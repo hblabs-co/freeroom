@@ -179,7 +179,8 @@ final class StoreTests: XCTestCase {
         defer { try? FileManager.default.removeItem(atPath: path) }
         let store = try Store(path: path)
 
-        let scan = try store.beginScan(source: .agent, note: "test")
+        let scan = try store.beginScan(source: .agent, note: "test", pluginVersion: "0.1.0")
+        XCTAssertEqual(try store.scans().first?.pluginVersion, "0.1.0")
         XCTAssertEqual(try store.openScan(source: .agent)?.id, scan.id)
 
         let finding = Finding(id: "agent:x", title: "X", paths: ["/tmp/x"], sizeBytes: 42, safety: .safe,

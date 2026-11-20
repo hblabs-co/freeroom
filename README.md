@@ -39,6 +39,17 @@ In Claude Code:
 Then run `/freeroom:scan` — or `/freeroom:scan ~/Projects` for one folder — and
 `/freeroom:translate es` to read the explanations in another language.
 
+### Plugin updates
+
+The plugin is versioned (`plugin/.claude-plugin/plugin.json`). Freeroom.app shows the installed
+version (from Claude Code's plugin registry), the version used in the last scan, and the latest
+published version (it reads that `plugin.json` from GitHub once a day; nothing about you is sent,
+and you can turn it off). When an update is available it shows a notice with the command:
+
+```sh
+claude plugin update freeroom@freeroom
+```
+
 ## Build from source
 
 ```sh

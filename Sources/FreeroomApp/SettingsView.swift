@@ -55,6 +55,10 @@ row("textformat.size", L("Text size")) {
                             .foregroundStyle(.secondary)
                     }
                 }
+                PluginVersionCard()
+                row("arrow.triangle.2.circlepath", L("Check for plugin updates"), subtitle: L("Asks GitHub once a day. Nothing about you is sent.")) {
+                    Toggle("", isOn: $model.checkPluginUpdates)
+                }
                 row("arrow.down.circle", L("Install")) { CopyField(text: "/plugin install freeroom --marketplace hblabs-co/freeroom") }
                 row("magnifyingglass", L("Scan")) { CopyField(text: "/freeroom:scan") }
                 row("globe", L("Translate")) { CopyField(text: "/freeroom:translate es") }

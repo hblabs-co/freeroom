@@ -42,6 +42,10 @@ struct MenuPanel: View {
 
             agentCard
 
+            if model.plugin.updateAvailable {
+                PluginUpdateBanner(status: model.plugin)
+            }
+
             Divider()
             footer
         }

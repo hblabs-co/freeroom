@@ -32,7 +32,8 @@ your findings to the user, who decides and deletes from the app.**
 
 1. **Check the setup.** Run `freeroom status`. If `fullDiskAccess` is false, tell the user that
    sizes will be incomplete until their terminal app has Full Disk Access, then continue.
-2. **Open a session.** `freeroom scan begin --note "<short note>"`.
+2. **Open a session.** `freeroom scan begin --plugin-version 0.1.0 --note "<short note>"`
+   (this is plugin version 0.1.0; Freeroom.app uses it to tell the user when an update is available).
 3. **Baseline (no AI needed).** Run `freeroom rules`. These are already classified by the rule
    engine (known caches, Docker, simulator runtimes, verified build folders). Do **not** report
    them again; focus on what the rules cannot know.

@@ -44,6 +44,8 @@ final class AppModel {
     var showDiskMap: Bool { didSet { defaults.set(showDiskMap, forKey: "diskMap") } }
     var playSound: Bool { didSet { defaults.set(playSound, forKey: "sound") } }
     var onboarded: Bool { didSet { defaults.set(onboarded, forKey: "onboarded") } }
+    var checkPluginUpdates: Bool { didSet { defaults.set(checkPluginUpdates, forKey: "checkPluginUpdates"); refreshPluginStatus(force: true) } }
+    var plugin = PluginStatus()
     /// Persisted only. Switch modes with `switchMode(simple:)` so the window resizes smoothly.
     var simpleMode: Bool { didSet { defaults.set(simpleMode, forKey: "simpleMode") } }
     /// Minimum window width for the current layout. Raised only after an animated expansion,
@@ -76,16 +78,22 @@ final class AppModel {
         showDiskMap = defaults.object(forKey: "diskMap") as? Bool ?? true
         playSound = defaults.object(forKey: "sound") as? Bool ?? true
         onboarded = defaults.bool(forKey: "onboarded")
+        checkPluginUpdates = defaults.object(forKey: "checkPluginUpdates") as? Bool ?? true
         simpleMode = defaults.object(forKey: "simpleMode") as? Bool ?? true
         windowMinWidth = (defaults.object(forKey: "simpleMode") as? Bool ?? true) ? 720 : Self.detailedMinWidth
         let savedSize = FontScale.Size(rawValue: defaults.string(forKey: "textSize") ?? "") ?? .medium
         textSize = savedSize
         FontScale.factor = savedSize.factor
 
+        plugin.published = defaults.string(forKey: "pluginPublished")
+        plugin.checkedAt = defaults.object(forKey: "pluginCheckedAt") as? Date
         do { store = try Store() } catch { storeError = "\(error)" }
         reload()
         pollTimer = Timer.scheduledTimer(withTimeInterval: 3, repeats: true) { [weak self] _ in
             Task { @MainActor in self?.reload() }
+        }
+        Timer.scheduledTimer(withTimeInterval: 600, repeats: true) { [weak self] _ in
+            Task { @MainActor in self?.refreshPluginStatus() }
         }
         scheduleRuleChecks()
         notificationDelegate.model = self
@@ -93,6 +101,28 @@ final class AppModel {
         center.delegate = notificationDelegate
         center.setNotificationCategories([NotificationDelegate.category])
         if onboarded && lastRuleScan == nil { runRules() }
+        refreshPluginStatus()
+    }
+
+    // MARK: Claude Code plugin version
+
+    /// Installed and last-used versions are local and cheap; the published version is fetched
+    /// from GitHub at most once a day (or when forced), and only if the user allows it.
+    func refreshPluginStatus(force: Bool = false) {
+        let installed = PluginStatus.readInstalled()
+        plugin.installed = installed.version
+        plugin.installedAt = installed.at
+        plugin.lastUsed = (try? store?.scans(limit: 50))?.first { $0.source == .agent && $0.pluginVersion != nil }?.pluginVersion
+        guard checkPluginUpdates else { return }
+        let stale = plugin.checkedAt.map { Date().timeIntervalSince($0) > 20 * 3600 } ?? true
+        guard force || stale else { return }
+        Task {
+            guard let published = await PluginStatus.fetchPublished() else { return }
+            plugin.published = published
+            plugin.checkedAt = Date()
+            defaults.set(published, forKey: "pluginPublished")
+            defaults.set(plugin.checkedAt, forKey: "pluginCheckedAt")
+        }
     }
 
     // MARK: Loading

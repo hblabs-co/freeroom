@@ -17,6 +17,8 @@ public struct ScanRecord: Codable, Equatable, Sendable {
     public var startedAt: Date
     public var endedAt: Date?
     public var note: String?
+    /// Version of the Claude Code plugin that ran an agent scan (nil for rule scans).
+    public var pluginVersion: String?
 }
 
 public struct HistoryEntry: Codable, Equatable, Sendable {
@@ -80,6 +82,10 @@ public final class Store: @unchecked Sendable {
         if !(try columnExists(table: "history", column: "finding")) {
             try exec("ALTER TABLE history ADD COLUMN finding TEXT;")
         }
+        // v3: which plugin version ran each agent scan.
+        if !(try columnExists(table: "scans", column: "plugin_version")) {
+            try exec("ALTER TABLE scans ADD COLUMN plugin_version TEXT;")
+        }
     }
 
     deinit { sqlite3_close(db) }
@@ -87,10 +93,12 @@ public final class Store: @unchecked Sendable {
     // MARK: Scans
 
     @discardableResult
-    public func beginScan(source: FindingSource, note: String? = nil) throws -> ScanRecord {
-        let record = ScanRecord(id: Self.newScanId(), source: source, startedAt: Date(), endedAt: nil, note: note)
-        try run("INSERT INTO scans(id, source, started_at, note) VALUES(?,?,?,?)",
-                [.text(record.id), .text(source.rawValue), .real(record.startedAt.timeIntervalSince1970), note.map { .text($0) } ?? .null])
+    public func beginScan(source: FindingSource, note: String? = nil, pluginVersion: String? = nil) throws -> ScanRecord {
+        let record = ScanRecord(id: Self.newScanId(), source: source, startedAt: Date(), endedAt: nil, note: note,
+                                pluginVersion: pluginVersion)
+        try run("INSERT INTO scans(id, source, started_at, note, plugin_version) VALUES(?,?,?,?,?)",
+                [.text(record.id), .text(source.rawValue), .real(record.startedAt.timeIntervalSince1970),
+                 note.map { .text($0) } ?? .null, pluginVersion.map { .text($0) } ?? .null])
         return record
     }
 
@@ -99,11 +107,11 @@ public final class Store: @unchecked Sendable {
     }
 
     public func scans(limit: Int = 20) throws -> [ScanRecord] {
-        try query("SELECT id, source, started_at, ended_at, note FROM scans ORDER BY started_at DESC LIMIT ?", [.int(Int64(limit))]) { s in
+        try query("SELECT id, source, started_at, ended_at, note, plugin_version FROM scans ORDER BY started_at DESC LIMIT ?", [.int(Int64(limit))]) { s in
             ScanRecord(id: s.text(0) ?? "", source: FindingSource(rawValue: s.text(1) ?? "") ?? .rule,
                        startedAt: Date(timeIntervalSince1970: s.double(2)),
                        endedAt: s.isNull(3) ? nil : Date(timeIntervalSince1970: s.double(3)),
-                       note: s.text(4))
+                       note: s.text(4), pluginVersion: s.text(5))
         }
     }
 

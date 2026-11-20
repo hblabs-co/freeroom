@@ -272,10 +272,11 @@ struct Scan: ParsableCommand {
     struct Begin: ParsableCommand {
         static let configuration = CommandConfiguration(abstract: "Start an agent scan; prints its id.")
         @Option(help: "Free-text note shown in the app.") var note: String?
+        @Option(help: "Version of the Claude Code plugin running the scan.") var pluginVersion: String?
         func run() throws {
             let store = try Store()
             if let open = try store.openScan(source: .agent) { try store.endScan(id: open.id) }
-            try emit(try store.beginScan(source: .agent, note: note))
+            try emit(try store.beginScan(source: .agent, note: note, pluginVersion: pluginVersion))
         }
     }
 
