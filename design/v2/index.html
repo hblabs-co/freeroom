@@ -1,0 +1,1386 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Freeroom v2 mockup</title>
+<meta name="description" content="Freeroom v2: visual, icon-first redesign of the macOS menu-bar disk cleaner by hblabs. Clickable high-fidelity mockup.">
+<style>
+/* ==========================================================================
+   Freeroom v2 — tokens
+   hblabs DS: one blue accent (#1a4ddb / #6594fa), amber = agent only,
+   semantic colour always paired with a glyph, glass only on floating chrome.
+   Values mirror Sources/FreeroomApp/Theme.swift so the mock and the app match.
+   ========================================================================== */
+:root {
+  --font: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Inter", system-ui, sans-serif;
+  --mono: "SF Mono", ui-monospace, "JetBrains Mono", Menlo, monospace;
+
+  --ink-0: #fbfcfd; --ink-1: #f4f6f9; --ink-2: #eaedf2; --ink-3: #d9dde4;
+  --ink-4: #b3b9c4; --ink-5: #5d6472; --ink-6: #3a404c; --ink-7: #1a1d24;
+  --line: rgba(20,24,33,.10); --line-strong: rgba(20,24,33,.17); --line-soft: rgba(20,24,33,.06);
+
+  --accent: #1a4ddb; --accent-hover: #1640c0; --accent-soft: #e5ecfc; --on-accent: #ffffff; --accent-ring: rgba(26,77,219,.35);
+  --agent: #a86a0e; --agent-fill: #c89638; --agent-soft: #fdf0dc; --agent-line: rgba(200,150,56,.45);
+  --safe: #1f7a47;   --safe-soft: #e3f3e9;   --safe-tile: #eef8f1;
+  --review: #0e6f84; --review-soft: #ddf0f4; --review-tile: #ecf6f9;
+  --keep: #5f5f66;   --keep-soft: #ececef;
+  --danger: #b42318; --danger-soft: #fde8e6;
+
+  --desk-a: #c9d8f6; --desk-b: #e6ecf8; --desk-c: #b9d6ea; --desk-d: #dcd6f3;
+  --win: rgba(246,247,250,.80);        /* window frame glass */
+  --side: rgba(240,243,248,.62);       /* sidebar glass */
+  --pane: #fdfdfe;                     /* opaque reading surface */
+  --card: #ffffff;
+  --glass: rgba(250,251,253,.66); --glass-strong: rgba(250,251,253,.84);
+  --glass-rim: rgba(255,255,255,.75); --glass-edge: rgba(20,24,33,.10);
+  --spec: rgba(255,255,255,.9);
+  --tile-brand: #ffffff; --tile-sym: #eef1f5; --tile-app-a: #f7f8fa; --tile-app-b: #e3e7ee;
+  --shadow-win: 0 0 0 .5px rgba(0,0,0,.18), 0 22px 70px rgba(15,22,40,.28), 0 6px 18px rgba(15,22,40,.12);
+  --shadow-pop: 0 0 0 .5px rgba(0,0,0,.12), 0 18px 50px rgba(15,22,40,.25);
+  --bar-track: #e4e8ee;
+  --other: #c4cad4;
+}
+html[data-theme="dark"] {
+  --ink-0: #0b0e14; --ink-1: #12161e; --ink-2: #1a1f29; --ink-3: #262c38;
+  --ink-4: #6b7281; --ink-5: #9ba2ae; --ink-6: #c5cad3; --ink-7: #eceef2;
+  --line: rgba(255,255,255,.09); --line-strong: rgba(255,255,255,.16); --line-soft: rgba(255,255,255,.05);
+
+  --accent: #6594fa; --accent-hover: #7aa3fb; --accent-soft: #1b2847; --on-accent: #070d1a; --accent-ring: rgba(101,148,250,.4);
+  --agent: #f0b54a; --agent-fill: #f0b54a; --agent-soft: #3a2c14; --agent-line: rgba(240,181,74,.45);
+  --safe: #5fd394;   --safe-soft: #173426;   --safe-tile: #14271e;
+  --review: #5cc8de; --review-soft: #13313a;  --review-tile: #12252c;
+  --keep: #a0a0a8;   --keep-soft: #26272c;
+  --danger: #ff8a80; --danger-soft: #3d1b18;
+
+  --desk-a: #0f1d3d; --desk-b: #0a0f1c; --desk-c: #0c2a3a; --desk-d: #1c1838;
+  --win: rgba(28,32,41,.78);
+  --side: rgba(30,35,46,.55);
+  --pane: #15191f;
+  --card: #1b2028;
+  --glass: rgba(34,39,50,.62); --glass-strong: rgba(34,39,50,.86);
+  --glass-rim: rgba(255,255,255,.14); --glass-edge: rgba(0,0,0,.4);
+  --spec: rgba(255,255,255,.16);
+  --tile-brand: #222833; --tile-sym: #222833; --tile-app-a: #2c323e; --tile-app-b: #1c2129;
+  --shadow-win: 0 0 0 .5px rgba(255,255,255,.12), 0 22px 70px rgba(0,0,0,.6), 0 6px 18px rgba(0,0,0,.35);
+  --shadow-pop: 0 0 0 .5px rgba(255,255,255,.12), 0 18px 50px rgba(0,0,0,.55);
+  --bar-track: #262c37;
+  --other: #4a5160;
+  --glyph-on: #0b0e14;
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; height: 100%; }
+body { font: 13px/1.38 var(--font); color: var(--ink-7); background: var(--ink-0); -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+button { font: inherit; color: inherit; background: none; border: 0; padding: 0; cursor: default; }
+input { font: inherit; color: inherit; }
+.mono, .num { font-family: var(--mono); font-feature-settings: "tnum"; font-variant-numeric: tabular-nums; }
+.i { width: 16px; height: 16px; flex: none; display: inline-block; vertical-align: middle; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 6px; }
+.sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+.muted { color: var(--ink-5); }
+.appic .d { display: none; } html[data-theme="dark"] .appic .l { display: none; } html[data-theme="dark"] .appic .d { display: inline; }
+
+/* ---------- Desktop ---------- */
+.desk { position: fixed; inset: 0; background:
+  radial-gradient(900px 600px at 15% 10%, var(--desk-a), transparent 65%),
+  radial-gradient(800px 700px at 90% 25%, var(--desk-d), transparent 60%),
+  radial-gradient(900px 700px at 55% 110%, var(--desk-c), transparent 60%),
+  var(--desk-b); }
+.mbar { position: fixed; top: 0; left: 0; right: 0; height: 28px; z-index: 50; display: flex; align-items: center; gap: 18px; padding: 0 14px;
+  background: rgba(255,255,255,.28); backdrop-filter: blur(24px) saturate(1.8); -webkit-backdrop-filter: blur(24px) saturate(1.8); font-size: 13px; }
+html[data-theme="dark"] .mbar { background: rgba(10,12,18,.32); }
+.mbar b { font-weight: 700; }
+.mbar .r { margin-left: auto; display: flex; align-items: center; gap: 14px; }
+.mbar .fr { display: flex; align-items: center; gap: 5px; padding: 2px 7px; border-radius: 6px; }
+.mbar .fr.on { background: rgba(0,0,0,.12); } html[data-theme="dark"] .mbar .fr.on { background: rgba(255,255,255,.18); }
+.mbar .fr svg { width: 17px; height: 17px; }
+.mbar .fr span { font-variant-numeric: tabular-nums; }
+.stage { position: relative; z-index: 1; min-height: 100vh; padding: 52px 24px 110px; display: flex; justify-content: center; align-items: flex-start; }
+
+/* ---------- Glass ---------- */
+.glass { background: var(--glass); backdrop-filter: blur(30px) saturate(1.7); -webkit-backdrop-filter: blur(30px) saturate(1.7);
+  border: .5px solid var(--glass-edge); box-shadow: inset 0 1px 0 var(--spec), inset 0 0 0 .5px var(--glass-rim); }
+
+/* ---------- Icon tiles (app / brand / symbol) ---------- */
+.ai { --s: 28px; position: relative; width: var(--s); height: var(--s); flex: none; border-radius: calc(var(--s) * .235); display: inline-grid; place-items: center; overflow: hidden; }
+.ai.app { background: linear-gradient(180deg, var(--tile-app-a), var(--tile-app-b)); box-shadow: inset 0 0 0 .5px var(--line-strong), 0 .5px 1.5px rgba(0,0,0,.12); }
+.ai.app span { font-weight: 650; color: var(--ink-5); letter-spacing: -.01em; text-align: center; line-height: 1.05; padding: 0 3px; font-size: calc(var(--s) * .3); }
+.ai.app.big span { font-size: calc(var(--s) * .17); }
+.ai.brand { background: var(--tile-brand); box-shadow: inset 0 0 0 .5px var(--line-strong), 0 .5px 1.5px rgba(0,0,0,.10); }
+.ai.brand i { width: 60%; height: 60%; background: var(--bc, var(--ink-7)); -webkit-mask: var(--m) center/contain no-repeat; mask: var(--m) center/contain no-repeat; display: none; }
+.ai.brand.ok i { display: block; } .ai.brand.ok b { display: none; }
+.ai.brand b { font-size: calc(var(--s) * .38); color: var(--ink-5); }
+.ai.sym { background: var(--tile-sym); box-shadow: inset 0 0 0 .5px var(--line); color: var(--ink-6); }
+.ai.sym svg { width: 58%; height: 58%; }
+.ai.fr { background: none; box-shadow: none; overflow: visible; } .ai.fr svg { width: 100%; height: 100%; }
+body.srcs .ai[data-src]::after { content: attr(data-src); position: absolute; left: 50%; bottom: -1px; transform: translateX(-50%); font: 700 7.5px/1 var(--mono); letter-spacing: .03em;
+  padding: 2px 3px; border-radius: 3px; background: var(--ink-7); color: var(--ink-0); text-transform: uppercase; }
+
+/* ---------- Chips ---------- */
+.chip { display: inline-flex; align-items: center; gap: 4px; height: 20px; padding: 0 7px 0 5px; border-radius: 10px; font-size: 11.5px; font-weight: 600; white-space: nowrap; }
+.chip .i { width: 13px; height: 13px; }
+.chip.safe { color: var(--safe); background: var(--safe-soft); }
+.chip.review { color: var(--review); background: var(--review-soft); }
+.chip.keep { color: var(--keep); background: var(--keep-soft); }
+.chip.agent { color: var(--agent); background: var(--agent-soft); }
+.chip.neutral { color: var(--ink-5); background: var(--ink-2); }
+.glyph-safe { color: var(--safe); } .glyph-review { color: var(--review); } .glyph-keep { color: var(--keep); }
+.hex { color: var(--agent-fill); }
+
+/* ---------- Buttons ---------- */
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 6px; height: 28px; padding: 0 12px; border-radius: 14px; font-weight: 550; font-size: 13px;
+  background: var(--card); box-shadow: inset 0 0 0 .5px var(--line-strong), 0 .5px 1px rgba(0,0,0,.08); white-space: nowrap; }
+.btn:hover { background: var(--ink-1); }
+.btn.pri { background: var(--accent); color: var(--on-accent); box-shadow: 0 1px 2px rgba(26,77,219,.3), inset 0 1px 0 rgba(255,255,255,.18); }
+.btn.pri:hover { background: var(--accent-hover); }
+.btn.pri[disabled] { opacity: .45; }
+.btn.lg { height: 36px; padding: 0 18px; border-radius: 18px; font-size: 14px; }
+.btn.ghost { background: transparent; box-shadow: none; color: var(--ink-6); }
+.btn.ghost:hover { background: var(--line-soft); }
+.btn .k { font: 11px var(--mono); opacity: .7; }
+.ibtn { width: 30px; height: 30px; border-radius: 15px; display: inline-grid; place-items: center; color: var(--ink-6); }
+.ibtn:hover { background: var(--line-soft); }
+.ibtn .i { width: 17px; height: 17px; }
+kbd { font: 10.5px var(--mono); padding: 1px 5px; border-radius: 4px; background: var(--ink-2); color: var(--ink-5); box-shadow: inset 0 -1px 0 var(--line-strong); }
+
+/* ---------- Window chrome ---------- */
+.win { position: relative; border-radius: 22px; background: var(--win); backdrop-filter: blur(40px) saturate(1.6); -webkit-backdrop-filter: blur(40px) saturate(1.6);
+  box-shadow: var(--shadow-win); overflow: hidden; }
+.lights { display: flex; gap: 8px; padding: 0 4px; }
+.lights i { width: 12px; height: 12px; border-radius: 50%; background: #ff5f57; box-shadow: inset 0 0 0 .5px rgba(0,0,0,.15); }
+.lights i:nth-child(2) { background: #febc2e; } .lights i:nth-child(3) { background: #28c840; }
+
+/* Main window */
+.main { width: 1180px; height: 760px; display: grid; grid-template-columns: 228px 1fr 300px; }
+.main.noinsp { grid-template-columns: 228px 1fr 0; }
+.side { position: relative; margin: 8px 0 8px 8px; border-radius: 16px; background: var(--side); backdrop-filter: blur(30px); -webkit-backdrop-filter: blur(30px);
+  box-shadow: inset 0 0 0 .5px var(--glass-rim), 0 0 0 .5px var(--line); padding: 46px 8px 10px; overflow: auto; display: flex; flex-direction: column; }
+.side .lights { position: absolute; top: 15px; left: 14px; }
+.side h6 { margin: 14px 10px 4px; font-size: 11px; font-weight: 600; color: var(--ink-5); }
+.nav { display: flex; align-items: center; gap: 8px; height: 30px; padding: 0 8px; border-radius: 8px; width: 100%; text-align: left; }
+.nav .ai { --s: 20px; }
+.nav .t { flex: 1; min-width: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.nav .n { font: 11.5px var(--mono); color: var(--ink-5); }
+.nav:hover { background: var(--line-soft); }
+.nav.on { background: var(--accent-soft); } .nav.on .t { font-weight: 600; } html[data-theme="dark"] .nav.on { background: rgba(101,148,250,.18); }
+.nav .i { width: 17px; height: 17px; color: var(--ink-6); }
+.side .foot { margin-top: auto; padding: 10px 8px 2px; border-top: .5px solid var(--line); display: flex; align-items: center; gap: 8px; font-size: 12px; color: var(--ink-5); }
+
+.center { display: flex; flex-direction: column; min-width: 0; position: relative; }
+.tb { height: 54px; display: flex; align-items: center; gap: 8px; padding: 0 12px 0 14px; flex: none; }
+.tb .ttl { display: flex; flex-direction: column; line-height: 1.15; margin-right: auto; min-width: 0; }
+.tb .ttl b { font-size: 15px; font-weight: 700; }
+.tb .ttl span { font-size: 11.5px; color: var(--ink-5); white-space: nowrap; font-variant-numeric: tabular-nums; }
+.cap { display: inline-flex; align-items: center; height: 32px; border-radius: 16px; padding: 0 2px; }
+.cap .ibtn { width: 32px; height: 28px; border-radius: 14px; }
+.seg { display: inline-flex; padding: 2px; gap: 2px; }
+.seg button { height: 26px; padding: 0 10px; border-radius: 13px; font-size: 12px; font-weight: 550; color: var(--ink-6); display: inline-flex; align-items: center; gap: 5px; }
+.seg button.on { background: var(--card); box-shadow: 0 1px 2px rgba(0,0,0,.12), inset 0 0 0 .5px var(--line); color: var(--ink-7); }
+html[data-theme="dark"] .seg button.on { background: rgba(255,255,255,.14); }
+.search { width: 150px; padding: 0 10px; gap: 6px; color: var(--ink-5); }
+.search input { border: 0; outline: 0; background: none; width: 100%; font-size: 13px; color: var(--ink-7); }
+.livecap { white-space: nowrap; flex: none; gap: 7px; padding: 0 12px 0 9px; color: var(--agent); font-weight: 600; font-size: 12px; background: var(--agent-soft); box-shadow: inset 0 0 0 .5px var(--agent-line); }
+.livecap .i { width: 16px; height: 16px; color: var(--agent-fill); }
+.pulse { animation: pulse 1.4s ease-in-out infinite; }
+@keyframes pulse { 50% { opacity: .35; transform: scale(.86); } }
+
+.scroll { flex: 1; overflow: auto; padding: 0 18px 90px; }
+.hero { display: grid; grid-template-columns: auto 1fr; gap: 22px; align-items: center; padding: 4px 2px 14px; }
+.reclaim .lbl { font-size: 12px; color: var(--ink-5); font-weight: 550; }
+.reclaim .big { font: 700 34px/1.05 var(--font); letter-spacing: -.02em; font-variant-numeric: tabular-nums; }
+.reclaim .big small { font-size: 18px; font-weight: 600; color: var(--ink-5); margin-left: 3px; }
+.reclaim .chips { display: flex; gap: 6px; margin-top: 7px; }
+.diskbar { display: flex; height: 12px; border-radius: 6px; overflow: hidden; background: var(--bar-track); gap: 1.5px; }
+.diskbar > i { display: block; height: 100%; transition: flex-basis .6s cubic-bezier(.2,.8,.2,1); }
+.diskbar .s { background: var(--safe); } .diskbar .r { background: var(--review); } .diskbar .k { background: var(--keep); opacity: .55; }
+.diskbar .o { background: var(--other); } .diskbar .f { background: transparent; }
+.legend { display: flex; flex-wrap: wrap; gap: 4px 14px; margin-top: 7px; font-size: 11.5px; color: var(--ink-5); }
+.legend span { display: inline-flex; align-items: center; gap: 4px; } .legend .i { width: 12px; height: 12px; }
+.legend b { font: 600 11.5px var(--mono); color: var(--ink-6); }
+
+.maphead { display: flex; align-items: center; gap: 8px; margin: 2px 2px 8px; font-size: 12px; font-weight: 600; color: var(--ink-5); }
+.maphead .sp { flex: 1; }
+.tmap { position: relative; height: 196px; border-radius: 14px; overflow: hidden; background: var(--line-soft); }
+.tile { position: absolute; padding: 1.5px; }
+.tile > div { position: relative; width: 100%; height: 100%; border-radius: 9px; padding: 8px; display: flex; flex-direction: column; justify-content: space-between; overflow: hidden;
+  box-shadow: inset 0 0 0 .5px var(--line); transition: box-shadow .15s, transform .15s; }
+.tile.safe > div { background: var(--safe-tile); } .tile.review > div { background: var(--review-tile); }
+.tile:hover > div { box-shadow: inset 0 0 0 1px var(--line-strong); }
+.tile.sel > div { box-shadow: inset 0 0 0 2px var(--accent); }
+.tile.foc > div { box-shadow: inset 0 0 0 2px var(--accent), 0 0 0 3px var(--accent-ring); }
+.tile .top { display: flex; align-items: flex-start; justify-content: space-between; gap: 4px; }
+.tile .ai { --s: 30px; }
+.tile .nm { font-size: 12px; font-weight: 600; line-height: 1.2; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.tile .sz { font: 600 12px var(--mono); color: var(--ink-6); }
+.tile.xl .ai { --s: 40px; } .tile.xl .sz { font-size: 17px; color: var(--ink-7); } .tile.xl .nm { font-size: 13px; }
+.tile .ck { width: 18px; height: 18px; border-radius: 50%; display: grid; place-items: center; background: var(--accent); color: var(--on-accent); }
+.tile .ck .i { width: 11px; height: 11px; }
+.tile .sg .i { width: 14px; height: 14px; }
+.tile.tiny > div { padding: 4px; align-items: center; justify-content: center; } .tile.tiny .ai { --s: 20px; }
+
+.lhead { display: flex; align-items: center; gap: 8px; margin: 18px 2px 6px; position: sticky; top: 0; z-index: 2; padding: 6px 0; background: var(--pane); }
+.lhead .ai { --s: 20px; } .lhead b { font-size: 13px; } .lhead .tot { font: 600 12px var(--mono); color: var(--ink-5); margin-left: auto; }
+.lhead .gsel { font-size: 12px; color: var(--accent); font-weight: 550; padding: 2px 6px; border-radius: 6px; } .lhead .gsel:hover { background: var(--accent-soft); }
+.list { border-radius: 12px; background: var(--card); box-shadow: inset 0 0 0 .5px var(--line); }
+.row { display: grid; grid-template-columns: 18px 30px minmax(0,1fr) 110px 70px 84px; align-items: center; gap: 10px; height: 44px; padding: 0 12px; border-top: .5px solid var(--line-soft); position: relative; }
+.row:first-child { border-top: 0; }
+.row:hover { background: var(--line-soft); }
+.row.foc { background: var(--accent-soft); } html[data-theme="dark"] .row.foc { background: rgba(101,148,250,.14); }
+.row.dis { opacity: .62; }
+.row .ai { --s: 30px; }
+.row .t { min-width: 0; display: flex; align-items: center; gap: 6px; white-space: nowrap; }
+.row .t b { font-weight: 600; overflow: hidden; text-overflow: ellipsis; flex: 0 0 auto; max-width: 100%; }
+.row .t span { color: var(--ink-5); font-size: 12px; overflow: hidden; text-overflow: ellipsis; flex: 1 1 0; min-width: 0; }
+.row .t .hx { width: 14px; height: 14px; color: var(--agent-fill); flex: none; }
+.row .t .lk { width: 13px; height: 13px; color: var(--ink-5); flex: none; }
+.row .sz { font: 600 13px var(--mono); text-align: right; }
+.row .bar { height: 6px; border-radius: 3px; background: var(--bar-track); overflow: hidden; } .row .bar i { display: block; height: 100%; border-radius: 3px; background: var(--ink-4); }
+.row.sel .bar i { background: var(--accent); }
+.row.new { animation: newrow 1.6s ease-out; } .row.new::before { content: ""; position: absolute; left: 0; top: 8px; bottom: 8px; width: 3px; border-radius: 2px; background: var(--agent-fill); }
+@keyframes newrow { from { background: var(--agent-soft); transform: translateY(-6px); opacity: 0; } 20% { opacity: 1; transform: none; } }
+.cb { width: 16px; height: 16px; border-radius: 4.5px; box-shadow: inset 0 0 0 1px var(--ink-4); display: grid; place-items: center; background: var(--card); }
+.cb.on { background: var(--accent); box-shadow: none; color: var(--on-accent); } .cb .i { width: 11px; height: 11px; display: none; } .cb.on .i { display: block; }
+.cb.x { opacity: .35; }
+
+.livestrip { display: flex; align-items: center; gap: 10px; margin: 2px 0 12px; padding: 9px 12px; border-radius: 12px; background: var(--agent-soft); box-shadow: inset 0 0 0 .5px var(--agent-line); }
+.livestrip > .i { width: 22px; height: 22px; color: var(--agent-fill); } .livestrip .t { flex: 1; min-width: 0; }
+.livestrip .t b { display: block; font-size: 12.5px; color: var(--agent); } .livestrip .t span { font-size: 12px; color: var(--ink-6); }
+/* Inspector */
+.insp { margin: 8px 8px 8px 0; border-radius: 16px; background: var(--pane); box-shadow: inset 0 0 0 .5px var(--line); overflow: auto; padding: 18px 18px 90px; }
+.main.noinsp .insp { display: none; }
+.insp .hd { display: flex; flex-direction: column; align-items: flex-start; gap: 10px; }
+.insp .hd .ai { --s: 64px; }
+.insp h2 { margin: 0; font-size: 18px; line-height: 1.2; letter-spacing: -.01em; }
+.insp .bigsz { font: 700 28px/1 var(--mono); letter-spacing: -.02em; }
+.insp .chips { display: flex; gap: 6px; flex-wrap: wrap; }
+.insp p.why { margin: 12px 0 0; color: var(--ink-6); font-size: 13px; }
+.card { margin-top: 14px; border-radius: 12px; background: var(--card); box-shadow: inset 0 0 0 .5px var(--line); padding: 10px 12px; }
+.insp .card { background: var(--ink-1); }
+.act { display: flex; gap: 10px; align-items: flex-start; }
+.act .i { width: 20px; height: 20px; color: var(--ink-6); margin-top: 1px; }
+.act b { display: block; font-size: 13px; } .act span { font-size: 12px; color: var(--ink-5); }
+code.cmd { display: block; margin-top: 6px; font: 11.5px var(--mono); background: var(--ink-2); border-radius: 6px; padding: 5px 7px; color: var(--ink-7); word-break: break-all; }
+details.dis { margin-top: 8px; border-top: .5px solid var(--line); padding-top: 8px; }
+details.dis summary { list-style: none; display: flex; align-items: center; gap: 6px; font-weight: 600; font-size: 12.5px; padding: 4px 0; }
+details.dis summary::-webkit-details-marker { display: none; }
+details.dis summary .i { width: 13px; height: 13px; color: var(--ink-5); transition: transform .15s; }
+details.dis[open] summary .chev { transform: rotate(90deg); }
+details.dis summary .n { margin-left: auto; font: 11.5px var(--mono); color: var(--ink-5); }
+.path { display: flex; align-items: center; gap: 6px; font: 11.5px var(--mono); color: var(--ink-6); padding: 3px 0; }
+.path .i { width: 13px; height: 13px; color: var(--ink-5); }
+.path a { color: var(--accent); margin-left: auto; font: 11.5px var(--font); text-decoration: none; }
+.evid { display: flex; gap: 8px; font-size: 12px; color: var(--ink-6); padding: 4px 0; }
+.evid .i { width: 15px; height: 15px; flex: none; margin-top: 1px; }
+.evid.agent { color: var(--ink-7); background: var(--agent-soft); border-radius: 8px; padding: 7px 9px; box-shadow: inset 0 0 0 .5px var(--agent-line); }
+.evid.agent .i { color: var(--agent-fill); }
+.evid.agent b { color: var(--agent); }
+.insp .acts { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
+
+/* Selection bar (floating Liquid Glass) */
+.selbar { position: absolute; left: 50%; bottom: 16px; transform: translateX(-50%); display: flex; align-items: center; gap: 12px; height: 52px; padding: 0 8px 0 14px; border-radius: 26px; white-space: nowrap; z-index: 5; }
+.selbar .stack { display: flex; } .selbar .stack .ai { --s: 26px; margin-left: -8px; box-shadow: 0 0 0 2px var(--glass-strong); } .selbar .stack .ai:first-child { margin-left: 0; }
+.selbar .info b { font: 700 15px var(--mono); } .selbar .info span { color: var(--ink-5); font-size: 12px; }
+.selbar .proj { display: flex; align-items: center; gap: 6px; font-size: 12px; color: var(--ink-5); }
+.selbar .proj b { font: 600 12px var(--mono); color: var(--safe); }
+
+/* Toast */
+.toast { position: fixed; left: 50%; top: 44px; transform: translateX(-50%); z-index: 90; padding: 9px 14px; border-radius: 14px; display: flex; gap: 8px; align-items: center; font-size: 12.5px; box-shadow: var(--shadow-pop); animation: toast 2.6s ease forwards; }
+@keyframes toast { 0% { opacity: 0; transform: translate(-50%, -8px); } 10%, 85% { opacity: 1; transform: translate(-50%, 0); } 100% { opacity: 0; } }
+
+/* ---------- Popover ---------- */
+.pop { position: fixed; top: 34px; right: 168px; width: 360px; border-radius: 24px; padding: 14px; z-index: 60; box-shadow: var(--shadow-pop), inset 0 1px 0 var(--spec), inset 0 0 0 .5px var(--glass-rim);
+  background: var(--glass-strong); backdrop-filter: blur(40px) saturate(1.8); -webkit-backdrop-filter: blur(40px) saturate(1.8); }
+.pop .head { display: flex; align-items: center; gap: 14px; }
+.ring { position: relative; width: 74px; height: 74px; flex: none; }
+.ring svg { width: 100%; height: 100%; transform: rotate(-90deg); }
+.ring .c { position: absolute; inset: 0; display: grid; place-items: center; }
+.ring .c svg { width: 26px; height: 26px; transform: none; color: var(--accent); }
+.pop .free b { font: 700 26px/1 var(--mono); letter-spacing: -.02em; } .pop .free b small { font-size: 15px; color: var(--ink-5); }
+.pop .free span { display: block; margin-top: 3px; font-size: 12px; color: var(--ink-5); }
+.pop .free .warn { display: inline-flex; align-items: center; gap: 4px; color: var(--danger); font-weight: 600; font-size: 11.5px; margin-top: 5px; }
+.pop .free .warn .i { width: 13px; height: 13px; }
+.pop .cta { margin-top: 12px; width: 100%; height: 40px; border-radius: 20px; font-size: 14px; }
+.pop h6 { margin: 14px 4px 7px; font-size: 11.5px; font-weight: 600; color: var(--ink-5); display: flex; }
+.pop h6 a { margin-left: auto; color: var(--accent); text-decoration: none; font-weight: 550; }
+.tiles3 { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; }
+.qt { border-radius: 16px; background: var(--card); box-shadow: inset 0 0 0 .5px var(--line); padding: 10px 8px 9px; display: flex; flex-direction: column; align-items: center; gap: 5px; text-align: center; }
+html[data-theme="dark"] .qt { background: rgba(255,255,255,.06); }
+.qt:hover { box-shadow: inset 0 0 0 1px var(--accent); }
+.qt .ai { --s: 44px; }
+.qt b { font: 700 14px var(--mono); }
+.qt span { font-size: 11px; color: var(--ink-5); max-width: 100%; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.agentrow { margin-top: 10px; display: flex; align-items: center; gap: 10px; padding: 9px 10px; border-radius: 14px; background: var(--agent-soft); box-shadow: inset 0 0 0 .5px var(--agent-line); width: 100%; text-align: left; }
+.agentrow .i { width: 20px; height: 20px; color: var(--agent-fill); }
+.agentrow .t { flex: 1; min-width: 0; } .agentrow .t b { display: block; font-size: 12.5px; color: var(--agent); } .agentrow .t span { font-size: 11.5px; color: var(--ink-6); }
+.agentrow .chev { width: 14px; height: 14px; color: var(--ink-5); }
+.neutralrow { margin-top: 10px; display: flex; align-items: center; gap: 10px; padding: 9px 10px; border-radius: 14px; background: var(--line-soft); width: 100%; text-align: left; }
+.neutralrow .i { width: 18px; height: 18px; color: var(--ink-6); } .neutralrow b { font-size: 12.5px; } .neutralrow span { font-size: 11.5px; color: var(--ink-5); display: block; }
+.livebar { height: 3px; border-radius: 2px; background: var(--agent-soft); overflow: hidden; margin-top: 6px; position: relative; }
+.livebar i { position: absolute; top: 0; bottom: 0; width: 35%; background: var(--agent-fill); border-radius: 2px; animation: indet 1.4s ease-in-out infinite; }
+@keyframes indet { from { left: -35%; } to { left: 100%; } }
+.popfoot { display: flex; align-items: center; gap: 2px; margin-top: 12px; padding-top: 8px; border-top: .5px solid var(--line); }
+.popfoot .sp { flex: 1; }
+.popfoot .lnk { font-size: 12px; color: var(--ink-5); padding: 0 6px; }
+
+/* ---------- Sheet ---------- */
+.scrim { position: absolute; inset: 0; background: rgba(10,14,22,.18); z-index: 8; display: flex; justify-content: center; align-items: flex-start; padding-top: 54px; }
+html[data-theme="dark"] .scrim { background: rgba(0,0,0,.35); }
+.sheet { width: 560px; border-radius: 26px; padding: 22px 22px 18px; box-shadow: var(--shadow-pop), inset 0 1px 0 var(--spec), inset 0 0 0 .5px var(--glass-rim);
+  background: var(--glass-strong); backdrop-filter: blur(40px) saturate(1.7); -webkit-backdrop-filter: blur(40px) saturate(1.7); max-height: 680px; display: flex; flex-direction: column; }
+.sheet .top { display: flex; align-items: flex-end; justify-content: space-between; gap: 16px; }
+.sheet .top .lbl { font-size: 12.5px; color: var(--ink-5); font-weight: 550; }
+.sheet .top .big { font: 700 40px/1 var(--mono); letter-spacing: -.03em; }
+.sheet .top .big small { font-size: 20px; color: var(--ink-5); }
+.fromto { text-align: right; font-size: 12px; color: var(--ink-5); } .fromto b { font: 600 13px var(--mono); color: var(--ink-7); } .fromto b.to { color: var(--safe); }
+.sheet .diskbar { margin-top: 12px; height: 14px; border-radius: 7px; }
+.diskbar .fnew { background: repeating-linear-gradient(135deg, var(--safe) 0 4px, transparent 4px 7px); opacity: .8; }
+.diskbar .fdone { background: var(--safe); }
+.groups { margin-top: 14px; overflow: auto; flex: 1; padding-right: 2px; }
+.grp { margin-top: 10px; } .grp:first-child { margin-top: 0; }
+.grp .gh { display: flex; align-items: center; gap: 7px; font-size: 12px; font-weight: 600; color: var(--ink-6); margin: 0 2px 5px; }
+.grp .gh .i { width: 15px; height: 15px; } .grp .gh span { font-weight: 400; color: var(--ink-5); } .grp .gh .tot { margin-left: auto; font: 600 12px var(--mono); color: var(--ink-5); }
+.citems { border-radius: 12px; background: var(--card); box-shadow: inset 0 0 0 .5px var(--line); }
+html[data-theme="dark"] .citems { background: rgba(255,255,255,.04); }
+.ci { display: grid; grid-template-columns: 24px minmax(0,1fr) auto 64px 20px; gap: 9px; align-items: center; min-height: 38px; padding: 5px 10px; border-top: .5px solid var(--line-soft); }
+.ci:first-child { border-top: 0; }
+.ci .ai { --s: 24px; }
+.ci .t { min-width: 0; } .ci .t b { font-weight: 550; display: block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.ci .t code { font: 10.5px var(--mono); color: var(--ink-5); display: block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.ci .t em { font-style: normal; font-size: 11.5px; color: var(--ink-5); display: flex; align-items: center; gap: 4px; } .ci .t em .i { width: 12px; height: 12px; }
+.ci .sz { font: 600 12.5px var(--mono); text-align: right; }
+.ci .st { width: 18px; height: 18px; display: grid; place-items: center; } .ci .st .i { width: 17px; height: 17px; }
+.ci .x { opacity: 0; } .ci:hover .x { opacity: 1; }
+.ci .lock { display: inline-flex; align-items: center; gap: 3px; font-size: 11px; color: var(--ink-5); } .ci .lock .i { width: 12px; height: 12px; }
+.ci.pending { opacity: .5; } .ci.fin .sz { color: var(--ink-5); text-decoration: line-through; text-decoration-color: var(--ink-4); }
+.spin { width: 15px; height: 15px; border-radius: 50%; border: 2px solid var(--accent-soft); border-top-color: var(--accent); animation: spin .8s linear infinite; }
+@keyframes spin { to { transform: rotate(360deg); } }
+.sheet .foot { display: flex; align-items: center; gap: 8px; margin-top: 14px; }
+.sheet .foot .note { font-size: 11.5px; color: var(--ink-5); display: flex; gap: 5px; align-items: center; margin-right: auto; } .sheet .foot .note .i { width: 13px; height: 13px; }
+
+/* Done moment */
+.done { text-align: center; padding-top: 6px; }
+.burst { position: relative; width: 120px; height: 120px; margin: 0 auto 6px; }
+.burst .appic { width: 96px; height: 96px; position: absolute; left: 12px; top: 12px; animation: pop .7s cubic-bezier(.2,1.4,.4,1) both; }
+.burst .g { position: absolute; color: var(--accent); animation: glint 1.4s ease-out both; }
+.burst .g svg { width: 100%; height: 100%; }
+@keyframes pop { from { transform: scale(.6); opacity: 0; } }
+@keyframes glint { 0% { transform: scale(0) rotate(-30deg); opacity: 0; } 40% { opacity: 1; transform: scale(1.15) rotate(0); } 100% { transform: scale(1); opacity: 1; } }
+.done h1 { margin: 2px 0 0; font-size: 15px; font-weight: 600; color: var(--ink-5); }
+.done .freed { font: 800 54px/1.02 var(--mono); letter-spacing: -.04em; color: var(--ink-7); }
+.done .freed small { font-size: 26px; color: var(--ink-5); font-weight: 700; }
+.done .ft { margin-top: 6px; font-size: 13px; color: var(--ink-5); display: flex; justify-content: center; align-items: center; gap: 8px; }
+.done .ft b { font: 600 13px var(--mono); color: var(--ink-7); } .done .ft b.to { color: var(--safe); } .done .ft .i { width: 14px; height: 14px; }
+.done .icons { display: flex; justify-content: center; flex-wrap: wrap; gap: 6px; margin: 14px auto 0; max-width: 420px; }
+.done .icons .ai { --s: 28px; animation: pop .5s both; }
+.done .notes { margin-top: 14px; text-align: left; display: flex; flex-direction: column; gap: 6px; }
+.dn { display: flex; align-items: center; gap: 10px; padding: 8px 10px; border-radius: 12px; background: var(--card); box-shadow: inset 0 0 0 .5px var(--line); font-size: 12.5px; }
+html[data-theme="dark"] .dn { background: rgba(255,255,255,.05); }
+.dn .i { width: 18px; height: 18px; color: var(--ink-6); } .dn .ai { --s: 22px; } .dn .tx { flex: 1; } .dn .tx em { font-style: normal; color: var(--ink-5); }
+.fly { position: fixed; z-index: 99; pointer-events: none; transition: transform .7s cubic-bezier(.5,0,.2,1), opacity .7s; }
+
+/* ---------- Empty / loading ---------- */
+.emptyc { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 0 40px 60px; }
+.emptyc h2 { margin: 14px 0 4px; font-size: 22px; letter-spacing: -.01em; }
+.emptyc p { margin: 0; color: var(--ink-5); }
+.emptyc .acts { display: flex; gap: 8px; margin-top: 18px; }
+.watch { margin-top: 28px; display: flex; flex-direction: column; align-items: center; gap: 8px; font-size: 12px; color: var(--ink-5); }
+.watch .row2 { display: flex; gap: 6px; } .watch .ai { --s: 28px; }
+.scanring { position: relative; width: 150px; height: 150px; }
+.scanring svg.r { width: 100%; height: 100%; transform: rotate(-90deg); }
+.scanring .c { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+.scanring .c b { font: 700 21px var(--mono); letter-spacing: -.02em; } .scanring .c span { font-size: 11.5px; color: var(--ink-5); }
+.ticker { margin-top: 12px; font: 11.5px var(--mono); color: var(--ink-5); height: 16px; max-width: 420px; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+.found { margin-top: 18px; display: grid; grid-template-columns: repeat(6, 92px); gap: 8px; justify-content: center; }
+.fnd { border-radius: 14px; background: var(--card); box-shadow: inset 0 0 0 .5px var(--line); padding: 10px 6px 8px; display: flex; flex-direction: column; align-items: center; gap: 4px; }
+.fnd.nw { animation: pop .45s cubic-bezier(.2,1.3,.4,1) both; }
+.fnd .ai { --s: 36px; } .fnd b { font: 600 12px var(--mono); } .fnd span { font-size: 10.5px; color: var(--ink-5); max-width: 100%; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+.fnd.sk { background: var(--line-soft); box-shadow: none; animation: shimmer 1.5s ease-in-out infinite; height: 86px; }
+@keyframes shimmer { 50% { opacity: .45; } }
+
+/* ---------- Onboarding ---------- */
+.onb { width: 640px; height: 560px; display: flex; flex-direction: column; }
+.onb .bar { height: 44px; display: flex; align-items: center; padding: 0 14px; }
+.onb .dots { margin: 0 auto; display: flex; gap: 6px; transform: translateX(-30px); } .onb .dots i { width: 22px; height: 4px; border-radius: 2px; background: var(--ink-3); } .onb .dots i.on { background: var(--accent); }
+.onb .ill { margin: 6px 28px 0; height: 220px; border-radius: 18px; background: var(--pane); box-shadow: inset 0 0 0 .5px var(--line); display: grid; place-items: center; position: relative; overflow: hidden; }
+.onb .body { padding: 22px 44px 0; text-align: center; flex: 1; }
+.onb h1 { margin: 0; font-size: 24px; letter-spacing: -.015em; }
+.onb p { margin: 8px auto 0; color: var(--ink-5); max-width: 440px; font-size: 13.5px; }
+.onb .acts { display: flex; justify-content: center; gap: 10px; padding: 0 0 26px; }
+.onb .stat { margin-top: 12px; display: inline-flex; gap: 6px; align-items: center; }
+.mini-set { width: 360px; border-radius: 12px; background: var(--card); box-shadow: 0 8px 24px rgba(0,0,0,.12), inset 0 0 0 .5px var(--line); overflow: hidden; }
+.mini-set .h { height: 30px; display: flex; align-items: center; gap: 6px; padding: 0 10px; font-size: 12px; font-weight: 600; border-bottom: .5px solid var(--line); background: var(--ink-1); }
+.mini-set .h .lights i { width: 9px; height: 9px; }
+.mini-set .h span { margin-left: 8px; color: var(--ink-5); font-weight: 500; }
+.mini-set .r { display: flex; align-items: center; gap: 10px; height: 40px; padding: 0 12px; border-top: .5px solid var(--line-soft); font-size: 12.5px; }
+.mini-set .r:first-of-type { border-top: 0; }
+.mini-set .r .ai { --s: 24px; } .mini-set .r .appic { width: 24px; height: 24px; }
+.mini-set .r .sw { margin-left: auto; }
+.sw { width: 32px; height: 19px; border-radius: 10px; background: var(--ink-3); position: relative; flex: none; transition: background .25s; }
+.sw::after { content: ""; position: absolute; top: 2px; left: 2px; width: 15px; height: 15px; border-radius: 50%; background: #fff; box-shadow: 0 1px 2px rgba(0,0,0,.25); transition: transform .25s; }
+.sw.on { background: var(--accent); } .sw.on::after { transform: translateX(13px); }
+.sw.anim { animation: swon 2.4s ease-in-out infinite; } .sw.anim::after { animation: swknob 2.4s ease-in-out infinite; }
+@keyframes swon { 0%, 35% { background: var(--ink-3); } 50%, 100% { background: var(--accent); } }
+@keyframes swknob { 0%, 35% { transform: none; } 50%, 100% { transform: translateX(13px); } }
+.cursor { position: absolute; width: 18px; height: 18px; animation: cur 2.4s ease-in-out infinite; }
+@keyframes cur { 0% { transform: translate(40px, 40px); opacity: 0; } 30% { transform: translate(0, 0); opacity: 1; } 45% { transform: translate(0, 0) scale(.85); } 60%, 100% { transform: translate(0, 0); opacity: 1; } }
+.flow { display: flex; align-items: center; gap: 14px; }
+.flow .node { display: flex; flex-direction: column; align-items: center; gap: 7px; width: 132px; text-align: center; font-size: 12px; font-weight: 600; }
+.flow .node span { font-weight: 400; color: var(--ink-5); font-size: 11px; }
+.flow .node .ai { --s: 56px; } .flow .node .appic { width: 56px; height: 56px; }
+.flow .arr { color: var(--ink-4); } .flow .arr .i { width: 22px; height: 22px; }
+.flow .node.agent .ai { box-shadow: inset 0 0 0 1.5px var(--agent-fill); }
+.flow .node.agent b { white-space: nowrap; color: var(--agent); display: inline-flex; gap: 4px; align-items: center; font-size: 11px; } .flow .node.agent b .i { width: 13px; height: 13px; color: var(--agent-fill); }
+.cmdchip { display: inline-flex; align-items: center; gap: 8px; height: 30px; padding: 0 6px 0 11px; border-radius: 9px; background: var(--ink-2); font: 12px var(--mono); }
+.cmdchip button { width: 22px; height: 22px; border-radius: 6px; display: grid; place-items: center; color: var(--ink-5); } .cmdchip button:hover { background: var(--line); }
+.cmdchip .i { width: 13px; height: 13px; }
+
+/* Notification banners */
+.nstack { position: fixed; top: 40px; right: 14px; width: 372px; display: flex; flex-direction: column; gap: 10px; z-index: 40; }
+.nb { border-radius: 22px; padding: 12px 12px 12px 12px; display: grid; grid-template-columns: 38px 1fr 44px; gap: 10px; align-items: center; position: relative;
+  background: var(--glass-strong); backdrop-filter: blur(40px) saturate(1.8); -webkit-backdrop-filter: blur(40px) saturate(1.8); box-shadow: var(--shadow-pop), inset 0 1px 0 var(--spec), inset 0 0 0 .5px var(--glass-rim); }
+.nb .appic { width: 38px; height: 38px; }
+.nb .t b { font-size: 13px; display: block; } .nb .t span { font-size: 12.5px; color: var(--ink-6); display: block; }
+.nb .t b small { font-weight: 400; font-size: 11px; color: var(--ink-5); margin-left: 6px; }
+.nb .att .ai { --s: 44px; }
+.nb .acts { grid-column: 1 / -1; display: flex; gap: 6px; padding-top: 2px; }
+.nb .acts .btn { flex: 1; height: 28px; font-size: 12px; background: rgba(127,127,127,.12); box-shadow: none; }
+.nb .acts .btn.pri { background: var(--accent); }
+.nside { position: fixed; left: 40px; top: 70px; width: 440px; z-index: 30; }
+.nside h3 { margin: 0 0 6px; font-size: 18px; } .nside p { margin: 0 0 6px; color: var(--ink-6); font-size: 13px; }
+.nside ul { margin: 6px 0 0; padding-left: 0; list-style: none; display: flex; flex-direction: column; gap: 6px; }
+.nside li { display: flex; gap: 8px; align-items: flex-start; font-size: 12.5px; color: var(--ink-6); } .nside li .i { width: 15px; height: 15px; color: var(--ink-5); margin-top: 1px; }
+.panel { border-radius: 18px; padding: 16px 18px; }
+
+/* Settings */
+.set { width: 680px; height: 560px; display: flex; flex-direction: column; }
+.set .tbar { display: flex; align-items: center; padding: 12px 14px 8px; gap: 6px; }
+.set .tabs { display: flex; gap: 2px; margin: 0 auto; transform: translateX(-26px); }
+.set .tab { width: 82px; height: 50px; border-radius: 12px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px; font-size: 11.5px; color: var(--ink-6); }
+.set .tab .i { width: 20px; height: 20px; } .set .tab .hx2 { color: var(--ink-6); }
+.set .tab.on { background: rgba(127,127,127,.14); color: var(--accent); font-weight: 600; }
+.set .pane { flex: 1; overflow: auto; padding: 4px 26px 24px; background: var(--pane); border-top: .5px solid var(--line); }
+.fgroup { margin-top: 16px; } .fgroup > h5 { margin: 0 6px 6px; font-size: 12px; color: var(--ink-5); font-weight: 600; }
+.fgroup .box { border-radius: 12px; background: var(--card); box-shadow: inset 0 0 0 .5px var(--line); }
+html[data-theme="dark"] .fgroup .box { background: var(--ink-1); }
+.frow { display: flex; align-items: center; gap: 10px; min-height: 42px; padding: 6px 12px; border-top: .5px solid var(--line-soft); font-size: 13px; }
+.frow:first-child { border-top: 0; }
+.frow .ic { width: 24px; height: 24px; border-radius: 6px; background: var(--ink-2); display: grid; place-items: center; color: var(--ink-6); flex: none; }
+.frow .ic .i { width: 15px; height: 15px; } .frow .ai { --s: 24px; }
+.frow .lab { flex: 1; min-width: 0; } .frow .lab small { display: block; color: var(--ink-5); font-size: 11.5px; }
+.frow .val { color: var(--ink-5); font-size: 12.5px; display: flex; align-items: center; gap: 6px; }
+.popup { display: inline-flex; align-items: center; gap: 6px; height: 24px; padding: 0 6px 0 10px; border-radius: 7px; background: var(--card); box-shadow: inset 0 0 0 .5px var(--line-strong), 0 .5px 1px rgba(0,0,0,.08); font-size: 12.5px; color: var(--ink-7); }
+html[data-theme="dark"] .popup { background: var(--ink-3); }
+.popup .i { width: 11px; height: 11px; color: var(--ink-5); }
+.slider { width: 170px; height: 4px; border-radius: 2px; background: var(--ink-3); position: relative; } .slider i { position: absolute; left: 0; top: 0; bottom: 0; width: 22%; background: var(--accent); border-radius: 2px; }
+.slider b { position: absolute; left: 22%; top: 50%; width: 16px; height: 16px; border-radius: 50%; background: #fff; transform: translate(-50%, -50%); box-shadow: 0 1px 3px rgba(0,0,0,.3), inset 0 0 0 .5px rgba(0,0,0,.1); }
+.chipset { display: flex; flex-wrap: wrap; gap: 6px; padding: 10px 12px; }
+.pchip { display: inline-flex; align-items: center; gap: 6px; height: 28px; padding: 0 10px 0 5px; border-radius: 9px; background: var(--ink-1); box-shadow: inset 0 0 0 .5px var(--line); font-size: 12px; }
+.pchip .ai { --s: 20px; } .pchip .i { width: 14px; height: 14px; color: var(--ink-5); } .pchip code { font: 11.5px var(--mono); }
+.status { display: flex; align-items: center; gap: 12px; padding: 12px; }
+.status .ai { --s: 40px; } .status b { display: block; } .status span { font-size: 12px; color: var(--ink-5); }
+.okchip { display: inline-flex; gap: 4px; align-items: center; color: var(--safe); font-weight: 600; font-size: 12px; } .okchip .i { width: 14px; height: 14px; }
+.about { display: flex; flex-direction: column; align-items: center; text-align: center; padding-top: 30px; gap: 6px; }
+.about .appic { width: 96px; height: 96px; } .about h3 { margin: 6px 0 0; font-size: 18px; } .about p { margin: 0; color: var(--ink-5); }
+
+/* ---------- Prototype bar ---------- */
+.proto { position: fixed; bottom: 12px; left: 50%; transform: translateX(-50%); z-index: 100; display: flex; align-items: center; gap: 4px; padding: 5px; border-radius: 18px; max-width: calc(100vw - 24px); overflow-x: auto;
+  background: rgba(20,22,28,.82); color: #e9ebef; backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); box-shadow: 0 10px 30px rgba(0,0,0,.3); font-size: 11.5px; }
+.proto b { padding: 0 8px 0 6px; font-weight: 700; color: #9aa3b2; white-space: nowrap; }
+.proto button { height: 26px; padding: 0 9px; border-radius: 13px; white-space: nowrap; color: #d6d9e0; }
+.proto button:hover { background: rgba(255,255,255,.1); }
+.proto button.on { background: #6594fa; color: #070d1a; font-weight: 600; }
+.proto .sep { width: 1px; height: 18px; background: rgba(255,255,255,.18); margin: 0 4px; flex: none; }
+
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: .001ms !important; animation-iteration-count: 1 !important; transition-duration: .001ms !important; } }
+html.rm *, html.rm *::before, html.rm *::after { animation-duration: .001ms !important; animation-iteration-count: 1 !important; transition-duration: .001ms !important; }
+@media (max-width: 1240px) { .stage { justify-content: flex-start; overflow-x: auto; } }
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-ruler" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M21.3 15.3a2.4 2.4 0 0 1 0 3.4l-2.6 2.6a2.4 2.4 0 0 1-3.4 0L2.7 8.7a2.41 2.41 0 0 1 0-3.4l2.6-2.6a2.41 2.41 0 0 1 3.4 0Z"/><path d="m14.5 12.5 2-2M11.5 9.5l2-2M8.5 6.5l2-2M17.5 15.5l2-2"/></symbol>
+  <symbol id="i-bell" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9M10.3 21a1.94 1.94 0 0 0 3.4 0"/></symbol>
+  <symbol id="i-link" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></symbol>
+  <symbol id="i-wifi" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.55a11 11 0 0 1 14.08 0M1.42 9a16 16 0 0 1 21.16 0M8.53 16.11a6 6 0 0 1 6.95 0M12 20h.01"/></symbol>
+  <symbol id="i-battery" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="17" height="10" rx="2.5"/><path d="M22 11v2"/><rect x="4" y="9" width="11" height="6" rx="1" fill="currentColor" stroke="none"/></symbol>
+  <symbol id="i-toggles" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="7" rx="3.5"/><rect x="2" y="13" width="20" height="7" rx="3.5"/><circle cx="16" cy="7.5" r="1.6" fill="currentColor"/><circle cx="8" cy="16.5" r="1.6" fill="currentColor"/></symbol>
+  <!-- Menu-bar template glyph · final Sweep: hexagon + swept fill + one glint (18 pt). Low-disk variant: nearly full, no glint. -->
+  <symbol id="fr-glyph" viewBox="0 0 24 24"><path d="M12 2.6 20.2 7.3v9.4L12 21.4 3.8 16.7V7.3Z" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round"/><path d="M3.8 15.8C8 14.9 14 13.1 20.2 11.4v5.3L12 21.4 3.8 16.7Z" fill="currentColor"/><path d="M13.6 5.6Q14 8.1 16.4 8.6Q14 9.1 13.6 11.6Q13.2 9.1 10.8 8.6Q13.2 8.1 13.6 5.6Z" fill="currentColor"/></symbol>
+  <symbol id="fr-glyph-low" viewBox="0 0 24 24"><path d="M12 2.6 20.2 7.3v9.4L12 21.4 3.8 16.7V7.3Z" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round"/><path d="M3.8 8.6C8 7.9 14 7.1 20.2 6.9v9.8L12 21.4 3.8 16.7Z" fill="currentColor"/></symbol>
+  <!-- Agent marker (always amber in the UI): hex node. Replaces the sparkle, which now belongs to the brand icon. -->
+  <symbol id="i-agent" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.8 19.8 7.3v9.4L12 21.2 4.2 16.7V7.3Z"/><circle cx="12" cy="12" r="2.6" fill="currentColor" stroke="none"/></symbol>
+  <symbol id="i-clock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></symbol>
+  <symbol id="i-scan" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7V5a2 2 0 0 1 2-2h2M17 3h2a2 2 0 0 1 2 2v2M21 17v2a2 2 0 0 1-2 2h-2M7 21H5a2 2 0 0 1-2-2v-2"/><circle cx="12" cy="12" r="3"/><path d="m16 16-1.9-1.9"/></symbol>
+  <symbol id="i-list" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/></symbol>
+  <symbol id="i-trash" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></symbol>
+  <symbol id="i-history" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5M12 7v5l4 2"/></symbol>
+  <symbol id="i-settings" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M21 4h-7M10 4H3M21 12h-9M8 12H3M21 20h-5M12 20H3M14 2v4M8 10v4M16 18v4"/></symbol>
+  <symbol id="i-key" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="7.5" cy="15.5" r="5.5"/><path d="m21 2-9.6 9.6M15.5 7.5l3 3L22 7l-3-3"/></symbol>
+  <symbol id="i-lock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></symbol>
+  <symbol id="i-shield" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></symbol>
+  <symbol id="i-eye" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></symbol>
+  <symbol id="i-check-circle" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></symbol>
+  <symbol id="i-x" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18M6 6l12 12"/></symbol>
+  <symbol id="i-x-circle" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m15 9-6 6M9 9l6 6"/></symbol>
+  <symbol id="i-terminal" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="m4 17 6-6-6-6M12 19h8"/></symbol>
+  <symbol id="i-chev-r" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></symbol>
+  <symbol id="i-chev-d" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></symbol>
+  <symbol id="i-search" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></symbol>
+  <symbol id="i-languages" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="m5 8 6 6M4 14l6-6 2-3M2 5h12M7 2h1M22 22l-5-10-5 10M14 18h6"/></symbol>
+  <symbol id="i-box" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"/><path d="m3.3 7 8.7 5 8.7-5M12 22V12"/></symbol>
+  <symbol id="i-phone" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2"/><path d="M12 18h.01"/></symbol>
+  <symbol id="i-layers" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="m12 2 10 5-10 5L2 7z"/><path d="m2 17 10 5 10-5M2 12l10 5 10-5"/></symbol>
+  <symbol id="i-archive" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="5" rx="1"/><path d="M4 8v11a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8M10 12h4"/></symbol>
+  <symbol id="i-folder-code" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20h16a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.93a2 2 0 0 1-1.66-.9l-.82-1.2A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13c0 1.1.9 2 2 2Z"/><path d="m10 13-2 2 2 2M14 17l2-2-2-2"/></symbol>
+  <symbol id="i-user" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></symbol>
+  <symbol id="i-app" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="4"/><path d="M3 9h18"/></symbol>
+  <symbol id="i-cpu" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="2"/><rect x="9" y="9" width="6" height="6"/><path d="M15 2v2M15 20v2M2 15h2M2 9h2M20 15h2M20 9h2M9 2v2M9 20v2"/></symbol>
+  <symbol id="i-copy" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></symbol>
+  <symbol id="i-pause" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="4" width="4" height="16" rx="1"/><rect x="14" y="4" width="4" height="16" rx="1"/></symbol>
+  <symbol id="i-play" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="m6 3 14 9-14 9z"/></symbol>
+  <symbol id="i-arrow-r" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></symbol>
+  <symbol id="i-info" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></symbol>
+  <symbol id="i-alert" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><path d="M12 9v4M12 17h.01"/></symbol>
+  <symbol id="i-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></symbol>
+  <symbol id="i-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></symbol>
+  <symbol id="i-monitor" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></symbol>
+  <symbol id="i-refresh" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8M21 3v5h-5M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16M8 16H3v5"/></symbol>
+  <symbol id="i-ext" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h6v6M10 14 21 3M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/></symbol>
+  <symbol id="i-hdd" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12H2M5.45 5.11 2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11zM6 16h.01M10 16h.01"/></symbol>
+  <symbol id="i-chip" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 8V4H8"/><rect x="4" y="8" width="16" height="12" rx="2"/><path d="M2 14h2M20 14h2M15 13v2M9 13v2"/></symbol>
+  <symbol id="i-github" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/><path d="M9 18c-4.51 2-5-2-7-2"/></symbol>
+  <symbol id="i-sort" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="m3 16 4 4 4-4M7 20V4M11 4h10M11 8h7M11 12h4"/></symbol>
+  <symbol id="i-plus" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"/></symbol>
+  <symbol id="i-admin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="16" r="1"/><rect x="3" y="10" width="18" height="12" rx="2"/><path d="M7 10V7a5 5 0 0 1 10 0v3"/></symbol>
+  <symbol id="i-download" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></symbol>
+  <symbol id="i-hb" viewBox="10 2 80 96"><path d="M50 4 L88 26 L88 74 L50 96 L12 74 L12 26 Z" fill="currentColor"/><path d="M28 32 H38 V46 H50 V32 H60 V68 H50 V54 H38 V68 H28 Z M62 32 H78 Q86 32 86 40 Q86 47 80 49 Q86 51 86 60 Q86 68 78 68 H62 Z M70 38 V46 H75 Q78 46 78 42 Q78 38 75 38 Z M70 54 V62 H76 Q79 62 79 58 Q79 54 76 54 Z" fill="var(--hb-ink-0)"/></symbol>
+  <!-- Freeroom app icon (light/dark follow theme via CSS vars) -->
+<!-- Freeroom app icon · final Sweep (B+). UI sizes use the 128/64 tier (max 2 glints). -->
+  <symbol id="appicon-l" viewBox="96 96 832 832"><defs><linearGradient id="bg-uil" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFFFFF"/><stop offset="1" stop-color="#E9EDF4"/></linearGradient><linearGradient id="fill-uil" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3D6EF2"/><stop offset=".55" stop-color="#1A4DDB"/><stop offset="1" stop-color="#1340BE"/></linearGradient><linearGradient id="spec-uil" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="rgba(255,255,255,1)"/><stop offset=".35" stop-color="rgba(255,255,255,.35)" stop-opacity=".0"/><stop offset=".85" stop-color="rgba(255,255,255,.35)" stop-opacity="0"/><stop offset="1" stop-color="rgba(255,255,255,.35)"/></linearGradient><radialGradient id="glw-uil" cx=".3" cy=".18" r=".75"><stop offset="0" stop-color="rgba(255,255,255,.75)"/><stop offset="1" stop-color="rgba(255,255,255,.75)" stop-opacity="0"/></radialGradient><clipPath id="sq-uil"><path d="M924.0 512.0 L923.8 638.6 L923.1 679.0 L922.0 708.2 L920.4 731.8 L918.3 751.9 L915.8 769.6 L912.8 785.3 L909.4 799.5 L905.4 812.4 L901.0 824.2 L896.0 835.1 L890.5 845.1 L884.5 854.3 L877.9 862.8 L870.7 870.7 L862.8 877.9 L854.3 884.5 L845.1 890.5 L835.1 896.0 L824.2 901.0 L812.4 905.4 L799.5 909.4 L785.3 912.8 L769.6 915.8 L751.9 918.3 L731.8 920.4 L708.2 922.0 L679.0 923.1 L638.6 923.8 L512.0 924.0 L385.4 923.8 L345.0 923.1 L315.8 922.0 L292.2 920.4 L272.1 918.3 L254.4 915.8 L238.7 912.8 L224.5 909.4 L211.6 905.4 L199.8 901.0 L188.9 896.0 L178.9 890.5 L169.7 884.5 L161.2 877.9 L153.3 870.7 L146.1 862.8 L139.5 854.3 L133.5 845.1 L128.0 835.1 L123.0 824.2 L118.6 812.4 L114.6 799.5 L111.2 785.3 L108.2 769.6 L105.7 751.9 L103.6 731.8 L102.0 708.2 L100.9 679.0 L100.2 638.6 L100.0 512.0 L100.2 385.4 L100.9 345.0 L102.0 315.8 L103.6 292.2 L105.7 272.1 L108.2 254.4 L111.2 238.7 L114.6 224.5 L118.6 211.6 L123.0 199.8 L128.0 188.9 L133.5 178.9 L139.5 169.7 L146.1 161.2 L153.3 153.3 L161.2 146.1 L169.7 139.5 L178.9 133.5 L188.9 128.0 L199.8 123.0 L211.6 118.6 L224.5 114.6 L238.7 111.2 L254.4 108.2 L272.1 105.7 L292.2 103.6 L315.8 102.0 L345.0 100.9 L385.4 100.2 L512.0 100.0 L638.6 100.2 L679.0 100.9 L708.2 102.0 L731.8 103.6 L751.9 105.7 L769.6 108.2 L785.3 111.2 L799.5 114.6 L812.4 118.6 L824.2 123.0 L835.1 128.0 L845.1 133.5 L854.3 139.5 L862.8 146.1 L870.7 153.3 L877.9 161.2 L884.5 169.7 L890.5 178.9 L896.0 188.9 L901.0 199.8 L905.4 211.6 L909.4 224.5 L912.8 238.7 L915.8 254.4 L918.3 272.1 L920.4 292.2 L922.0 315.8 L923.1 345.0 L923.8 385.4 Z"/></clipPath><clipPath id="hx-uil"><path d="M512 236 L752 374 L752 650 L512 788 L272 650 L272 374 Z"/></clipPath></defs><path d="M924.0 512.0 L923.8 638.6 L923.1 679.0 L922.0 708.2 L920.4 731.8 L918.3 751.9 L915.8 769.6 L912.8 785.3 L909.4 799.5 L905.4 812.4 L901.0 824.2 L896.0 835.1 L890.5 845.1 L884.5 854.3 L877.9 862.8 L870.7 870.7 L862.8 877.9 L854.3 884.5 L845.1 890.5 L835.1 896.0 L824.2 901.0 L812.4 905.4 L799.5 909.4 L785.3 912.8 L769.6 915.8 L751.9 918.3 L731.8 920.4 L708.2 922.0 L679.0 923.1 L638.6 923.8 L512.0 924.0 L385.4 923.8 L345.0 923.1 L315.8 922.0 L292.2 920.4 L272.1 918.3 L254.4 915.8 L238.7 912.8 L224.5 909.4 L211.6 905.4 L199.8 901.0 L188.9 896.0 L178.9 890.5 L169.7 884.5 L161.2 877.9 L153.3 870.7 L146.1 862.8 L139.5 854.3 L133.5 845.1 L128.0 835.1 L123.0 824.2 L118.6 812.4 L114.6 799.5 L111.2 785.3 L108.2 769.6 L105.7 751.9 L103.6 731.8 L102.0 708.2 L100.9 679.0 L100.2 638.6 L100.0 512.0 L100.2 385.4 L100.9 345.0 L102.0 315.8 L103.6 292.2 L105.7 272.1 L108.2 254.4 L111.2 238.7 L114.6 224.5 L118.6 211.6 L123.0 199.8 L128.0 188.9 L133.5 178.9 L139.5 169.7 L146.1 161.2 L153.3 153.3 L161.2 146.1 L169.7 139.5 L178.9 133.5 L188.9 128.0 L199.8 123.0 L211.6 118.6 L224.5 114.6 L238.7 111.2 L254.4 108.2 L272.1 105.7 L292.2 103.6 L315.8 102.0 L345.0 100.9 L385.4 100.2 L512.0 100.0 L638.6 100.2 L679.0 100.9 L708.2 102.0 L731.8 103.6 L751.9 105.7 L769.6 108.2 L785.3 111.2 L799.5 114.6 L812.4 118.6 L824.2 123.0 L835.1 128.0 L845.1 133.5 L854.3 139.5 L862.8 146.1 L870.7 153.3 L877.9 161.2 L884.5 169.7 L890.5 178.9 L896.0 188.9 L901.0 199.8 L905.4 211.6 L909.4 224.5 L912.8 238.7 L915.8 254.4 L918.3 272.1 L920.4 292.2 L922.0 315.8 L923.1 345.0 L923.8 385.4 Z" fill="url(#bg-uil)"/><path d="M924.0 512.0 L923.8 638.6 L923.1 679.0 L922.0 708.2 L920.4 731.8 L918.3 751.9 L915.8 769.6 L912.8 785.3 L909.4 799.5 L905.4 812.4 L901.0 824.2 L896.0 835.1 L890.5 845.1 L884.5 854.3 L877.9 862.8 L870.7 870.7 L862.8 877.9 L854.3 884.5 L845.1 890.5 L835.1 896.0 L824.2 901.0 L812.4 905.4 L799.5 909.4 L785.3 912.8 L769.6 915.8 L751.9 918.3 L731.8 920.4 L708.2 922.0 L679.0 923.1 L638.6 923.8 L512.0 924.0 L385.4 923.8 L345.0 923.1 L315.8 922.0 L292.2 920.4 L272.1 918.3 L254.4 915.8 L238.7 912.8 L224.5 909.4 L211.6 905.4 L199.8 901.0 L188.9 896.0 L178.9 890.5 L169.7 884.5 L161.2 877.9 L153.3 870.7 L146.1 862.8 L139.5 854.3 L133.5 845.1 L128.0 835.1 L123.0 824.2 L118.6 812.4 L114.6 799.5 L111.2 785.3 L108.2 769.6 L105.7 751.9 L103.6 731.8 L102.0 708.2 L100.9 679.0 L100.2 638.6 L100.0 512.0 L100.2 385.4 L100.9 345.0 L102.0 315.8 L103.6 292.2 L105.7 272.1 L108.2 254.4 L111.2 238.7 L114.6 224.5 L118.6 211.6 L123.0 199.8 L128.0 188.9 L133.5 178.9 L139.5 169.7 L146.1 161.2 L153.3 153.3 L161.2 146.1 L169.7 139.5 L178.9 133.5 L188.9 128.0 L199.8 123.0 L211.6 118.6 L224.5 114.6 L238.7 111.2 L254.4 108.2 L272.1 105.7 L292.2 103.6 L315.8 102.0 L345.0 100.9 L385.4 100.2 L512.0 100.0 L638.6 100.2 L679.0 100.9 L708.2 102.0 L731.8 103.6 L751.9 105.7 L769.6 108.2 L785.3 111.2 L799.5 114.6 L812.4 118.6 L824.2 123.0 L835.1 128.0 L845.1 133.5 L854.3 139.5 L862.8 146.1 L870.7 153.3 L877.9 161.2 L884.5 169.7 L890.5 178.9 L896.0 188.9 L901.0 199.8 L905.4 211.6 L909.4 224.5 L912.8 238.7 L915.8 254.4 L918.3 272.1 L920.4 292.2 L922.0 315.8 L923.1 345.0 L923.8 385.4 Z" fill="url(#glw-uil)"/><g clip-path="url(#hx-uil)"><path d="M170 700 C 360 660, 600 580, 860 470 L880 900 L150 900 Z" fill="url(#fill-uil)"/></g><path d="M318 612 C 452 576, 592 526, 736 468" fill="none" stroke="#1A4DDB" stroke-opacity=".40" stroke-width="24" stroke-linecap="round"/><path d="M512 236 L752 374 L752 650 L512 788 L272 650 L272 374 Z" fill="none" stroke="#1A4DDB" stroke-width="50" stroke-linejoin="round"/><path d="M588 324 Q601.9 392.1 670 406 Q601.9 419.9 588 488 Q574.1 419.9 506 406 Q574.1 392.1 588 324 Z" fill="#1A4DDB"/><path d="M662 618 Q669.5 654.5 706 662 Q669.5 669.5 662 706 Q654.5 669.5 618 662 Q654.5 654.5 662 618 Z" fill="#FFFFFF" fill-opacity=".95"/><g clip-path="url(#sq-uil)"><path d="M924.0 512.0 L923.8 638.6 L923.1 679.0 L922.0 708.2 L920.4 731.8 L918.3 751.9 L915.8 769.6 L912.8 785.3 L909.4 799.5 L905.4 812.4 L901.0 824.2 L896.0 835.1 L890.5 845.1 L884.5 854.3 L877.9 862.8 L870.7 870.7 L862.8 877.9 L854.3 884.5 L845.1 890.5 L835.1 896.0 L824.2 901.0 L812.4 905.4 L799.5 909.4 L785.3 912.8 L769.6 915.8 L751.9 918.3 L731.8 920.4 L708.2 922.0 L679.0 923.1 L638.6 923.8 L512.0 924.0 L385.4 923.8 L345.0 923.1 L315.8 922.0 L292.2 920.4 L272.1 918.3 L254.4 915.8 L238.7 912.8 L224.5 909.4 L211.6 905.4 L199.8 901.0 L188.9 896.0 L178.9 890.5 L169.7 884.5 L161.2 877.9 L153.3 870.7 L146.1 862.8 L139.5 854.3 L133.5 845.1 L128.0 835.1 L123.0 824.2 L118.6 812.4 L114.6 799.5 L111.2 785.3 L108.2 769.6 L105.7 751.9 L103.6 731.8 L102.0 708.2 L100.9 679.0 L100.2 638.6 L100.0 512.0 L100.2 385.4 L100.9 345.0 L102.0 315.8 L103.6 292.2 L105.7 272.1 L108.2 254.4 L111.2 238.7 L114.6 224.5 L118.6 211.6 L123.0 199.8 L128.0 188.9 L133.5 178.9 L139.5 169.7 L146.1 161.2 L153.3 153.3 L161.2 146.1 L169.7 139.5 L178.9 133.5 L188.9 128.0 L199.8 123.0 L211.6 118.6 L224.5 114.6 L238.7 111.2 L254.4 108.2 L272.1 105.7 L292.2 103.6 L315.8 102.0 L345.0 100.9 L385.4 100.2 L512.0 100.0 L638.6 100.2 L679.0 100.9 L708.2 102.0 L731.8 103.6 L751.9 105.7 L769.6 108.2 L785.3 111.2 L799.5 114.6 L812.4 118.6 L824.2 123.0 L835.1 128.0 L845.1 133.5 L854.3 139.5 L862.8 146.1 L870.7 153.3 L877.9 161.2 L884.5 169.7 L890.5 178.9 L896.0 188.9 L901.0 199.8 L905.4 211.6 L909.4 224.5 L912.8 238.7 L915.8 254.4 L918.3 272.1 L920.4 292.2 L922.0 315.8 L923.1 345.0 L923.8 385.4 Z" fill="none" stroke="url(#spec-uil)" stroke-width="14"/></g><path d="M924.0 512.0 L923.8 638.6 L923.1 679.0 L922.0 708.2 L920.4 731.8 L918.3 751.9 L915.8 769.6 L912.8 785.3 L909.4 799.5 L905.4 812.4 L901.0 824.2 L896.0 835.1 L890.5 845.1 L884.5 854.3 L877.9 862.8 L870.7 870.7 L862.8 877.9 L854.3 884.5 L845.1 890.5 L835.1 896.0 L824.2 901.0 L812.4 905.4 L799.5 909.4 L785.3 912.8 L769.6 915.8 L751.9 918.3 L731.8 920.4 L708.2 922.0 L679.0 923.1 L638.6 923.8 L512.0 924.0 L385.4 923.8 L345.0 923.1 L315.8 922.0 L292.2 920.4 L272.1 918.3 L254.4 915.8 L238.7 912.8 L224.5 909.4 L211.6 905.4 L199.8 901.0 L188.9 896.0 L178.9 890.5 L169.7 884.5 L161.2 877.9 L153.3 870.7 L146.1 862.8 L139.5 854.3 L133.5 845.1 L128.0 835.1 L123.0 824.2 L118.6 812.4 L114.6 799.5 L111.2 785.3 L108.2 769.6 L105.7 751.9 L103.6 731.8 L102.0 708.2 L100.9 679.0 L100.2 638.6 L100.0 512.0 L100.2 385.4 L100.9 345.0 L102.0 315.8 L103.6 292.2 L105.7 272.1 L108.2 254.4 L111.2 238.7 L114.6 224.5 L118.6 211.6 L123.0 199.8 L128.0 188.9 L133.5 178.9 L139.5 169.7 L146.1 161.2 L153.3 153.3 L161.2 146.1 L169.7 139.5 L178.9 133.5 L188.9 128.0 L199.8 123.0 L211.6 118.6 L224.5 114.6 L238.7 111.2 L254.4 108.2 L272.1 105.7 L292.2 103.6 L315.8 102.0 L345.0 100.9 L385.4 100.2 L512.0 100.0 L638.6 100.2 L679.0 100.9 L708.2 102.0 L731.8 103.6 L751.9 105.7 L769.6 108.2 L785.3 111.2 L799.5 114.6 L812.4 118.6 L824.2 123.0 L835.1 128.0 L845.1 133.5 L854.3 139.5 L862.8 146.1 L870.7 153.3 L877.9 161.2 L884.5 169.7 L890.5 178.9 L896.0 188.9 L901.0 199.8 L905.4 211.6 L909.4 224.5 L912.8 238.7 L915.8 254.4 L918.3 272.1 L920.4 292.2 L922.0 315.8 L923.1 345.0 L923.8 385.4 Z" fill="none" stroke="rgba(11,18,25,.10)" stroke-width="6"/></symbol>
+  <symbol id="appicon-d" viewBox="96 96 832 832"><defs><linearGradient id="bg-uid" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1E2431"/><stop offset="1" stop-color="#0A0D13"/></linearGradient><linearGradient id="fill-uid" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#93B3FF"/><stop offset=".55" stop-color="#6594FA"/><stop offset="1" stop-color="#4675E4"/></linearGradient><linearGradient id="spec-uid" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="rgba(255,255,255,.55)"/><stop offset=".35" stop-color="rgba(255,255,255,.10)" stop-opacity=".0"/><stop offset=".85" stop-color="rgba(255,255,255,.10)" stop-opacity="0"/><stop offset="1" stop-color="rgba(255,255,255,.10)"/></linearGradient><radialGradient id="glw-uid" cx=".3" cy=".18" r=".75"><stop offset="0" stop-color="rgba(120,150,255,.16)"/><stop offset="1" stop-color="rgba(120,150,255,.16)" stop-opacity="0"/></radialGradient><clipPath id="sq-uid"><path d="M924.0 512.0 L923.8 638.6 L923.1 679.0 L922.0 708.2 L920.4 731.8 L918.3 751.9 L915.8 769.6 L912.8 785.3 L909.4 799.5 L905.4 812.4 L901.0 824.2 L896.0 835.1 L890.5 845.1 L884.5 854.3 L877.9 862.8 L870.7 870.7 L862.8 877.9 L854.3 884.5 L845.1 890.5 L835.1 896.0 L824.2 901.0 L812.4 905.4 L799.5 909.4 L785.3 912.8 L769.6 915.8 L751.9 918.3 L731.8 920.4 L708.2 922.0 L679.0 923.1 L638.6 923.8 L512.0 924.0 L385.4 923.8 L345.0 923.1 L315.8 922.0 L292.2 920.4 L272.1 918.3 L254.4 915.8 L238.7 912.8 L224.5 909.4 L211.6 905.4 L199.8 901.0 L188.9 896.0 L178.9 890.5 L169.7 884.5 L161.2 877.9 L153.3 870.7 L146.1 862.8 L139.5 854.3 L133.5 845.1 L128.0 835.1 L123.0 824.2 L118.6 812.4 L114.6 799.5 L111.2 785.3 L108.2 769.6 L105.7 751.9 L103.6 731.8 L102.0 708.2 L100.9 679.0 L100.2 638.6 L100.0 512.0 L100.2 385.4 L100.9 345.0 L102.0 315.8 L103.6 292.2 L105.7 272.1 L108.2 254.4 L111.2 238.7 L114.6 224.5 L118.6 211.6 L123.0 199.8 L128.0 188.9 L133.5 178.9 L139.5 169.7 L146.1 161.2 L153.3 153.3 L161.2 146.1 L169.7 139.5 L178.9 133.5 L188.9 128.0 L199.8 123.0 L211.6 118.6 L224.5 114.6 L238.7 111.2 L254.4 108.2 L272.1 105.7 L292.2 103.6 L315.8 102.0 L345.0 100.9 L385.4 100.2 L512.0 100.0 L638.6 100.2 L679.0 100.9 L708.2 102.0 L731.8 103.6 L751.9 105.7 L769.6 108.2 L785.3 111.2 L799.5 114.6 L812.4 118.6 L824.2 123.0 L835.1 128.0 L845.1 133.5 L854.3 139.5 L862.8 146.1 L870.7 153.3 L877.9 161.2 L884.5 169.7 L890.5 178.9 L896.0 188.9 L901.0 199.8 L905.4 211.6 L909.4 224.5 L912.8 238.7 L915.8 254.4 L918.3 272.1 L920.4 292.2 L922.0 315.8 L923.1 345.0 L923.8 385.4 Z"/></clipPath><clipPath id="hx-uid"><path d="M512 236 L752 374 L752 650 L512 788 L272 650 L272 374 Z"/></clipPath></defs><path d="M924.0 512.0 L923.8 638.6 L923.1 679.0 L922.0 708.2 L920.4 731.8 L918.3 751.9 L915.8 769.6 L912.8 785.3 L909.4 799.5 L905.4 812.4 L901.0 824.2 L896.0 835.1 L890.5 845.1 L884.5 854.3 L877.9 862.8 L870.7 870.7 L862.8 877.9 L854.3 884.5 L845.1 890.5 L835.1 896.0 L824.2 901.0 L812.4 905.4 L799.5 909.4 L785.3 912.8 L769.6 915.8 L751.9 918.3 L731.8 920.4 L708.2 922.0 L679.0 923.1 L638.6 923.8 L512.0 924.0 L385.4 923.8 L345.0 923.1 L315.8 922.0 L292.2 920.4 L272.1 918.3 L254.4 915.8 L238.7 912.8 L224.5 909.4 L211.6 905.4 L199.8 901.0 L188.9 896.0 L178.9 890.5 L169.7 884.5 L161.2 877.9 L153.3 870.7 L146.1 862.8 L139.5 854.3 L133.5 845.1 L128.0 835.1 L123.0 824.2 L118.6 812.4 L114.6 799.5 L111.2 785.3 L108.2 769.6 L105.7 751.9 L103.6 731.8 L102.0 708.2 L100.9 679.0 L100.2 638.6 L100.0 512.0 L100.2 385.4 L100.9 345.0 L102.0 315.8 L103.6 292.2 L105.7 272.1 L108.2 254.4 L111.2 238.7 L114.6 224.5 L118.6 211.6 L123.0 199.8 L128.0 188.9 L133.5 178.9 L139.5 169.7 L146.1 161.2 L153.3 153.3 L161.2 146.1 L169.7 139.5 L178.9 133.5 L188.9 128.0 L199.8 123.0 L211.6 118.6 L224.5 114.6 L238.7 111.2 L254.4 108.2 L272.1 105.7 L292.2 103.6 L315.8 102.0 L345.0 100.9 L385.4 100.2 L512.0 100.0 L638.6 100.2 L679.0 100.9 L708.2 102.0 L731.8 103.6 L751.9 105.7 L769.6 108.2 L785.3 111.2 L799.5 114.6 L812.4 118.6 L824.2 123.0 L835.1 128.0 L845.1 133.5 L854.3 139.5 L862.8 146.1 L870.7 153.3 L877.9 161.2 L884.5 169.7 L890.5 178.9 L896.0 188.9 L901.0 199.8 L905.4 211.6 L909.4 224.5 L912.8 238.7 L915.8 254.4 L918.3 272.1 L920.4 292.2 L922.0 315.8 L923.1 345.0 L923.8 385.4 Z" fill="url(#bg-uid)"/><path d="M924.0 512.0 L923.8 638.6 L923.1 679.0 L922.0 708.2 L920.4 731.8 L918.3 751.9 L915.8 769.6 L912.8 785.3 L909.4 799.5 L905.4 812.4 L901.0 824.2 L896.0 835.1 L890.5 845.1 L884.5 854.3 L877.9 862.8 L870.7 870.7 L862.8 877.9 L854.3 884.5 L845.1 890.5 L835.1 896.0 L824.2 901.0 L812.4 905.4 L799.5 909.4 L785.3 912.8 L769.6 915.8 L751.9 918.3 L731.8 920.4 L708.2 922.0 L679.0 923.1 L638.6 923.8 L512.0 924.0 L385.4 923.8 L345.0 923.1 L315.8 922.0 L292.2 920.4 L272.1 918.3 L254.4 915.8 L238.7 912.8 L224.5 909.4 L211.6 905.4 L199.8 901.0 L188.9 896.0 L178.9 890.5 L169.7 884.5 L161.2 877.9 L153.3 870.7 L146.1 862.8 L139.5 854.3 L133.5 845.1 L128.0 835.1 L123.0 824.2 L118.6 812.4 L114.6 799.5 L111.2 785.3 L108.2 769.6 L105.7 751.9 L103.6 731.8 L102.0 708.2 L100.9 679.0 L100.2 638.6 L100.0 512.0 L100.2 385.4 L100.9 345.0 L102.0 315.8 L103.6 292.2 L105.7 272.1 L108.2 254.4 L111.2 238.7 L114.6 224.5 L118.6 211.6 L123.0 199.8 L128.0 188.9 L133.5 178.9 L139.5 169.7 L146.1 161.2 L153.3 153.3 L161.2 146.1 L169.7 139.5 L178.9 133.5 L188.9 128.0 L199.8 123.0 L211.6 118.6 L224.5 114.6 L238.7 111.2 L254.4 108.2 L272.1 105.7 L292.2 103.6 L315.8 102.0 L345.0 100.9 L385.4 100.2 L512.0 100.0 L638.6 100.2 L679.0 100.9 L708.2 102.0 L731.8 103.6 L751.9 105.7 L769.6 108.2 L785.3 111.2 L799.5 114.6 L812.4 118.6 L824.2 123.0 L835.1 128.0 L845.1 133.5 L854.3 139.5 L862.8 146.1 L870.7 153.3 L877.9 161.2 L884.5 169.7 L890.5 178.9 L896.0 188.9 L901.0 199.8 L905.4 211.6 L909.4 224.5 L912.8 238.7 L915.8 254.4 L918.3 272.1 L920.4 292.2 L922.0 315.8 L923.1 345.0 L923.8 385.4 Z" fill="url(#glw-uid)"/><g clip-path="url(#hx-uid)"><path d="M170 700 C 360 660, 600 580, 860 470 L880 900 L150 900 Z" fill="url(#fill-uid)"/></g><path d="M318 612 C 452 576, 592 526, 736 468" fill="none" stroke="#6594FA" stroke-opacity=".40" stroke-width="24" stroke-linecap="round"/><path d="M512 236 L752 374 L752 650 L512 788 L272 650 L272 374 Z" fill="none" stroke="#6594FA" stroke-width="50" stroke-linejoin="round"/><path d="M588 324 Q601.9 392.1 670 406 Q601.9 419.9 588 488 Q574.1 419.9 506 406 Q574.1 392.1 588 324 Z" fill="#A9C2FF"/><path d="M662 618 Q669.5 654.5 706 662 Q669.5 669.5 662 706 Q654.5 669.5 618 662 Q654.5 654.5 662 618 Z" fill="#FFFFFF" fill-opacity=".95"/><g clip-path="url(#sq-uid)"><path d="M924.0 512.0 L923.8 638.6 L923.1 679.0 L922.0 708.2 L920.4 731.8 L918.3 751.9 L915.8 769.6 L912.8 785.3 L909.4 799.5 L905.4 812.4 L901.0 824.2 L896.0 835.1 L890.5 845.1 L884.5 854.3 L877.9 862.8 L870.7 870.7 L862.8 877.9 L854.3 884.5 L845.1 890.5 L835.1 896.0 L824.2 901.0 L812.4 905.4 L799.5 909.4 L785.3 912.8 L769.6 915.8 L751.9 918.3 L731.8 920.4 L708.2 922.0 L679.0 923.1 L638.6 923.8 L512.0 924.0 L385.4 923.8 L345.0 923.1 L315.8 922.0 L292.2 920.4 L272.1 918.3 L254.4 915.8 L238.7 912.8 L224.5 909.4 L211.6 905.4 L199.8 901.0 L188.9 896.0 L178.9 890.5 L169.7 884.5 L161.2 877.9 L153.3 870.7 L146.1 862.8 L139.5 854.3 L133.5 845.1 L128.0 835.1 L123.0 824.2 L118.6 812.4 L114.6 799.5 L111.2 785.3 L108.2 769.6 L105.7 751.9 L103.6 731.8 L102.0 708.2 L100.9 679.0 L100.2 638.6 L100.0 512.0 L100.2 385.4 L100.9 345.0 L102.0 315.8 L103.6 292.2 L105.7 272.1 L108.2 254.4 L111.2 238.7 L114.6 224.5 L118.6 211.6 L123.0 199.8 L128.0 188.9 L133.5 178.9 L139.5 169.7 L146.1 161.2 L153.3 153.3 L161.2 146.1 L169.7 139.5 L178.9 133.5 L188.9 128.0 L199.8 123.0 L211.6 118.6 L224.5 114.6 L238.7 111.2 L254.4 108.2 L272.1 105.7 L292.2 103.6 L315.8 102.0 L345.0 100.9 L385.4 100.2 L512.0 100.0 L638.6 100.2 L679.0 100.9 L708.2 102.0 L731.8 103.6 L751.9 105.7 L769.6 108.2 L785.3 111.2 L799.5 114.6 L812.4 118.6 L824.2 123.0 L835.1 128.0 L845.1 133.5 L854.3 139.5 L862.8 146.1 L870.7 153.3 L877.9 161.2 L884.5 169.7 L890.5 178.9 L896.0 188.9 L901.0 199.8 L905.4 211.6 L909.4 224.5 L912.8 238.7 L915.8 254.4 L918.3 272.1 L920.4 292.2 L922.0 315.8 L923.1 345.0 L923.8 385.4 Z" fill="none" stroke="url(#spec-uid)" stroke-width="14"/></g><path d="M924.0 512.0 L923.8 638.6 L923.1 679.0 L922.0 708.2 L920.4 731.8 L918.3 751.9 L915.8 769.6 L912.8 785.3 L909.4 799.5 L905.4 812.4 L901.0 824.2 L896.0 835.1 L890.5 845.1 L884.5 854.3 L877.9 862.8 L870.7 870.7 L862.8 877.9 L854.3 884.5 L845.1 890.5 L835.1 896.0 L824.2 901.0 L812.4 905.4 L799.5 909.4 L785.3 912.8 L769.6 915.8 L751.9 918.3 L731.8 920.4 L708.2 922.0 L679.0 923.1 L638.6 923.8 L512.0 924.0 L385.4 923.8 L345.0 923.1 L315.8 922.0 L292.2 920.4 L272.1 918.3 L254.4 915.8 L238.7 912.8 L224.5 909.4 L211.6 905.4 L199.8 901.0 L188.9 896.0 L178.9 890.5 L169.7 884.5 L161.2 877.9 L153.3 870.7 L146.1 862.8 L139.5 854.3 L133.5 845.1 L128.0 835.1 L123.0 824.2 L118.6 812.4 L114.6 799.5 L111.2 785.3 L108.2 769.6 L105.7 751.9 L103.6 731.8 L102.0 708.2 L100.9 679.0 L100.2 638.6 L100.0 512.0 L100.2 385.4 L100.9 345.0 L102.0 315.8 L103.6 292.2 L105.7 272.1 L108.2 254.4 L111.2 238.7 L114.6 224.5 L118.6 211.6 L123.0 199.8 L128.0 188.9 L133.5 178.9 L139.5 169.7 L146.1 161.2 L153.3 153.3 L161.2 146.1 L169.7 139.5 L178.9 133.5 L188.9 128.0 L199.8 123.0 L211.6 118.6 L224.5 114.6 L238.7 111.2 L254.4 108.2 L272.1 105.7 L292.2 103.6 L315.8 102.0 L345.0 100.9 L385.4 100.2 L512.0 100.0 L638.6 100.2 L679.0 100.9 L708.2 102.0 L731.8 103.6 L751.9 105.7 L769.6 108.2 L785.3 111.2 L799.5 114.6 L812.4 118.6 L824.2 123.0 L835.1 128.0 L845.1 133.5 L854.3 139.5 L862.8 146.1 L870.7 153.3 L877.9 161.2 L884.5 169.7 L890.5 178.9 L896.0 188.9 L901.0 199.8 L905.4 211.6 L909.4 224.5 L912.8 238.7 L915.8 254.4 L918.3 272.1 L920.4 292.2 L922.0 315.8 L923.1 345.0 L923.8 385.4 Z" fill="none" stroke="rgba(255,255,255,.14)" stroke-width="6"/></symbol>
+  <!-- v2 additions (SF Symbol stand-ins) -->
+  <symbol id="i-film" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2.5"/><path d="M7.5 3v18M16.5 3v18M3 8h4.5M3 12h18M3 16h4.5M16.5 8H21M16.5 16H21"/></symbol>
+  <symbol id="i-photo" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="9" cy="9" r="2"/><path d="m21 15-3.1-3.1a2 2 0 0 0-2.8 0L6 21"/></symbol>
+  <symbol id="i-hammer" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="m15 12-8.4 8.4a2.1 2.1 0 1 1-3-3L12 9"/><path d="M17.6 15 22 10.6M20.9 11.7l-1.3-1.3a2.4 2.4 0 0 1-.7-1.7v-.9l-2.5-2.5a6 6 0 0 0-4.2-1.8H9l.9.8a6.2 6.2 0 0 1 2.1 4.6v1.6l2 2h.9a2.4 2.4 0 0 1 1.7.7l1.2 1.2"/></symbol>
+  <symbol id="i-glint" viewBox="0 0 24 24"><path d="M12 1.5Q13.2 10.8 22.5 12Q13.2 13.2 12 22.5Q10.8 13.2 1.5 12Q10.8 10.8 12 1.5Z" fill="currentColor"/></symbol>
+  <symbol id="i-sidebar" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="3"/><path d="M9.5 4v16M5.5 8h1.5M5.5 11h1.5"/></symbol>
+  <symbol id="i-inspector" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="3"/><path d="M14.5 4v16"/></symbol>
+  <symbol id="i-xbin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/><path d="m10 11 4 4M14 11l-4 4"/></symbol>
+  <symbol id="i-power" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.5v9"/><path d="M18.4 6.6a9 9 0 1 1-12.77.04"/></symbol>
+  <symbol id="i-gauge" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="m12 14 4-4"/><path d="M3.34 19a10 10 0 1 1 17.32 0"/></symbol>
+  <symbol id="i-folder" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20h16a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.9a2 2 0 0 1-1.7-.9l-.8-1.2A2 2 0 0 0 7.9 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2Z"/></symbol>
+  <symbol id="i-treemap" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2.5"/><path d="M13 3v18M13 11h8M3 14h10M17 11v10"/></symbol>
+  <symbol id="i-minus-circle" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><path d="M8 12h8"/></symbol>
+  <symbol id="i-keyboard" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2.5"/><path d="M6 9h.01M10 9h.01M14 9h.01M18 9h.01M6 13h.01M18 13h.01M8 16h8M10 13h4"/></symbol>
+  <symbol id="i-menubar" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2.5"/><path d="M2 8.5h20M15 6.3h4"/></symbol>
+  <symbol id="i-cursor" viewBox="0 0 24 24"><path d="M5 3l14 7.5-6.2 1.6L10 18.5Z" fill="#111" stroke="#fff" stroke-width="1.4" stroke-linejoin="round"/></symbol>
+  <symbol id="i-sort-size" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><path d="M4 6h16M4 12h11M4 18h6"/></symbol>
+  <symbol id="i-group" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="2"/><rect x="14" y="3" width="7" height="7" rx="2"/><rect x="3" y="14" width="7" height="7" rx="2"/><rect x="14" y="14" width="7" height="7" rx="2"/></symbol>
+  <!-- filled safety glyphs: checkmark.circle.fill / eye.circle.fill / lock.circle.fill -->
+  <symbol id="s-safe" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="currentColor"/><path d="m7.6 12.3 3 3 5.8-6.4" fill="none" style="stroke:var(--glyph-on,#fff)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="s-review" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="currentColor"/><path d="M5.8 12s2.3-4 6.2-4 6.2 4 6.2 4-2.3 4-6.2 4-6.2-4-6.2-4Z" fill="none" style="stroke:var(--glyph-on,#fff)" stroke-width="1.7" stroke-linejoin="round"/><circle cx="12" cy="12" r="1.7" style="fill:var(--glyph-on,#fff)"/></symbol>
+  <symbol id="s-keep" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="currentColor"/><rect x="8.2" y="11" width="7.6" height="5.6" rx="1.2" style="fill:var(--glyph-on,#fff)"/><path d="M9.8 11V9.4a2.2 2.2 0 0 1 4.4 0V11" fill="none" style="stroke:var(--glyph-on,#fff)" stroke-width="1.6"/></symbol>
+  <symbol id="s-skip" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="currentColor"/><path d="M7.5 12h9" style="stroke:var(--glyph-on,#fff)" stroke-width="2.2" stroke-linecap="round"/></symbol>
+  <symbol id="i-circle-o" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/></symbol>
+</svg>
+
+<div class="desk" aria-hidden="true"></div>
+
+<header class="mbar" role="menubar" aria-label="Simulated macOS menu bar">
+  <b>Freeroom</b><span>File</span><span>Edit</span><span>View</span><span>Window</span><span>Help</span>
+  <div class="r">
+    <button class="fr" id="mbFr" data-act="pop" aria-label="Freeroom: 18.4 GB free. Open menu" aria-haspopup="dialog" aria-expanded="false">
+      <svg aria-hidden="true"><use href="#fr-glyph"/></svg><span id="mbFree">18.4 GB</span>
+    </button>
+    <svg class="i" aria-hidden="true"><use href="#i-wifi"/></svg>
+    <svg class="i" aria-hidden="true"><use href="#i-battery"/></svg>
+    <svg class="i" aria-hidden="true"><use href="#i-search"/></svg>
+    <span>Fri 20 Nov&nbsp; 14:52</span>
+  </div>
+</header>
+
+<div class="stage" id="stage"></div>
+<div id="overlay"></div>
+
+<nav class="proto" aria-label="Prototype controls">
+  <b>Freeroom v2</b>
+  <button data-go="menubar">Menu bar</button>
+  <button data-go="menubar-live">Menu · live</button>
+  <button data-go="notifications">Notifications</button>
+  <button data-go="onboarding-1">Onboarding</button>
+  <button data-go="first-scan">First scan</button>
+  <button data-go="main">Main</button>
+  <button data-go="live">Live agent</button>
+  <button data-go="confirm">Confirm</button>
+  <button data-go="cleaning">Cleaning</button>
+  <button data-go="done">Freed!</button>
+  <button data-go="empty">All clean</button>
+  <button data-go="settings">Settings</button>
+  <span class="sep"></span>
+  <button data-theme-set="auto">Auto</button><button data-theme-set="light">Light</button><button data-theme-set="dark">Dark</button>
+  <span class="sep"></span>
+  <button data-act="srcs" title="Tag every icon with the tier it resolved to: APP (installed app icon), BRAND (Simple Icons), SF (SF Symbol)">Icon tiers</button>
+  <button data-act="rm" title="Simulate Reduce Motion">Reduce motion</button>
+</nav>
+
+<script>
+"use strict";
+/* ==========================================================================
+   Sample data — anonymised (acme-api, shop-frontend, ~ paths only)
+   icon: { app: "Name" }  -> NSWorkspace icon of the installed app (placeholder here)
+         { brand: "slug" } -> Simple Icons SVG, tinted (CDN here, bundled in the app)
+         { sym: "i-…" }   -> SF Symbol
+   ========================================================================== */
+const TOTAL = 494.4, FREE0 = 18.4, FREE_AFTER = 135.9;
+const SI = "16.30.0";
+const BRAND_HEX = { docker: "2496ED", nodedotjs: "5FA04E", npm: "CB3837", pnpm: "F69220", go: "00ADD8", rust: "000000", gradle: "02303A",
+  ollama: "000000", huggingface: "FFD21E", homebrew: "FBB040", xcode: "147EFB", python: "3776AB" };
+
+const ECO = {
+  docker:  { name: "Docker",            icon: { app: "Docker", bundle: "com.docker.docker" } },
+  xcode:   { name: "Xcode & Simulators", icon: { app: "Xcode", bundle: "com.apple.dt.Xcode" } },
+  js:      { name: "JavaScript",        icon: { brand: "nodedotjs" } },
+  rust:    { name: "Rust",              icon: { brand: "rust" } },
+  go:      { name: "Go",                icon: { brand: "go" } },
+  gradle:  { name: "Gradle",            icon: { brand: "gradle" } },
+  ai:      { name: "AI models",         icon: { sym: "i-cpu" } },
+  brew:    { name: "Homebrew",          icon: { brand: "homebrew" } },
+  apps:    { name: "App caches",        icon: { sym: "i-app" } },
+  personal:{ name: "Personal files",    icon: { sym: "i-user" } },
+  system:  { name: "System",            icon: { sym: "i-hdd" } },
+};
+
+const F = [
+  { id: "docker-build", t: "Docker build cache", m: "BuildKit layers", gb: 27.4, cls: "safe", src: "rule", eco: "docker", icon: { app: "Docker", bundle: "com.docker.docker" },
+    act: "command", cmd: "docker builder prune -f", why: "Layers BuildKit keeps to speed up rebuilds. Docker recreates them on the next build.", rule: "docker.buildcache", ev: "Known location · measured by Freeroom", paths: ["~/Library/Containers/com.docker.docker/Data/vms/0/data/Docker.raw"] },
+  { id: "xcode-dd", t: "Xcode DerivedData", m: "46 folders", gb: 19.8, cls: "safe", src: "rule", eco: "xcode", icon: { app: "Xcode", bundle: "com.apple.dt.Xcode" },
+    act: "delete", why: "Intermediate build products. Xcode rebuilds them; the first build afterwards is slower.", rule: "xcode.deriveddata", ev: "Known location · measured by Freeroom", paths: ["~/Library/Developer/Xcode/DerivedData"] },
+  { id: "node-modules", t: "node_modules", m: "14 projects idle > 60 days", gb: 9.3, cls: "safe", src: "rule", eco: "js", icon: { brand: "nodedotjs" },
+    act: "delete", why: "Installed dependencies. `npm install` brings them back from the lockfile.", rule: "js.node_modules", ev: "package-lock.json next to every folder", paths: ["~/Projects/shop-frontend/node_modules", "~/Projects/acme-dashboard/node_modules", "~/Projects/landing-2024/node_modules"], more: 11 },
+  { id: "rust-target", t: "target/ in acme-api", m: "last build 41 days ago", gb: 7.9, cls: "safe", src: "agent", eco: "rust", icon: { brand: "rust" },
+    act: "delete", why: "Cargo build output for a project you have not built in six weeks. `cargo build` regenerates it.", rule: "rust.target", ev: "Cargo.toml next to target/; no process holds files open; last modified 41 days ago.", verified: true, paths: ["~/Projects/acme-api/target"] },
+  { id: "gradle", t: "Gradle caches", m: "~/.gradle", gb: 6.4, cls: "safe", src: "rule", eco: "gradle", icon: { brand: "gradle" },
+    act: "delete", why: "Downloaded dependencies and build caches. Gradle fetches them again when needed.", rule: "gradle.caches", ev: "Known location · measured by Freeroom", paths: ["~/.gradle/caches"] },
+  { id: "go-mod", t: "Go module cache", m: "go clean -modcache", gb: 5.6, cls: "safe", src: "rule", eco: "go", icon: { brand: "go" },
+    act: "command", cmd: "go clean -modcache", why: "Downloaded Go modules. They are re-downloaded on the next build.", rule: "go.modcache", ev: "Known location · measured by Freeroom", paths: ["~/go/pkg/mod"] },
+  { id: "pnpm", t: "pnpm store", m: "1.1 GB hard-linked", gb: 4.8, shared: 1.1, cls: "safe", src: "rule", eco: "js", icon: { brand: "pnpm" },
+    act: "command", cmd: "pnpm store prune", why: "Packages no project references any more. Only unreferenced packages are removed.", rule: "js.pnpm-store", ev: "Known location · 1.1 GB is hard-linked into projects and will not be freed", paths: ["~/Library/pnpm/store/v3"] },
+  { id: "spotify", t: "Spotify cache", m: "offline streaming cache", gb: 3.4, cls: "safe", src: "rule", eco: "apps", icon: { app: "Spotify", bundle: "com.spotify.client" },
+    act: "delete", why: "Streamed songs kept for faster playback. Downloaded playlists are not touched.", rule: "app.spotify.cache", ev: "Known location · measured by Freeroom", paths: ["~/Library/Caches/com.spotify.client"] },
+  { id: "npm", t: "npm cache", m: "~/.npm/_cacache", gb: 3.2, cls: "safe", src: "rule", eco: "js", icon: { brand: "npm" },
+    act: "command", cmd: "npm cache clean --force", why: "Tarballs npm keeps after installs. Safe to clear; installs re-download.", rule: "js.npm-cache", ev: "Known location · measured by Freeroom", paths: ["~/.npm/_cacache"] },
+  { id: "brew", t: "Homebrew downloads", m: "brew cleanup", gb: 2.1, cls: "safe", src: "rule", eco: "brew", icon: { brand: "homebrew" },
+    act: "command", cmd: "brew cleanup --prune=all", why: "Old bottles and installers of formulae you already have.", rule: "brew.cache", ev: "Known location · measured by Freeroom", paths: ["~/Library/Caches/Homebrew"] },
+  { id: "chrome", t: "Chrome cache", m: "browser cache", gb: 1.9, cls: "safe", src: "rule", eco: "apps", icon: { app: "Chrome", bundle: "com.google.Chrome" },
+    act: "delete", why: "Web cache. Sites load a little slower the first time afterwards.", rule: "app.chrome.cache", ev: "Known location · measured by Freeroom", paths: ["~/Library/Caches/Google/Chrome"] },
+  { id: "slack", t: "Slack cache", m: "app cache", gb: 1.2, cls: "safe", src: "rule", eco: "apps", icon: { app: "Slack", bundle: "com.tinyspeck.slackmacgap" },
+    act: "delete", why: "Cached images and files. Messages stay on the server.", rule: "app.slack.cache", ev: "Known location · measured by Freeroom", paths: ["~/Library/Containers/com.tinyspeck.slackmacgap/Data/Library/Caches"] },
+
+  { id: "sim-runtimes", t: "iOS Simulator runtimes", m: "3 runtimes not used in 90 days", gb: 21.6, cls: "review", src: "rule", eco: "xcode", icon: { app: "Simulator", bundle: "com.apple.iphonesimulator" },
+    act: "command", admin: true, cmd: "xcrun simctl runtime delete 21A328 21E213 22A3354", why: "iOS 17.0, 17.4 and 18.0 runtimes. You can download them again from Xcode › Settings › Components.", rule: "xcode.sim-runtimes", ev: "No simulator booted with these runtimes in 90 days", paths: ["/Library/Developer/CoreSimulator/Volumes"] },
+  { id: "docker-images", t: "Unused Docker images", m: "9 images · no containers", gb: 14.2, cls: "review", src: "agent", eco: "docker", icon: { app: "Docker", bundle: "com.docker.docker" },
+    act: "command", cmd: "docker image prune -a", why: "Images that no container uses, e.g. registry.example.com/acme-api:old builds.", rule: "docker.images", ev: "`docker ps -a` shows no container for any of the 9 images; newest is 5 months old.", verified: true, paths: ["Docker.raw (inside the VM)"] },
+  { id: "ollama", t: "Ollama models", m: "2 not run in 4 months", gb: 11.3, cls: "review", src: "agent", eco: "ai", icon: { brand: "ollama" },
+    act: "command", cmd: "ollama rm llama3:70b-q4 codellama:34b", why: "Two local models you have not run since July. `ollama pull` restores them.", rule: "ai.ollama", ev: "Last access times from ~/.ollama/models/manifests: July 2026.", verified: true, paths: ["~/.ollama/models/blobs"] },
+  { id: "tm", t: "Local Time Machine snapshots", m: "4 snapshots", gb: 9.0, cls: "review", src: "rule", eco: "system", icon: { sym: "i-history" },
+    act: "command", admin: true, cmd: "tmutil thinlocalsnapshots / 9000000000 4", why: "Hourly local snapshots. Your backup disk keeps the real backups.", rule: "system.tm-local", ev: "tmutil listlocalsnapshots /", paths: ["/ (APFS snapshots)"] },
+  { id: "hf", t: "Hugging Face cache", m: "5 model snapshots", gb: 8.7, cls: "review", src: "agent", eco: "ai", icon: { brand: "huggingface" },
+    act: "trash", why: "Model weights downloaded by Python notebooks. Re-downloaded on first use.", rule: "ai.hf-hub", ev: "No project under ~/Projects references 3 of the 5 snapshots.", paths: ["~/.cache/huggingface/hub"] },
+  { id: "downloads", t: "Installers in Downloads", m: "23 .dmg / .pkg", gb: 7.4, cls: "review", src: "agent", eco: "personal", icon: { sym: "i-download" },
+    act: "trash", why: "Disk images for apps that are already installed in /Applications.", rule: "personal.installers", ev: "Each .dmg matches an app bundle already in /Applications.", paths: ["~/Downloads/*.dmg", "~/Downloads/*.pkg"] },
+  { id: "archives", t: "Xcode Archives", m: "31 archives, 2022–2024", gb: 6.1, cls: "review", src: "agent", eco: "xcode", icon: { app: "Xcode", bundle: "com.apple.dt.Xcode" },
+    act: "trash", why: "Old app archives. Keep the ones whose dSYMs you still need for crash reports.", rule: "xcode.archives", ev: "Newest archive per app is kept out of this finding.", paths: ["~/Library/Developer/Xcode/Archives"] },
+
+  { id: "photos", t: "Photos Library", m: "system library", gb: 52.0, cls: "keep", src: "rule", eco: "personal", icon: { app: "Photos", bundle: "com.apple.Photos" },
+    act: "none", why: "Your photo library. Freeroom never offers to delete it; use Photos › Settings › Optimise Mac Storage.", rule: "keep.photos", ev: "Protected location", paths: ["~/Pictures/Photos Library.photoslibrary"] },
+  { id: "gopro", t: "GoPro raw footage", m: "no copies found", gb: 38.2, cls: "keep", src: "agent", eco: "personal", icon: { sym: "i-film" },
+    act: "none", why: "Original video with no copy elsewhere on this Mac. Move it to an external disk if you need the space.", rule: "personal.video", ev: "Searched ~/Movies and mounted volumes: no duplicates.", paths: ["~/Movies/GoPro"] },
+];
+const byId = Object.fromEntries(F.map(f => [f.id, f]));
+const LIVE_IDS = ["rust-target", "docker-images", "ollama", "hf", "downloads", "archives", "gopro"];
+
+/* ---------- helpers ---------- */
+const $ = s => document.querySelector(s);
+const esc = s => String(s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+const sz = gb => gb < 1 ? Math.round(gb * 1000) + " MB" : gb.toFixed(1) + " GB";
+const szParts = gb => { const s = sz(gb).split(" "); return `${s[0]}<small> ${s[1]}</small>`; };
+const sum = arr => arr.reduce((a, f) => a + f.gb, 0);
+const net = arr => arr.reduce((a, f) => a + f.gb - (f.shared || 0), 0);
+const use = (id, cls = "i") => `<svg class="${cls}" aria-hidden="true"><use href="#${id}"/></svg>`;
+const reduceMotion = () => document.documentElement.classList.contains("rm") || matchMedia("(prefers-reduced-motion: reduce)").matches;
+const CLS = { safe: ["s-safe", "Safe"], review: ["s-review", "Review"], keep: ["s-keep", "Keep"] };
+const chip = c => `<span class="chip ${c}">${use(CLS[c][0])}${CLS[c][1]}</span>`;
+const appIcon = (cls = "appic") => `<svg class="${cls}" viewBox="0 0 24 24" aria-hidden="true"><use class="l" href="#appicon-l"/><use class="d" href="#appicon-d"/></svg>`;
+
+/* Brand colour → monochrome when it falls into the agent's amber band or is too dark/light to read. */
+function oklch(hex) {
+  const lin = v => { v /= 255; return v <= .04045 ? v / 12.92 : ((v + .055) / 1.055) ** 2.4; };
+  const r = lin(parseInt(hex.slice(0, 2), 16)), g = lin(parseInt(hex.slice(2, 4), 16)), b = lin(parseInt(hex.slice(4, 6), 16));
+  const l = Math.cbrt(.4122214708 * r + .5363325363 * g + .0514459929 * b), m = Math.cbrt(.2119034982 * r + .6806995451 * g + .1073969566 * b), s = Math.cbrt(.0883024619 * r + .2817188376 * g + .6299787005 * b);
+  const L = .2104542553 * l + .793617785 * m - .0040720468 * s, A = 1.9779984951 * l - 2.428592205 * m + .4505937099 * s, B = .0259040371 * l + .7827717662 * m - .808675766 * s;
+  return { L, C: Math.hypot(A, B), H: (Math.atan2(B, A) * 180 / Math.PI + 360) % 360 };
+}
+function brandTint(slug) {
+  const hex = BRAND_HEX[slug]; if (!hex) return null;
+  const { L, C, H } = oklch(hex);
+  if (C > .08 && H >= 45 && H <= 110) return null;   // amber is sacred → monochrome
+  if (L < .4 || L > .92) return null;                  // unreadable in one theme → monochrome
+  return "#" + hex;
+}
+const loaded = new Set();
+function preloadBrands() {
+  const slugs = new Set(); F.forEach(f => f.icon.brand && slugs.add(f.icon.brand)); Object.values(ECO).forEach(e => e.icon.brand && slugs.add(e.icon.brand)); ["docker", "python"].forEach(s => slugs.add(s));
+  slugs.forEach(slug => { const im = new Image(); im.onload = () => { loaded.add(slug); document.querySelectorAll(`.ai.brand[data-slug="${slug}"]`).forEach(n => n.classList.add("ok")); }; im.src = siURL(slug); });
+}
+const siURL = slug => `https://cdn.jsdelivr.net/npm/simple-icons@${SI}/icons/${slug}.svg`;
+
+/* Icon resolution: app → brand → SF Symbol (mirrors the Swift IconResolver) */
+function ico(icon, s = 28, extra = "") {
+  const st = `style="--s:${s}px"`;
+  if (icon.fr) return `<span class="ai fr ${extra}" ${st}>${appIcon("")}</span>`;
+  if (icon.app) {
+    const label = s >= 40 ? icon.app : icon.app.slice(0, 2);
+    return `<span class="ai app ${s >= 40 ? "big" : ""} ${extra}" ${st} data-src="app" role="img" aria-label="${esc(icon.app)}" title="${esc(icon.app)} — installed app icon (${esc(icon.bundle || "")})"><span>${esc(label)}</span></span>`;
+  }
+  if (icon.brand) {
+    const tint = brandTint(icon.brand);
+    return `<span class="ai brand ${loaded.has(icon.brand) ? "ok" : ""} ${extra}" ${st} data-src="si" data-slug="${icon.brand}" role="img" aria-label="${esc(icon.brand)}" title="Simple Icons: ${icon.brand}${tint ? "" : " (monochrome)"}"><i style="--m:url(${siURL(icon.brand)});${tint ? `--bc:${tint}` : ""}"></i><b>${icon.brand[0].toUpperCase()}</b></span>`;
+  }
+  return `<span class="ai sym ${extra}" ${st} data-src="sf" role="img" aria-hidden="true">${use(icon.sym || "i-folder", "")}</span>`;
+}
+
+/* ---------- state ---------- */
+const S = { screen: "main", pop: false, sel: new Set(), focus: "docker-build", eco: "all", src: "all", group: "eco", q: "", insp: true,
+  live: [], liveDone: false, onb: 1, fda: false, set: "general", clean: null, timers: [], srcs: false };
+const DEFAULT_CONFIRM = () => new Set([...F.filter(f => f.cls === "safe").map(f => f.id), "downloads", "sim-runtimes"]);
+
+function clearTimers() { S.timers.forEach(t => { clearInterval(t); clearTimeout(t); }); S.timers = []; }
+
+/* ---------- visible findings ---------- */
+function pool() {
+  if (S.screen === "live") return F.filter(f => f.src === "rule" || S.live.includes(f.id));
+  if (S.screen === "empty") return [];
+  if (S.screen === "first-scan") return SCAN_ORDER.slice(0, S.scanN || 0).map(id => byId[id]);
+  return F;
+}
+function visible() {
+  return pool().filter(f => (S.eco === "all" || f.eco === S.eco) && (S.src === "all" || f.src === S.src)
+    && (!S.q || (f.t + " " + f.m + " " + f.paths.join(" ")).toLowerCase().includes(S.q.toLowerCase())))
+    .sort((a, b) => b.gb - a.gb);
+}
+const selectable = f => f.cls !== "keep" && f.act !== "none";
+
+/* ==========================================================================
+   Main window
+   ========================================================================== */
+function liveStrip() {
+  const last = byId[S.live[S.live.length - 1]];
+  return `<div class="livestrip" role="status" aria-live="polite">
+    ${S.liveDone ? use("i-agent") : `<svg class="i pulse" aria-hidden="true"><use href="#i-agent"/></svg>`}
+    <div class="t"><b>${S.liveDone ? "Claude Code finished" : "Claude Code is scanning ~/Projects"}</b><span>${S.live.length} new finding${S.live.length === 1 ? "" : "s"}${last ? " · latest: " + esc(last.t) + " " + sz(last.gb) : " · waiting for the first report"} · 2 measurements corrected</span>
+    ${S.liveDone ? "" : `<div class="livebar"><i></i></div>`}</div>
+    ${last ? ico(last.icon, 28) : ""}
+  </div>`;
+}
+
+function sidebar() {
+  const p = pool();
+  const ecoRows = Object.entries(ECO).map(([k, e]) => {
+    const items = p.filter(f => f.eco === k); if (!items.length) return "";
+    const rec = items.filter(selectable);
+    return `<button class="nav ${S.eco === k ? "on" : ""}" data-eco="${k}" aria-pressed="${S.eco === k}">${ico(e.icon, 20)}<span class="t">${e.name}</span><span class="n">${rec.length ? sz(sum(rec)) : "—"}</span></button>`;
+  }).join("");
+  const agentN = p.filter(f => f.src === "agent").length;
+  return `<aside class="side" aria-label="Sidebar">
+    <div class="lights" aria-hidden="true"><i></i><i></i><i></i></div>
+    <button class="nav ${S.eco === "all" && S.src === "all" ? "on" : ""}" data-eco="all">${use("i-treemap")}<span class="t">Everything</span><span class="n">${sz(sum(p.filter(selectable)))}</span></button>
+    <h6>Ecosystems</h6>${ecoRows}
+    <h6>Found by</h6>
+    <button class="nav ${S.src === "rule" ? "on" : ""}" data-src="rule">${use("i-ruler")}<span class="t">Rules</span><span class="n">${p.filter(f => f.src === "rule").length}</span></button>
+    <button class="nav ${S.src === "agent" ? "on" : ""}" data-src="agent"><svg class="i hex" aria-hidden="true"><use href="#i-agent"/></svg><span class="t">Claude Code</span><span class="n">${agentN}</span></button>
+    <div class="foot">${use("i-history")}<span>214 GB freed since March</span></div>
+  </aside>`;
+}
+
+function toolbar(mode) {
+  const live = mode === "live";
+  const freeNow = S.screen === "empty" ? FREE_AFTER : FREE0;
+  return `<div class="tb">
+    <div class="ttl"><b>${S.eco === "all" ? "Everything" : ECO[S.eco].name}</b><span>${sz(freeNow)} free of ${TOTAL.toFixed(0)} GB</span></div>
+    <div class="cap seg glass" role="group" aria-label="Group by">
+      <button class="${S.group === "eco" ? "on" : ""}" data-group="eco" title="Group by ecosystem">${use("i-group")}Ecosystem</button>
+      <button class="${S.group === "size" ? "on" : ""}" data-group="size" title="Flat list by size">${use("i-sort-size")}Size</button>
+    </div>
+    <div class="cap glass">
+      <button class="ibtn" data-act="check" title="Check now (no AI) ⌘R" aria-label="Check now">${use("i-refresh")}</button>
+      <button class="ibtn" data-act="copyscan" title="Deep scan: copy /freeroom:scan for Claude Code" aria-label="Deep scan with Claude Code">${use("i-terminal")}</button>
+    </div>
+    <label class="cap glass search">${use("i-search")}<input id="q" placeholder="Search" value="${esc(S.q)}" aria-label="Search findings"></label>
+    <div class="cap glass"><button class="ibtn" data-act="insp" title="Show inspector ⌘⌥I" aria-label="Toggle inspector" aria-pressed="${S.insp}">${use("i-inspector")}</button></div>
+  </div>`;
+}
+
+function hero() {
+  const p = pool();
+  const safe = p.filter(f => f.cls === "safe"), rev = p.filter(f => f.cls === "review"), keep = p.filter(f => f.cls === "keep");
+  const used = TOTAL - FREE0, s = sum(safe), r = sum(rev), k = sum(keep), o = used - s - r - k;
+  const pc = v => (v / TOTAL * 100).toFixed(2) + "%";
+  return `<div class="hero">
+    <div class="reclaim"><div class="lbl">You can free up to</div><div class="big num" aria-label="${sz(s + r)} reclaimable">${szParts(s + r)}</div>
+      <div class="chips">${chip("safe").replace("Safe", "Safe " + sz(s))}${chip("review").replace("Review", "Review " + sz(r))}</div></div>
+    <div>
+      <div class="diskbar" role="img" aria-label="Disk: ${sz(s)} safe, ${sz(r)} to review, ${sz(k)} kept, ${sz(o)} other, ${sz(FREE0)} free of ${TOTAL} GB">
+        <i class="s" style="flex-basis:${pc(s)}"></i><i class="r" style="flex-basis:${pc(r)}"></i><i class="k" style="flex-basis:${pc(k)}"></i><i class="o" style="flex-basis:${pc(o)}"></i><i class="f" style="flex-basis:${pc(FREE0)}"></i></div>
+      <div class="legend">
+        <span>${use("s-safe", "i glyph-safe")}Safe <b>${sz(s)}</b></span><span>${use("s-review", "i glyph-review")}Review <b>${sz(r)}</b></span>
+        <span>${use("s-keep", "i glyph-keep")}Keep <b>${sz(k)}</b></span><span>${use("i-hdd")}Other <b>${sz(o)}</b></span><span>${use("i-circle-o", "i")}Free <b>${sz(FREE0)}</b></span>
+      </div>
+    </div>
+  </div>`;
+}
+
+/* Squarified treemap in a 1000×300 unit box, output in % */
+function squarify(items, W, H) {
+  const out = []; let x = 0, y = 0, w = W, h = H, rest = items.slice();
+  const worst = (row, scale, side) => { const ar = row.map(o => o.v * scale), s = ar.reduce((a, b) => a + b, 0); return Math.max(side * side * Math.max(...ar) / (s * s), s * s / (side * side * Math.min(...ar))); };
+  while (rest.length) {
+    const scale = (w * h) / rest.reduce((a, o) => a + o.v, 0), side = Math.min(w, h);
+    let row = [rest[0]], i = 1;
+    while (i < rest.length && worst([...row, rest[i]], scale, side) <= worst(row, scale, side)) row.push(rest[i++]);
+    const s = row.reduce((a, o) => a + o.v * scale, 0);
+    if (w >= h) { const cw = s / h; let cy = y; row.forEach(o => { const ch = o.v * scale / cw; out.push({ o, x, y: cy, w: cw, h: ch }); cy += ch; }); x += cw; w -= cw; }
+    else { const rh = s / w; let cx = x; row.forEach(o => { const cw = o.v * scale / rh; out.push({ o, x: cx, y, w: cw, h: rh }); cx += cw; }); y += rh; h -= rh; }
+    rest = rest.slice(row.length);
+  }
+  return out;
+}
+function treemap() {
+  const items = visible().filter(selectable).map(f => ({ v: f.gb, f }));
+  if (!items.length) return "";
+  const PXW = S.insp ? 616 : 916, PXH = 196;
+  const rects = squarify(items, PXW, PXH);
+  const tiles = rects.map(({ o, x, y, w, h }) => {
+    const f = o.f, sel = S.sel.has(f.id), foc = S.focus === f.id;
+    const size = w > 150 && h > 90 ? "xl" : (w < 64 || h < 50) ? "tiny" : "";
+    const inner = size === "tiny" ? ico(f.icon, 20)
+      : `<div class="top">${ico(f.icon, size === "xl" ? 40 : 30)}${sel ? `<span class="ck">${use("i-check")}</span>` : `<span class="sg">${use(CLS[f.cls][0], "i glyph-" + f.cls)}</span>`}</div>
+         <div>${w > 92 ? `<div class="nm">${f.src === "agent" ? `<svg class="i hex" style="width:12px;height:12px;margin-right:3px" aria-hidden="true"><use href="#i-agent"/></svg>` : ""}${esc(f.t)}</div>` : ""}<div class="sz">${sz(f.gb)}</div></div>`;
+    return `<button class="tile ${f.cls} ${size} ${sel ? "sel" : ""} ${foc ? "foc" : ""}" data-tile="${f.id}" style="left:${x / PXW * 100}%;top:${y / PXH * 100}%;width:${w / PXW * 100}%;height:${h / PXH * 100}%"
+      title="${esc(f.t)} · ${sz(f.gb)} — ${esc(f.why)}" aria-label="${esc(f.t)}, ${sz(f.gb)}, ${CLS[f.cls][1]}${sel ? ", selected" : ""}"><div>${inner}</div></button>`;
+  }).join("");
+  return `<div class="maphead">${use("i-treemap")}Disk map <span class="muted" style="font-weight:400">· click to select, double-click to inspect</span><span class="sp"></span><span class="muted" style="font-weight:400">tile area = size</span></div>
+    <div class="tmap" role="group" aria-label="Disk map of reclaimable items">${tiles}</div>`;
+}
+
+function rowHTML(f, max) {
+  const sel = S.sel.has(f.id), ok = selectable(f), isNew = S.screen === "live" && S.live[S.live.length - 1] === f.id;
+  return `<div class="row ${sel ? "sel" : ""} ${S.focus === f.id ? "foc" : ""} ${ok ? "" : "dis"} ${isNew ? "new" : ""}" data-row="${f.id}" role="row" aria-selected="${sel}">
+    <button class="cb ${sel ? "on" : ""} ${ok ? "" : "x"}" data-cb="${f.id}" role="checkbox" aria-checked="${sel}" aria-label="Select ${esc(f.t)}" ${ok ? "" : "disabled title=\"Freeroom never deletes Keep items\""}>${use("i-check")}</button>
+    ${ico(f.icon, 30)}
+    <div class="t"><b>${esc(f.t)}</b>${f.src === "agent" ? `<svg class="hx" aria-label="Found by Claude Code"><use href="#i-agent"/></svg>` : ""}${f.admin ? `<svg class="lk" aria-label="Needs administrator password"><use href="#i-lock"/></svg>` : ""}<span>${esc(f.m)}</span></div>
+    <div class="bar" aria-hidden="true"><i style="width:${Math.max(3, f.gb / max * 100)}%"></i></div>
+    <div class="sz">${sz(f.gb)}</div>
+    <div>${chip(f.cls)}</div>
+  </div>`;
+}
+function listHTML() {
+  const v = visible(); if (!v.length) return `<p class="muted" style="text-align:center;margin-top:40px">No findings match.</p>`;
+  const max = Math.max(...v.map(f => f.gb));
+  if (S.group === "size") return `<div class="lhead"><b>All findings</b><span class="tot">${sz(sum(v))}</span></div><div class="list" role="grid">${v.map(f => rowHTML(f, max)).join("")}</div>`;
+  return Object.entries(ECO).map(([k, e]) => {
+    const items = v.filter(f => f.eco === k); if (!items.length) return "";
+    const sels = items.filter(selectable), allOn = sels.length && sels.every(f => S.sel.has(f.id));
+    return `<div class="lhead">${ico(e.icon, 20)}<b>${e.name}</b>${sels.length ? `<button class="gsel" data-gsel="${k}">${allOn ? "Deselect" : "Select all"}</button>` : ""}<span class="tot">${sz(sum(items))}</span></div>
+      <div class="list" role="grid" aria-label="${e.name}">${items.map(f => rowHTML(f, max)).join("")}</div>`;
+  }).join("");
+}
+
+function inspector() {
+  const f = byId[S.focus]; if (!f) return `<aside class="insp"></aside>`;
+  const actMap = {
+    command: ["i-terminal", "Runs the tool's own cleanup", f.admin ? "Asks for your administrator password once" : "Allow-listed command, run without a shell"],
+    delete: ["i-xbin", "Deletes permanently", "Regenerable: the tool recreates it"],
+    trash: ["i-trash", "Moves to the Trash", "Recoverable until you empty the Trash"],
+    none: ["i-lock", "Freeroom leaves this alone", "Informational only"],
+  }[f.act];
+  const sel = S.sel.has(f.id);
+  return `<aside class="insp" aria-label="Inspector">
+    <div class="hd">${ico(f.icon, 64)}<h2>${esc(f.t)}</h2><div class="bigsz num">${sz(f.gb)}</div>
+      <div class="chips">${chip(f.cls)}${f.src === "agent" ? `<span class="chip agent">${use("i-agent")}Claude Code${f.verified ? " · verified" : ""}</span>` : `<span class="chip neutral">${use("i-ruler")}Rule</span>`}</div></div>
+    <p class="why">${esc(f.why)}</p>
+    <div class="card act">${use(actMap[0])}<div><b>${actMap[1]}</b><span>${actMap[2]}</span>${f.cmd ? `<code class="cmd">${esc(f.cmd)}</code>` : ""}</div></div>
+    ${f.shared ? `<div class="card act">${use("i-link")}<div><b>${sz(f.shared)} won't be freed</b><span>Hard-linked into your projects</span></div></div>` : ""}
+    <details class="dis" ${f.src === "agent" ? "open" : ""}><summary>${use("i-chev-r", "i chev")}Why it's ${CLS[f.cls][1].toLowerCase()}</summary>
+      ${f.src === "agent" ? `<div class="evid agent">${use("i-agent")}<div><b>Claude Code checked</b><br>${esc(f.ev)}</div></div>` : `<div class="evid">${use("i-ruler")}<div><span class="mono">${f.rule}</span><br>${esc(f.ev)}</div></div>`}
+    </details>
+    <details class="dis"><summary>${use("i-chev-r", "i chev")}Locations<span class="n">${f.paths.length + (f.more || 0)}</span></summary>
+      ${f.paths.map(p => `<div class="path">${use("i-folder")}<span style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${esc(p)}</span><a href="#" data-act="reveal" title="Reveal in Finder">Show</a></div>`).join("")}
+      ${f.more ? `<div class="path muted">+ ${f.more} more</div>` : ""}
+    </details>
+    <div class="acts">${selectable(f) ? `<button class="btn ${sel ? "" : "pri"}" data-cb="${f.id}">${sel ? "Remove from selection" : "Add to selection"} <span class="k">space</span></button>` : ""}<button class="btn ghost" data-act="reveal">${use("i-search")}Finder</button></div>
+  </aside>`;
+}
+
+function selbar() {
+  const sel = F.filter(f => S.sel.has(f.id)), n = sel.length, freed = net(sel);
+  if (!n) return `<div class="selbar glass" role="region" aria-label="Selection"><span class="muted">${use("i-keyboard")} Select items — <kbd>space</kbd> toggles, <kbd>⌘A</kbd> selects all Safe</span>
+    <button class="btn pri" disabled>Review & clean</button></div>`;
+  return `<div class="selbar glass" role="region" aria-label="Selection">
+    <div class="stack">${sel.slice(0, 5).map(f => ico(f.icon, 26)).join("")}</div>
+    <div class="info"><b>${sz(freed)}</b> <span>· ${n} item${n > 1 ? "s" : ""}</span></div>
+    <div class="proj">${use("i-arrow-r")}<b>${sz(FREE0 + freed)}</b> free</div>
+    <button class="btn ghost" data-act="clearsel">Clear</button>
+    <button class="btn pri" data-act="confirm">Review & clean <span class="k">⌘⏎</span></button>
+  </div>`;
+}
+
+function mainWin(mode) {
+  let content;
+  if (mode === "first-scan") content = firstScan();
+  else if (mode === "empty") content = emptyState();
+  else content = `<div class="scroll" id="scroll" style="background:var(--pane)">${mode === "live" ? liveStrip() : ""}${hero()}${treemap()}<div id="list">${listHTML()}</div></div>${selbar()}`;
+  const showInsp = S.insp && !["first-scan", "empty"].includes(mode);
+  return `<div class="win main ${showInsp ? "" : "noinsp"}" id="mainwin" role="application" aria-label="Freeroom">
+    ${sidebar()}
+    <section class="center" style="background:var(--pane);margin:8px 8px 8px 8px;border-radius:16px;box-shadow:inset 0 0 0 .5px var(--line);overflow:hidden">
+      ${toolbar(mode)}${content}
+    </section>
+    ${showInsp ? inspector() : "<span></span>"}
+  </div>`;
+}
+
+/* ---------- First scan (loading) ---------- */
+const TICK = ["~/Library/Caches/com.spotify.client", "~/Library/Developer/Xcode/DerivedData", "~/.npm/_cacache", "~/Projects/shop-frontend/node_modules", "~/go/pkg/mod", "~/.gradle/caches",
+  "~/Library/Containers/com.docker.docker", "~/Library/Caches/Homebrew", "/Library/Developer/CoreSimulator", "~/Library/Caches/Google/Chrome"];
+const SCAN_ORDER = ["spotify", "xcode-dd", "npm", "node-modules", "go-mod", "gradle", "docker-build", "brew", "sim-runtimes", "chrome", "pnpm", "slack", "tm"];
+function firstScan() {
+  const n = S.scanN || 0, pct = Math.min(1, n / SCAN_ORDER.length), found = SCAN_ORDER.slice(0, n).map(id => byId[id]);
+  const C = 2 * Math.PI * 66;
+  const done = n >= SCAN_ORDER.length;
+  const cards = found.slice(-12).reverse().map((f, i) => `<div class="fnd ${i === 0 && !done ? "nw" : ""}">${ico(f.icon, 36)}<b>${sz(f.gb)}</b><span>${esc(f.t)}</span></div>`).join("")
+    + Array.from({ length: Math.max(0, 6 - found.length) }, () => `<div class="fnd sk"></div>`).join("");
+  return `<div class="emptyc" style="justify-content:flex-start;padding-top:40px;background:var(--pane)">
+    <div class="scanring" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="${Math.round(pct * 100)}" aria-label="Measuring your disk">
+      <svg class="r" viewBox="0 0 150 150"><circle cx="75" cy="75" r="66" fill="none" stroke="var(--bar-track)" stroke-width="9"/><circle cx="75" cy="75" r="66" fill="none" stroke="var(--accent)" stroke-width="9" stroke-linecap="round" stroke-dasharray="${C}" stroke-dashoffset="${C * (1 - pct)}" style="transition:stroke-dashoffset .4s"/></svg>
+      <div class="c"><b class="num">${sz(sum(found.filter(selectable)))}</b><span>${done ? "found" : "found so far"}</span></div>
+    </div>
+    <h2>${done ? "Here's what you can free" : "Measuring your disk"}</h2>
+    <p>${done ? "No AI involved: these come from Freeroom's built-in rules." : "Rules only, no AI. Hard links and mounted volumes are not double-counted."}</p>
+    <div class="ticker" aria-hidden="true">${done ? "&nbsp;" : esc(TICK[n % TICK.length])}</div>
+    <div class="found" aria-live="polite">${cards}</div>
+    ${done ? `<div class="acts"><button class="btn pri lg" data-go="main">Show ${sz(sum(found.filter(selectable)))} of findings</button></div>` : ""}
+  </div>`;
+}
+function emptyState() {
+  const watch = ["docker-build", "xcode-dd", "node-modules", "go-mod", "npm", "brew", "spotify", "chrome"].map(id => ico(byId[id].icon, 28)).join("");
+  return `<div class="emptyc" style="background:var(--pane)">
+    <div class="burst" aria-hidden="true">${appIcon()}<span class="g" style="left:-4px;top:6px;width:22px;height:22px">${use("i-glint", "")}</span><span class="g" style="right:-6px;top:30px;width:14px;height:14px;animation-delay:.15s">${use("i-glint", "")}</span></div>
+    <h2>Nothing worth cleaning</h2>
+    <p class="num">${sz(FREE_AFTER)} free · checked 2 min ago</p>
+    <div class="acts"><button class="btn" data-act="check">${use("i-refresh")}Check now</button><button class="btn" data-act="copyscan">${use("i-terminal")}Deep scan with Claude Code</button></div>
+    <div class="watch"><div class="row2">${watch}</div><span>Watching 46 known locations · next check in 6 h</span></div>
+  </div>`;
+}
+
+/* ==========================================================================
+   Confirm → cleaning → done (one sheet that morphs)
+   ========================================================================== */
+const ACT_GROUPS = [
+  ["delete", "i-xbin", "Delete", "regenerable"],
+  ["command", "i-terminal", "Run cleanup command", "tool's own command"],
+  ["trash", "i-trash", "Move to Trash", "recoverable"],
+];
+function sheet() {
+  const C = S.clean; const items = C.items.map(id => byId[id]);
+  const total = net(items);
+  const freed = C.freed;
+  const phase = C.phase;
+  const pc = v => (v / TOTAL * 100).toFixed(2) + "%";
+  if (phase === "done") return doneSheet(items);
+  const groups = ACT_GROUPS.map(([a, ic, lab, sub]) => {
+    const g = items.filter(f => f.act === a); if (!g.length) return "";
+    return `<div class="grp"><div class="gh">${use(ic)}${lab} <span>· ${sub}</span><span class="tot">${sz(net(g))}</span></div><div class="citems">${g.map(f => {
+      const st = C.state[f.id];
+      const stHTML = st === "run" ? `<span class="spin" role="img" aria-label="Cleaning"></span>` : st === "ok" ? use("s-safe", "i glyph-safe") : st === "skip" ? use("s-skip", "i glyph-keep") : phase === "review" ? `<button class="x" data-unsel="${f.id}" title="Remove from this cleanup" aria-label="Remove ${esc(f.t)}">${use("i-x")}</button>` : "";
+      return `<div class="ci ${phase === "run" && !st ? "pending" : ""} ${st === "ok" ? "fin" : ""}" data-ci="${f.id}">${ico(f.icon, 24)}
+        <div class="t"><b>${esc(f.t)}</b>${st === "skip" ? `<em>${use("i-info")}Spotify is open — quit it and retry</em>` : f.cmd ? `<code>${esc(f.cmd)}</code>` : ""}</div>
+        ${f.admin ? `<span class="lock" title="Asks for your password">${use("i-lock")}password</span>` : "<span></span>"}
+        <span class="sz">${sz(f.gb - (f.shared || 0))}</span><span class="st">${stHTML}</span></div>`;
+    }).join("")}</div></div>`;
+  }).join("");
+  const toFree = phase === "review" ? total : freed;
+  return `<div class="sheet" role="dialog" aria-modal="true" aria-labelledby="shT">
+    <div class="top">
+      <div><div class="lbl" id="shT">${phase === "review" ? "Clean " + items.length + " items" : "Cleaning…"}</div><div class="big num" id="bigNum" aria-live="polite">${szParts(phase === "review" ? total : freed)}</div></div>
+      <div class="fromto">Free space<br><b class="num">${sz(FREE0)}</b> → <b class="num to">${sz(FREE0 + (phase === "review" ? total : freed))}</b></div>
+    </div>
+    <div class="diskbar" id="sheetBar" role="img" aria-label="Free space grows from ${sz(FREE0)} to ${sz(FREE0 + total)}">
+      <i class="o" style="flex-basis:${pc(TOTAL - FREE0 - total)}"></i>${phase === "review" ? `<i class="fnew" style="flex-basis:${pc(total)}"></i>` : `<i class="o" style="flex-basis:${pc(total - freed)}"></i><i class="fdone" style="flex-basis:${pc(freed)}"></i>`}<i class="f" style="flex-basis:${pc(FREE0)}"></i></div>
+    <div class="groups">${groups}</div>
+    <div class="foot">
+      ${phase === "review" ? `<span class="note">${use("i-shield")}Re-checked right before each item runs</span><button class="btn" data-act="cancel">Cancel <span class="k">esc</span></button><button class="btn pri" data-act="startclean">Clean ${sz(total)} <span class="k">⏎</span></button>`
+        : `<span class="note">${use("i-shield")}Items are re-verified as they go</span><button class="btn" disabled>Stop after current</button>`}
+    </div>
+  </div>`;
+}
+function doneSheet(items) {
+  const C = S.clean; const ok = items.filter(f => C.state[f.id] === "ok"), skipped = items.filter(f => C.state[f.id] === "skip"), trashed = ok.filter(f => f.act === "trash");
+  const freed = net(ok);
+  return `<div class="sheet done" role="dialog" aria-modal="true" aria-labelledby="dnT">
+    <div class="burst" aria-hidden="true">${appIcon()}
+      <span class="g" style="left:0;top:4px;width:24px;height:24px;animation-delay:.25s">${use("i-glint", "")}</span>
+      <span class="g" style="right:-2px;top:22px;width:16px;height:16px;animation-delay:.4s">${use("i-glint", "")}</span>
+      <span class="g" style="left:14px;bottom:0;width:12px;height:12px;animation-delay:.55s">${use("i-glint", "")}</span></div>
+    <h1 id="dnT">You freed</h1>
+    <div class="freed num" id="freedNum" data-to="${freed}" aria-label="${sz(freed)} freed">${szParts(reduceMotion() ? freed : 0)}</div>
+    <div class="ft">${use("i-hdd")}<b class="num">${sz(FREE0)}</b>${use("i-arrow-r")}<b class="num to">${sz(FREE0 + freed)}</b> free</div>
+    <div class="icons" aria-label="${ok.length} items cleaned">${ok.map((f, i) => ico(f.icon, 28, "").replace('class="ai', `style="animation-delay:${.3 + i * .04}s" class="ai`)).join("")}</div>
+    <div class="notes">
+      ${trashed.length ? `<div class="dn">${use("i-trash")}<span class="tx">${trashed.length} item${trashed.length > 1 ? "s" : ""} in the Trash <em>· ${sz(net(trashed))}, recoverable</em></span><button class="btn">Open Trash</button></div>` : ""}
+      ${skipped.map(f => `<div class="dn">${ico(f.icon, 22)}<span class="tx">${esc(f.t)} skipped <em>· the app is open</em></span><button class="btn">Retry</button></div>`).join("")}
+    </div>
+    <div class="foot" style="justify-content:flex-end"><button class="btn ghost" data-act="history">${use("i-history")}History</button><button class="btn pri" data-go="empty">Done <span class="k">⏎</span></button></div>
+  </div>`;
+}
+function startCleaning() {
+  const C = S.clean; C.phase = "run"; C.freed = 0; C.state = {};
+  const ids = ACT_GROUPS.flatMap(([a]) => C.items.filter(id => byId[id].act === a));
+  let i = 0;
+  const step = () => {
+    if (i > 0) {
+      const prev = ids[i - 1], f = byId[prev];
+      C.state[prev] = prev === "spotify" ? "skip" : "ok";
+      if (C.state[prev] === "ok") { flyIcon(prev); C.freed += f.gb - (f.shared || 0); }
+    }
+    if (i >= ids.length) { render(); S.timers.push(setTimeout(() => { C.phase = "done"; location.hash = "done"; }, reduceMotion() ? 200 : 700)); return; }
+    C.state[ids[i]] = "run"; i++; render();
+    S.timers.push(setTimeout(step, reduceMotion() ? 60 : 380));
+  };
+  step();
+}
+function flyIcon(id) {
+  if (reduceMotion()) return;
+  const src = document.querySelector(`.ci[data-ci="${id}"] .ai`), dst = document.getElementById("bigNum");
+  if (!src || !dst) return;
+  const a = src.getBoundingClientRect(), b = dst.getBoundingClientRect();
+  const c = src.cloneNode(true); c.classList.add("fly"); c.style.left = a.left + "px"; c.style.top = a.top + "px"; document.body.appendChild(c);
+  requestAnimationFrame(() => { c.style.transform = `translate(${b.left + 40 - a.left}px, ${b.top + 14 - a.top}px) scale(.4)`; c.style.opacity = "0"; });
+  setTimeout(() => c.remove(), 800);
+}
+function countUp(el) {
+  const to = parseFloat(el.dataset.to); if (reduceMotion()) return;
+  const t0 = performance.now(), D = 1300;
+  const tick = now => { const p = Math.min(1, (now - t0) / D), e = 1 - Math.pow(1 - p, 3); el.innerHTML = szParts(to * e); if (p < 1) requestAnimationFrame(tick); };
+  requestAnimationFrame(tick);
+}
+
+/* ==========================================================================
+   Menu-bar popover
+   ========================================================================== */
+function popover(live) {
+  const safe = F.filter(f => f.cls === "safe"), s = net(safe);
+  const top3 = F.filter(f => f.cls === "safe").sort((a, b) => b.gb - a.gb).slice(0, 3);
+  const C = 2 * Math.PI * 31, used = 1 - FREE0 / TOTAL;
+  const agentCount = F.filter(f => f.src === "agent").length;
+  return `<div class="pop" role="dialog" aria-label="Freeroom">
+    <div class="head">
+      <div class="ring" role="img" aria-label="${Math.round(used * 100)}% of disk used">
+        <svg viewBox="0 0 74 74"><circle cx="37" cy="37" r="31" fill="none" stroke="var(--bar-track)" stroke-width="7"/><circle cx="37" cy="37" r="31" fill="none" stroke="var(--accent)" stroke-width="7" stroke-linecap="round" stroke-dasharray="${C}" stroke-dashoffset="${C * (1 - used)}"/></svg>
+        <div class="c"><svg aria-hidden="true"><use href="#fr-glyph"/></svg></div>
+      </div>
+      <div class="free"><b class="num">${szParts(FREE0)}</b><span>free of ${TOTAL.toFixed(0)} GB</span>
+        <span class="warn">${use("i-alert")}Below your 25 GB threshold</span></div>
+      <span style="flex:1"></span>
+      <button class="ibtn" data-go="main" title="Open Freeroom ⌘O" aria-label="Open Freeroom">${use("i-ext")}</button>
+    </div>
+    <button class="btn pri cta" data-act="popclean">${use("i-glint")}Free ${sz(s)} safely</button>
+    <h6>Biggest safe wins <a href="#main">See all</a></h6>
+    <div class="tiles3">${top3.map(f => `<button class="qt" data-quick="${f.id}" aria-label="Clean ${esc(f.t)}, ${sz(f.gb)}">${ico(f.icon, 44)}<b>${sz(f.gb)}</b><span>${esc(f.t)}</span></button>`).join("")}</div>
+    ${live ? `<button class="agentrow" data-go="live">${`<svg class="i pulse" aria-hidden="true"><use href="#i-agent"/></svg>`}<span class="t"><b>Claude Code is scanning</b><span>~/Projects · 4 found so far</span><div class="livebar"><i></i></div></span>${use("i-chev-r", "i chev")}</button>`
+      : `<button class="agentrow" data-go="live">${use("i-agent")}<span class="t"><b>Claude Code · 2 h ago</b><span>${agentCount} findings, 3 verified</span></span>${use("i-chev-r", "i chev")}</button>`}
+    <div class="popfoot">
+      <button class="ibtn" data-act="check" title="Check now (rules, no AI)" aria-label="Check now">${use("i-refresh")}</button>
+      <button class="ibtn" data-act="copyscan" title="Copy /freeroom:scan for Claude Code" aria-label="Copy deep-scan command">${use("i-terminal")}</button>
+      <span class="sp"></span>
+      <span class="lnk">Checked 12 min ago</span>
+      <button class="ibtn" data-go="settings" title="Settings ⌘," aria-label="Settings">${use("i-settings")}</button>
+      <button class="ibtn" data-act="quit" title="Quit Freeroom ⌘Q" aria-label="Quit">${use("i-power")}</button>
+    </div>
+  </div>`;
+}
+
+/* ==========================================================================
+   Notifications
+   ========================================================================== */
+function notifications() {
+  const nb = (title, body, att, actions, when = "now") => `<div class="nb" role="alert">${appIcon()}
+    <div class="t"><b>${title}<small>${when}</small></b><span>${body}</span></div><div class="att">${att}</div>
+    <div class="acts">${actions.map((a, i) => `<button class="btn ${i === 0 ? "pri" : ""}" ${i === 0 ? 'data-act="confirm-from-notif"' : ""}>${a}</button>`).join("")}</div></div>`;
+  const ring = `<span class="ai sym" style="--s:44px;color:var(--danger)" data-src="sf">${use("i-hdd", "")}</span>`;
+  return `<div class="nside glass panel">
+      <h3>Notifications</h3>
+      <p>Short title with the size, one line of body, and the item's real icon as the attachment. Actions open the confirm sheet; nothing is deleted from a banner.</p>
+      <ul>
+        <li>${use("i-bell")}At most one a day, quiet hours respected, per-ecosystem switches.</li>
+        <li>${use("i-ruler")}Rule engine only: no AI, no tokens.</li>
+        <li>${use("i-photo")}<span>Attachment = the item's resolved icon, rendered to PNG (<span class="mono">UNNotificationAttachment</span>).</span></li>
+        <li>${use("i-keyboard")}Category actions: Review (foreground), Later (snooze 1 day).</li>
+      </ul>
+    </div>
+    <div class="nstack">
+      ${nb("Docker build cache · 27.4 GB", "Safe: Docker rebuilds it when needed.", ico(byId["docker-build"].icon, 44), ["Review", "Later"])}
+      ${nb("18.4 GB free", "You can free 91.9 GB safely.", ring, ["Review", "Later"], "2 h ago")}
+      ${nb("iOS runtimes · 21.6 GB", "3 not booted in 90 days.", ico(byId["sim-runtimes"].icon, 44), ["Review", "Later"], "Yesterday")}
+      ${nb("This week: 117.5 GB freed", "Docker, Xcode and 11 more.", `<span class="ai sym" style="--s:44px;color:var(--accent)" data-src="sf">${use("i-glint", "")}</span>`, ["Open summary"], "Mon")}
+    </div>`;
+}
+
+/* ==========================================================================
+   Onboarding
+   ========================================================================== */
+function onboarding() {
+  const st = S.onb;
+  const dots = [1, 2, 3].map(i => `<i class="${i <= st ? "on" : ""}"></i>`).join("");
+  let ill, h, p, acts, extra = "";
+  if (st === 1) {
+    ill = `<div class="mini-set" aria-hidden="true"><div class="h"><div class="lights"><i></i><i></i><i></i></div><span>Privacy & Security › Full Disk Access</span></div>
+      <div class="r"><span class="ai sym" style="--s:24px">${use("i-terminal", "")}</span>Terminal<span class="sw sw on"></span></div>
+      <div class="r" style="position:relative">${appIcon()}<b>Freeroom</b><span class="sw ${S.fda ? "on" : "anim"}"></span>${S.fda ? "" : `<svg class="cursor" style="right:4px;top:18px" viewBox="0 0 24 24"><use href="#i-cursor"/></svg>`}</div>
+      <div class="r"><span class="ai sym" style="--s:24px">${use("i-hdd", "")}</span>Backup utility<span class="sw"></span></div></div>`;
+    h = "Let Freeroom see the whole disk";
+    p = "Full Disk Access lets it measure caches inside ~/Library. Nothing ever leaves your Mac.";
+    extra = S.fda ? `<div class="stat okchip">${use("s-safe")}Access granted</div>` : `<div class="stat muted" style="font-size:12px"><span class="spin"></span>Waiting for System Settings…</div>`;
+    acts = S.fda ? `<button class="btn pri lg" data-onb="2">Continue</button>` : `<button class="btn lg ghost" data-onb="2">Later</button><button class="btn pri lg" data-act="fda">Open System Settings</button>`;
+  } else if (st === 2) {
+    ill = `<div style="width:372px">${`<div class="nb" style="box-shadow:0 10px 30px rgba(0,0,0,.15), inset 0 0 0 .5px var(--line)">${appIcon()}<div class="t"><b>18.4 GB free<small>now</small></b><span>You can free 91.9 GB safely.</span></div><div class="att"><span class="ai sym" style="--s:44px;color:var(--danger)">${use("i-hdd", "")}</span></div></div>`}
+      <div style="display:flex;gap:16px;justify-content:center;margin-top:16px;font-size:12px;color:var(--ink-5)"><span>${use("i-bell")} 1 per day max</span><span>${use("i-moon")} Quiet hours</span><span>${use("i-ruler")} No AI</span></div></div>`;
+    h = "A nudge when space runs low";
+    p = "Warn me below";
+    extra = `<div style="display:flex;align-items:center;gap:12px;justify-content:center;margin-top:12px"><div class="slider"><i></i><b></b></div><span class="mono" style="font-weight:600">25 GB</span></div>`;
+    acts = `<button class="btn lg ghost" data-onb="3">Not now</button><button class="btn pri lg" data-onb="3">Allow notifications</button>`;
+  } else {
+    ill = `<div class="flow" aria-hidden="true">
+        <div class="node agent">${`<span class="ai sym" style="--s:56px">${use("i-terminal", "")}</span>`}Claude Code<b>${use("i-agent")}measures & reports</b></div>
+        <span class="arr">${use("i-arrow-r")}</span>
+        <div class="node"><span class="ai sym" style="--s:56px">${use("i-layers", "")}</span>Local store<span>SQLite on this Mac</span></div>
+        <span class="arr">${use("i-arrow-r")}</span>
+        <div class="node">${appIcon()}Freeroom<span>you confirm, it cleans</span></div></div>`;
+    h = "Deeper scans with Claude Code";
+    p = "Optional. Your own Claude Code finds things rules can't — it can't delete anything.";
+    extra = `<div style="display:flex;gap:8px;justify-content:center;margin-top:14px"><span class="cmdchip">/plugin install freeroom@freeroom<button data-act="copy" aria-label="Copy">${use("i-copy")}</button></span></div>
+      <div class="stat muted" style="font-size:12px">${use("i-minus-circle")}Plugin not detected · <a href="#" data-act="recheck" style="color:var(--accent)">Re-check</a></div>`;
+    acts = `<button class="btn lg ghost" data-go="first-scan">Skip — rules only</button><button class="btn pri lg" data-go="first-scan">Start first scan</button>`;
+  }
+  return `<div class="win onb" role="dialog" aria-label="Welcome to Freeroom, step ${st} of 3">
+    <div class="bar"><div class="lights" aria-hidden="true"><i></i><i></i><i></i></div><div class="dots" aria-hidden="true">${dots}</div></div>
+    <div class="ill">${ill}</div>
+    <div class="body"><h1>${h}</h1><p>${p}</p>${extra}</div>
+    <div class="acts">${st > 1 ? `<button class="btn lg ghost" data-onb="${st - 1}">Back</button>` : ""}${acts}</div>
+  </div>`;
+}
+
+/* ==========================================================================
+   Settings
+   ========================================================================== */
+function settings() {
+  const tabs = [["general", "i-settings", "General"], ["notifications", "i-bell", "Alerts"], ["claude", "i-terminal", "Claude Code"], ["safety", "i-shield", "Safety"], ["about", "i-info", "About"]];
+  const sw = on => `<span class="sw ${on ? "on" : ""}" role="switch" aria-checked="${on}" tabindex="0"></span>`;
+  const row = (ic, lab, ctrl, small = "") => `<div class="frow">${ic}<div class="lab">${lab}${small ? `<small>${small}</small>` : ""}</div>${ctrl}</div>`;
+  const icb = id => `<span class="ic">${use(id)}</span>`;
+  const pop = v => `<span class="popup">${v}${use("i-chev-d")}</span>`;
+  let pane = "";
+  if (S.set === "general") pane = `
+    <div class="fgroup"><div class="box">
+      ${row(icb("i-power"), "Open at login", sw(true))}
+      ${row(icb("i-menubar"), "Show free space in the menu bar", `<span class="val"><span class="mono" style="display:inline-flex;gap:4px;align-items:center;padding:2px 6px;border-radius:5px;background:var(--ink-2)"><svg class="i" style="width:14px;height:14px"><use href="#fr-glyph"/></svg>18.4 GB</span>${sw(true)}</span>`)}
+      ${row(icb("i-clock"), "Check the disk", pop("Every 6 hours"), "Rules only, no AI")}
+    </div></div>
+    <div class="fgroup"><h5>Explanations</h5><div class="box">
+      ${row(icb("i-languages"), "Language", pop("English"), "Other languages: run /freeroom:translate in Claude Code")}
+    </div></div>
+    <div class="fgroup"><h5>Appearance</h5><div class="box">
+      ${row(icb("i-treemap"), "Show disk map", sw(true))}
+      ${row(icb("i-app"), "Use installed app icons", sw(true), "Falls back to brand logos, then SF Symbols")}
+    </div></div>`;
+  if (S.set === "notifications") pane = `
+    <div class="fgroup"><div class="box">
+      ${row(icb("i-bell"), "Notifications", sw(true), "At most one a day")}
+      ${row(icb("i-hdd"), "Warn below", `<span class="val"><span class="slider"><i></i><b></b></span><span class="mono" style="color:var(--ink-7);font-weight:600">25 GB</span></span>`)}
+      ${row(icb("i-moon"), "Quiet hours", pop("22:00 – 08:00"))}
+    </div></div>
+    <div class="fgroup"><h5>Tell me about</h5><div class="box">
+      ${row(ico(ECO.docker.icon, 24), "Docker", sw(true))}
+      ${row(ico(ECO.xcode.icon, 24), "Xcode & Simulators", sw(true))}
+      ${row(ico(ECO.js.icon, 24), "JavaScript caches", sw(true))}
+      ${row(ico(ECO.ai.icon, 24), "AI models", sw(false))}
+      ${row(ico({ sym: "i-glint" }, 24), "Weekly summary", sw(true))}
+    </div></div>`;
+  if (S.set === "claude") pane = `
+    <div class="fgroup"><div class="box"><div class="status"><span class="ai sym" style="--s:40px">${use("i-terminal", "")}</span><div style="flex:1"><b>Claude Code plugin</b><span>freeroom 0.1.0 · last scan 2 h ago</span></div><span class="okchip">${use("s-safe")}Installed</span></div></div></div>
+    <div class="fgroup"><h5>Commands</h5><div class="box">
+      ${row(`<svg class="i hex" style="width:22px;height:22px"><use href="#i-agent"/></svg>`, "Deep scan", `<span class="cmdchip">/freeroom:scan<button data-act="copy" aria-label="Copy">${use("i-copy")}</button></span>`)}
+      ${row(icb("i-languages"), "Translate explanations", `<span class="cmdchip">/freeroom:translate es<button data-act="copy" aria-label="Copy">${use("i-copy")}</button></span>`)}
+    </div></div>
+    <div class="fgroup"><div class="box">${row(icb("i-shield"), "The agent can measure and report. It cannot delete.", "")}</div></div>`;
+  if (S.set === "safety") pane = `
+    <div class="fgroup"><h5>Never touched</h5><div class="box chipset">
+      ${["Documents", "Desktop", "Library/Keychains", ".ssh", "Photos Library", "Mail"].map(n => `<span class="pchip">${ico({ sym: n === ".ssh" ? "i-key" : n.startsWith("Photos") ? "i-photo" : n.includes("Keychains") ? "i-lock" : "i-folder" }, 20)}${n}</span>`).join("")}
+    </div></div>
+    <div class="fgroup"><h5>Allowed cleanup commands</h5><div class="box chipset">
+      ${[["docker", "docker builder prune"], ["go", "go clean -modcache"], ["npm", "npm cache clean"], ["pnpm", "pnpm store prune"], ["homebrew", "brew cleanup"], ["xcode", "xcrun simctl runtime delete"]].map(([b, c]) => `<span class="pchip">${ico({ brand: b }, 20)}<code>${c}</code></span>`).join("")}
+    </div></div>
+    <div class="fgroup"><div class="box">
+      ${row(icb("i-trash"), "Review items go to the Trash", sw(true), "Safe items are deleted; they're regenerable")}
+    </div></div>`;
+  if (S.set === "about") pane = `<div class="about">${appIcon()}<h3>Freeroom 0.2</h3><p>Open source · MIT · by hblabs</p><p class="mono" style="font-size:12px">brew install --cask hblabs-co/tap/freeroom</p>
+    <div style="display:flex;gap:8px;margin-top:8px"><button class="btn">${use("i-github")}GitHub</button><button class="btn">${use("i-history")}History</button></div>
+    <p style="font-size:11px;margin-top:14px;max-width:420px">Brand logos from Simple Icons (CC0). Trademarks belong to their owners and are shown only to identify items on your disk.</p></div>`;
+  return `<div class="win set" role="dialog" aria-label="Freeroom Settings">
+    <div class="tbar"><div class="lights" aria-hidden="true"><i></i><i></i><i></i></div>
+      <div class="tabs" role="tablist">${tabs.map(([k, ic, l]) => `<button class="tab ${S.set === k ? "on" : ""}" role="tab" aria-selected="${S.set === k}" data-set="${k}">${use(ic)}${l}</button>`).join("")}</div></div>
+    <div class="pane" role="tabpanel">${pane}</div>
+  </div>`;
+}
+
+/* ==========================================================================
+   Router / render
+   ========================================================================== */
+function render() {
+  const st = $("#stage"), ov = $("#overlay");
+  let html = "", over = "";
+  const sc = S.screen;
+  if (["main", "live", "first-scan", "empty", "confirm", "cleaning", "done"].includes(sc)) {
+    const mode = ["confirm", "cleaning", "done"].includes(sc) ? "main" : sc;
+    html = `<div style="position:relative">${mainWin(mode)}${S.clean && ["confirm", "cleaning", "done"].includes(sc) ? `<div class="scrim" style="border-radius:22px">${sheet()}</div>` : ""}</div>`;
+  } else if (sc.startsWith("onboarding")) html = onboarding();
+  else if (sc === "settings") html = settings();
+  else if (sc === "notifications") html = notifications();
+  else html = "";
+  st.innerHTML = html;
+  if (S.pop || sc.startsWith("menubar")) over = popover(sc === "menubar-live");
+  ov.innerHTML = over;
+  $("#mbFree").textContent = sz(sc === "empty" ? FREE_AFTER : FREE0);
+  $("#mbFr").classList.toggle("on", !!over);
+  $("#mbFr").setAttribute("aria-expanded", !!over);
+  document.querySelectorAll(".proto [data-go]").forEach(b => b.classList.toggle("on", b.dataset.go === sc || (sc.startsWith("onboarding") && b.dataset.go === "onboarding-1")));
+  const fn = $("#freedNum"); if (fn && !fn.dataset.counted) { fn.dataset.counted = 1; countUp(fn); }
+  if (S.qFocus) { const q = $("#q"); if (q) { q.focus(); q.setSelectionRange(q.value.length, q.value.length); } }
+}
+
+function go(hash) {
+  const [name, ...flags] = hash.replace(/^#/, "").split("&");
+  flags.forEach(fl => { if (fl === "dark" || fl === "light") setTheme(fl); if (fl === "srcs") { S.srcs = true; document.body.classList.add("srcs"); } if (fl === "rm") document.documentElement.classList.add("rm"); });
+  clearTimers();
+  S.screen = name || "main"; S.pop = false; S.qFocus = false;
+  if (S.screen.startsWith("onboarding")) S.onb = +(S.screen.split("-")[1] || 1);
+  if (S.screen === "live") {
+    S.live = []; S.liveDone = false; S.eco = "all"; S.src = "all"; S.focus = "docker-build";
+    let i = 0;
+    const add = () => { if (i >= LIVE_IDS.length) { S.liveDone = true; render(); return; } S.live.push(LIVE_IDS[i]); S.focus = LIVE_IDS[i]; i++; render(); S.timers.push(setTimeout(add, reduceMotion() ? 300 : 1500)); };
+    S.timers.push(setTimeout(add, 600));
+  }
+  if (S.screen === "first-scan") {
+    S.scanN = 0;
+    const t = setInterval(() => { S.scanN++; render(); if (S.scanN >= SCAN_ORDER.length) clearInterval(t); }, reduceMotion() ? 120 : 420); S.timers.push(t);
+  }
+  if (S.screen === "confirm") { if (!S.clean || S.clean.phase !== "review" || !S.clean.fromUI) { S.sel = S.sel.size ? S.sel : DEFAULT_CONFIRM(); S.clean = { items: [...S.sel], phase: "review", state: {}, freed: 0 }; } S.clean.fromUI = false; }
+  if (S.screen === "cleaning") { if (!S.clean || S.clean.phase !== "review") S.clean = { items: [...DEFAULT_CONFIRM()], phase: "review", state: {}, freed: 0 }; render(); startCleaning(); return; }
+  if (S.screen === "done") {
+    if (!S.clean || S.clean.phase !== "done") { const items = [...DEFAULT_CONFIRM()]; const state = {}; items.forEach(id => state[id] = id === "spotify" ? "skip" : "ok"); S.clean = { items, phase: "done", state, freed: 0 }; }
+  }
+  if (["main"].includes(S.screen) && S.clean && S.clean.phase !== "review") S.clean = null;
+  render();
+}
+window.addEventListener("hashchange", () => go(location.hash));
+
+/* ---------- theme ---------- */
+let themePref = "auto";
+function setTheme(t) {
+  themePref = t;
+  const dark = t === "dark" || (t === "auto" && matchMedia("(prefers-color-scheme: dark)").matches);
+  document.documentElement.dataset.theme = dark ? "dark" : "light";
+  document.querySelectorAll("[data-theme-set]").forEach(b => b.classList.toggle("on", b.dataset.themeSet === t));
+}
+matchMedia("(prefers-color-scheme: dark)").addEventListener("change", () => themePref === "auto" && setTheme("auto"));
+
+function toast(msg, icon = "i-check-circle") {
+  const t = document.createElement("div"); t.className = "toast glass"; t.setAttribute("role", "status");
+  t.innerHTML = `${use(icon)}${msg}`; document.body.appendChild(t); setTimeout(() => t.remove(), 2700);
+}
+
+function toggleSel(id) {
+  const f = byId[id]; if (!f || !selectable(f)) return;
+  S.sel.has(id) ? S.sel.delete(id) : S.sel.add(id); render();
+}
+
+/* ---------- events ---------- */
+document.addEventListener("click", e => {
+  const t = e.target.closest("[data-go],[data-act],[data-cb],[data-row],[data-tile],[data-eco],[data-src],[data-group],[data-gsel],[data-quick],[data-onb],[data-set],[data-theme-set],[data-unsel]");
+  if (!t) { if (S.pop && !e.target.closest(".pop")) { S.pop = false; render(); } return; }
+  const d = t.dataset;
+  if (d.go) { e.preventDefault(); if (location.hash === "#" + d.go) go("#" + d.go); else location.hash = d.go; return; }
+  if (d.themeSet) { setTheme(d.themeSet); return; }
+  if (d.cb) { e.stopPropagation(); S.focus = d.cb; toggleSel(d.cb); return; }
+  if (d.tile) { S.focus = d.tile; toggleSel(d.tile); return; }
+  if (d.row) { S.focus = d.row; render(); return; }
+  if (d.eco) { S.eco = d.eco; S.src = "all"; const v = visible(); if (v.length && !v.some(f => f.id === S.focus)) S.focus = v[0].id; render(); return; }
+  if (d.src) { S.src = S.src === d.src ? "all" : d.src; S.eco = "all"; const v = visible(); if (v.length) S.focus = v[0].id; render(); return; }
+  if (d.group) { S.group = d.group; render(); return; }
+  if (d.gsel) { const items = visible().filter(f => f.eco === d.gsel && selectable(f)); const all = items.every(f => S.sel.has(f.id)); items.forEach(f => all ? S.sel.delete(f.id) : S.sel.add(f.id)); render(); return; }
+  if (d.quick) { S.sel = new Set([d.quick]); S.clean = { items: [d.quick], phase: "review", state: {}, freed: 0, fromUI: true }; location.hash = "confirm"; return; }
+  if (d.onb) { location.hash = "onboarding-" + d.onb; return; }
+  if (d.set) { S.set = d.set; render(); return; }
+  if (d.unsel) { S.clean.items = S.clean.items.filter(id => id !== d.unsel); S.sel.delete(d.unsel); render(); return; }
+  switch (d.act) {
+    case "pop": S.pop = !S.pop; if (S.screen.startsWith("menubar")) { location.hash = "main"; return; } render(); break;
+    case "srcs": S.srcs = !S.srcs; document.body.classList.toggle("srcs", S.srcs); t.classList.toggle("on", S.srcs); break;
+    case "rm": document.documentElement.classList.toggle("rm"); t.classList.toggle("on"); break;
+    case "insp": S.insp = !S.insp; render(); break;
+    case "clearsel": S.sel.clear(); render(); break;
+    case "confirm": if (!S.sel.size) return; S.clean = { items: [...S.sel], phase: "review", state: {}, freed: 0, fromUI: true }; location.hash = "confirm"; break;
+    case "confirm-from-notif": S.sel = new Set(["docker-build"]); S.clean = { items: ["docker-build"], phase: "review", state: {}, freed: 0, fromUI: true }; location.hash = "confirm"; break;
+    case "popclean": S.sel = new Set(F.filter(f => f.cls === "safe").map(f => f.id)); S.clean = { items: [...S.sel], phase: "review", state: {}, freed: 0, fromUI: true }; location.hash = "confirm"; break;
+    case "startclean": location.hash = "cleaning"; break;
+    case "cancel": S.clean = null; location.hash = "main"; break;
+    case "check": toast("Checking 46 known locations… (rules, no AI)", "i-refresh"); break;
+    case "copyscan": e.preventDefault(); toast("Copied <span class='mono'>/freeroom:scan</span> — paste it into Claude Code", "i-terminal"); break;
+    case "copy": e.preventDefault(); toast("Copied", "i-copy"); break;
+    case "recheck": e.preventDefault(); toast("Still not detected — install it in Claude Code first", "i-info"); break;
+    case "fda": S.fda = true; render(); break;
+    case "reveal": e.preventDefault(); toast("Revealed in Finder", "i-folder"); break;
+    case "history": toast("History: 214 GB freed since March", "i-history"); break;
+    case "quit": toast("Quit (disabled in the mockup)", "i-power"); break;
+  }
+});
+document.addEventListener("dblclick", e => { const t = e.target.closest("[data-tile]"); if (t) { S.focus = t.dataset.tile; S.insp = true; toggleSel(t.dataset.tile); } });
+document.addEventListener("input", e => { if (e.target.id === "q") { S.q = e.target.value; S.qFocus = true; render(); } });
+document.addEventListener("focusout", e => { if (e.target.id === "q") S.qFocus = false; });
+
+/* Keyboard-first selection */
+document.addEventListener("keydown", e => {
+  if (e.target.tagName === "INPUT") { if (e.key === "Escape") { e.target.blur(); S.qFocus = false; } return; }
+  const sc = S.screen;
+  if (e.key === "Escape") { if (S.pop) { S.pop = false; render(); } else if (sc === "confirm") { S.clean = null; location.hash = "main"; } return; }
+  if (sc === "confirm" && e.key === "Enter") { e.preventDefault(); location.hash = "cleaning"; return; }
+  if (sc === "done" && e.key === "Enter") { e.preventDefault(); location.hash = "empty"; return; }
+  if (!["main", "live"].includes(sc)) return;
+  const v = visible(), i = v.findIndex(f => f.id === S.focus);
+  if (e.key === "ArrowDown" || e.key === "j") { e.preventDefault(); S.focus = v[Math.min(v.length - 1, i + 1)].id; render(); scrollFocus(); }
+  else if (e.key === "ArrowUp" || e.key === "k") { e.preventDefault(); S.focus = v[Math.max(0, i - 1)].id; render(); scrollFocus(); }
+  else if (e.key === " ") { e.preventDefault(); toggleSel(S.focus); }
+  else if ((e.metaKey || e.ctrlKey) && e.key === "a") { e.preventDefault(); v.filter(f => f.cls === "safe").forEach(f => S.sel.add(f.id)); render(); }
+  else if ((e.metaKey || e.ctrlKey) && e.key === "Enter") { e.preventDefault(); if (S.sel.size) { S.clean = { items: [...S.sel], phase: "review", state: {}, freed: 0, fromUI: true }; location.hash = "confirm"; } }
+  else if (e.key === "/") { e.preventDefault(); const q = $("#q"); q && q.focus(); }
+});
+function scrollFocus() { const r = document.querySelector(".row.foc"); r && r.scrollIntoView({ block: "nearest" }); }
+
+/* boot */
+setTheme("auto");
+preloadBrands();
+document.querySelector('[data-act="srcs"]').classList.toggle("on", false);
+go(location.hash || "#main");
+</script>
+</body>
+</html>

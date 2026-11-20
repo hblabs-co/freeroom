@@ -1,0 +1,4683 @@
+[
+  {
+    "id": "xcode-derived-data",
+    "title": "Xcode DerivedData",
+    "paths": [
+      "~/Library/Developer/Xcode/DerivedData"
+    ],
+    "category": "xcode",
+    "safety": "safe",
+    "action": "delete",
+    "needsAdmin": false,
+    "explanation": "Build products and indexes for every project ever opened in Xcode. Rebuilt on the next build.",
+    "icon": {
+      "app": "com.apple.dt.Xcode",
+      "brand": "xcode",
+      "symbol": "hammer"
+    },
+    "confidence": "high",
+    "source": "https://help.apple.com/xcode/mac/current/en.lproj/deva52afe8a4.html",
+    "popularity": 5
+  },
+  {
+    "id": "xcode-simulator-devices",
+    "title": "Simulator devices (apps and data)",
+    "paths": [
+      "~/Library/Developer/CoreSimulator/Devices"
+    ],
+    "category": "xcode",
+    "safety": "review",
+    "action": "command",
+    "command": "xcrun simctl erase all",
+    "needsAdmin": false,
+    "explanation": "Apps and data installed in iOS simulators. Erasing resets every simulator to factory state.",
+    "icon": {
+      "app": "com.apple.iphonesimulator",
+      "brand": "xcode",
+      "symbol": "iphone"
+    },
+    "confidence": "high",
+    "source": "observed on macOS",
+    "popularity": 5
+  },
+  {
+    "id": "xcode-device-support",
+    "title": "iOS DeviceSupport",
+    "paths": [
+      "~/Library/Developer/Xcode/iOS DeviceSupport",
+      "~/Library/Developer/Xcode/watchOS DeviceSupport",
+      "~/Library/Developer/Xcode/tvOS DeviceSupport",
+      "~/Library/Developer/Xcode/visionOS DeviceSupport",
+      "~/Library/Developer/Xcode/macOS DeviceSupport"
+    ],
+    "category": "xcode",
+    "safety": "safe",
+    "action": "delete",
+    "needsAdmin": false,
+    "explanation": "Debug symbols copied from physical devices. Recreated when a device is connected again.",
+    "icon": {
+      "app": "com.apple.dt.Xcode",
+      "brand": "xcode",
+      "symbol": "iphone.and.arrow.forward"
+    },
+    "confidence": "medium",
+    "source": "pre-existing Freeroom entry; not verified",
+    "popularity": 4
+  },
+  {
+    "id": "xcode-archives",
+    "title": "Xcode Archives",
+    "paths": [
+      "~/Library/Developer/Xcode/Archives"
+    ],
+    "category": "xcode",
+    "safety": "review",
+    "action": "trash",
+    "needsAdmin": false,
+    "explanation": "Archived app builds. Needed to symbolicate crash reports of released versions.",
+    "icon": {
+      "app": "com.apple.dt.Xcode",
+      "brand": "xcode",
+      "symbol": "archivebox"
+    },
+    "confidence": "high",
+    "source": "observed on macOS",
+    "popularity": 4
+  },
+  {
+    "id": "xcode-caches",
+    "title": "Xcode caches",
+    "paths": [
+      "~/Library/Caches/com.apple.dt.Xcode",
+      "~/Library/Caches/com.apple.dt.xcodebuild"
+    ],
+    "category": "xcode",
+    "safety": "safe",
+    "action": "delete",
+    "needsAdmin": false,
+    "explanation": "Xcode's own download and documentation caches. Recreated on demand.",
+    "icon": {
+      "app": "com.apple.dt.Xcode",
+      "brand": "xcode",
+      "symbol": "hammer"
+    },
+    "confidence": "high",
+    "source": "observed on macOS",
+    "popularity": 5
+  },
+  {
+    "id": "xcode-device-logs",
+    "title": "Device logs",
+    "paths": [
+      "~/Library/Developer/Xcode/DeviceLogs"
+    ],
+    "category": "xcode",
+    "safety": "review",
+    "action": "trash",
+    "needsAdmin": false,
+    "explanation": "Crash and diagnostic logs pulled from connected devices. Keep them if you are still debugging a crash.",
+    "icon": {
+      "app": "com.apple.dt.Xcode",
+      "brand": "xcode",
+      "symbol": "doc.text"
+    },
+    "confidence": "high",
+    "source": "observed on macOS",
+    "popularity": 3
+  },
+  {
+    "id": "xcode-coresimulator-caches",
+    "title": "Simulator caches",
+    "paths": [
+      "~/Library/Developer/CoreSimulator/Caches",
+      "~/Library/Developer/CoreSimulator/Temp"
+    ],
+    "category": "xcode",
+    "safety": "safe",
+    "action": "delete",
+    "needsAdmin": false,
+    "explanation": "Dyld and temporary caches for simulators. Regenerated when a simulator boots.",
+    "icon": {
+      "app": "com.apple.iphonesimulator",
+      "brand": "xcode",
+      "symbol": "iphone"
+    },
+    "confidence": "high",
+    "source": "observed on macOS",
+    "popularity": 4
+  },
+  {
+    "id": "xcode-xctest-devices",
+    "title": "XCTest clone devices",
+    "paths": [
+      "~/Library/Developer/XCTestDevices"
+    ],
+    "category": "xcode",
+    "safety": "safe",
+    "action": "delete",
+    "needsAdmin": false,
+    "explanation": "Simulator clones made for parallel testing. Xcode creates them again for the next test run.",
+    "icon": {
+      "app": "com.apple.dt.Xcode",
+      "brand": "xcode",
+      "symbol": "checklist"
+    },
+    "confidence": "high",
+    "source": "observed on macOS",
+    "popularity": 3
+  },
+  {
+    "id": "xcode-dvtdownloads",
+    "title": "Xcode component downloads",
+    "paths": [
+      "~/Library/Developer/DVTDownloads"
+    ],
+    "category": "xcode",
+    "safety": "safe",
+    "action": "delete",
+    "needsAdmin": false,
+    "explanation": "Installer packages Xcode downloaded for components it has already installed.",
+    "icon": {
+      "app": "com.apple.dt.Xcode",
+      "brand": "xcode",
+      "symbol": "arrow.down.circle"
+    },
+    "confidence": "high",
+    "source": "observed on macOS",
+    "popularity": 3
+  },
+  {
+    "id": "xcode-previews",
+    "title": "SwiftUI previews",
+    "paths": [
+      "~/Library/Developer/Xcode/UserData/Previews"
+    ],
+    "category": "xcode",
+    "safety": "review",
+    "action": "trash",
+    "needsAdmin": false,
+    "explanation": "Simulator data used to render SwiftUI previews. Rebuilt when a preview is shown.",
+    "icon": {
+      "app": "com.apple.dt.Xcode",
+      "brand": "xcode",
+      "symbol": "rectangle.on.rectangle"
+    },
+    "confidence": "medium",
+    "source": "observed on macOS",
+    "popularity": 4
+  },
+  {
+    "id": "xcode-unavailable-simulators",
+    "title": "Unavailable simulators",
+    "paths": [],
+    "category": "xcode",
+    "safety": "safe",
+    "action": "command",
+    "command": "xcrun simctl delete unavailable",
+    "needsAdmin": false,
+    "explanation": "Simulators for runtimes that are no longer installed. They cannot boot, so removing them loses nothing.",
+    "icon": {
+      "app": "com.apple.iphonesimulator",
+      "brand": "xcode",
+      "symbol": "iphone.slash"
+    },
+    "confidence": "medium",
+    "source": "observed on macOS (xcrun simctl help delete)",
+    "popularity": 4
+  },
+  {
+    "id": "xcode-simulator-runtimes",
+    "title": "Simulator runtimes",
+    "paths": [
+      "/Library/Developer/CoreSimulator/Volumes",
+      "/Library/Developer/CoreSimulator/Images"
+    ],
+    "category": "xcode",
+    "safety": "review",
+    "action": "none",
+    "needsAdmin": true,
+    "explanation": "iOS/watchOS/visionOS runtimes (several GB each). Remove unused ones in Xcode > Settings > Components.",
+    "icon": {
+      "app": "com.apple.dt.Xcode",
+      "brand": "xcode",
+      "symbol": "square.stack.3d.up"
+    },
+    "confidence": "high",
+    "source": "observed on macOS",
+    "popularity": 5
+  },
+  {
+    "id": "xcode-app",
+    "title": "Xcode",
+    "paths": [
+      "/Applications/Xcode.app"
+    ],
+    "category": "apps",
+    "safety": "review",
+    "action": "none",
+    "needsAdmin": false,
+    "explanation": "The Xcode app itself (10+ GB). Remove it only if you no longer build for Apple platforms.",
+    "icon": {
+      "app": "com.apple.dt.Xcode",
+      "brand": "xcode",
+      "symbol": "hammer"
+    },
+    "confidence": "high",
+    "source": "observed on macOS",
+    "popularity": 5
+  },
+  {
+    "id": "swiftpm-cache",
+    "title": "Swift Package Manager cache",
+    "paths": [
+      "~/Library/Caches/org.swift.swiftpm",
+      "~/.swiftpm/cache"
+    ],
+    "category": "devCaches",
+    "safety": "safe",
+    "action": "command",
+    "needsAdmin": false,
+    "explanation": "Downloaded Swift packages and repositories. Fetched again on the next resolve.",
+    "icon": {
+      "brand": "swift",
+      "symbol": "shippingbox"
+    },
+    "confidence": "high",
+    "source": "observed on macOS",
+    "popularity": 4,
+    "command": "swift package purge-cache"
+  },
+  {
+    "id": "cocoapods-cache",
+    "title": "CocoaPods cache",
+    "paths": [
+      "~/Library/Caches/CocoaPods"
+    ],
+    "category": "devCaches",
+    "safety": "safe",
+    "action": "command",
+    "needsAdmin": false,
+    "explanation": "Downloaded pods. Fetched again by `pod install`.",
+    "icon": {
+      "brand": "cocoapods",
+      "symbol": "shippingbox"
+    },
+    "confidence": "high",
+    "source": "https://guides.cocoapods.org/terminal/commands.html",
+    "popularity": 3,
+    "command": "pod cache clean --all"
+  },
+  {
+    "id": "cocoapods-repos",
+    "title": "CocoaPods spec repos",
+    "paths": [
+      "~/.cocoapods/repos"
+    ],
+    "category": "devCaches",
+    "safety": "safe",
+    "action": "delete",
+    "needsAdmin": false,
+    "explanation": "Local copy of the CocoaPods specs index. Modern CocoaPods uses the CDN and re-creates it if needed.",
+    "icon": {
+      "brand": "cocoapods",
+      "symbol": "books.vertical"
+    },
+    "confidence": "medium",
+    "source": "https://guides.cocoapods.org/terminal/commands.html",
+    "popularity": 2
+  },
+  {
+    "id": "ios-backups",
+    "title": "iPhone and iPad backups",
+    "paths": [
+      "~/Library/Application Support/MobileSync/Backup"
+    ],
+    "category": "personal",
+    "safety": "review",
+    "action": "none",
+    "needsAdmin": false,
+    "explanation": "Local device backups made by Finder. Delete old ones in Finder > device > Manage Backups.",
+    "icon": {
+      "app": "com.apple.finder",
+      "symbol": "externaldrive.badge.timemachine"
+    },
+    "confidence": "high",
+    "source": "https://support.apple.com/en-us/108809",
+    "popularity": 4
+  },
+  {
+    "id": "docker-desktop-disk",
+    "title": "Docker Desktop disk image",
+    "paths": [
+      "~/Library/Containers/com.docker.docker/Data/vms/0/data/Docker.raw"
+    ],
+    "category": "docker",
+    "safety": "review",
+    "action": "none",
+    "needsAdmin": false,
+    "explanation": "Virtual disk holding all images, containers and volumes. Shrink it with the prune commands, not by deleting it.",
+    "icon": {
+      "app": "com.docker.docker",
+      "brand": "docker",
+      "symbol": "shippingbox"
+    },
+    "confidence": "high",
+    "source": "https://docs.docker.com/desktop/troubleshoot-and-support/faqs/macfaqs/",
+    "popularity": 5
+  },
+  {
+    "id": "docker-build-cache",
+    "title": "Docker build cache",
+    "paths": [],
+    "category": "docker",
+    "safety": "safe",
+    "action": "command",
+    "command": "docker builder prune -f",
+    "needsAdmin": false,
+    "explanation": "Cached layers from `docker build`. Size comes from `docker system df`; builds get slower once.",
+    "icon": {
+      "app": "com.docker.docker",
+      "brand": "docker",
+      "symbol": "shippingbox"
+    },
+    "confidence": "high",
+    "source": "https://docs.docker.com/engine/manage-resources/pruning/",
+    "popularity": 5
+  },
+  {
+    "id": "docker-dangling-images",
+    "title": "Dangling Docker images",
+    "paths": [],
+    "category": "docker",
+    "safety": "safe",
+    "action": "command",
+    "command": "docker image prune -f",
+    "needsAdmin": false,
+    "explanation": "Untagged image layers left by rebuilds. No container or tag uses them.",
+    "icon": {
+      "app": "com.docker.docker",
+      "brand": "docker",
+      "symbol": "shippingbox"
+    },
+    "confidence": "high",
+    "source": "https://docs.docker.com/engine/manage-resources/pruning/",
+    "popularity": 5
+  },
+  {
+    "id": "docker-desktop-caches",
+    "title": "Docker Desktop app caches",
+    "paths": [
+      "~/Library/Caches/com.docker.docker",
+      "~/Library/Caches/Docker Desktop",
+      "~/Library/Containers/com.docker.docker/Data/log"
+    ],
+    "category": "docker",
+    "safety": "safe",
+    "action": "delete",
+    "needsAdmin": false,
+    "explanation": "Logs and update caches of the Docker Desktop app, not your images or containers.",
+    "icon": {
+      "app": "com.docker.docker",
+      "brand": "docker",
+      "symbol": "shippingbox"
+    },
+    "confidence": "medium",
+    "source": "observed on macOS",
+    "popularity": 4
+  },
+  {
+    "id": "docker-cli-config",
+    "title": "Docker CLI config and contexts",
+    "paths": [
+      "~/.docker/config.json",
+      "~/.docker/contexts"
+    ],
+    "category": "system",
+    "safety": "keep",
+    "action": "none",
+    "needsAdmin": false,
+    "explanation": "Registry credentials and contexts for the Docker CLI. Freeroom never touches them.",
+    "icon": {
+      "brand": "docker",
+      "symbol": "lock.shield"
+    },
+    "confidence": "high",
+    "source": "observed on macOS",
+    "popularity": 5
+  },
+  {
+    "id": "docker-model-runner",
+    "title": "Docker Model Runner models",
+    "paths": [
+      "~/.docker/models"
+    ],
+    "category": "docker",
+    "safety": "review",
+    "action": "none",
+    "needsAdmin": false,
+    "explanation": "AI models pulled with `docker model pull`. Remove unused ones with `docker model rm`.",
+    "icon": {
+      "app": "com.docker.docker",
+      "brand": "docker",
+      "symbol": "brain"
+    },
+    "confidence": "medium",
+    "source": "observed on macOS",
+    "popularity": 2
+  },
+  {
+    "id": "orbstack-data",
+    "title": "OrbStack data",
+    "paths": [
+      "~/.orbstack/data"
+    ],
+    "category": "docker",
+    "safety": "review",
+    "action": "none",
+    "needsAdmin": false,
+    "explanation": "Disk image with OrbStack's containers, images and Linux machines. Prune from Docker or remove machines in OrbStack.",
+    "icon": {
+      "app": "dev.kdrag0n.MacVirt",
+      "symbol": "shippingbox"
+    },
+    "confidence": "medium",
+    "source": "https://docs.orbstack.dev/faq",
+    "popularity": 4
+  },
+  {
+    "id": "colima-data",
+    "title": "Colima VMs",
+    "paths": [
+      "~/.colima"
+    ],
+    "category": "docker",
+    "safety": "review",
+    "action": "none",
+    "needsAdmin": false,
+    "explanation": "Colima's Linux VM disks with your images and containers. Use `colima delete` for profiles you no longer need.",
+    "icon": {
+      "symbol": "shippingbox"
+    },
+    "confidence": "medium",
+    "source": "https://github.com/abiosoft/colima/blob/main/docs/FAQ.md",
+    "popularity": 3
+  },
+  {
+    "id": "lima-vms",
+    "title": "Lima VMs",
+    "paths": [
+      "~/.lima"
+    ],
+    "category": "docker",
+    "safety": "review",
+    "action": "none",
+    "needsAdmin": false,
+    "explanation": "Disks of Lima Linux VMs. Remove unused ones with `limactl delete <name>`.",
+    "icon": {
+      "symbol": "server.rack"
+    },
+    "confidence": "medium",
+    "source": "https://lima-vm.io/docs/config/environment-variables/",
+    "popularity": 2
+  },
+  {
+    "id": "rancher-desktop",
+    "title": "Rancher Desktop VM",
+    "paths": [
+      "~/Library/Application Support/rancher-desktop/lima"
+    ],
+    "category": "docker",
+    "safety": "review",
+    "action": "none",
+    "needsAdmin": false,
+    "explanation": "VM disk of Rancher Desktop with images and Kubernetes state. Use Troubleshooting > Factory Reset to clear.",
+    "icon": {
+      "app": "io.rancherdesktop.app",
+      "brand": "rancher",
+      "symbol": "shippingbox"
+    },
+    "confidence": "medium",
+    "source": "https://docs.rancherdesktop.io/faq",
+    "popularity": 2
+  },
+  {
+    "id": "minikube",
+    "title": "minikube",
+    "paths": [
+      "~/.minikube"
+    ],
+    "category": "docker",
+    "safety": "review",
+    "action": "none",
+    "needsAdmin": false,
+    "explanation": "minikube clusters, VM images and cached Kubernetes binaries. `minikube delete --all --purge` removes everything.",
+    "icon": {
+      "brand": "kubernetes",
+      "symbol": "server.rack"
+    },
+    "confidence": "medium",
+    "source": "https://minikube.sigs.k8s.io/docs/handbook/config/",
+    "popularity": 2
+  },
+  {
+    "id": "testcontainers-config",
+    "title": "Testcontainers settings",
+    "paths": [
+      "~/.testcontainers.properties"
+    ],
+    "category": "system",
+    "safety": "keep",
+    "action": "none",
+    "needsAdmin": false,
+    "explanation": "Small Testcontainers settings file. Nothing to reclaim.",
+    "icon": {
+      "symbol": "gearshape"
+    },
+    "confidence": "medium",
+    "source": "observed on macOS",
+    "popularity": 1
+  },
+  {
+    "id": "npm-cache",
+    "title": "npm cache",
+    "paths": [
+      "~/.npm/_cacache"
+    ],
+    "category": "devCaches",
+    "safety": "safe",
+    "action": "command",
+    "command": "npm cache clean --force",
+    "needsAdmin": false,
+    "explanation": "Downloaded npm packages. Fetched again on install.",
+    "icon": {
+      "brand": "npm",
+      "symbol": "shippingbox"
+    },
+    "confidence": "high",
+    "source": "https://docs.npmjs.com/cli/v10/commands/npm-cache",
+    "popularity": 5
+  },
+  {
+    "id": "npm-npx-cache",
+    "title": "npx cache",
+    "paths": [
+      "~/.npm/_npx"
+    ],
+    "category": "devCaches",
+    "safety": "safe",
+    "action": "delete",
+    "needsAdmin": false,
+    "explanation": "Packages downloaded to run `npx` commands. Downloaded again the next time you run them.",
+    "icon": {
+      "brand": "npm",
+      "symbol": "shippingbox"
+    },
+    "confidence": "medium",
+    "source": "https://docs.npmjs.com/cli/v10/configuring-npm/folders",
+    "popularity": 4
+  },
+  {
+    "id": "npm-logs",
+    "title": "npm logs",
+    "paths": [
+      "~/.npm/_logs"
+    ],
+    "category": "devCaches",
+    "safety": "safe",
+    "action": "delete",
+    "needsAdmin": false,
+    "explanation": "Debug logs from npm runs.",
+    "icon": {
+      "brand": "npm",
+      "symbol": "doc.text"
+    },
+    "confidence": "medium",
+    "source": "https://docs.npmjs.com/cli/v10/using-npm/logging",
+    "popularity": 3
+  },
+  {
+    "id": "pnpm-store",
+    "title": "pnpm store",
+    "paths": [
+      "~/Library/pnpm/store",
+      "~/Library/Caches/pnpm"
+    ],
+    "category": "devCaches",
+    "safety": "safe",
+    "action": "command",
+    "command": "pnpm store prune",
+    "needsAdmin": false,
+    "explanation": "Content-addressable package store. Pruning removes packages no project references.",
+    "icon": {
+      "brand": "pnpm",
+      "symbol": "shippingbox"
+    },
+    "confidence": "high",
+    "source": "observed on macOS",
+    "popularity": 4
+  },
+  {
+    "id": "yarn-cache",
+    "title": "Yarn cache",
+    "paths": [
+      "~/Library/Caches/Yarn"
+    ],
+    "category": "devCaches",
+    "safety": "safe",
+    "action": "command",
+    "command": "yarn cache clean",
+    "needsAdmin": false,
+    "explanation": "Downloaded Yarn packages.",
+    "icon": {
+      "brand": "yarn",
+      "symbol": "shippingbox"
+    },
+    "confidence": "high",
+    "source": "https://classic.yarnpkg.com/en/docs/cli/cache",
+    "popularity": 4
+  },
+  {
+    "id": "yarn-berry-cache",
+    "title": "Yarn Berry global cache",
+    "paths": [
+      "~/.yarn/berry/cache"
+    ],
+    "category": "devCaches",
+    "safety": "safe",
+    "action": "delete",
+    "needsAdmin": false,
+    "explanation": "Global package cache of Yarn 2+. Fetched again on `yarn install`.",
+    "icon": {
+      "brand": "yarn",
+      "symbol": "shippingbox"
+    },
+    "confidence": "high",
+    "source": "https://yarnpkg.com/configuration/yarnrc",
+    "popularity": 3
+  },
+  {
+    "id": "bun-cache",
+    "title": "Bun install cache",
+    "paths": [
+      "~/.bun/install/cache"
+    ],
+    "category": "devCaches",
+    "safety": "safe",
+    "action": "command",
+    "needsAdmin": false,
+    "explanation": "Packages downloaded by `bun install`. Fetched again when needed.",
+    "icon": {
+      "brand": "bun",
+      "symbol": "shippingbox"
+    },
+    "confidence": "high",
+    "source": "https://bun.sh/docs/install/cache",
+    "popularity": 3,
+    "command": "bun pm cache rm"
+  },
+  {
+    "id": "deno-cache",
+    "title": "Deno cache",
+    "paths": [
+      "~/Library/Caches/deno"
+    ],
+    "category": "devCaches",
+    "safety": "safe",
+    "action": "command",
+    "needsAdmin": false,
+    "explanation": "Deno's global cache of remote modules and npm packages. Rebuilt on the next run.",
+    "icon": {
+      "brand": "deno",
+      "symbol": "shippingbox"
+    },
+    "confidence": "medium",
+    "source": "https://docs.deno.com/runtime/reference/cli/clean/",
+    "popularity": 2,
+    "command": "deno clean"
+  },
+  {
+    "id": "node-gyp-cache",
+    "title": "node-gyp headers",
+    "paths": [
+      "~/Library/Caches/node-gyp"
+    ],
+    "category": "devCaches",
+    "safety": "safe",
+    "action": "delete",
+    "needsAdmin": false,
+    "explanation": "Node.js headers downloaded to compile native modules. Downloaded again when needed.",
+    "icon": {
+      "brand": "nodedotjs",
+      "symbol": "wrench.and.screwdriver"
+    },
+    "confidence": "high",
+    "source": "observed on macOS",
+    "popularity": 3
+  },
+  {
+    "id": "typescript-cache",
+    "title": "TypeScript type cache",
+    "paths": [
+      "~/Library/Caches/typescript"
+    ],
+    "category": "devCaches",
+    "safety": "safe",
+    "action": "delete",
+    "needsAdmin": false,
+    "explanation": "Type definitions the editor's TypeScript server downloaded automatically.",
+    "icon": {
+      "brand": "typescript",
+      "symbol": "curlybraces"
+    },
+    "confidence": "high",
+    "source": "observed on macOS",
+    "popularity": 3
+  },
+  {
+    "id": "nvm-versions",
+    "title": "nvm Node.js versions",
+    "paths": [
+      "~/.nvm/versions"
+    ],
+    "category": "devCaches",
+    "safety": "review",
+    "action": "none",
+    "needsAdmin": false,
+    "explanation": "Installed Node.js versions. Remove unused ones with `nvm uninstall <version>`.",
+    "icon": {
+      "brand": "nodedotjs",
+      "symbol": "square.stack.3d.up"
+    },
+    "confidence": "high",
+    "source": "https://github.com/nvm-sh/nvm",
+    "popularity": 4
+  },
+  {
+    "id": "nvm-cache",
+    "title": "nvm download cache",
+    "paths": [
+      "~/.nvm/.cache"
+    ],
+    "category": "devCaches",
+    "safety": "safe",
+    "action": "delete",
+    "needsAdmin": false,
+    "explanation": "Node.js archives nvm downloaded for versions that are already installed.",
+    "icon": {
+      "brand": "nodedotjs",
+      "symbol": "arrow.down.circle"
+    },
+    "confidence": "medium",
+    "source": "https://github.com/nvm-sh/nvm",
+    "popularity": 3
+  },
+  {
+    "id": "fnm-versions",
+    "title": "fnm Node.js versions",
+    "paths": [
+      "~/Library/Application Support/fnm/node-versions"
+    ],
+    "category": "devCaches",
+    "safety": "review",
+    "action": "none",
+    "needsAdmin": false,
+    "explanation": "Node.js versions installed by fnm. Remove unused ones with `fnm uninstall <version>`.",
+    "icon": {
+      "brand": "nodedotjs",
+      "symbol": "square.stack.3d.up"
+    },
+    "confidence": "medium",
+    "source": "https://github.com/Schniz/fnm",
+    "popularity": 2
+  },
+  {
+    "id": "volta-tools",
+    "title": "Volta toolchains",
+    "paths": [
+      "~/.volta/tools"
+    ],
+    "category": "devCaches",
+    "safety": "review",
+    "action": "none",
+    "needsAdmin": false,
+    "explanation": "Node, npm and global tools managed by Volta. Remove unused versions from Volta.",
+    "icon": {
+      "symbol": "square.stack.3d.up"
+    },
+    "confidence": "medium",
+    "source": "https://docs.volta.sh/advanced/installers",
+    "popularity": 2
+  },
+  {
+    "id": "playwright-browsers",
+    "title": "Playwright browsers",
+    "paths": [
+      "~/Library/Caches/ms-playwright"
+    ],
+    "category": "appCaches",
+    "safety": "safe",
+    "action": "delete",
+    "needsAdmin": false,
+    "explanation": "Browsers downloaded for end-to-end tests. Reinstall with `npx playwright install`.",
+    "icon": {
+      "symbol": "globe"
+    },
+    "confidence": "high",
+    "source": "https://playwright.dev/docs/browsers",
+    "popularity": 4
+  },
+  {
+    "id": "puppeteer-browsers",
+    "title": "Puppeteer browsers",
+    "paths": [
+      "~/.cache/puppeteer"
+    ],
+    "category": "devCaches",
+    "safety": "safe",
+    "action": "delete",
+    "needsAdmin": false,
+    "explanation": "Chrome builds downloaded by Puppeteer. Reinstalled with `npx puppeteer browsers install`.",
+    "icon": {
+      "brand": "puppeteer",
+      "symbol": "globe"
+    },
+    "confidence": "high",
+    "source": "https://pptr.dev/guides/configuration",
+    "popularity": 3
+  },
+  {
+    "id": "cypress-cache",
+    "title": "Cypress binaries",
+    "paths": [
+      "~/Library/Caches/Cypress"
+    ],
+    "category": "devCaches",
+    "safety": "safe",
+    "action": "delete",
+    "needsAdmin": false,
+    "explanation": "Cypress app binaries for each version you installed. Reinstalled by `npx cypress install`.",
+    "icon": {
+      "brand": "cypress",
+      "symbol": "globe"
+    },
+    "confidence": "high",
+    "source": "https://docs.cypress.io/app/references/advanced-installation",
+    "popularity": 3
+  },
+  {
+    "id": "electron-cache",
+    "title": "Electron downloads",
+    "paths": [
+      "~/Library/Caches/electron",
+      "~/Library/Caches/electron-builder"
+    ],
+    "category": "devCaches",
+    "safety": "safe",
+    "action": "delete",
+    "needsAdmin": false,
+    "explanation": "Electron runtimes and build tools downloaded when building Electron apps.",
+    "icon": {
+      "brand": "electron",
+      "symbol": "atom"
+    },
+    "confidence": "high",
+    "source": "observed on macOS",
+    "popularity": 3
+  },
+  {
+    "id": "updater-caches",
+    "title": "App updater caches",
+    "paths": [
+      "~/Library/Caches/lens-desktop-updater",
+      "~/Library/Caches/com.electron.kontena-lens.ShipIt"
+    ],
+    "category": "appCaches",
+    "safety": "safe",
+    "action": "delete",
+    "needsAdmin": false,
+    "explanation": "Downloaded installers of updates that were already applied.",
+    "icon": {
+      "symbol": "arrow.triangle.2.circlepath"
+    },
+    "confidence": "high",
+    "source": "observed on macOS",
+    "popularity": 2
+  },
+  {
+    "id": "chrome-headless-shell",
+    "title": "Chrome headless shell",
+    "paths": [
+      "~/Library/Caches/chrome-headless-shell"
+    ],
+    "category": "devCaches",
+    "safety": "safe",
+    "action": "delete",
+    "needsAdmin": false,
+    "explanation": "Headless Chrome builds downloaded by browser-testing tools. Downloaded again when a test needs them.",
+    "icon": {
+      "brand": "googlechrome",
+      "symbol": "globe"
+    },
+    "confidence": "medium",
+    "source": "observed on macOS",
+    "popularity": 2
+  },
+  {
+    "id": "pip-cache",
+    "title": "pip cache",
+    "paths": [
+      "~/Library/Caches/pip"
+    ],
+    "category": "devCaches",
+    "safety": "safe",
+    "action": "command",
+    "command": "pip3 cache purge",
+    "needsAdmin": false,
+    "explanation": "Downloaded Python wheels.",
+    "icon": {
+      "brand": "pypi",
+      "symbol": "shippingbox"
+    },
+    "confidence": "high",
+    "source": "https://pip.pypa.io/en/stable/topics/caching/",
+    "popularity": 5
+  },
+  {
+    "id": "uv-cache",
+    "title": "uv cache",
+    "paths": [
+      "~/.cache/uv"
+    ],
+    "category": "devCaches",
+    "safety": "safe",
+    "action": "command",
+    "needsAdmin": false,
+    "explanation": "Packages and builds cached by uv. Fetched again on the next install.",
+    "icon": {
+      "brand": "uv",
+      "symbol": "shippingbox"
+    },
+    "confidence": "high",
+    "source": "https://docs.astral.sh/uv/concepts/cache/",
+    "popularity": 4,
+    "command": "uv cache clean"
+  },
+  {
+    "id": "uv-python",
+    "title": "uv-managed Python versions",
+    "paths": [
+      "~/.local/share/uv/python"
+    ],
+    "category": "devCaches",
+    "safety": "review",
+    "action": "none",
+    "needsAdmin": false,
+    "explanation": "Python interpreters installed by uv. Remove unused ones with `uv python uninstall <version>`.",
+    "icon": {
+      "brand": "uv",
+      "symbol": "square.stack.3d.up"
+    },
+    "confidence": "high",
+    "source": "https://docs.astral.sh/uv/reference/storage/",
+    "popularity": 3
+  },
+  {
+    "id": "uv-tools",
+    "title": "uv tools",
+    "paths": [
+      "~/.local/share/uv/tools"
+    ],
+    "category": "devCaches",
+    "safety": "review",
+    "action": "none",
+    "needsAdmin": false,
+    "explanation": "Command-line tools installed with `uv tool install`. Remove with `uv tool uninstall <name>`.",
+    "icon": {
+      "brand": "uv",
+      "symbol": "wrench.and.screwdriver"
+    },
+    "confidence": "high",
+    "source": "https://docs.astral.sh/uv/reference/storage/",
+    "popularity": 2
+  },
+  {
+    "id": "poetry-cache",
+    "title": "Poetry cache",
+    "paths": [
+      "~/Library/Caches/pypoetry/cache",
+      "~/Library/Caches/pypoetry/artifacts"
+    ],
+    "category": "devCaches",
+    "safety": "safe",
+    "action": "delete",
+    "needsAdmin": false,
+    "explanation": "Packages downloaded by Poetry. Fetched again on `poetry install`.",
+    "icon": {
+      "brand": "poetry",
+      "symbol": "shippingbox"
+    },
+    "confidence": "high",
+    "source": "https://python-poetry.org/docs/configuration/",
+    "popularity": 3
+  },
+  {
+    "id": "poetry-virtualenvs",
+    "title": "Poetry virtualenvs",
+    "paths": [
+      "~/Library/Caches/pypoetry/virtualenvs"
+    ],
+    "category": "projects",
+    "safety": "review",
+    "action": "trash",
+    "needsAdmin": false,
+    "explanation": "Virtual environments Poetry created for your projects. Recreated by `poetry install`, but in-env changes are lost.",
+    "icon": {
+      "brand": "poetry",
+      "symbol": "cube"
+    },
+    "confidence": "high",
+    "source": "https://python-poetry.org/docs/configuration/",
+    "popularity": 3
+  },
+  {
+    "id": "conda-pkgs",
+    "title": "Conda package cache",
+    "paths": [
+      "~/miniconda3/pkgs",
+      "~/anaconda3/pkgs",
+      "~/miniforge3/pkgs",
+      "~/opt/anaconda3/pkgs",
+      "~/opt/miniconda3/pkgs"
+    ],
+    "category": "devCaches",
+    "safety": "review",
+    "action": "command",
+    "needsAdmin": false,
+    "explanation": "Downloaded conda packages and tarballs. Environments keep working; installs re-download.",
+    "icon": {
+      "brand": "anaconda",
+      "symbol": "shippingbox"
+    },
+    "confidence": "medium",
+    "source": "https://docs.conda.io/projects/conda/en/stable/commands/clean.html",
+    "popularity": 3,
+    "command": "conda clean --all --yes"
+  },
+  {
+    "id": "pyenv-versions",
+    "title": "pyenv Python versions",
+    "paths": [
+      "~/.pyenv/versions"
+    ],
+    "category": "devCaches",
+    "safety": "review",
+    "action": "none",
+    "needsAdmin": false,
+    "explanation": "Python versions built by pyenv. Remove unused ones with `pyenv uninstall <version>`.",
+    "icon": {
+      "brand": "python",
+      "symbol": "square.stack.3d.up"
+    },
+    "confidence": "high",
+    "source": "https://github.com/pyenv/pyenv",
+    "popularity": 3
+  },
+  {
+    "id": "python-matplotlib-cache",
+    "title": "Matplotlib font cache",
+    "paths": [
+      "~/.matplotlib"
+    ],
+    "category": "devCaches",
+    "safety": "safe",
+    "action": "delete",
+    "needsAdmin": false,
+    "explanation": "Font list cache built by Matplotlib. Rebuilt on the next import.",
+    "icon": {
+      "brand": "python",
+      "symbol": "textformat"
+    },
+    "confidence": "medium",
+    "source": "observed on macOS",
+    "popularity": 2
+  },
+  {
+    "id": "ipython-history",
+    "title": "IPython profile",
+    "paths": [
+      "~/.ipython"
+    ],
+    "category": "system",
+    "safety": "keep",
+    "action": "none",
+    "needsAdmin": false,
+    "explanation": "IPython settings and command history. Small; kept.",
+    "icon": {
+      "brand": "python",
+      "symbol": "gearshape"
+    },
+    "confidence": "medium",
+    "source": "observed on macOS",
+    "popularity": 2
+  },
+  {
+    "id": "jupyter-runtime",
+    "title": "Jupyter data",
+    "paths": [
+      "~/Library/Application Support/Jupyter"
+    ],
+    "category": "devCaches",
+    "safety": "review",
+    "action": "none",
+    "needsAdmin": false,
+    "explanation": "Jupyter kernels, extensions and runtime files. Usually small; review before removing kernels.",
+    "icon": {
+      "brand": "jupyter",
+      "symbol": "book"
+    },
+    "confidence": "medium",
+    "source": "https://docs.jupyter.org/en/latest/use/jupyter-directories.html",
+    "popularity": 2
+  },
+  {
+    "id": "ollama-models",
+    "title": "Ollama models",
+    "paths": [
+      "~/.ollama/models"
+    ],
+    "category": "devCaches",
+    "safety": "review",
+    "action": "none",
+    "needsAdmin": false,
+    "explanation": "Local AI models. Remove the ones you don't use with `ollama rm <model>`.",
+    "icon": {
+      "app": "com.electron.ollama",
+      "brand": "ollama",
+      "symbol": "brain"
+    },
+    "confidence": "high",
+    "source": "https://docs.ollama.com/faq",
+    "popularity": 4
+  },
+  {
+    "id": "huggingface-hub",
+    "title": "Hugging Face cache",
+    "paths": [
+      "~/.cache/huggingface/hub"
+    ],
+    "category": "devCaches",
+    "safety": "review",
+    "action": "trash",
+    "needsAdmin": false,
+    "explanation": "Models and datasets downloaded by Hugging Face libraries. Downloaded again when code needs them.",
+    "icon": {
+      "brand": "huggingface",
+      "symbol": "brain"
+    },
+    "confidence": "high",
+    "source": "https://huggingface.co/docs/huggingface_hub/guides/manage-cache",
+    "popularity": 4
+  },
+  {
+    "id": "huggingface-xet",
+    "title": "Hugging Face Xet cache",
+    "paths": [
+      "~/.cache/huggingface/xet"
+    ],
+    "category": "devCaches",
+    "safety": "safe",
+    "action": "delete",
+    "needsAdmin": false,
+    "explanation": "Chunk cache used to speed up Hugging Face downloads. Not needed to run models.",
+    "icon": {
+      "brand": "huggingface",
+      "symbol": "brain"
+    },
+    "confidence": "medium",
+    "source": "https://huggingface.co/docs/huggingface_hub/guides/manage-cache",
+    "popularity": 2
+  },
+  {
+    "id": "lmstudio-models",
+    "title": "LM Studio models",
+    "paths": [
+      "~/.lmstudio/models",
+      "~/.cache/lm-studio/models"
+    ],
+    "category": "devCaches",
+    "safety": "review",
+    "action": "none",
+    "needsAdmin": false,
+    "explanation": "Models you downloaded in LM Studio. Delete unused ones from LM Studio's My Models tab.",
+    "icon": {
+      "app": "ai.elementlabs.lmstudio",
+      "brand": "lmstudio",
+      "symbol": "brain"
+    },
+    "confidence": "high",
+    "source": "https://lmstudio.ai/docs/app/advanced/import-model",
+    "popularity": 3
+  },
+  {
+    "id": "whisper-models",
+    "title": "Whisper models",
+    "paths": [
+      "~/.cache/whisper"
+    ],
+    "category": "devCaches",
+    "safety": "review",
+    "action": "trash",
+    "needsAdmin": false,
+    "explanation": "Speech-to-text models. Downloaded again when used.",
+    "icon": {
+      "symbol": "waveform"
+    },
+    "confidence": "high",
+    "source": "observed on macOS",
+    "popularity": 3
+  },
+  {
+    "id": "torch-hub",
+    "title": "PyTorch Hub cache",
+    "paths": [
+      "~/.cache/torch"
+    ],
+    "category": "devCaches",
+    "safety": "review",
+    "action": "trash",
+    "needsAdmin": false,
+    "explanation": "Model weights downloaded by PyTorch Hub and torchvision. Downloaded again when code loads them.",
+    "icon": {
+      "brand": "pytorch",
+      "symbol": "brain"
+    },
+    "confidence": "high",
+    "source": "observed on macOS",
+    "popularity": 3
+  },
+  {
+    "id": "easyocr-models",
+    "title": "EasyOCR models",
+    "paths": [
+      "~/.EasyOCR"
+    ],
+    "category": "devCaches",
+    "safety": "review",
+    "action": "trash",
+    "needsAdmin": false,
+    "explanation": "OCR models downloaded by EasyOCR. Downloaded again on next use.",
+    "icon": {
+      "symbol": "text.viewfinder"
+    },
+    "confidence": "medium",
+    "source": "observed on macOS",
+    "popularity": 1
+  },
+  {
+    "id": "claude-code-data",
+    "title": "Claude Code data",
+    "paths": [
+      "~/.claude"
+    ],
+    "category": "system",
+    "safety": "keep",
+    "action": "none",
+    "needsAdmin": false,
+    "explanation": "Claude Code settings, memory and session history. Prune old sessions from Claude Code, not by hand.",
+    "icon": {
+      "brand": "claude",
+      "symbol": "terminal"
+    },
+    "confidence": "high",
+    "source": "https://code.claude.com/docs/en/settings",
+    "popularity": 4
+  },
+  {
+    "id": "claude-cli-cache",
+    "title": "Claude Code CLI cache",
+    "paths": [
+      "~/Library/Caches/claude-cli-nodejs"
+    ],
+    "category": "devCaches",
+    "safety": "safe",
+    "action": "delete",
+    "needsAdmin": false,
+    "explanation": "Logs and cached data of the Claude Code CLI. Recreated as needed.",
+    "icon": {
+      "brand": "claude",
+      "symbol": "terminal"
+    },
+    "confidence": "medium",
+    "source": "observed on macOS",
+    "popularity": 3
+  },
+  {
+    "id": "claude-desktop-cache",
+    "title": "Claude cache",
+    "paths": [
+      "~/Library/Application Support/Claude/Cache",
+      "~/Library/Application Support/Claude/Code Cache",
+      "~/Library/Application Support/Claude/GPUCache"
+    ],
+    "category": "appCaches",
+    "safety": "safe",
+    "action": "delete",
+    "needsAdmin": false,
+    "explanation": "Web caches of the Claude app. Rebuilt automatically; quit the app first.",
+    "icon": {
+      "app": "com.anthropic.claudefordesktop",
+      "brand": "claude",
+      "symbol": "app.badge"
+    },
+    "confidence": "medium",
+    "source": "https://modelcontextprotocol.io/docs/develop/connect-local-servers",
+    "popularity": 3
+  },
+  {
+    "id": "go-modcache",
+    "title": "Go module cache",
+    "paths": [
+      "~/go/pkg/mod"
+    ],
+    "category": "devCaches",
+    "safety": "safe",
+    "action": "command",
+    "command": "go clean -modcache",
+    "needsAdmin": false,
+    "explanation": "Downloaded Go modules. Fetched again by `go build`.",
+    "icon": {
+      "brand": "go",
+      "symbol": "shippingbox"
+    },
+    "confidence": "high",
+    "source": "https://go.dev/ref/mod",
+    "popularity": 4
+  },
+  {
+    "id": "go-build-cache",
+    "title": "Go build cache",
+    "paths": [
+      "~/Library/Caches/go-build"
+    ],
+    "category": "devCaches",
+    "safety": "safe",
+    "action": "command",
+    "command": "go clean -cache",
+    "needsAdmin": false,
+    "explanation": "Compiled Go packages.",
+    "icon": {
+      "brand": "go",
+      "symbol": "shippingbox"
+    },
+    "confidence": "high",
+    "source": "https://pkg.go.dev/cmd/go",
+    "popularity": 4
+  },
+  {
+    "id": "gopls-cache",
+    "title": "gopls cache",
+    "paths": [
+      "~/Library/Caches/gopls"
+    ],
+    "category": "devCaches",
+    "safety": "safe",
+    "action": "delete",
+    "needsAdmin": false,
+    "explanation": "Index cache of the Go language server. Rebuilt when you open a Go project.",
+    "icon": {
+      "brand": "go",
+      "symbol": "curlybraces"
+    },
+    "confidence": "high",
+    "source": "observed on macOS",
+    "popularity": 3
+  },
+  {
+    "id": "golangci-lint-cache",
+    "title": "golangci-lint cache",
+    "paths": [
+      "~/Library/Caches/golangci-lint"
+    ],
+    "category": "devCaches",
+    "safety": "safe",
+    "action": "delete",
+    "needsAdmin": false,
+    "explanation": "Lint results cache. Rebuilt on the next run.",
+    "icon": {
+      "brand": "go",
+      "symbol": "checkmark.seal"
+    },
+    "confidence": "high",
+    "source": "observed on macOS",
+    "popularity": 2
+  },
+  {
+    "id": "go-sumdb",
+    "title": "Go checksum database cache",
+    "paths": [
+      "~/go/pkg/sumdb"
+    ],
+    "category": "devCaches",
+    "safety": "safe",
+    "action": "delete",
+    "needsAdmin": false,
+    "explanation": "Cached checksum database tiles. Fetched again when modules are verified.",
+    "icon": {
+      "brand": "go",
+      "symbol": "checkmark.shield"
+    },
+    "confidence": "medium",
+    "source": "https://go.dev/ref/mod",
+    "popularity": 2
+  },
+  {
+    "id": "goimports-cache",
+    "title": "goimports cache",
+    "paths": [
+      "~/Library/Caches/goimports"
+    ],
+    "category": "devCaches",
+    "safety": "safe",
+    "action": "delete",
+    "needsAdmin": false,
+    "explanation": "Package index cache of goimports. Rebuilt automatically.",
+    "icon": {
+      "brand": "go",
+      "symbol": "curlybraces"
+    },
+    "confidence": "medium",
+    "source": "observed on macOS",
+    "popularity": 2
+  },
+  {
+    "id": "cargo-registry",
+    "title": "Cargo registry cache",
+    "paths": [
+      "~/.cargo/registry"
+    ],
+    "category": "devCaches",
+    "safety": "safe",
+    "action": "delete",
+    "needsAdmin": false,
+    "explanation": "Downloaded crates.",
+    "icon": {
+      "brand": "rust",
+      "symbol": "shippingbox"
+    },
+    "confidence": "high",
+    "source": "https://doc.rust-lang.org/cargo/guide/cargo-home.html",
+    "popularity": 4
+  },
+  {
+    "id": "cargo-git",
+    "title": "Cargo git dependencies",
+    "paths": [
+      "~/.cargo/git"
+    ],
+    "category": "devCaches",
+    "safety": "safe",
+    "action": "delete",
+    "needsAdmin": false,
+    "explanation": "Git checkouts of crates used as git dependencies. Cloned again on the next build.",
+    "icon": {
+      "brand": "rust",
+      "symbol": "shippingbox"
+    },
+    "confidence": "high",
+    "source": "https://doc.rust-lang.org/cargo/guide/cargo-home.html",
+    "popularity": 3
+  },
+  {
+    "id": "rustup-toolchains",
+    "title": "Rust toolchains",
+    "paths": [
+      "~/.rustup/toolchains"
+    ],
+    "category": "devCaches",
+    "safety": "review",
+    "action": "none",
+    "needsAdmin": false,
+    "explanation": "Installed Rust toolchains (about 1 GB each). Remove unused ones with `rustup toolchain uninstall <name>`.",
+    "icon": {
+      "brand": "rust",
+      "symbol": "square.stack.3d.up"
+    },
+    "confidence": "high",
+    "source": "https://rust-lang.github.io/rustup/installation/index.html",
+    "popularity": 3
+  },
+  {
+    "id": "gradle-cache",
+    "title": "Gradle caches",
+    "paths": [
+      "~/.gradle/caches"
+    ],
+    "category": "devCaches",
+    "safety": "safe",
+    "action": "delete",
+    "needsAdmin": false,
+    "explanation": "Downloaded dependencies and build cache.",
+    "icon": {
+      "brand": "gradle",
+      "symbol": "shippingbox"
+    },
+    "confidence": "high",
+    "source": "https://docs.gradle.org/current/userguide/directory_layout.html",
+    "popularity": 4
+  },
+  {
+    "id": "gradle-wrapper-dists",
+    "title": "Gradle wrapper distributions",
+    "paths": [
+      "~/.gradle/wrapper/dists"
+    ],
+    "category": "devCaches",
+    "safety": "safe",
+    "action": "delete",
+    "needsAdmin": false,
+    "explanation": "Gradle versions downloaded by `./gradlew`. Downloaded again by the project that needs them.",
+    "icon": {
+      "brand": "gradle",
+      "symbol": "shippingbox"
+    },
+    "confidence": "high",
+    "source": "https://docs.gradle.org/current/userguide/directory_layout.html",
+    "popularity": 4
+  },
+  {
+    "id": "gradle-daemon",
+    "title": "Gradle daemon logs",
+    "paths": [
+      "~/.gradle/daemon"
+    ],
+    "category": "devCaches",
+    "safety": "safe",
+    "action": "delete",
+    "needsAdmin": false,
+    "explanation": "Logs and registry of Gradle daemons. Stop daemons first with `./gradlew --stop`.",
+    "icon": {
+      "brand": "gradle",
+      "symbol": "doc.text"
+    },
+    "confidence": "high",
+    "source": "https://docs.gradle.org/current/userguide/directory_layout.html",
+    "popularity": 3
+  },
+  {
+    "id": "gradle-jdks",
+    "title": "Gradle-provisioned JDKs",
+    "paths": [
+      "~/.gradle/jdks"
+    ],
+    "category": "devCaches",
+    "safety": "safe",
+    "action": "delete",
+    "needsAdmin": false,
+    "explanation": "JDKs Gradle downloaded for toolchains. Downloaded again when a build requests them.",
+    "icon": {
+      "brand": "gradle",
+      "symbol": "cup.and.saucer"
+    },
+    "confidence": "high",
+    "source": "https://docs.gradle.org/current/userguide/directory_layout.html",
+    "popularity": 2
+  },
+  {
+    "id": "maven-repo",
+    "title": "Maven repository",
+    "paths": [
+      "~/.m2/repository"
+    ],
+    "category": "devCaches",
+    "safety": "safe",
+    "action": "delete",
+    "needsAdmin": false,
+    "explanation": "Downloaded Java dependencies.",
+    "icon": {
+      "brand": "apachemaven",
+      "symbol": "shippingbox"
+    },
+    "confidence": "high",
+    "source": "observed on macOS",
+    "popularity": 4
+  },
+  {
+    "id": "maven-wrapper",
+    "title": "Maven wrapper distributions",
+    "paths": [
+      "~/.m2/wrapper"
+    ],
+    "category": "devCaches",
+    "safety": "safe",
+    "action": "delete",
+    "needsAdmin": false,
+    "explanation": "Maven versions downloaded by `./mvnw`. Downloaded again when needed.",
+    "icon": {
+      "brand": "apachemaven",
+      "symbol": "shippingbox"
+    },
+    "confidence": "medium",
+    "source": "observed on macOS",
+    "popularity": 3
+  },
+  {
+    "id": "sdkman-candidates",
+    "title": "SDKMAN candidates",
+    "paths": [
+      "~/.sdkman/candidates"
+    ],
+    "category": "devCaches",
+    "safety": "review",
+    "action": "none",
+    "needsAdmin": false,
+    "explanation": "JDKs and tools installed with SDKMAN. Remove unused versions with `sdk uninstall`.",
+    "icon": {
+      "symbol": "cup.and.saucer"
+    },
+    "confidence": "high",
+    "source": "https://sdkman.io/usage",
+    "popularity": 3
+  },
+  {
+    "id": "sdkman-archives",
+    "title": "SDKMAN archives",
+    "paths": [
+      "~/.sdkman/archives",
+      "~/.sdkman/tmp"
+    ],
+    "category": "devCaches",
+    "safety": "safe",
+    "action": "delete",
+    "needsAdmin": false,
+    "explanation": "Downloaded archives of SDKs that are already installed (`sdk flush` cleans them too).",
+    "icon": {
+      "symbol": "arrow.down.circle"
+    },
+    "confidence": "medium",
+    "source": "https://sdkman.io/usage",
+    "popularity": 2
+  },
+  {
+    "id": "system-jdks",
+    "title": "Installed JDKs",
+    "paths": [
+      "/Library/Java/JavaVirtualMachines"
+    ],
+    "category": "devCaches",
+    "safety": "review",
+    "action": "none",
+    "needsAdmin": true,
+    "explanation": "Java runtimes installed system-wide. Remove only versions no project uses.",
+    "icon": {
+      "brand": "openjdk",
+      "symbol": "cup.and.saucer"
+    },
+    "confidence": "medium",
+    "source": "observed on macOS",
+    "popularity": 3
+  },
+  {
+    "id": "coursier-cache",
+    "title": "Coursier cache",
+    "paths": [
+      "~/Library/Caches/Coursier"
+    ],
+    "category": "devCaches",
+    "safety": "safe",
+    "action": "delete",
+    "needsAdmin": false,
+    "explanation": "Scala/JVM artifacts downloaded by Coursier, sbt and Metals.",
+    "icon": {
+      "brand": "scala",
+      "symbol": "shippingbox"
+    },
+    "confidence": "high",
+    "source": "https://get-coursier.io/docs/cache",
+    "popularity": 2
+  },
+  {
+    "id": "nuget-packages",
+    "title": "NuGet packages",
+    "paths": [
+      "~/.nuget/packages",
+      "~/.local/share/NuGet"
+    ],
+    "category": "devCaches",
+    "safety": "safe",
+    "action": "command",
+    "command": "dotnet nuget locals all --clear",
+    "needsAdmin": false,
+    "explanation": "Downloaded .NET packages. Restored on the next build.",
+    "icon": {
+      "brand": "nuget",
+      "symbol": "shippingbox"
+    },
+    "confidence": "high",
+    "source": "https://learn.microsoft.com/en-us/nuget/consume-packages/managing-the-global-packages-and-cache-folders",
+    "popularity": 3
+  },
+  {
+    "id": "dotnet-sdks",
+    "title": ".NET SDKs and runtimes",
+    "paths": [
+      "/usr/local/share/dotnet/sdk",
+      "/usr/local/share/dotnet/shared"
+    ],
+    "category": "devCaches",
+    "safety": "review",
+    "action": "none",
+    "needsAdmin": true,
+    "explanation": "Installed .NET SDKs and runtimes. Remove old versions as Microsoft documents.",
+    "icon": {
+      "brand": "dotnet",
+      "symbol": "square.stack.3d.up"
+    },
+    "confidence": "high",
+    "source": "https://learn.microsoft.com/en-us/dotnet/core/install/remove-runtime-sdk-versions",
+    "popularity": 3
+  },
+  {
+    "id": "dotnet-tools",
+    "title": ".NET global tools",
+    "paths": [
+      "~/.dotnet/tools"
+    ],
+    "category": "devCaches",
+    "safety": "review",
+    "action": "none",
+    "needsAdmin": false,
+    "explanation": "Global .NET tools. Remove unused ones with `dotnet tool uninstall -g <name>`.",
+    "icon": {
+      "brand": "dotnet",
+      "symbol": "wrench.and.screwdriver"
+    },
+    "confidence": "medium",
+    "source": "observed on macOS",
+    "popularity": 2
+  },
+  {
+    "id": "rbenv-versions",
+    "title": "rbenv Ruby versions",
+    "paths": [
+      "~/.rbenv/versions"
+    ],
+    "category": "devCaches",
+    "safety": "review",
+    "action": "none",
+    "needsAdmin": false,
+    "explanation": "Ruby versions built by rbenv. Remove unused ones with `rbenv uninstall <version>`.",
+    "icon": {
+      "brand": "ruby",
+      "symbol": "square.stack.3d.up"
+    },
+    "confidence": "high",
+    "source": "https://github.com/rbenv/rbenv",
+    "popularity": 3
+  },
+  {
+    "id": "rvm-rubies",
+    "title": "RVM",
+    "paths": [
+      "~/.rvm"
+    ],
+    "category": "devCaches",
+    "safety": "review",
+    "action": "none",
+    "needsAdmin": false,
+    "explanation": "Rubies and gemsets managed by RVM. Remove unused rubies with `rvm remove <version>`.",
+    "icon": {
+      "brand": "ruby",
+      "symbol": "square.stack.3d.up"
+    },
+    "confidence": "medium",
+    "source": "https://rvm.io/rvm/basics",
+    "popularity": 1
+  },
+  {
+    "id": "pub-cache",
+    "title": "Dart/Flutter pub cache",
+    "paths": [
+      "~/.pub-cache"
+    ],
+    "category": "devCaches",
+    "safety": "safe",
+    "action": "delete",
+    "needsAdmin": false,
+    "explanation": "Packages downloaded by `dart pub get` / `flutter pub get`. Fetched again on the next get.",
+    "icon": {
+      "brand": "dart",
+      "symbol": "shippingbox"
+    },
+    "confidence": "high",
+    "source": "https://dart.dev/tools/pub/glossary",
+    "popularity": 3
+  },
+  {
+    "id": "composer-cache",
+    "title": "Composer cache",
+    "paths": [
+      "~/Library/Caches/composer"
+    ],
+    "category": "devCaches",
+    "safety": "safe",
+    "action": "command",
+    "needsAdmin": false,
+    "explanation": "PHP packages downloaded by Composer.",
+    "icon": {
+      "brand": "composer",
+      "symbol": "shippingbox"
+    },
+    "confidence": "high",
+    "source": "https://getcomposer.org/doc/06-config.md",
+    "popularity": 2,
+    "command": "composer clear-cache"
+  },
+  {
+    "id": "ccache",
+    "title": "ccache",
+    "paths": [
+      "~/Library/Caches/ccache"
+    ],
+    "category": "devCaches",
+    "safety": "safe",
+    "action": "command",
+    "needsAdmin": false,
+    "explanation": "Compiler output cache for C/C++. Builds get slower until it refills.",
+    "icon": {
+      "symbol": "cpu"
+    },
+    "confidence": "high",
+    "source": "https://ccache.dev/manual/latest.html",
+    "popularity": 2,
+    "command": "ccache -C"
+  },
+  {
+    "id": "vcpkg-archives",
+    "title": "vcpkg binary cache",
+    "paths": [
+      "~/.cache/vcpkg/archives"
+    ],
+    "category": "devCaches",
+    "safety": "safe",
+    "action": "delete",
+    "needsAdmin": false,
+    "explanation": "Prebuilt C/C++ libraries cached by vcpkg.",
+    "icon": {
+      "symbol": "shippingbox"
+    },
+    "confidence": "medium",
+    "source": "https://learn.microsoft.com/en-us/vcpkg/users/binarycaching",
+    "popularity": 1
+  },
+  {
+    "id": "conan-cache",
+    "title": "Conan packages",
+    "paths": [
+      "~/.conan2/p"
+    ],
+    "category": "devCaches",
+    "safety": "safe",
+    "action": "delete",
+    "needsAdmin": false,
+    "explanation": "C/C++ packages cached by Conan 2. Downloaded or built again on demand.",
+    "icon": {
+      "brand": "conan",
+      "symbol": "shippingbox"
+    },
+    "confidence": "medium",
+    "source": "https://docs.conan.io/2/reference/environment.html",
+    "popularity": 1
+  },
+  {
+    "id": "haskell-stack",
+    "title": "Haskell Stack root",
+    "paths": [
+      "~/.stack"
+    ],
+    "category": "devCaches",
+    "safety": "review",
+    "action": "none",
+    "needsAdmin": false,
+    "explanation": "GHC versions and package snapshots used by Stack. Large, but rebuilding takes long.",
+    "icon": {
+      "brand": "haskell",
+      "symbol": "square.stack.3d.up"
+    },
+    "confidence": "medium",
+    "source": "https://docs.haskellstack.org/en/stable/topics/stack_root/",
+    "popularity": 1
+  },
+  {
+    "id": "ghcup",
+    "title": "GHCup toolchains",
+    "paths": [
+      "~/.ghcup"
+    ],
+    "category": "devCaches",
+    "safety": "review",
+    "action": "none",
+    "needsAdmin": false,
+    "explanation": "GHC, cabal and HLS versions installed by GHCup. Remove unused ones with `ghcup rm`.",
+    "icon": {
+      "brand": "haskell",
+      "symbol": "square.stack.3d.up"
+    },
+    "confidence": "medium",
+    "source": "https://www.haskell.org/ghcup/guide/",
+    "popularity": 1
+  },
+  {
+    "id": "opam-root",
+    "title": "opam switches",
+    "paths": [
+      "~/.opam"
+    ],
+    "category": "devCaches",
+    "safety": "review",
+    "action": "none",
+    "needsAdmin": false,
+    "explanation": "OCaml compilers and packages per switch. Remove unused switches with `opam switch remove`.",
+    "icon": {
+      "brand": "ocaml",
+      "symbol": "square.stack.3d.up"
+    },
+    "confidence": "medium",
+    "source": "https://opam.ocaml.org/doc/FAQ.html",
+    "popularity": 1
+  },
+  {
+    "id": "julia-depot",
+    "title": "Julia depot",
+    "paths": [
+      "~/.julia"
+    ],
+    "category": "devCaches",
+    "safety": "review",
+    "action": "none",
+    "needsAdmin": false,
+    "explanation": "Julia packages, artifacts and compiled caches. `Pkg.gc()` removes unused versions.",
+    "icon": {
+      "brand": "julia",
+      "symbol": "shippingbox"
+    },
+    "confidence": "medium",
+    "source": "https://docs.julialang.org/en/v1/manual/environment-variables/",
+    "popularity": 1
+  },
+  {
+    "id": "platformio",
+    "title": "PlatformIO core",
+    "paths": [
+      "~/.platformio"
+    ],
+    "category": "devCaches",
+    "safety": "review",
+    "action": "none",
+    "needsAdmin": false,
+    "explanation": "Embedded toolchains and platforms installed by PlatformIO. Re-downloaded per project when needed.",
+    "icon": {
+      "symbol": "cpu"
+    },
+    "confidence": "medium",
+    "source": "https://docs.platformio.org/en/latest/projectconf/sections/platformio/options/directory/core_dir.html",
+    "popularity": 1
+  },
+  {
+    "id": "arduino-staging",
+    "title": "Arduino downloads",
+    "paths": [
+      "~/Library/Arduino15/staging"
+    ],
+    "category": "devCaches",
+    "safety": "safe",
+    "action": "delete",
+    "needsAdmin": false,
+    "explanation": "Installer archives of board packages that are already installed.",
+    "icon": {
+      "app": "cc.arduino.IDE2",
+      "brand": "arduino",
+      "symbol": "cpu"
+    },
+    "confidence": "medium",
+    "source": "pre-existing Freeroom entry; not verified",
+    "popularity": 2
+  },
+  {
+    "id": "arduino-packages",
+    "title": "Arduino board packages",
+    "paths": [
+      "~/Library/Arduino15/packages"
+    ],
+    "category": "devCaches",
+    "safety": "review",
+    "action": "trash",
+    "needsAdmin": false,
+    "explanation": "Toolchains for Arduino/ESP32 boards. Safe to remove if you no longer use Arduino.",
+    "icon": {
+      "app": "cc.arduino.IDE2",
+      "brand": "arduino",
+      "symbol": "cpu"
+    },
+    "confidence": "medium",
+    "source": "pre-existing Freeroom entry; not verified",
+    "popularity": 2
+  },
+  {
+    "id": "arduino-ide-cache",
+    "title": "Arduino IDE cache",
+    "paths": [
+      "~/Library/Caches/arduino",
+      "~/.arduinoIDE"
+    ],
+    "category": "devCaches",
+    "safety": "safe",
+    "action": "delete",
+    "needsAdmin": false,
+    "explanation": "Arduino IDE 2 caches and downloaded index files. Rebuilt on start.",
+    "icon": {
+      "app": "cc.arduino.IDE2",
+      "brand": "arduino",
+      "symbol": "cpu"
+    },
+    "confidence": "medium",
+    "source": "observed on macOS",
+    "popularity": 1
+  },
+  {
+    "id": "buf-cache",
+    "title": "Buf module cache",
+    "paths": [
+      "~/.cache/buf"
+    ],
+    "category": "devCaches",
+    "safety": "safe",
+    "action": "delete",
+    "needsAdmin": false,
+    "explanation": "Protobuf modules downloaded by the Buf CLI.",
+    "icon": {
+      "symbol": "shippingbox"
+    },
+    "confidence": "medium",
+    "source": "observed on macOS",
+    "popularity": 1
+  },
+  {
+    "id": "homebrew-cache",
+    "title": "Homebrew downloads",
+    "paths": [
+      "~/Library/Caches/Homebrew"
+    ],
+    "category": "devCaches",
+    "safety": "safe",
+    "action": "command",
+    "command": "brew cleanup -s",
+    "needsAdmin": false,
+    "explanation": "Old bottles and downloads. Installed formulae are not affected.",
+    "icon": {
+      "brand": "homebrew",
+      "symbol": "mug"
+    },
+    "confidence": "high",
+    "source": "https://docs.brew.sh/Manpage",
+    "popularity": 5
+  },
+  {
+    "id": "homebrew-logs",
+    "title": "Homebrew logs",
+    "paths": [
+      "~/Library/Logs/Homebrew"
+    ],
+    "category": "devCaches",
+    "safety": "safe",
+    "action": "delete",
+    "needsAdmin": false,
+    "explanation": "Build logs from formula installs.",
+    "icon": {
+      "brand": "homebrew",
+      "symbol": "doc.text"
+    },
+    "confidence": "high",
+    "source": "https://docs.brew.sh/Manpage",
+    "popularity": 3
+  },
+  {
+    "id": "homebrew-cellar",
+    "title": "Homebrew installed packages",
+    "paths": [
+      "/opt/homebrew/Cellar",
+      "/opt/homebrew/Caskroom",
+      "/usr/local/Cellar"
+    ],
+    "category": "apps",
+    "safety": "review",
+    "action": "command",
+    "needsAdmin": false,
+    "explanation": "Everything installed with Homebrew. Remove tools with `brew uninstall` and unused deps with `brew autoremove`.",
+    "icon": {
+      "brand": "homebrew",
+      "symbol": "mug"
+    },
+    "confidence": "high",
+    "source": "https://docs.brew.sh/Manpage",
+    "popularity": 5,
+    "command": "brew autoremove"
+  },
+  {
+    "id": "jetbrains-cache",
+    "title": "JetBrains caches",
+    "paths": [
+      "~/Library/Caches/JetBrains"
+    ],
+    "category": "appCaches",
+    "safety": "safe",
+    "action": "delete",
+    "needsAdmin": false,
+    "explanation": "IDE indexes. Rebuilt when a project is opened.",
+    "icon": {
+      "app": "com.jetbrains.toolbox",
+      "brand": "jetbrains",
+      "symbol": "chevron.left.forwardslash.chevron.right"
+    },
+    "confidence": "high",
+    "source": "https://www.jetbrains.com/help/idea/directories-used-by-the-ide-to-store-settings-caches-plugins-and-logs.html",
+    "popularity": 4
+  },
+  {
+    "id": "jetbrains-logs",
+    "title": "JetBrains logs",
+    "paths": [
+      "~/Library/Logs/JetBrains"
+    ],
+    "category": "appCaches",
+    "safety": "safe",
+    "action": "delete",
+    "needsAdmin": false,
+    "explanation": "IDE log files.",
+    "icon": {
+      "app": "com.jetbrains.toolbox",
+      "brand": "jetbrains",
+      "symbol": "doc.text"
+    },
+    "confidence": "high",
+    "source": "https://www.jetbrains.com/help/idea/directories-used-by-the-ide-to-store-settings-caches-plugins-and-logs.html",
+    "popularity": 3
+  },
+  {
+    "id": "jetbrains-config",
+    "title": "JetBrains settings and plugins",
+    "paths": [
+      "~/Library/Application Support/JetBrains"
+    ],
+    "category": "system",
+    "safety": "keep",
+    "action": "none",
+    "needsAdmin": false,
+    "explanation": "IDE settings and installed plugins. Old version folders can be removed from the IDE, not by hand.",
+    "icon": {
+      "app": "com.jetbrains.toolbox",
+      "brand": "jetbrains",
+      "symbol": "gearshape"
+    },
+    "confidence": "high",
+    "source": "https://www.jetbrains.com/help/idea/directories-used-by-the-ide-to-store-settings-caches-plugins-and-logs.html",
+    "popularity": 4
+  },
+  {
+    "id": "vscode-shipit",
+    "title": "VS Code update leftovers",
+    "paths": [
+      "~/Library/Caches/com.microsoft.VSCode.ShipIt"
+    ],
+    "category": "appCaches",
+    "safety": "safe",
+    "action": "delete",
+    "needsAdmin": false,
+    "explanation": "Installers of updates that were already applied.",
+    "icon": {
+      "app": "com.microsoft.VSCode",
+      "symbol": "arrow.triangle.2.circlepath"
+    },
+    "confidence": "medium",
+    "source": "pre-existing Freeroom entry; not verified",
+    "popularity": 4
+  },
+  {
+    "id": "vscode-cache",
+    "title": "VS Code caches",
+    "paths": [
+      "~/Library/Application Support/Code/Cache",
+      "~/Library/Application Support/Code/CachedData",
+      "~/Library/Application Support/Code/Code Cache",
+      "~/Library/Application Support/Code/GPUCache",
+      "~/Library/Application Support/Code/CachedExtensionVSIXs",
+      "~/Library/Caches/com.microsoft.VSCode"
+    ],
+    "category": "appCaches",
+    "safety": "safe",
+    "action": "delete",
+    "needsAdmin": false,
+    "explanation": "Web, compiled-code and extension download caches of VS Code. Rebuilt automatically; quit VS Code first.",
+    "icon": {
+      "app": "com.microsoft.VSCode",
+      "symbol": "chevron.left.forwardslash.chevron.right"
+    },
+    "confidence": "high",
+    "source": "observed on macOS",
+    "popularity": 5
+  },
+  {
+    "id": "vscode-logs",
+    "title": "VS Code logs",
+    "paths": [
+      "~/Library/Application Support/Code/logs"
+    ],
+    "category": "appCaches",
+    "safety": "safe",
+    "action": "delete",
+    "needsAdmin": false,
+    "explanation": "Diagnostic logs of VS Code.",
+    "icon": {
+      "app": "com.microsoft.VSCode",
+      "symbol": "doc.text"
+    },
+    "confidence": "high",
+    "source": "observed on macOS",
+    "popularity": 4
+  },
+  {
+    "id": "vscode-workspace-storage",
+    "title": "VS Code workspace storage",
+    "paths": [
+      "~/Library/Application Support/Code/User/workspaceStorage"
+    ],
+    "category": "appCaches",
+    "safety": "review",
+    "action": "trash",
+    "needsAdmin": false,
+    "explanation": "Per-workspace state (open editors, extension data, local history). Grows for every folder opened.",
+    "icon": {
+      "app": "com.microsoft.VSCode",
+      "symbol": "folder"
+    },
+    "confidence": "high",
+    "source": "observed on macOS",
+    "popularity": 4
+  },
+  {
+    "id": "vscode-extensions",
+    "title": "VS Code extensions",
+    "paths": [
+      "~/.vscode/extensions"
+    ],
+    "category": "apps",
+    "safety": "review",
+    "action": "none",
+    "needsAdmin": false,
+    "explanation": "Installed VS Code extensions. Uninstall unused ones from the Extensions view.",
+    "icon": {
+      "app": "com.microsoft.VSCode",
+      "symbol": "puzzlepiece.extension"
+    },
+    "confidence": "high",
+    "source": "https://code.visualstudio.com/docs/configure/extensions/extension-marketplace",
+    "popularity": 5
+  },
+  {
+    "id": "vscode-settings",
+    "title": "VS Code settings",
+    "paths": [
+      "~/Library/Application Support/Code/User/settings.json",
+      "~/Library/Application Support/Code/User/keybindings.json"
+    ],
+    "category": "system",
+    "safety": "keep",
+    "action": "none",
+    "needsAdmin": false,
+    "explanation": "Your VS Code settings and keybindings.",
+    "icon": {
+      "app": "com.microsoft.VSCode",
+      "symbol": "gearshape"
+    },
+    "confidence": "high",
+    "source": "https://code.visualstudio.com/docs/setup/uninstall",
+    "popularity": 5
+  },
+  {
+    "id": "cursor-extensions",
+    "title": "Cursor extensions",
+    "paths": [
+      "~/.cursor/extensions"
+    ],
+    "category": "apps",
+    "safety": "review",
+    "action": "none",
+    "needsAdmin": false,
+    "explanation": "Installed Cursor extensions. Uninstall unused ones in Cursor.",
+    "icon": {
+      "app": "com.todesktop.230313mzl4w4u92",
+      "brand": "cursor",
+      "symbol": "puzzlepiece.extension"
+    },
+    "confidence": "medium",
+    "source": "https://forum.cursor.com/t/vscode-settings-import-fails-to-import-any-vscode-extensions/162122.md",
+    "popularity": 3
+  },
+  {
+    "id": "android-sdk",
+    "title": "Android SDK",
+    "paths": [
+      "~/Library/Android/sdk"
+    ],
+    "category": "devCaches",
+    "safety": "review",
+    "action": "none",
+    "needsAdmin": false,
+    "explanation": "Android platforms, build tools and system images. Remove unused packages in Android Studio's SDK Manager.",
+    "icon": {
+      "app": "com.google.android.studio",
+      "brand": "androidstudio",
+      "symbol": "square.stack.3d.up"
+    },
+    "confidence": "high",
+    "source": "https://developer.android.com/tools/variables",
+    "popularity": 4
+  },
+  {
+    "id": "android-avds",
+    "title": "Android emulators (AVDs)",
+    "paths": [
+      "~/.android/avd"
+    ],
+    "category": "devCaches",
+    "safety": "review",
+    "action": "none",
+    "needsAdmin": false,
+    "explanation": "Virtual devices with their data (several GB each). Delete unused ones in Device Manager.",
+    "icon": {
+      "app": "com.google.android.studio",
+      "brand": "android",
+      "symbol": "iphone"
+    },
+    "confidence": "high",
+    "source": "https://developer.android.com/studio/run/emulator-commandline",
+    "popularity": 4
+  },
+  {
+    "id": "android-studio-logs",
+    "title": "Android Studio logs",
+    "paths": [
+      "~/Library/Logs/Google"
+    ],
+    "category": "appCaches",
+    "safety": "safe",
+    "action": "delete",
+    "needsAdmin": false,
+    "explanation": "IDE logs of Android Studio.",
+    "icon": {
+      "app": "com.google.android.studio",
+      "brand": "androidstudio",
+      "symbol": "doc.text"
+    },
+    "confidence": "medium",
+    "source": "https://developer.android.com/studio/troubleshoot",
+    "popularity": 3
+  },
+  {
+    "id": "postman-cache",
+    "title": "Postman cache",
+    "paths": [
+      "~/Library/Application Support/Postman/Cache",
+      "~/Library/Application Support/Postman/Code Cache",
+      "~/Library/Application Support/Postman/GPUCache",
+      "~/Library/Caches/com.postmanlabs.mac",
+      "~/Library/Caches/com.postmanlabs.mac.ShipIt",
+      "~/Library/Application Support/Postman/logs"
+    ],
+    "category": "appCaches",
+    "safety": "safe",
+    "action": "delete",
+    "needsAdmin": false,
+    "explanation": "Web caches, logs and update leftovers of Postman. Collections are synced to your account.",
+    "icon": {
+      "app": "com.postmanlabs.mac",
+      "brand": "postman",
+      "symbol": "paperplane"
+    },
+    "confidence": "high",
+    "source": "observed on macOS",
+    "popularity": 3
+  },
+  {
+    "id": "gitkraken-cache",
+    "title": "GitKraken caches",
+    "paths": [
+      "~/Library/Caches/com.axosoft.gitkraken",
+      "~/Library/Caches/com.axosoft.gitkraken.ShipIt"
+    ],
+    "category": "appCaches",
+    "safety": "safe",
+    "action": "delete",
+    "needsAdmin": false,
+    "explanation": "Web caches and update leftovers of GitKraken.",
+    "icon": {
+      "app": "com.axosoft.gitkraken",
+      "brand": "gitkraken",
+      "symbol": "arrow.triangle.branch"
+    },
+    "confidence": "high",
+    "source": "observed on macOS",
+    "popularity": 2
+  },
+  {
+    "id": "mongodb-compass-cache",
+    "title": "MongoDB Compass caches",
+    "paths": [
+      "~/Library/Caches/com.mongodb.compass",
+      "~/Library/Caches/com.mongodb.compass.ShipIt",
+      "~/Library/Application Support/MongoDB Compass/Cache",
+      "~/Library/Application Support/MongoDB Compass/Code Cache",
+      "~/Library/Application Support/MongoDB Compass/GPUCache"
+    ],
+    "category": "appCaches",
+    "safety": "safe",
+    "action": "delete",
+    "needsAdmin": false,
+    "explanation": "Web caches and update leftovers of MongoDB Compass.",
+    "icon": {
+      "app": "com.mongodb.compass",
+      "brand": "mongodb",
+      "symbol": "cylinder"
+    },
+    "confidence": "high",
+    "source": "observed on macOS",
+    "popularity": 2
+  },
+  {
+    "id": "lens-cache",
+    "title": "Lens caches",
+    "paths": [
+      "~/Library/Caches/com.electron.kontena-lens",
+      "~/Library/Application Support/Lens/Cache",
+      "~/Library/Application Support/Lens/Code Cache",
+      "~/Library/Application Support/Lens/GPUCache"
+    ],
+    "category": "appCaches",
+    "safety": "safe",
+    "action": "delete",
+    "needsAdmin": false,
+    "explanation": "Web caches of the Lens Kubernetes IDE.",
+    "icon": {
+      "app": "com.electron.kontena-lens",
+      "brand": "kubernetes",
+      "symbol": "server.rack"
+    },
+    "confidence": "high",
+    "source": "observed on macOS",
+    "popularity": 2
+  },
+  {
+    "id": "tableplus-cache",
+    "title": "TablePlus cache",
+    "paths": [
+      "~/Library/Caches/com.tinyapp.TablePlus"
+    ],
+    "category": "appCaches",
+    "safety": "safe",
+    "action": "delete",
+    "needsAdmin": false,
+    "explanation": "Cached data of TablePlus. Connections are not stored here.",
+    "icon": {
+      "app": "com.tinyapp.TablePlus",
+      "symbol": "tablecells"
+    },
+    "confidence": "high",
+    "source": "observed on macOS",
+    "popularity": 2
+  },
+  {
+    "id": "helm-cache",
+    "title": "Helm cache",
+    "paths": [
+      "~/Library/Caches/helm"
+    ],
+    "category": "devCaches",
+    "safety": "safe",
+    "action": "delete",
+    "needsAdmin": false,
+    "explanation": "Downloaded charts and repository indexes. Fetched again by `helm repo update`.",
+    "icon": {
+      "brand": "helm",
+      "symbol": "helm"
+    },
+    "confidence": "high",
+    "source": "https://helm.sh/docs/helm/helm/",
+    "popularity": 3
+  },
+  {
+    "id": "kube-config",
+    "title": "Kubernetes config",
+    "paths": [
+      "~/.kube"
+    ],
+    "category": "system",
+    "safety": "keep",
+    "action": "none",
+    "needsAdmin": false,
+    "explanation": "kubeconfig with cluster credentials. Freeroom never touches it.",
+    "icon": {
+      "brand": "kubernetes",
+      "symbol": "lock.shield"
+    },
+    "confidence": "high",
+    "source": "observed on macOS",
+    "popularity": 4
+  },
+  {
+    "id": "terraform-plugin-cache",
+    "title": "Terraform plugin cache",
+    "paths": [
+      "~/.terraform.d/plugin-cache"
+    ],
+    "category": "devCaches",
+    "safety": "safe",
+    "action": "delete",
+    "needsAdmin": false,
+    "explanation": "Shared cache of Terraform providers (only if you enabled plugin_cache_dir). Re-downloaded by `terraform init`.",
+    "icon": {
+      "brand": "terraform",
+      "symbol": "square.3.layers.3d"
+    },
+    "confidence": "medium",
+    "source": "https://developer.hashicorp.com/terraform/cli/config/config-file",
+    "popularity": 3
+  },
+  {
+    "id": "terraform-credentials",
+    "title": "Terraform credentials",
+    "paths": [
+      "~/.terraform.d/credentials.tfrc.json"
+    ],
+    "category": "system",
+    "safety": "keep",
+    "action": "none",
+    "needsAdmin": false,
+    "explanation": "API tokens for Terraform Cloud. Never deleted.",
+    "icon": {
+      "brand": "terraform",
+      "symbol": "key"
+    },
+    "confidence": "medium",
+    "source": "https://developer.hashicorp.com/terraform/cli/commands/login",
+    "popularity": 3
+  },
+  {
+    "id": "tflint-plugins",
+    "title": "TFLint cache",
+    "paths": [
+      "~/Library/Caches/tflint",
+      "~/.tflint.d/plugins"
+    ],
+    "category": "devCaches",
+    "safety": "safe",
+    "action": "delete",
+    "needsAdmin": false,
+    "explanation": "Rule plugins and caches of TFLint. Reinstalled by `tflint --init`.",
+    "icon": {
+      "brand": "terraform",
+      "symbol": "square.3.layers.3d"
+    },
+    "confidence": "medium",
+    "source": "observed on macOS",
+    "popularity": 1
+  },
+  {
+    "id": "vagrant-boxes",
+    "title": "Vagrant boxes",
+    "paths": [
+      "~/.vagrant.d/boxes"
+    ],
+    "category": "other",
+    "safety": "review",
+    "action": "command",
+    "needsAdmin": false,
+    "explanation": "Base VM images for Vagrant. `vagrant box prune` removes old versions.",
+    "icon": {
+      "brand": "vagrant",
+      "symbol": "shippingbox"
+    },
+    "confidence": "high",
+    "source": "https://developer.hashicorp.com/vagrant/docs/cli/box",
+    "popularity": 2,
+    "command": "vagrant box prune"
+  },
+  {
+    "id": "aws-config",
+    "title": "AWS credentials",
+    "paths": [
+      "~/.aws"
+    ],
+    "category": "system",
+    "safety": "keep",
+    "action": "none",
+    "needsAdmin": false,
+    "explanation": "AWS CLI credentials and config. Freeroom never touches them.",
+    "icon": {
+      "symbol": "key"
+    },
+    "confidence": "high",
+    "source": "https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-files.html",
+    "popularity": 4
+  },
+  {
+    "id": "azure-cli",
+    "title": "Azure CLI data",
+    "paths": [
+      "~/.azure"
+    ],
+    "category": "system",
+    "safety": "keep",
+    "action": "none",
+    "needsAdmin": false,
+    "explanation": "Azure CLI login tokens and config. Never deleted.",
+    "icon": {
+      "symbol": "key"
+    },
+    "confidence": "medium",
+    "source": "observed on macOS",
+    "popularity": 2
+  },
+  {
+    "id": "gcloud-config",
+    "title": "Google Cloud SDK config",
+    "paths": [
+      "~/.config/gcloud"
+    ],
+    "category": "system",
+    "safety": "keep",
+    "action": "none",
+    "needsAdmin": false,
+    "explanation": "gcloud credentials and configurations. Never deleted.",
+    "icon": {
+      "brand": "googlecloud",
+      "symbol": "key"
+    },
+    "confidence": "medium",
+    "source": "https://cloud.google.com/sdk/docs/configurations",
+    "popularity": 3
+  },
+  {
+    "id": "gh-config",
+    "title": "GitHub CLI config",
+    "paths": [
+      "~/.config/gh"
+    ],
+    "category": "system",
+    "safety": "keep",
+    "action": "none",
+    "needsAdmin": false,
+    "explanation": "GitHub CLI settings and auth. Never deleted.",
+    "icon": {
+      "brand": "github",
+      "symbol": "key"
+    },
+    "confidence": "high",
+    "source": "observed on macOS",
+    "popularity": 3
+  },
+  {
+    "id": "ssh-keys",
+    "title": "SSH keys",
+    "paths": [
+      "~/.ssh"
+    ],
+    "category": "system",
+    "safety": "keep",
+    "action": "none",
+    "needsAdmin": false,
+    "explanation": "Your SSH keys and known hosts. Never deleted.",
+    "icon": {
+      "symbol": "key"
+    },
+    "confidence": "high",
+    "source": "observed on macOS",
+    "popularity": 5
+  },
+  {
+    "id": "gnupg",
+    "title": "GnuPG keyring",
+    "paths": [
+      "~/.gnupg"
+    ],
+    "category": "system",
+    "safety": "keep",
+    "action": "none",
+    "needsAdmin": false,
+    "explanation": "Your GPG keys. Never deleted.",
+    "icon": {
+      "brand": "gnuprivacyguard",
+      "symbol": "key"
+    },
+    "confidence": "high",
+    "source": "observed on macOS",
+    "popularity": 3
+  },
+  {
+    "id": "parallels-vms",
+    "title": "Parallels virtual machines",
+    "paths": [
+      "~/Parallels"
+    ],
+    "category": "other",
+    "safety": "review",
+    "action": "none",
+    "needsAdmin": false,
+    "explanation": "Your Parallels VMs. Delete unused VMs from Parallels Control Center, which also removes snapshots.",
+    "icon": {
+      "app": "com.parallels.desktop.console",
+      "symbol": "desktopcomputer"
+    },
+    "confidence": "medium",
+    "source": "https://download.parallels.com/desktop/v17/docs/en.lproj/33776.htm",
+    "popularity": 3
+  },
+  {
+    "id": "utm-vms",
+    "title": "UTM virtual machines",
+    "paths": [
+      "~/Library/Containers/com.utmapp.UTM/Data/Documents"
+    ],
+    "category": "other",
+    "safety": "review",
+    "action": "none",
+    "needsAdmin": false,
+    "explanation": "Your UTM VMs and their disks. Delete unused VMs from inside UTM.",
+    "icon": {
+      "app": "com.utmapp.UTM",
+      "symbol": "desktopcomputer"
+    },
+    "confidence": "medium",
+    "source": "https://github.com/utmapp/UTM/releases/tag/v2.0.20",
+    "popularity": 3
+  },
+  {
+    "id": "vmware-fusion-vms",
+    "title": "VMware Fusion virtual machines",
+    "paths": [
+      "~/Virtual Machines",
+      "~/Virtual Machines.localized",
+      "~/Documents/Virtual Machines",
+      "~/Documents/Virtual Machines.localized"
+    ],
+    "category": "other",
+    "safety": "review",
+    "action": "none",
+    "needsAdmin": false,
+    "explanation": "Your VMware Fusion VMs. Delete unused ones from Fusion's Virtual Machine Library.",
+    "icon": {
+      "app": "com.vmware.fusion",
+      "brand": "vmware",
+      "symbol": "desktopcomputer"
+    },
+    "confidence": "medium",
+    "source": "https://knowledge.broadcom.com/external/article?legacyId=2109701",
+    "popularity": 2
+  },
+  {
+    "id": "virtualbox-vms",
+    "title": "VirtualBox virtual machines",
+    "paths": [
+      "~/VirtualBox VMs"
+    ],
+    "category": "other",
+    "safety": "review",
+    "action": "none",
+    "needsAdmin": false,
+    "explanation": "Your VirtualBox VMs. Remove unused ones in VirtualBox with 'Delete all files'.",
+    "icon": {
+      "app": "org.virtualbox.app.VirtualBox",
+      "brand": "virtualbox",
+      "symbol": "desktopcomputer"
+    },
+    "confidence": "medium",
+    "source": "https://www.virtualbox.org/manual/ch10.html",
+    "popularity": 1
+  },
+  {
+    "id": "browser-caches",
+    "title": "Browser caches",
+    "paths": [
+      "~/Library/Caches/Google/Chrome",
+      "~/Library/Caches/company.thebrowser.Browser",
+      "~/Library/Caches/Arc",
+      "~/Library/Caches/Firefox",
+      "~/Library/Caches/com.microsoft.edgemac"
+    ],
+    "category": "appCaches",
+    "safety": "safe",
+    "action": "delete",
+    "needsAdmin": false,
+    "explanation": "Web caches of Chrome, Arc, Firefox and Edge. Sessions, history and passwords are not stored here.",
+    "icon": {
+      "symbol": "globe"
+    },
+    "confidence": "high",
+    "source": "https://chromium.googlesource.com/chromium/src/+/HEAD/docs/user_data_dir.md",
+    "popularity": 5
+  },
+  {
+    "id": "chrome-ai-model",
+    "title": "Chrome on-device AI model",
+    "paths": [
+      "~/Library/Application Support/Google/Chrome/OptGuideOnDeviceModel"
+    ],
+    "category": "appCaches",
+    "safety": "safe",
+    "action": "delete",
+    "needsAdmin": false,
+    "explanation": "Gemini Nano model used by Chrome's built-in AI. Chrome downloads it again if a feature needs it.",
+    "icon": {
+      "app": "com.google.Chrome",
+      "brand": "googlechrome",
+      "symbol": "sparkles"
+    },
+    "confidence": "medium",
+    "source": "observed on macOS",
+    "popularity": 3
+  },
+  {
+    "id": "chrome-profile",
+    "title": "Chrome profile",
+    "paths": [
+      "~/Library/Application Support/Google/Chrome/Default"
+    ],
+    "category": "system",
+    "safety": "keep",
+    "action": "none",
+    "needsAdmin": false,
+    "explanation": "Chrome bookmarks, history, passwords and extensions. Clear browsing data from Chrome instead.",
+    "icon": {
+      "app": "com.google.Chrome",
+      "brand": "googlechrome",
+      "symbol": "person.crop.circle"
+    },
+    "confidence": "high",
+    "source": "observed on macOS",
+    "popularity": 5
+  },
+  {
+    "id": "chrome-for-testing",
+    "title": "Chrome for Testing profiles",
+    "paths": [
+      "~/Library/Application Support/Google/Chrome for Testing",
+      "~/Library/Application Support/Google/Chrome-headless",
+      "~/Library/Caches/Google/Chrome-headless"
+    ],
+    "category": "devCaches",
+    "safety": "safe",
+    "action": "delete",
+    "needsAdmin": false,
+    "explanation": "Profiles created by automated browser tests. Recreated on the next test run.",
+    "icon": {
+      "brand": "googlechrome",
+      "symbol": "globe"
+    },
+    "confidence": "medium",
+    "source": "observed on macOS",
+    "popularity": 2
+  },
+  {
+    "id": "google-updater",
+    "title": "Google Updater cache",
+    "paths": [
+      "~/Library/Caches/com.google.GoogleUpdater",
+      "~/Library/Application Support/Google/GoogleUpdater/crx_cache"
+    ],
+    "category": "appCaches",
+    "safety": "safe",
+    "action": "delete",
+    "needsAdmin": false,
+    "explanation": "Downloaded update packages for Chrome and other Google apps.",
+    "icon": {
+      "app": "com.google.Chrome",
+      "brand": "google",
+      "symbol": "arrow.triangle.2.circlepath"
+    },
+    "confidence": "medium",
+    "source": "observed on macOS",
+    "popularity": 4
+  },
+  {
+    "id": "safari-cache",
+    "title": "Safari cache",
+    "paths": [
+      "~/Library/Caches/com.apple.Safari"
+    ],
+    "category": "appCaches",
+    "safety": "safe",
+    "action": "delete",
+    "needsAdmin": false,
+    "explanation": "Web cache of Safari. History and bookmarks are stored elsewhere.",
+    "icon": {
+      "app": "com.apple.Safari",
+      "brand": "safari",
+      "symbol": "safari"
+    },
+    "confidence": "high",
+    "source": "observed on macOS",
+    "popularity": 5
+  },
+  {
+    "id": "safari-data",
+    "title": "Safari data",
+    "paths": [
+      "~/Library/Safari"
+    ],
+    "category": "system",
+    "safety": "keep",
+    "action": "none",
+    "needsAdmin": false,
+    "explanation": "Safari history, bookmarks and reading list. Clear history from Safari instead.",
+    "icon": {
+      "app": "com.apple.Safari",
+      "brand": "safari",
+      "symbol": "safari"
+    },
+    "confidence": "high",
+    "source": "observed on macOS",
+    "popularity": 5
+  },
+  {
+    "id": "firefox-profiles",
+    "title": "Firefox profiles",
+    "paths": [
+      "~/Library/Application Support/Firefox/Profiles"
+    ],
+    "category": "system",
+    "safety": "keep",
+    "action": "none",
+    "needsAdmin": false,
+    "explanation": "Firefox bookmarks, history, passwords and add-ons. Clear data from Firefox instead.",
+    "icon": {
+      "app": "org.mozilla.firefox",
+      "brand": "firefox",
+      "symbol": "person.crop.circle"
+    },
+    "confidence": "high",
+    "source": "observed on macOS",
+    "popularity": 4
+  },
+  {
+    "id": "arc-data",
+    "title": "Arc data",
+    "paths": [
+      "~/Library/Application Support/Arc"
+    ],
+    "category": "system",
+    "safety": "keep",
+    "action": "none",
+    "needsAdmin": false,
+    "explanation": "Arc spaces, sidebar and profiles. Clear data from Arc instead.",
+    "icon": {
+      "app": "company.thebrowser.Browser",
+      "brand": "arc",
+      "symbol": "person.crop.circle"
+    },
+    "confidence": "high",
+    "source": "observed on macOS",
+    "popularity": 3
+  },
+  {
+    "id": "slack-cache",
+    "title": "Slack caches",
+    "paths": [
+      "~/Library/Containers/com.tinyspeck.slackmacgap/Data/Library/Application Support/Slack/Cache",
+      "~/Library/Containers/com.tinyspeck.slackmacgap/Data/Library/Application Support/Slack/Code Cache",
+      "~/Library/Containers/com.tinyspeck.slackmacgap/Data/Library/Application Support/Slack/Service Worker/CacheStorage",
+      "~/Library/Application Support/Slack/Cache",
+      "~/Library/Application Support/Slack/Code Cache",
+      "~/Library/Application Support/Slack/Service Worker/CacheStorage"
+    ],
+    "category": "appCaches",
+    "safety": "safe",
+    "action": "delete",
+    "needsAdmin": false,
+    "explanation": "Web caches of Slack. Messages stay in your workspace. Quit Slack first.",
+    "icon": {
+      "app": "com.tinyspeck.slackmacgap",
+      "symbol": "bubble.left.and.bubble.right"
+    },
+    "confidence": "medium",
+    "source": "https://slack.com/help/articles/360048367814-Update-the-Slack-desktop-app",
+    "popularity": 5
+  },
+  {
+    "id": "teams-cache",
+    "title": "Microsoft Teams cache",
+    "paths": [
+      "~/Library/Containers/com.microsoft.teams2/Data/Library/Caches"
+    ],
+    "category": "appCaches",
+    "safety": "safe",
+    "action": "delete",
+    "needsAdmin": false,
+    "explanation": "Cache of the new Microsoft Teams. Chats stay on Microsoft's servers. Quit Teams first.",
+    "icon": {
+      "app": "com.microsoft.teams2",
+      "symbol": "person.2"
+    },
+    "confidence": "high",
+    "source": "https://learn.microsoft.com/en-us/troubleshoot/microsoftteams/teams-administration/clear-teams-cache",
+    "popularity": 4
+  },
+  {
+    "id": "zoom-cache",
+    "title": "Zoom caches",
+    "paths": [
+      "~/Library/Caches/us.zoom.xos",
+      "~/Library/Caches/us.zoom.updater"
+    ],
+    "category": "appCaches",
+    "safety": "safe",
+    "action": "delete",
+    "needsAdmin": false,
+    "explanation": "Cached data and update files of Zoom.",
+    "icon": {
+      "app": "us.zoom.xos",
+      "brand": "zoom",
+      "symbol": "video"
+    },
+    "confidence": "high",
+    "source": "observed on macOS",
+    "popularity": 4
+  },
+  {
+    "id": "zoom-recordings",
+    "title": "Zoom recordings",
+    "paths": [
+      "~/Documents/Zoom"
+    ],
+    "category": "personal",
+    "safety": "review",
+    "action": "none",
+    "needsAdmin": false,
+    "explanation": "Meetings you recorded locally. Move what you want to keep before deleting.",
+    "icon": {
+      "app": "us.zoom.xos",
+      "brand": "zoom",
+      "symbol": "video"
+    },
+    "confidence": "medium",
+    "source": "https://community.zoom.com/t5/Zoom-Meetings/Local-Recording-Path-does-not-exist/m-p/203837",
+    "popularity": 3
+  },
+  {
+    "id": "discord-cache",
+    "title": "Discord cache",
+    "paths": [
+      "~/Library/Application Support/discord/Cache",
+      "~/Library/Application Support/discord/Code Cache",
+      "~/Library/Application Support/discord/GPUCache",
+      "~/Library/Caches/com.hnc.Discord",
+      "~/Library/Caches/com.hnc.Discord.ShipIt",
+      "~/Library/Application Support/discord/logs"
+    ],
+    "category": "appCaches",
+    "safety": "safe",
+    "action": "delete",
+    "needsAdmin": false,
+    "explanation": "Web caches of the Discord app. Rebuilt automatically; quit the app first.",
+    "icon": {
+      "app": "com.hnc.Discord",
+      "brand": "discord",
+      "symbol": "app.badge"
+    },
+    "confidence": "high",
+    "source": "observed on macOS",
+    "popularity": 4
+  },
+  {
+    "id": "whatsapp-cache",
+    "title": "WhatsApp cache",
+    "paths": [
+      "~/Library/Containers/net.whatsapp.WhatsApp/Data/Library/Caches"
+    ],
+    "category": "appCaches",
+    "safety": "safe",
+    "action": "delete",
+    "needsAdmin": false,
+    "explanation": "Temporary cache of the WhatsApp app. Chats and media are stored elsewhere.",
+    "icon": {
+      "app": "net.whatsapp.WhatsApp",
+      "brand": "whatsapp",
+      "symbol": "message"
+    },
+    "confidence": "medium",
+    "source": "observed on macOS",
+    "popularity": 4
+  },
+  {
+    "id": "whatsapp-media",
+    "title": "WhatsApp media",
+    "paths": [
+      "~/Library/Group Containers/group.net.whatsapp.WhatsApp.shared/Message/Media"
+    ],
+    "category": "personal",
+    "safety": "review",
+    "action": "none",
+    "needsAdmin": false,
+    "explanation": "Photos, videos and files from your chats. Manage in WhatsApp > Settings > Storage.",
+    "icon": {
+      "app": "net.whatsapp.WhatsApp",
+      "brand": "whatsapp",
+      "symbol": "photo.on.rectangle"
+    },
+    "confidence": "medium",
+    "source": "observed on macOS",
+    "popularity": 4
+  },
+  {
+    "id": "messages-attachments",
+    "title": "Messages attachments",
+    "paths": [
+      "~/Library/Messages/Attachments"
+    ],
+    "category": "personal",
+    "safety": "review",
+    "action": "none",
+    "needsAdmin": false,
+    "explanation": "Photos and files from iMessage chats. Remove large ones in Messages or Settings > General > Storage.",
+    "icon": {
+      "app": "com.apple.MobileSMS",
+      "symbol": "message"
+    },
+    "confidence": "high",
+    "source": "https://support.apple.com/en-us/102624",
+    "popularity": 5
+  },
+  {
+    "id": "messages-db",
+    "title": "Messages history",
+    "paths": [
+      "~/Library/Messages/chat.db"
+    ],
+    "category": "system",
+    "safety": "keep",
+    "action": "none",
+    "needsAdmin": false,
+    "explanation": "Your iMessage/SMS history database. Never deleted.",
+    "icon": {
+      "app": "com.apple.MobileSMS",
+      "symbol": "message"
+    },
+    "confidence": "high",
+    "source": "observed on macOS",
+    "popularity": 5
+  },
+  {
+    "id": "mail-store",
+    "title": "Mail mailboxes",
+    "paths": [
+      "~/Library/Mail"
+    ],
+    "category": "system",
+    "safety": "keep",
+    "action": "none",
+    "needsAdmin": false,
+    "explanation": "Your local mail and mailboxes. Use Mail's own tools to remove messages.",
+    "icon": {
+      "app": "com.apple.mail",
+      "symbol": "envelope"
+    },
+    "confidence": "high",
+    "source": "observed on macOS",
+    "popularity": 5
+  },
+  {
+    "id": "mail-downloads",
+    "title": "Mail Downloads",
+    "paths": [
+      "~/Library/Containers/com.apple.mail/Data/Library/Mail Downloads"
+    ],
+    "category": "personal",
+    "safety": "review",
+    "action": "trash",
+    "needsAdmin": false,
+    "explanation": "Attachments you opened from Mail. The originals remain in the message.",
+    "icon": {
+      "app": "com.apple.mail",
+      "symbol": "paperclip"
+    },
+    "confidence": "medium",
+    "source": "observed on macOS",
+    "popularity": 4
+  },
+  {
+    "id": "facetime-cache",
+    "title": "FaceTime data",
+    "paths": [
+      "~/Library/Application Support/FaceTime"
+    ],
+    "category": "system",
+    "safety": "keep",
+    "action": "none",
+    "needsAdmin": false,
+    "explanation": "FaceTime settings and call data. Small; kept.",
+    "icon": {
+      "app": "com.apple.FaceTime",
+      "symbol": "video"
+    },
+    "confidence": "high",
+    "source": "observed on macOS",
+    "popularity": 2
+  },
+  {
+    "id": "teams-classic-data",
+    "title": "Microsoft Teams (classic) data",
+    "paths": [
+      "~/Library/Application Support/Microsoft/Teams"
+    ],
+    "category": "appCaches",
+    "safety": "review",
+    "action": "trash",
+    "needsAdmin": false,
+    "explanation": "Leftover data of the retired classic Teams app. Not used by the new Teams.",
+    "icon": {
+      "app": "com.microsoft.teams2",
+      "symbol": "person.2"
+    },
+    "confidence": "medium",
+    "source": "https://learn.microsoft.com/en-us/troubleshoot/microsoftteams/teams-administration/clear-teams-cache",
+    "popularity": 3
+  },
+  {
+    "id": "teamviewer-cache",
+    "title": "TeamViewer caches",
+    "paths": [
+      "~/Library/Caches/com.teamviewer.TeamViewer",
+      "~/Library/Caches/TeamViewer"
+    ],
+    "category": "appCaches",
+    "safety": "safe",
+    "action": "delete",
+    "needsAdmin": false,
+    "explanation": "Cached data of TeamViewer.",
+    "icon": {
+      "app": "com.teamviewer.TeamViewer",
+      "brand": "teamviewer",
+      "symbol": "rectangle.on.rectangle"
+    },
+    "confidence": "high",
+    "source": "observed on macOS",
+    "popularity": 2
+  },
+  {
+    "id": "figma-cache",
+    "title": "Figma desktop cache",
+    "paths": [
+      "~/Library/Application Support/Figma"
+    ],
+    "category": "appCaches",
+    "safety": "review",
+    "action": "trash",
+    "needsAdmin": false,
+    "explanation": "Figma desktop app data and cache. Files live in the cloud; clearing signs you out.",
+    "icon": {
+      "app": "com.figma.Desktop",
+      "brand": "figma",
+      "symbol": "paintbrush"
+    },
+    "confidence": "medium",
+    "source": "https://help.figma.com/hc/en-us/articles/22380853110551",
+    "popularity": 4
+  },
+  {
+    "id": "spotify-cache",
+    "title": "Spotify cache",
+    "paths": [
+      "~/Library/Caches/com.spotify.client"
+    ],
+    "category": "appCaches",
+    "safety": "safe",
+    "action": "delete",
+    "needsAdmin": false,
+    "explanation": "Cached songs. Spotify downloads them again when needed.",
+    "icon": {
+      "app": "com.spotify.client",
+      "brand": "spotify",
+      "symbol": "music.note"
+    },
+    "confidence": "high",
+    "source": "observed on macOS",
+    "popularity": 5
+  },
+  {
+    "id": "spotify-offline",
+    "title": "Spotify offline storage",
+    "paths": [
+      "~/Library/Application Support/Spotify/PersistentCache"
+    ],
+    "category": "appCaches",
+    "safety": "review",
+    "action": "none",
+    "needsAdmin": false,
+    "explanation": "Songs you downloaded for offline listening plus Spotify's cache. Clear in Spotify > Settings > Storage.",
+    "icon": {
+      "app": "com.spotify.client",
+      "brand": "spotify",
+      "symbol": "music.note"
+    },
+    "confidence": "medium",
+    "source": "observed on macOS",
+    "popularity": 4
+  },
+  {
+    "id": "office-caches",
+    "title": "Microsoft Office caches",
+    "paths": [
+      "~/Library/Containers/com.microsoft.Word/Data/Library/Caches",
+      "~/Library/Containers/com.microsoft.Excel/Data/Library/Caches",
+      "~/Library/Containers/com.microsoft.Powerpoint/Data/Library/Caches",
+      "~/Library/Containers/com.microsoft.Outlook/Data/Library/Caches"
+    ],
+    "category": "appCaches",
+    "safety": "safe",
+    "action": "delete",
+    "needsAdmin": false,
+    "explanation": "Caches of Word, Excel, PowerPoint and Outlook. Rebuilt on launch; documents are not stored here.",
+    "icon": {
+      "app": "com.microsoft.Word",
+      "symbol": "doc.richtext"
+    },
+    "confidence": "medium",
+    "source": "observed on macOS",
+    "popularity": 4
+  },
+  {
+    "id": "office-font-cache",
+    "title": "Office font cache",
+    "paths": [
+      "~/Library/Group Containers/UBF8T346G9.Office/FontCache"
+    ],
+    "category": "appCaches",
+    "safety": "safe",
+    "action": "delete",
+    "needsAdmin": false,
+    "explanation": "Font cache shared by Office apps. Rebuilt on the next launch.",
+    "icon": {
+      "app": "com.microsoft.Word",
+      "symbol": "textformat"
+    },
+    "confidence": "medium",
+    "source": "observed on macOS",
+    "popularity": 3
+  },
+  {
+    "id": "microsoft-autoupdate",
+    "title": "Microsoft AutoUpdate cache",
+    "paths": [
+      "~/Library/Caches/com.microsoft.autoupdate2",
+      "~/Library/Caches/com.microsoft.autoupdate.fba"
+    ],
+    "category": "appCaches",
+    "safety": "safe",
+    "action": "delete",
+    "needsAdmin": false,
+    "explanation": "Downloaded Office update packages that were already installed.",
+    "icon": {
+      "app": "com.microsoft.autoupdate2",
+      "symbol": "arrow.triangle.2.circlepath"
+    },
+    "confidence": "high",
+    "source": "observed on macOS",
+    "popularity": 4
+  },
+  {
+    "id": "cloud-storage",
+    "title": "Cloud storage folders",
+    "paths": [
+      "~/Library/CloudStorage"
+    ],
+    "category": "personal",
+    "safety": "keep",
+    "action": "none",
+    "needsAdmin": false,
+    "explanation": "Files synced by OneDrive, Dropbox, Google Drive and Box. Free space with 'Remove Download' / 'Free up space'.",
+    "icon": {
+      "symbol": "icloud"
+    },
+    "confidence": "medium",
+    "source": "observed on macOS",
+    "popularity": 4
+  },
+  {
+    "id": "adobe-media-cache",
+    "title": "Adobe media cache",
+    "paths": [
+      "~/Library/Application Support/Adobe/Common/Media Cache Files",
+      "~/Library/Application Support/Adobe/Common/Media Cache"
+    ],
+    "category": "appCaches",
+    "safety": "safe",
+    "action": "delete",
+    "needsAdmin": false,
+    "explanation": "Conformed audio and preview files for Premiere Pro and After Effects. Rebuilt when projects are opened.",
+    "icon": {
+      "app": "com.adobe.acc.AdobeCreativeCloud",
+      "symbol": "film"
+    },
+    "confidence": "medium",
+    "source": "https://community.adobe.com/t5/after-effects-discussions/faq-how-to-clean-delete-or-trash-media-cache-files-in-after-effects/m-p/10634312",
+    "popularity": 3
+  },
+  {
+    "id": "capcut-cache",
+    "title": "CapCut cache",
+    "paths": [
+      "~/Library/Containers/com.lemon.lvoverseas/Data/Library/Caches"
+    ],
+    "category": "appCaches",
+    "safety": "safe",
+    "action": "delete",
+    "needsAdmin": false,
+    "explanation": "Effects, templates and preview caches of CapCut. Projects are stored elsewhere.",
+    "icon": {
+      "app": "com.lemon.lvoverseas",
+      "symbol": "film"
+    },
+    "confidence": "medium",
+    "source": "observed on macOS",
+    "popularity": 2
+  },
+  {
+    "id": "insta360-cache",
+    "title": "Insta360 Studio caches",
+    "paths": [
+      "~/Library/Caches/com.insta360.studio",
+      "~/Library/Caches/com.insta360.studio.export",
+      "~/Library/Caches/Insta360"
+    ],
+    "category": "appCaches",
+    "safety": "safe",
+    "action": "delete",
+    "needsAdmin": false,
+    "explanation": "Preview and export caches of Insta360 Studio.",
+    "icon": {
+      "app": "com.insta360.studio",
+      "symbol": "camera"
+    },
+    "confidence": "medium",
+    "source": "observed on macOS",
+    "popularity": 1
+  },
+  {
+    "id": "expressvpn-cache",
+    "title": "ExpressVPN cache",
+    "paths": [
+      "~/Library/Caches/com.express.vpn"
+    ],
+    "category": "appCaches",
+    "safety": "safe",
+    "action": "delete",
+    "needsAdmin": false,
+    "explanation": "Cached data of ExpressVPN.",
+    "icon": {
+      "app": "com.express.vpn",
+      "brand": "expressvpn",
+      "symbol": "network"
+    },
+    "confidence": "high",
+    "source": "observed on macOS",
+    "popularity": 1
+  },
+  {
+    "id": "sentry-crash-caches",
+    "title": "Crash reporter caches",
+    "paths": [
+      "~/Library/Caches/SentryCrash",
+      "~/Library/Caches/io.sentry"
+    ],
+    "category": "appCaches",
+    "safety": "safe",
+    "action": "delete",
+    "needsAdmin": false,
+    "explanation": "Crash reports apps queued for upload.",
+    "icon": {
+      "symbol": "ladybug"
+    },
+    "confidence": "medium",
+    "source": "observed on macOS",
+    "popularity": 3
+  },
+  {
+    "id": "photos-library",
+    "title": "Photos library",
+    "paths": [
+      "~/Pictures/Photos Library.photoslibrary"
+    ],
+    "category": "personal",
+    "safety": "review",
+    "action": "none",
+    "needsAdmin": false,
+    "explanation": "Your photos and videos. Turn on Optimize Mac Storage in Photos settings to keep originals only in iCloud.",
+    "icon": {
+      "app": "com.apple.Photos",
+      "symbol": "photo.on.rectangle"
+    },
+    "confidence": "high",
+    "source": "https://support.apple.com/en-us/102624",
+    "popularity": 5
+  },
+  {
+    "id": "music-media",
+    "title": "Music library media",
+    "paths": [
+      "~/Music/Music/Media.localized",
+      "~/Music/Music/Media"
+    ],
+    "category": "personal",
+    "safety": "review",
+    "action": "none",
+    "needsAdmin": false,
+    "explanation": "Songs, downloads and imported files in Music. Remove downloads from the Music app.",
+    "icon": {
+      "app": "com.apple.Music",
+      "brand": "applemusic",
+      "symbol": "music.note"
+    },
+    "confidence": "medium",
+    "source": "observed on macOS",
+    "popularity": 4
+  },
+  {
+    "id": "music-cache",
+    "title": "Music app cache",
+    "paths": [
+      "~/Library/Caches/com.apple.Music"
+    ],
+    "category": "appCaches",
+    "safety": "safe",
+    "action": "delete",
+    "needsAdmin": false,
+    "explanation": "Artwork and streaming cache of the Music app.",
+    "icon": {
+      "app": "com.apple.Music",
+      "brand": "applemusic",
+      "symbol": "music.note"
+    },
+    "confidence": "high",
+    "source": "observed on macOS",
+    "popularity": 4
+  },
+  {
+    "id": "tv-media",
+    "title": "TV app downloads",
+    "paths": [
+      "~/Movies/TV/Media.localized",
+      "~/Movies/TV/Media"
+    ],
+    "category": "personal",
+    "safety": "review",
+    "action": "none",
+    "needsAdmin": false,
+    "explanation": "Movies and shows downloaded in the TV app. Remove downloads from the TV app.",
+    "icon": {
+      "app": "com.apple.TV",
+      "brand": "appletv",
+      "symbol": "tv"
+    },
+    "confidence": "medium",
+    "source": "https://support.apple.com/en-us/102624",
+    "popularity": 3
+  },
+  {
+    "id": "tv-cache",
+    "title": "TV app cache",
+    "paths": [
+      "~/Library/Caches/com.apple.TV"
+    ],
+    "category": "appCaches",
+    "safety": "safe",
+    "action": "delete",
+    "needsAdmin": false,
+    "explanation": "Artwork and streaming cache of the TV app.",
+    "icon": {
+      "app": "com.apple.TV",
+      "brand": "appletv",
+      "symbol": "tv"
+    },
+    "confidence": "high",
+    "source": "observed on macOS",
+    "popularity": 3
+  },
+  {
+    "id": "podcasts-downloads",
+    "title": "Podcasts downloads",
+    "paths": [
+      "~/Library/Group Containers/243LU875E5.groups.com.apple.podcasts"
+    ],
+    "category": "personal",
+    "safety": "review",
+    "action": "none",
+    "needsAdmin": false,
+    "explanation": "Downloaded podcast episodes. Remove them in Podcasts > Settings, or turn on automatic removal.",
+    "icon": {
+      "app": "com.apple.podcasts",
+      "brand": "applepodcasts",
+      "symbol": "mic"
+    },
+    "confidence": "medium",
+    "source": "observed on macOS",
+    "popularity": 3
+  },
+  {
+    "id": "apple-loops",
+    "title": "Apple Loops and sound library",
+    "paths": [
+      "/Library/Audio/Apple Loops",
+      "/Library/Application Support/GarageBand",
+      "/Library/Application Support/Logic"
+    ],
+    "category": "apps",
+    "safety": "review",
+    "action": "none",
+    "needsAdmin": true,
+    "explanation": "GarageBand/Logic sounds and loops. Manage in Logic > Sound Library rather than deleting files.",
+    "icon": {
+      "app": "com.apple.garageband10",
+      "symbol": "pianokeys"
+    },
+    "confidence": "medium",
+    "source": "https://support.apple.com/en-us/101933",
+    "popularity": 3
+  },
+  {
+    "id": "logic-library-bundle",
+    "title": "Logic Pro library",
+    "paths": [
+      "~/Music/Logic Pro Library.bundle"
+    ],
+    "category": "personal",
+    "safety": "review",
+    "action": "none",
+    "needsAdmin": false,
+    "explanation": "Logic Pro 12+ sound library bundle. Remove sound packs from Logic Pro > Sound Library.",
+    "icon": {
+      "app": "com.apple.logic10",
+      "symbol": "pianokeys"
+    },
+    "confidence": "medium",
+    "source": "https://support.apple.com/en-us/125036",
+    "popularity": 2
+  },
+  {
+    "id": "voice-memos",
+    "title": "Voice Memos",
+    "paths": [
+      "~/Library/Group Containers/group.com.apple.VoiceMemos.shared"
+    ],
+    "category": "personal",
+    "safety": "keep",
+    "action": "none",
+    "needsAdmin": false,
+    "explanation": "Your voice recordings. Delete them from the Voice Memos app.",
+    "icon": {
+      "app": "com.apple.VoiceMemos",
+      "symbol": "waveform"
+    },
+    "confidence": "medium",
+    "source": "observed on macOS",
+    "popularity": 2
+  },
+  {
+    "id": "books-data",
+    "title": "Books",
+    "paths": [
+      "~/Library/Group Containers/group.com.apple.iBooks",
+      "~/Library/Containers/com.apple.iBooksX"
+    ],
+    "category": "personal",
+    "safety": "review",
+    "action": "none",
+    "needsAdmin": false,
+    "explanation": "Downloaded books and audiobooks. Remove downloads from the Books app.",
+    "icon": {
+      "app": "com.apple.iBooksX",
+      "symbol": "books.vertical"
+    },
+    "confidence": "medium",
+    "source": "observed on macOS",
+    "popularity": 2
+  },
+  {
+    "id": "notes-data",
+    "title": "Notes",
+    "paths": [
+      "~/Library/Group Containers/group.com.apple.notes"
+    ],
+    "category": "personal",
+    "safety": "keep",
+    "action": "none",
+    "needsAdmin": false,
+    "explanation": "Your notes and their attachments. Never deleted.",
+    "icon": {
+      "app": "com.apple.Notes",
+      "symbol": "note.text"
+    },
+    "confidence": "high",
+    "source": "observed on macOS",
+    "popularity": 4
+  },
+  {
+    "id": "icloud-drive",
+    "title": "iCloud Drive",
+    "paths": [
+      "~/Library/Mobile Documents"
+    ],
+    "category": "personal",
+    "safety": "keep",
+    "action": "none",
+    "needsAdmin": false,
+    "explanation": "Local copies of iCloud Drive files. Use Optimize Mac Storage or 'Remove Download' instead of deleting.",
+    "icon": {
+      "brand": "icloud",
+      "symbol": "icloud"
+    },
+    "confidence": "high",
+    "source": "https://support.apple.com/en-us/102624",
+    "popularity": 5
+  },
+  {
+    "id": "trash",
+    "title": "Trash",
+    "paths": [
+      "~/.Trash"
+    ],
+    "category": "personal",
+    "safety": "review",
+    "action": "delete",
+    "needsAdmin": false,
+    "explanation": "Files already moved to the Trash still use disk space until it is emptied.",
+    "icon": {
+      "symbol": "trash"
+    },
+    "confidence": "high",
+    "source": "observed on macOS",
+    "popularity": 5
+  },
+  {
+    "id": "downloads",
+    "title": "Downloads",
+    "paths": [
+      "~/Downloads"
+    ],
+    "category": "personal",
+    "safety": "review",
+    "action": "none",
+    "needsAdmin": false,
+    "explanation": "Review by hand: installers and archives here are often no longer needed.",
+    "icon": {
+      "symbol": "arrow.down.circle"
+    },
+    "confidence": "high",
+    "source": "observed on macOS",
+    "popularity": 5
+  },
+  {
+    "id": "desktop",
+    "title": "Desktop",
+    "paths": [
+      "~/Desktop"
+    ],
+    "category": "personal",
+    "safety": "review",
+    "action": "none",
+    "needsAdmin": false,
+    "explanation": "Screenshots and files on the Desktop. Review by hand.",
+    "icon": {
+      "symbol": "menubar.dock.rectangle"
+    },
+    "confidence": "high",
+    "source": "observed on macOS",
+    "popularity": 4
+  },
+  {
+    "id": "documents",
+    "title": "Documents",
+    "paths": [
+      "~/Documents"
+    ],
+    "category": "personal",
+    "safety": "keep",
+    "action": "none",
+    "needsAdmin": false,
+    "explanation": "Your documents. Freeroom never cleans this folder as a whole.",
+    "icon": {
+      "symbol": "doc"
+    },
+    "confidence": "high",
+    "source": "observed on macOS",
+    "popularity": 5
+  },
+  {
+    "id": "system-temp",
+    "title": "System temporary files",
+    "paths": [
+      "/private/var/folders"
+    ],
+    "category": "system",
+    "safety": "keep",
+    "action": "none",
+    "needsAdmin": false,
+    "explanation": "Managed by macOS and cleaned on restart. Do not delete by hand.",
+    "icon": {
+      "symbol": "gearshape.2"
+    },
+    "confidence": "high",
+    "source": "observed on macOS",
+    "popularity": 5
+  },
+  {
+    "id": "system-folder",
+    "title": "macOS system",
+    "paths": [
+      "/System"
+    ],
+    "category": "system",
+    "safety": "keep",
+    "action": "none",
+    "needsAdmin": false,
+    "explanation": "The sealed, read-only macOS system volume. Cannot and must not be changed.",
+    "icon": {
+      "symbol": "apple.logo"
+    },
+    "confidence": "high",
+    "source": "observed on macOS",
+    "popularity": 5
+  },
+  {
+    "id": "system-library",
+    "title": "System Library",
+    "paths": [
+      "/Library"
+    ],
+    "category": "system",
+    "safety": "keep",
+    "action": "none",
+    "needsAdmin": false,
+    "explanation": "System-wide settings, drivers and app support. Only remove items an app's uninstaller lists.",
+    "icon": {
+      "symbol": "building.columns"
+    },
+    "confidence": "high",
+    "source": "observed on macOS",
+    "popularity": 5
+  },
+  {
+    "id": "user-library",
+    "title": "Your Library folder",
+    "paths": [
+      "~/Library"
+    ],
+    "category": "system",
+    "safety": "keep",
+    "action": "none",
+    "needsAdmin": false,
+    "explanation": "Settings and data of every app. Clean the specific items inside it, never the folder.",
+    "icon": {
+      "symbol": "folder.badge.gearshape"
+    },
+    "confidence": "high",
+    "source": "observed on macOS",
+    "popularity": 5
+  },
+  {
+    "id": "app-support-root",
+    "title": "Application Support",
+    "paths": [
+      "~/Library/Application Support"
+    ],
+    "category": "system",
+    "safety": "keep",
+    "action": "none",
+    "needsAdmin": false,
+    "explanation": "Data of every app. Only specific known subfolders are safe to clean.",
+    "icon": {
+      "symbol": "folder.badge.gearshape"
+    },
+    "confidence": "high",
+    "source": "observed on macOS",
+    "popularity": 5
+  },
+  {
+    "id": "preferences",
+    "title": "Preferences",
+    "paths": [
+      "~/Library/Preferences"
+    ],
+    "category": "system",
+    "safety": "keep",
+    "action": "none",
+    "needsAdmin": false,
+    "explanation": "App settings. Deleting them resets apps.",
+    "icon": {
+      "symbol": "gearshape"
+    },
+    "confidence": "high",
+    "source": "observed on macOS",
+    "popularity": 5
+  },
+  {
+    "id": "keychains",
+    "title": "Keychains",
+    "paths": [
+      "~/Library/Keychains"
+    ],
+    "category": "system",
+    "safety": "keep",
+    "action": "none",
+    "needsAdmin": false,
+    "explanation": "Your passwords and certificates. Never deleted.",
+    "icon": {
+      "symbol": "key"
+    },
+    "confidence": "high",
+    "source": "observed on macOS",
+    "popularity": 5
+  },
+  {
+    "id": "containers-root",
+    "title": "App containers",
+    "paths": [
+      "~/Library/Containers"
+    ],
+    "category": "system",
+    "safety": "keep",
+    "action": "none",
+    "needsAdmin": false,
+    "explanation": "Sandboxed app data. Removing a container deletes that app's data.",
+    "icon": {
+      "symbol": "shippingbox"
+    },
+    "confidence": "high",
+    "source": "observed on macOS",
+    "popularity": 5
+  },
+  {
+    "id": "group-containers-root",
+    "title": "Group containers",
+    "paths": [
+      "~/Library/Group Containers"
+    ],
+    "category": "system",
+    "safety": "keep",
+    "action": "none",
+    "needsAdmin": false,
+    "explanation": "Data shared between apps of the same developer. Not a cache.",
+    "icon": {
+      "symbol": "shippingbox"
+    },
+    "confidence": "high",
+    "source": "observed on macOS",
+    "popularity": 5
+  },
+  {
+    "id": "vm-swap",
+    "title": "Swap and sleep image",
+    "paths": [
+      "/private/var/vm"
+    ],
+    "category": "system",
+    "safety": "keep",
+    "action": "none",
+    "needsAdmin": false,
+    "explanation": "Virtual memory swap files and the sleep image. macOS manages them; restart to shrink swap.",
+    "icon": {
+      "symbol": "memorychip"
+    },
+    "confidence": "high",
+    "source": "observed on macOS",
+    "popularity": 5
+  },
+  {
+    "id": "spotlight-index",
+    "title": "Spotlight index",
+    "paths": [
+      "/System/Volumes/Data/.Spotlight-V100"
+    ],
+    "category": "system",
+    "safety": "keep",
+    "action": "none",
+    "needsAdmin": false,
+    "explanation": "Search index. Rebuild it from Spotlight settings if it seems too big.",
+    "icon": {
+      "symbol": "magnifyingglass"
+    },
+    "confidence": "medium",
+    "source": "observed on macOS",
+    "popularity": 4
+  },
+  {
+    "id": "system-logs",
+    "title": "System logs",
+    "paths": [
+      "/private/var/log",
+      "/private/var/db/diagnostics"
+    ],
+    "category": "system",
+    "safety": "keep",
+    "action": "none",
+    "needsAdmin": false,
+    "explanation": "Unified logs. macOS rotates and limits them automatically.",
+    "icon": {
+      "symbol": "doc.text"
+    },
+    "confidence": "medium",
+    "source": "observed on macOS",
+    "popularity": 4
+  },
+  {
+    "id": "user-logs",
+    "title": "User logs",
+    "paths": [
+      "~/Library/Logs/DiagnosticReports"
+    ],
+    "category": "system",
+    "safety": "review",
+    "action": "trash",
+    "needsAdmin": false,
+    "explanation": "Crash and hang reports already sent or not needed. New ones are written as needed.",
+    "icon": {
+      "symbol": "doc.text"
+    },
+    "confidence": "high",
+    "source": "observed on macOS",
+    "popularity": 4
+  },
+  {
+    "id": "macos-updates",
+    "title": "macOS update downloads",
+    "paths": [
+      "/Library/Updates"
+    ],
+    "category": "system",
+    "safety": "keep",
+    "action": "none",
+    "needsAdmin": false,
+    "explanation": "Software updates staged by macOS. Install or let macOS remove them.",
+    "icon": {
+      "symbol": "arrow.down.circle"
+    },
+    "confidence": "medium",
+    "source": "observed on macOS",
+    "popularity": 3
+  },
+  {
+    "id": "system-caches",
+    "title": "System caches",
+    "paths": [
+      "/Library/Caches"
+    ],
+    "category": "system",
+    "safety": "keep",
+    "action": "none",
+    "needsAdmin": false,
+    "explanation": "System-wide caches managed by macOS and installers. Not safe to empty by hand.",
+    "icon": {
+      "symbol": "gearshape.2"
+    },
+    "confidence": "high",
+    "source": "observed on macOS",
+    "popularity": 4
+  },
+  {
+    "id": "time-machine-snapshots",
+    "title": "Local Time Machine snapshots",
+    "paths": [],
+    "category": "system",
+    "safety": "keep",
+    "action": "none",
+    "needsAdmin": false,
+    "explanation": "Shown as purgeable space. macOS deletes them automatically when space is needed (`tmutil listlocalsnapshots /`).",
+    "icon": {
+      "symbol": "clock.arrow.circlepath"
+    },
+    "confidence": "high",
+    "source": "https://support.apple.com/en-us/102154",
+    "popularity": 4
+  },
+  {
+    "id": "apple-intelligence-assets",
+    "title": "Apple system assets",
+    "paths": [
+      "/System/Library/AssetsV2"
+    ],
+    "category": "system",
+    "safety": "keep",
+    "action": "none",
+    "needsAdmin": false,
+    "explanation": "Downloaded system assets (voices, dictionaries, AI models). Managed by macOS.",
+    "icon": {
+      "symbol": "sparkles"
+    },
+    "confidence": "medium",
+    "source": "observed on macOS",
+    "popularity": 4
+  },
+  {
+    "id": "mobile-sync-config",
+    "title": "Device sync settings",
+    "paths": [
+      "~/Library/Application Support/MobileSync"
+    ],
+    "category": "system",
+    "safety": "keep",
+    "action": "none",
+    "needsAdmin": false,
+    "explanation": "Folder that holds device backups and sync data. Manage backups from Finder.",
+    "icon": {
+      "symbol": "iphone"
+    },
+    "confidence": "high",
+    "source": "observed on macOS",
+    "popularity": 3
+  },
+  {
+    "id": "crash-reporter",
+    "title": "Crash reporter data",
+    "paths": [
+      "~/Library/Application Support/CrashReporter"
+    ],
+    "category": "system",
+    "safety": "safe",
+    "action": "delete",
+    "needsAdmin": false,
+    "explanation": "Crash report metadata kept by macOS.",
+    "icon": {
+      "symbol": "ladybug"
+    },
+    "confidence": "medium",
+    "source": "observed on macOS",
+    "popularity": 3
+  },
+  {
+    "id": "apple-caches-misc",
+    "title": "Apple app caches",
+    "paths": [
+      "~/Library/Caches/com.apple.Safari.SafeBrowsing",
+      "~/Library/Caches/com.apple.appstore",
+      "~/Library/Caches/com.apple.iTunes",
+      "~/Library/Caches/com.apple.helpd",
+      "~/Library/Caches/GeoServices"
+    ],
+    "category": "appCaches",
+    "safety": "safe",
+    "action": "delete",
+    "needsAdmin": false,
+    "explanation": "Caches of App Store, Help, Maps and Safe Browsing. Rebuilt by macOS on demand.",
+    "icon": {
+      "symbol": "apple.logo"
+    },
+    "confidence": "high",
+    "source": "observed on macOS",
+    "popularity": 4
+  },
+  {
+    "id": "user-caches-root",
+    "title": "User caches folder",
+    "paths": [
+      "~/Library/Caches"
+    ],
+    "category": "system",
+    "safety": "keep",
+    "action": "none",
+    "needsAdmin": false,
+    "explanation": "Holds caches of every app. Clean the known items inside it, not the whole folder.",
+    "icon": {
+      "symbol": "folder.badge.gearshape"
+    },
+    "confidence": "high",
+    "source": "observed on macOS",
+    "popularity": 5
+  },
+  {
+    "id": "dot-cache-root",
+    "title": "~/.cache folder",
+    "paths": [
+      "~/.cache"
+    ],
+    "category": "system",
+    "safety": "keep",
+    "action": "none",
+    "needsAdmin": false,
+    "explanation": "Cache folder used by CLI tools. Clean the known items inside it, not the whole folder.",
+    "icon": {
+      "symbol": "folder.badge.gearshape"
+    },
+    "confidence": "high",
+    "source": "observed on macOS",
+    "popularity": 4
+  },
+  {
+    "id": "dot-config-root",
+    "title": "~/.config folder",
+    "paths": [
+      "~/.config"
+    ],
+    "category": "system",
+    "safety": "keep",
+    "action": "none",
+    "needsAdmin": false,
+    "explanation": "Settings of command-line tools. Not a cache.",
+    "icon": {
+      "symbol": "gearshape"
+    },
+    "confidence": "high",
+    "source": "observed on macOS",
+    "popularity": 4
+  },
+  {
+    "id": "dot-local-root",
+    "title": "~/.local folder",
+    "paths": [
+      "~/.local"
+    ],
+    "category": "system",
+    "safety": "keep",
+    "action": "none",
+    "needsAdmin": false,
+    "explanation": "Installed CLI tools and their data. Clean known items inside it, not the whole folder.",
+    "icon": {
+      "symbol": "gearshape"
+    },
+    "confidence": "high",
+    "source": "observed on macOS",
+    "popularity": 4
+  },
+  {
+    "id": "shell-history",
+    "title": "Shell history",
+    "paths": [
+      "~/.zsh_history",
+      "~/.zsh_sessions",
+      "~/.bash_history"
+    ],
+    "category": "system",
+    "safety": "keep",
+    "action": "none",
+    "needsAdmin": false,
+    "explanation": "Your command history. Small; kept.",
+    "icon": {
+      "symbol": "terminal"
+    },
+    "confidence": "high",
+    "source": "observed on macOS",
+    "popularity": 4
+  },
+  {
+    "id": "git-config",
+    "title": "Git config",
+    "paths": [
+      "~/.gitconfig"
+    ],
+    "category": "system",
+    "safety": "keep",
+    "action": "none",
+    "needsAdmin": false,
+    "explanation": "Your Git settings.",
+    "icon": {
+      "brand": "git",
+      "symbol": "gearshape"
+    },
+    "confidence": "high",
+    "source": "observed on macOS",
+    "popularity": 5
+  },
+  {
+    "id": "docker-unused-images",
+    "title": "Unused Docker images",
+    "paths": [],
+    "category": "docker",
+    "safety": "review",
+    "action": "command",
+    "command": "docker image prune -a -f",
+    "needsAdmin": false,
+    "explanation": "Every image not used by a container, including ones you pulled on purpose. They can be pulled or rebuilt again.",
+    "icon": {
+      "app": "com.docker.docker",
+      "brand": "docker",
+      "symbol": "shippingbox"
+    },
+    "confidence": "high",
+    "source": "https://docs.docker.com/engine/manage-resources/pruning/",
+    "popularity": 5
+  },
+  {
+    "id": "docker-buildx-cache",
+    "title": "Buildx builder cache",
+    "paths": [],
+    "category": "docker",
+    "safety": "safe",
+    "action": "command",
+    "command": "docker buildx prune -f",
+    "needsAdmin": false,
+    "explanation": "Build cache of buildx builders. Builds get slower once while the cache refills.",
+    "icon": {
+      "app": "com.docker.docker",
+      "brand": "docker",
+      "symbol": "shippingbox"
+    },
+    "confidence": "high",
+    "source": "https://docs.docker.com/engine/manage-resources/pruning/",
+    "popularity": 3
+  },
+  {
+    "id": "docker-stopped-containers",
+    "title": "Stopped Docker containers",
+    "paths": [],
+    "category": "docker",
+    "safety": "review",
+    "action": "command",
+    "needsAdmin": false,
+    "explanation": "Containers that are not running. Their writable layer and any data not in a volume is lost when removed.",
+    "icon": {
+      "app": "com.docker.docker",
+      "brand": "docker",
+      "symbol": "shippingbox"
+    },
+    "confidence": "high",
+    "source": "https://docs.docker.com/engine/manage-resources/pruning/",
+    "popularity": 4,
+    "command": "docker container prune -f"
+  },
+  {
+    "id": "docker-unused-volumes",
+    "title": "Unused Docker volumes",
+    "paths": [],
+    "category": "docker",
+    "safety": "review",
+    "action": "none",
+    "needsAdmin": false,
+    "explanation": "Volumes no container uses. They often hold databases; check before `docker volume prune`.",
+    "icon": {
+      "app": "com.docker.docker",
+      "brand": "docker",
+      "symbol": "cylinder"
+    },
+    "confidence": "high",
+    "source": "https://docs.docker.com/engine/manage-resources/pruning/",
+    "popularity": 4
+  },
+  {
+    "id": "claude-code-versions",
+    "title": "Claude Code versions",
+    "paths": [
+      "~/.local/share/claude/versions"
+    ],
+    "category": "devCaches",
+    "safety": "review",
+    "action": "none",
+    "needsAdmin": false,
+    "explanation": "Native Claude Code builds; the current one is in use. Claude Code removes old versions itself.",
+    "icon": {
+      "brand": "claude",
+      "symbol": "terminal"
+    },
+    "confidence": "medium",
+    "source": "observed on macOS",
+    "popularity": 3
+  },
+  {
+    "id": "macos-aerials",
+    "title": "Aerial wallpapers",
+    "paths": [
+      "~/Library/Application Support/com.apple.wallpaper/aerials"
+    ],
+    "category": "system",
+    "safety": "review",
+    "action": "none",
+    "needsAdmin": false,
+    "explanation": "Aerial wallpapers and screen savers macOS downloaded. Managed by macOS; pick a static wallpaper to stop downloads.",
+    "icon": {
+      "symbol": "photo"
+    },
+    "confidence": "medium",
+    "source": "observed on macOS",
+    "popularity": 4
+  },
+  {
+    "id": "xcode-userdata",
+    "title": "Xcode user settings",
+    "paths": [
+      "~/Library/Developer/Xcode/UserData"
+    ],
+    "category": "system",
+    "safety": "keep",
+    "action": "none",
+    "needsAdmin": false,
+    "explanation": "Xcode key bindings, code snippets, themes and breakpoints.",
+    "icon": {
+      "app": "com.apple.dt.Xcode",
+      "brand": "xcode",
+      "symbol": "gearshape"
+    },
+    "confidence": "high",
+    "source": "observed on macOS",
+    "popularity": 4
+  },
+  {
+    "id": "command-line-tools",
+    "title": "Command Line Tools",
+    "paths": [
+      "/Library/Developer/CommandLineTools"
+    ],
+    "category": "system",
+    "safety": "keep",
+    "action": "none",
+    "needsAdmin": true,
+    "explanation": "Compilers and git used by Homebrew and many tools. Keep unless full Xcode is installed and selected.",
+    "icon": {
+      "app": "com.apple.Terminal",
+      "symbol": "terminal"
+    },
+    "confidence": "high",
+    "source": "observed on macOS",
+    "popularity": 5
+  },
+  {
+    "id": "xcode-simulator-system-caches",
+    "title": "Simulator runtime caches",
+    "paths": [
+      "/Library/Developer/CoreSimulator/Caches"
+    ],
+    "category": "xcode",
+    "safety": "safe",
+    "action": "none",
+    "needsAdmin": true,
+    "explanation": "Shared caches built for installed simulator runtimes. Rebuilt by macOS; needs admin to remove.",
+    "icon": {
+      "app": "com.apple.iphonesimulator",
+      "brand": "xcode",
+      "symbol": "iphone"
+    },
+    "confidence": "high",
+    "source": "observed on macOS",
+    "popularity": 3
+  },
+  {
+    "id": "go-bin",
+    "title": "Go-installed binaries",
+    "paths": [
+      "~/go/bin"
+    ],
+    "category": "devCaches",
+    "safety": "review",
+    "action": "none",
+    "needsAdmin": false,
+    "explanation": "Tools installed with `go install`. Remove the ones you no longer use.",
+    "icon": {
+      "brand": "go",
+      "symbol": "wrench.and.screwdriver"
+    },
+    "confidence": "high",
+    "source": "observed on macOS",
+    "popularity": 3
+  },
+  {
+    "id": "cargo-bin",
+    "title": "Cargo-installed binaries",
+    "paths": [
+      "~/.cargo/bin"
+    ],
+    "category": "devCaches",
+    "safety": "review",
+    "action": "none",
+    "needsAdmin": false,
+    "explanation": "Tools installed with `cargo install` plus rustup's proxies. Remove with `cargo uninstall <name>`.",
+    "icon": {
+      "brand": "rust",
+      "symbol": "wrench.and.screwdriver"
+    },
+    "confidence": "medium",
+    "source": "https://doc.rust-lang.org/cargo/guide/cargo-home.html",
+    "popularity": 3
+  },
+  {
+    "id": "chrome-component-caches",
+    "title": "Chrome component caches",
+    "paths": [
+      "~/Library/Application Support/Google/Chrome/component_crx_cache",
+      "~/Library/Application Support/Google/Chrome/extensions_crx_cache",
+      "~/Library/Application Support/Google/Chrome/GrShaderCache",
+      "~/Library/Application Support/Google/Chrome/ShaderCache",
+      "~/Library/Application Support/Google/Chrome/GraphiteDawnCache"
+    ],
+    "category": "appCaches",
+    "safety": "safe",
+    "action": "delete",
+    "needsAdmin": false,
+    "explanation": "Downloaded component installers and GPU shader caches of Chrome. Rebuilt automatically; quit Chrome first.",
+    "icon": {
+      "app": "com.google.Chrome",
+      "brand": "googlechrome",
+      "symbol": "globe"
+    },
+    "confidence": "medium",
+    "source": "observed on macOS",
+    "popularity": 4
+  },
+  {
+    "id": "vscode-local-history",
+    "title": "VS Code local history",
+    "paths": [
+      "~/Library/Application Support/Code/User/History"
+    ],
+    "category": "appCaches",
+    "safety": "review",
+    "action": "trash",
+    "needsAdmin": false,
+    "explanation": "Earlier versions of files you saved in VS Code (Timeline view). Removing it loses that undo history.",
+    "icon": {
+      "app": "com.microsoft.VSCode",
+      "symbol": "clock.arrow.circlepath"
+    },
+    "confidence": "high",
+    "source": "observed on macOS",
+    "popularity": 3
+  },
+  {
+    "id": "tectonic-cache",
+    "title": "Tectonic TeX bundle cache",
+    "paths": [
+      "~/Library/Caches/Tectonic"
+    ],
+    "category": "devCaches",
+    "safety": "safe",
+    "action": "delete",
+    "needsAdmin": false,
+    "explanation": "TeX support files downloaded by Tectonic. Downloaded again on the next build.",
+    "icon": {
+      "symbol": "doc.text"
+    },
+    "confidence": "medium",
+    "source": "observed on macOS",
+    "popularity": 1
+  },
+  {
+    "id": "zoom-data",
+    "title": "Zoom chat data",
+    "paths": [
+      "~/Library/Application Support/zoom.us/data"
+    ],
+    "category": "system",
+    "safety": "keep",
+    "action": "none",
+    "needsAdmin": false,
+    "explanation": "Zoom's local chat history and settings. Not a cache.",
+    "icon": {
+      "app": "us.zoom.xos",
+      "brand": "zoom",
+      "symbol": "video"
+    },
+    "confidence": "high",
+    "source": "observed on macOS",
+    "popularity": 3
+  },
+  {
+    "id": "icloud-drive-state",
+    "title": "iCloud Drive state",
+    "paths": [
+      "~/Library/Application Support/CloudDocs"
+    ],
+    "category": "system",
+    "safety": "keep",
+    "action": "none",
+    "needsAdmin": false,
+    "explanation": "iCloud Drive's sync database. Deleting it can break syncing.",
+    "icon": {
+      "brand": "icloud",
+      "symbol": "icloud"
+    },
+    "confidence": "high",
+    "source": "observed on macOS",
+    "popularity": 4
+  },
+  {
+    "id": "swift-toolchains",
+    "title": "Swift toolchains",
+    "paths": [
+      "~/Library/Developer/Toolchains",
+      "/Library/Developer/Toolchains"
+    ],
+    "category": "xcode",
+    "safety": "review",
+    "action": "none",
+    "needsAdmin": false,
+    "explanation": "Extra Swift toolchains from swift.org or swiftly. Remove versions you no longer build with.",
+    "icon": {
+      "brand": "swift",
+      "symbol": "swift"
+    },
+    "confidence": "medium",
+    "source": "https://www.swift.org/install/macos/package_installer/",
+    "popularity": 2
+  },
+  {
+    "id": "huggingface-datasets",
+    "title": "Hugging Face datasets cache",
+    "paths": [
+      "~/.cache/huggingface/datasets"
+    ],
+    "category": "devCaches",
+    "safety": "review",
+    "action": "trash",
+    "needsAdmin": false,
+    "explanation": "Datasets downloaded and processed by the `datasets` library. Downloaded again when code loads them.",
+    "icon": {
+      "brand": "huggingface",
+      "symbol": "tablecells"
+    },
+    "confidence": "medium",
+    "source": "https://huggingface.co/docs/datasets/cache",
+    "popularity": 2
+  }
+]

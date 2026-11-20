@@ -86,6 +86,8 @@ public struct Finding: Codable, Identifiable, Equatable, Sendable {
     public var needsAdmin: Bool
     public var verification: Verification?
     public var scanId: String?
+    /// How the app draws this finding (app icon, brand logo or SF Symbol).
+    public var icon: IconRef?
 
     public init(
         id: String,
@@ -101,7 +103,8 @@ public struct Finding: Codable, Identifiable, Equatable, Sendable {
         command: String? = nil,
         needsAdmin: Bool = false,
         verification: Verification? = nil,
-        scanId: String? = nil
+        scanId: String? = nil,
+        icon: IconRef? = nil
     ) {
         self.schema = Finding.schemaVersion
         self.id = id
@@ -118,6 +121,7 @@ public struct Finding: Codable, Identifiable, Equatable, Sendable {
         self.needsAdmin = needsAdmin
         self.verification = verification
         self.scanId = scanId
+        self.icon = icon
     }
 }
 

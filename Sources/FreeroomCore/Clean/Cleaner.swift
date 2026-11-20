@@ -43,6 +43,17 @@ public struct Cleaner: Sendable {
         .init(prefix: ["brew", "cleanup"], maxExtraArguments: 2),
         .init(prefix: ["dotnet", "nuget", "locals", "all", "--clear"], maxExtraArguments: 0),
         .init(prefix: ["ollama", "rm"], maxExtraArguments: 1),
+        .init(prefix: ["uv", "cache", "clean"], maxExtraArguments: 0),
+        .init(prefix: ["bun", "pm", "cache", "rm"], maxExtraArguments: 0),
+        .init(prefix: ["deno", "clean"], maxExtraArguments: 0),
+        .init(prefix: ["pod", "cache", "clean", "--all"], maxExtraArguments: 0),
+        .init(prefix: ["swift", "package", "purge-cache"], maxExtraArguments: 0),
+        .init(prefix: ["conda", "clean", "--all", "--yes"], maxExtraArguments: 0),
+        .init(prefix: ["composer", "clear-cache"], maxExtraArguments: 0),
+        .init(prefix: ["ccache", "-C"], maxExtraArguments: 0),
+        .init(prefix: ["brew", "autoremove"], maxExtraArguments: 0),
+        .init(prefix: ["vagrant", "box", "prune"], maxExtraArguments: 0),
+        .init(prefix: ["docker", "container", "prune", "-f"], maxExtraArguments: 0),
     ]
 
     /// Top-level folders (relative to home) that must never be removed as a whole.

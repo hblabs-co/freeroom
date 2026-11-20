@@ -33,6 +33,7 @@ public struct RuleEngine: Sendable {
 
     public func catalogFindings() -> [Finding] {
         Catalog.locations.compactMap { location in
+            guard !location.paths.isEmpty else { return nil } // tool-managed: covered by Probes
             let report = Measurer().measure(location.paths)
             let existing = report.items.filter(\.exists)
             guard !existing.isEmpty, report.totalAllocatedBytes > 0 else { return nil }
@@ -51,7 +52,8 @@ public struct RuleEngine: Sendable {
                 needsAdmin: location.needsAdmin,
                 verification: Verification(rule: "catalog:\(location.id)",
                                            evidence: "Known location, measured by Freeroom",
-                                           measuredByFreeroom: true)
+                                           measuredByFreeroom: true),
+                icon: location.icon
             )
         }
     }

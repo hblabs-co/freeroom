@@ -284,3 +284,51 @@ final class CleanerTests: XCTestCase {
         guard case .skipped = cleaner.clean(ssh) else { return XCTFail("must not delete credentials") }
     }
 }
+
+final class CatalogTests: XCTestCase {
+    func testCatalogDecodesAndIsConsistent() {
+        let locations = Catalog.locations
+        XCTAssertGreaterThanOrEqual(locations.count, 200, "embedded catalog must decode")
+        XCTAssertEqual(Set(locations.map(\.id)).count, locations.count, "ids must be unique")
+        for id in ["spotify-cache", "npm-cache", "go-modcache", "nuget-packages", "xcode-derived-data", "trash"] {
+            XCTAssertNotNil(Catalog.location(id: id), "existing id kept: \(id)")
+        }
+        for location in locations {
+            XCTAssertNotNil(location.icon, "\(location.id) needs an icon")
+            XCTAssertFalse(location.icon?.symbol.isEmpty ?? true, "\(location.id) needs an SF Symbol fallback")
+            if location.action == .command {
+                XCTAssertTrue(Cleaner.isAllowed(command: location.command ?? ""), "\(location.id): command not allowlisted")
+            }
+        }
+    }
+
+    func testCatalogPathsAreAcceptableToTheCleaner() {
+        let cleaner = Cleaner()
+        for location in Catalog.locations where location.action == .delete || location.action == .trash {
+            XCTAssertNotEqual(location.safety, .keep, "\(location.id): keep items must not be deletable")
+            for path in location.paths {
+                let refusal = cleaner.refusal(for: path)
+                XCTAssertTrue(refusal == nil || refusal == "no longer exists",
+                              "\(location.id): \(path) refused: \(refusal ?? "")")
+            }
+        }
+    }
+
+    func testNoOverlappingPathsBetweenCleanableEntries() {
+        let cleanable = Catalog.locations.filter { $0.safety != .keep }
+        let all = cleanable.flatMap { loc in loc.paths.map { (loc.id, PathUtils.expand($0)) } }
+        for (idA, a) in all {
+            for (idB, b) in all where idA != idB {
+                XCTAssertFalse(a == b || b.hasPrefix(a + "/"), "\(idB) (\(b)) is inside \(idA) (\(a))")
+            }
+        }
+    }
+
+    func testGeneratedSwiftMatchesJSON() throws {
+        let url = URL(fileURLWithPath: #filePath)
+            .deletingLastPathComponent().deletingLastPathComponent().deletingLastPathComponent()
+            .appendingPathComponent("catalog/catalog.json")
+        let fromFile = try JSONDecoder().decode([KnownLocation].self, from: Data(contentsOf: url))
+        XCTAssertEqual(fromFile, Catalog.locations, "run python3 scripts/gen-catalog.py after editing catalog.json")
+    }
+}
