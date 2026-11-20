@@ -16,7 +16,7 @@ struct MenuPanel: View {
             } label: {
                 Label(safeTotal > 0 ? String(format: L("Free %@ safely"), safeTotal.formattedBytes) : L("Nothing safe to free right now"),
                       systemImage: "sparkles")
-                    .font(.headline)
+                    .font(.fr(.headline))
                     .frame(maxWidth: .infinity)
                     .padding(.vertical, 6)
             }
@@ -27,9 +27,9 @@ struct MenuPanel: View {
 
             if !model.suggestions.isEmpty {
                 HStack {
-                    Text(L("Biggest safe wins")).font(.caption.weight(.semibold)).foregroundStyle(.secondary)
+                    Text(L("Biggest safe wins")).font(.fr(.caption).weight(.semibold)).foregroundStyle(.secondary)
                     Spacer()
-                    Button(L("See all")) { model.openMainWindow() }.buttonStyle(.link).font(.caption)
+                    Button(L("See all")) { model.openMainWindow() }.buttonStyle(.link).font(.fr(.caption))
                 }
                 HStack(spacing: 8) {
                     ForEach(model.suggestions) { finding in
@@ -54,12 +54,12 @@ struct MenuPanel: View {
             DiskRing(used: model.usedFraction, warning: model.lowOnSpace)
             VStack(alignment: .leading, spacing: 2) {
                 HStack(alignment: .firstTextBaseline, spacing: 4) {
-                    Text(model.freeBytes.formattedBytes).font(.system(size: 26, weight: .semibold, design: .rounded)).monospacedDigit()
+                    Text(model.freeBytes.formattedBytes).font(.system(size: FontScale.size(26), weight: .semibold, design: .rounded)).monospacedDigit()
                 }
                 Text(String(format: L("free of %@"), model.totalBytes.formattedBytes)).foregroundStyle(.secondary)
                 if model.lowOnSpace {
                     Label(String(format: L("Below your %@ threshold"), "\(model.lowDiskThresholdGB) GB"), systemImage: "exclamationmark.triangle.fill")
-                        .font(.caption).foregroundStyle(Theme.danger)
+                        .font(.fr(.caption)).foregroundStyle(Theme.danger)
                 }
             }
             Spacer()
@@ -79,12 +79,12 @@ struct MenuPanel: View {
                     VStack(alignment: .leading, spacing: 1) {
                         Text(model.agentScanLive ? L("Claude Code is scanning…") :
                                 "Claude Code · \(model.lastAgentScan!.startedAt.formatted(.relative(presentation: .named)))")
-                            .font(.callout.weight(.semibold))
+                            .font(.fr(.callout).weight(.semibold))
                         Text(String(format: L("%@ findings"), "\(agentFindings.count)") + " · \(agentFindings.reduce(Int64(0)) { $0 + $1.reclaimable }.formattedBytes)")
-                            .font(.caption)
+                            .font(.fr(.caption))
                     }
                     Spacer()
-                    Image(systemName: "chevron.right").font(.caption)
+                    Image(systemName: "chevron.right").font(.fr(.caption))
                 }
                 .foregroundStyle(Theme.agent)
                 .padding(10)
@@ -96,8 +96,8 @@ struct MenuPanel: View {
                 HStack(spacing: 10) {
                     RowIcon(symbol: "terminal")
                     VStack(alignment: .leading, spacing: 1) {
-                        Text(L("Deep scan with Claude Code")).font(.callout.weight(.semibold))
-                        Text(String(format: L("Copy %@"), "/freeroom:scan")).font(.caption).foregroundStyle(.secondary)
+                        Text(L("Deep scan with Claude Code")).font(.fr(.callout).weight(.semibold))
+                        Text(String(format: L("Copy %@"), "/freeroom:scan")).font(.fr(.caption)).foregroundStyle(.secondary)
                     }
                     Spacer()
                     Image(systemName: "doc.on.doc").foregroundStyle(.secondary)
@@ -122,7 +122,7 @@ struct MenuPanel: View {
             .toggleStyle(.button).help(L("Show free space in the menu bar"))
             if let scan = model.lastRuleScan {
                 Text(String(format: L("Checked %@"), scan.startedAt.formatted(.relative(presentation: .named))))
-                    .font(.caption).foregroundStyle(.secondary)
+                    .font(.fr(.caption)).foregroundStyle(.secondary)
             }
             Button { model.openSettings() } label: { Image(systemName: "gearshape") }.help(L("Settings"))
             Button { NSApp.terminate(nil) } label: { Image(systemName: "power") }.help(L("Quit Freeroom"))
@@ -142,8 +142,8 @@ struct WinTile: View {
         Button(action: action) {
             VStack(spacing: 6) {
                 ItemIcon(icon: finding.icon, fallback: finding.categoryFallback, size: 40)
-                Text(finding.reclaimable.formattedBytes).font(.callout.weight(.semibold)).monospacedDigit()
-                Text(finding.displayTitle).font(.caption2).foregroundStyle(.secondary).lineLimit(1)
+                Text(finding.reclaimable.formattedBytes).font(.fr(.callout).weight(.semibold)).monospacedDigit()
+                Text(finding.displayTitle).font(.fr(.caption2)).foregroundStyle(.secondary).lineLimit(1)
             }
             .padding(.vertical, 10).padding(.horizontal, 6)
             .frame(maxWidth: .infinity)

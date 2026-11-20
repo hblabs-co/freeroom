@@ -45,6 +45,9 @@ final class AppModel {
     var playSound: Bool { didSet { defaults.set(playSound, forKey: "sound") } }
     var onboarded: Bool { didSet { defaults.set(onboarded, forKey: "onboarded") } }
     var simpleMode: Bool { didSet { defaults.set(simpleMode, forKey: "simpleMode") } }
+    var textSize: FontScale.Size { didSet { defaults.set(textSize.rawValue, forKey: "textSize"); FontScale.factor = textSize.factor } }
+    /// Changes when language or text size change, to rebuild the view tree.
+    var appearanceKey: String { "\(language)-\(textSize.rawValue)" }
 
     /// What the single main window shows.
     enum Route: Hashable { case findings, history, settings }
@@ -68,6 +71,9 @@ final class AppModel {
         playSound = defaults.object(forKey: "sound") as? Bool ?? true
         onboarded = defaults.bool(forKey: "onboarded")
         simpleMode = defaults.object(forKey: "simpleMode") as? Bool ?? true
+        let savedSize = FontScale.Size(rawValue: defaults.string(forKey: "textSize") ?? "") ?? .medium
+        textSize = savedSize
+        FontScale.factor = savedSize.factor
 
         do { store = try Store() } catch { storeError = "\(error)" }
         reload()

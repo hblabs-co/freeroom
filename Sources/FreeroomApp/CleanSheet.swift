@@ -46,13 +46,13 @@ struct CleanSheet: View {
             HStack(alignment: .firstTextBaseline) {
                 VStack(alignment: .leading, spacing: 2) {
                     Text(phase == .review ? (items.count == 1 ? L("Clean 1 item") : String(format: L("Clean %@ items"), "\(items.count)")) : L("Cleaning…"))
-                        .font(.title2.weight(.semibold))
+                        .font(.fr(.title2).weight(.semibold))
                     Text("\(L("Free space")) \(freeBefore.formattedBytes) → \((freeBefore + total).formattedBytes)")
                         .foregroundStyle(.secondary).monospacedDigit()
                 }
                 Spacer()
                 Text(phase == .review ? total.formattedBytes : Int64(shownFreed).formattedBytes)
-                    .font(.system(size: 34, weight: .semibold, design: .rounded)).monospacedDigit()
+                    .font(.system(size: FontScale.size(34), weight: .semibold, design: .rounded)).monospacedDigit()
                     .contentTransition(.numericText(value: phase == .review ? Double(total) : shownFreed))
                     .foregroundStyle(phase == .cleaning ? Theme.safe : .primary)
             }
@@ -69,7 +69,7 @@ struct CleanSheet: View {
             HStack(spacing: 8) {
                 Image(systemName: "checkmark.shield").foregroundStyle(Theme.accent)
                 Text(L("Review items go to the Trash. Commands run only if allowlisted. Each item is re-checked first."))
-                    .font(.caption).foregroundStyle(.secondary)
+                    .font(.fr(.caption)).foregroundStyle(.secondary)
             }
             HStack {
                 Spacer()
@@ -94,7 +94,7 @@ struct CleanSheet: View {
             VStack(alignment: .leading, spacing: 6) {
                 HStack(spacing: 6) {
                     Image(systemName: symbol).foregroundStyle(Theme.accent)
-                    Text(title).font(.headline)
+                    Text(title).font(.fr(.headline))
                     Text("· \(subtitle)").foregroundStyle(.secondary)
                     Spacer()
                     Text(groupItems.reduce(Int64(0)) { $0 + $1.reclaimable }.formattedBytes).monospacedDigit().foregroundStyle(.secondary)
@@ -105,14 +105,14 @@ struct CleanSheet: View {
                         VStack(alignment: .leading, spacing: 1) {
                             HStack(spacing: 4) {
                                 Text(finding.displayTitle).lineLimit(1)
-                                if finding.needsAdmin { Label(L("password"), systemImage: "lock.fill").font(.caption2).foregroundStyle(.secondary) }
+                                if finding.needsAdmin { Label(L("password"), systemImage: "lock.fill").font(.fr(.caption2)).foregroundStyle(.secondary) }
                             }
                             if let command = finding.command, action == .command {
-                                Text(command).font(.system(.caption, design: .monospaced)).foregroundStyle(.secondary).lineLimit(1)
+                                Text(command).font(.fr(.caption, design: .monospaced)).foregroundStyle(.secondary).lineLimit(1)
                             }
                             switch model.cleanResults[finding.id] {
-                            case .skipped(let reason): Text(reason).font(.caption).foregroundStyle(.secondary).lineLimit(2)
-                            case .failed(let reason): Text(reason).font(.caption).foregroundStyle(Theme.danger).lineLimit(2)
+                            case .skipped(let reason): Text(reason).font(.fr(.caption)).foregroundStyle(.secondary).lineLimit(2)
+                            case .failed(let reason): Text(reason).font(.fr(.caption)).foregroundStyle(Theme.danger).lineLimit(2)
                             default: EmptyView()
                             }
                         }
@@ -171,9 +171,9 @@ struct CleanSheet: View {
                         .animation(reduceMotion ? nil : .spring(duration: 0.5).delay(0.15 * Double(i)), value: glints)
                 }
             }
-            Text(L("You freed")).font(.title3).foregroundStyle(.secondary)
+            Text(L("You freed")).font(.fr(.title3)).foregroundStyle(.secondary)
             Text(Int64(shownFreed).formattedBytes)
-                .font(.system(size: 52, weight: .bold, design: .rounded)).monospacedDigit()
+                .font(.system(size: FontScale.size(52), weight: .bold, design: .rounded)).monospacedDigit()
                 .contentTransition(.numericText(value: shownFreed))
                 .accessibilityLabel(L("You freed") + " " + freed.formattedBytes)
             HStack(spacing: 6) {
@@ -217,7 +217,7 @@ private struct NoteRow: View {
     var body: some View {
         HStack {
             Image(systemName: symbol).foregroundStyle(.secondary)
-            Text(text).font(.callout)
+            Text(text).font(.fr(.callout))
             Spacer()
             if let button { Button(button, action: action) }
         }

@@ -32,16 +32,16 @@ struct SimpleView: View {
         return HStack(spacing: 28) {
             DiskRing(used: model.usedFraction, size: 120, warning: model.lowOnSpace)
             VStack(alignment: .leading, spacing: 8) {
-                Text(L("You can safely free")).font(.title3).foregroundStyle(.secondary)
+                Text(L("You can safely free")).font(.fr(.title3)).foregroundStyle(.secondary)
                 Text(safeTotal.formattedBytes)
-                    .font(.system(size: 56, weight: .bold, design: .rounded)).monospacedDigit()
+                    .font(.system(size: FontScale.size(56), weight: .bold, design: .rounded)).monospacedDigit()
                     .contentTransition(.numericText(value: Double(safeTotal)))
                 Text(String(format: L("%@ free of %@"), model.freeBytes.formattedBytes, model.totalBytes.formattedBytes))
                     .foregroundStyle(.secondary).monospacedDigit()
                 Button {
                     model.requestClean(model.safeFindings)
                 } label: {
-                    Label(L("Free it now"), systemImage: "sparkles").font(.title3.weight(.semibold))
+                    Label(L("Free it now"), systemImage: "sparkles").font(.fr(.title3).weight(.semibold))
                         .padding(.horizontal, 18).padding(.vertical, 8)
                 }
                 .buttonStyle(.borderedProminent).tint(Theme.accent).controlSize(.large)
@@ -56,7 +56,7 @@ struct SimpleView: View {
         if !items.isEmpty {
             VStack(alignment: .leading, spacing: 12) {
                 HStack {
-                    Label(title, systemImage: symbol).font(.headline).foregroundStyle(color)
+                    Label(title, systemImage: symbol).font(.fr(.headline)).foregroundStyle(color)
                     Spacer()
                     Text(items.reduce(Int64(0)) { $0 + $1.reclaimable }.formattedBytes).monospacedDigit().foregroundStyle(.secondary)
                 }
@@ -81,8 +81,8 @@ struct BigTile: View {
         } label: {
             VStack(spacing: 8) {
                 ItemIcon(icon: finding.icon, fallback: finding.categoryFallback, size: 52)
-                Text(finding.reclaimable.formattedBytes).font(.title3.weight(.semibold)).monospacedDigit()
-                Text(finding.displayTitle).font(.callout).foregroundStyle(.secondary).lineLimit(2).multilineTextAlignment(.center)
+                Text(finding.reclaimable.formattedBytes).font(.fr(.title3).weight(.semibold)).monospacedDigit()
+                Text(finding.displayTitle).font(.fr(.callout)).foregroundStyle(.secondary).lineLimit(2).multilineTextAlignment(.center)
                     .frame(height: 36, alignment: .top)
             }
             .padding(14)
@@ -94,7 +94,7 @@ struct BigTile: View {
                 .strokeBorder(selected ? Theme.accent : Color(nsColor: .separatorColor), lineWidth: selected ? 2 : 0.5))
             .overlay(alignment: .topTrailing) {
                 Image(systemName: selected ? "checkmark.circle.fill" : "circle")
-                    .font(.title3).foregroundStyle(selected ? Theme.accent : Color.secondary.opacity(0.5))
+                    .font(.fr(.title3)).foregroundStyle(selected ? Theme.accent : Color.secondary.opacity(0.5))
                     .padding(10)
             }
             .overlay(alignment: .topLeading) {

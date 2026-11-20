@@ -11,7 +11,8 @@ struct FreeroomApp: App {
             MenuPanel()
                 .environment(model)
                 .environment(\.locale, Locale(identifier: model.language))
-                .id(model.language)
+                .font(.fr(.body))
+                .id(model.appearanceKey)
         } label: {
             MenuBarLabel().environment(model)
         }
@@ -22,8 +23,9 @@ struct FreeroomApp: App {
             MainView()
                 .environment(model)
                 .environment(\.locale, Locale(identifier: model.language))
-                .id(model.language)
-                .modifier(MainWindowSizing(onboarded: model.onboarded))
+                .font(.fr(.body))
+                .id(model.appearanceKey)
+                .modifier(MainWindowSizing(onboarded: model.onboarded, compact: model.simpleMode || model.route != .findings))
         }
         .defaultSize(width: 1240, height: 800)
         .windowResizability(.contentSize)
@@ -60,9 +62,11 @@ private struct MenuBarLabel: View {
 /// Onboarding uses a compact, fixed-size window; afterwards the window can grow (min 980×640).
 private struct MainWindowSizing: ViewModifier {
     let onboarded: Bool
+    /// Simple mode, settings and history have no side columns, so the window can be narrower.
+    let compact: Bool
     func body(content: Content) -> some View {
         if onboarded {
-            content.frame(minWidth: 980, idealWidth: 1240, maxWidth: .infinity,
+            content.frame(minWidth: compact ? 720 : 980, idealWidth: 1240, maxWidth: .infinity,
                           minHeight: 640, idealHeight: 800, maxHeight: .infinity)
         } else {
             content.frame(width: 620, height: 600)

@@ -24,7 +24,7 @@ struct HistoryView: View {
                     ForEach(days, id: \.0) { day, entries in
                         VStack(alignment: .leading, spacing: 6) {
                             HStack {
-                                Text(day.formatted(date: .complete, time: .omitted)).font(.headline)
+                                Text(day.formatted(date: .complete, time: .omitted)).font(.fr(.headline))
                                 Spacer()
                                 Text(entries.reduce(Int64(0)) { $0 + $1.freedBytes }.formattedBytes)
                                     .monospacedDigit().foregroundStyle(.secondary)
@@ -56,7 +56,7 @@ struct HistoryView: View {
             VStack(alignment: .leading, spacing: 4) {
                 Text(L("Freed in total")).foregroundStyle(.secondary)
                 Text(model.freedAllTime.formattedBytes)
-                    .font(.system(size: 40, weight: .semibold, design: .rounded)).monospacedDigit()
+                    .font(.system(size: FontScale.size(40), weight: .semibold, design: .rounded)).monospacedDigit()
             }
             VStack(alignment: .leading, spacing: 6) {
                 Label("\(model.history.count) \(L("cleanups"))", systemImage: "sparkles")
@@ -99,7 +99,7 @@ private struct HistoryRow: View {
             HStack(spacing: 12) {
                 ItemIcon(icon: entry.finding?.icon, fallback: entry.finding?.categoryFallback ?? "sparkles", size: 30)
                 VStack(alignment: .leading, spacing: 2) {
-                    Text(entry.finding?.displayTitle ?? entry.title).font(.body.weight(.medium)).lineLimit(1)
+                    Text(entry.finding?.displayTitle ?? entry.title).font(.fr(.body).weight(.medium)).lineLimit(1)
                     HStack(spacing: 6) {
                         Label(how.1, systemImage: how.0)
                         Text("·")
@@ -107,10 +107,10 @@ private struct HistoryRow: View {
                         Text("·")
                         Text(origin)
                     }
-                    .font(.caption).foregroundStyle(.secondary)
+                    .font(.fr(.caption)).foregroundStyle(.secondary)
                 }
                 Spacer()
-                Text(entry.freedBytes.formattedBytes).font(.body.weight(.semibold)).monospacedDigit()
+                Text(entry.freedBytes.formattedBytes).font(.fr(.body).weight(.semibold)).monospacedDigit()
                 if entry.finding != nil {
                     Button(action: toggle) { Image(systemName: expanded ? "chevron.up" : "chevron.down") }
                         .buttonStyle(.borderless).foregroundStyle(.secondary)
@@ -120,18 +120,18 @@ private struct HistoryRow: View {
             if expanded, let finding = entry.finding {
                 VStack(alignment: .leading, spacing: 6) {
                     if let command = finding.command, finding.action == .command {
-                        Text(command).font(.system(.caption, design: .monospaced)).textSelection(.enabled)
+                        Text(command).font(.fr(.caption, design: .monospaced)).textSelection(.enabled)
                             .padding(6).background(.quaternary.opacity(0.6), in: RoundedRectangle(cornerRadius: 6))
                     }
                     ForEach(finding.paths.prefix(20), id: \.self) { path in
                         HStack(spacing: 6) {
                             Image(systemName: "folder").foregroundStyle(.secondary)
-                            Text(PathUtils.abbreviate(path)).font(.system(.caption, design: .monospaced))
+                            Text(PathUtils.abbreviate(path)).font(.fr(.caption, design: .monospaced))
                                 .lineLimit(1).truncationMode(.middle).textSelection(.enabled)
                         }
                     }
                     if finding.paths.count > 20 {
-                        Text("+ \(finding.paths.count - 20)").font(.caption).foregroundStyle(.secondary)
+                        Text("+ \(finding.paths.count - 20)").font(.fr(.caption)).foregroundStyle(.secondary)
                     }
                     if finding.action == .trash {
                         Button(L("Open Trash")) { model.openTrash() }.controlSize(.small)

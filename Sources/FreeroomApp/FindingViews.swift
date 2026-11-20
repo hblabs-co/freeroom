@@ -25,16 +25,16 @@ struct FindingRow: View {
             ItemIcon(icon: finding.icon, fallback: finding.categoryFallback, size: 30)
 
             HStack(spacing: 6) {
-                Text(finding.displayTitle).font(.body.weight(.medium)).lineLimit(1)
+                Text(finding.displayTitle).font(.fr(.body).weight(.medium)).lineLimit(1)
                 Text(finding.meta).foregroundStyle(.secondary).lineLimit(1)
                 if finding.source == .agent { AgentMark(size: 11) }
-                if finding.needsAdmin { Image(systemName: "lock.fill").font(.caption).foregroundStyle(.secondary) }
+                if finding.needsAdmin { Image(systemName: "lock.fill").font(.fr(.caption)).foregroundStyle(.secondary) }
             }
             .layoutPriority(1)
             Spacer(minLength: 8)
             SizeBar(fraction: fraction, highlighted: selected).frame(width: 90)
             Text(finding.reclaimable.formattedBytes)
-                .font(.body.weight(.semibold)).monospacedDigit()
+                .font(.fr(.body).weight(.semibold)).monospacedDigit()
                 .frame(width: 78, alignment: .trailing)
             SafetyBadge(safety: finding.safety).frame(width: 86, alignment: .leading)
         }
@@ -75,9 +75,9 @@ struct FindingInspector: View {
             VStack(alignment: .leading, spacing: 16) {
                 ItemIcon(icon: finding.icon, fallback: finding.categoryFallback, size: 60)
                 VStack(alignment: .leading, spacing: 4) {
-                    Text(finding.displayTitle).font(.title3.weight(.semibold))
+                    Text(finding.displayTitle).font(.fr(.title3).weight(.semibold))
                     Text(finding.reclaimable.formattedBytes)
-                        .font(.system(size: 30, weight: .semibold, design: .rounded)).monospacedDigit()
+                        .font(.system(size: FontScale.size(30), weight: .semibold, design: .rounded)).monospacedDigit()
                     HStack { SafetyBadge(safety: finding.safety); SourceBadge(source: finding.source) }
                 }
                 TranslatedExplanation(finding: finding)
@@ -93,7 +93,7 @@ struct FindingInspector: View {
                     DisclosureGroup(finding.safety == .safe ? L("Why it's safe") : L("Why to review")) {
                         HStack(alignment: .top, spacing: 8) {
                             if finding.source == .agent { AgentMark(size: 12) } else { Image(systemName: "ruler").foregroundStyle(.secondary) }
-                            Text(v.evidence).font(.callout)
+                            Text(v.evidence).font(.fr(.callout))
                         }
                         .padding(10)
                         .frame(maxWidth: .infinity, alignment: .leading)
@@ -109,7 +109,7 @@ struct FindingInspector: View {
                             ForEach(finding.paths.prefix(30), id: \.self) { path in
                                 Button { model.reveal(path) } label: {
                                     Label(PathUtils.abbreviate(path), systemImage: "folder")
-                                        .font(.system(.caption, design: .monospaced)).lineLimit(1).truncationMode(.middle)
+                                        .font(.fr(.caption, design: .monospaced)).lineLimit(1).truncationMode(.middle)
                                 }
                                 .buttonStyle(.link)
                             }
@@ -158,12 +158,12 @@ struct InfoCard: View {
 
     var body: some View {
         HStack(alignment: .top, spacing: 10) {
-            Image(systemName: symbol).font(.title3).foregroundStyle(Theme.accent).frame(width: 24)
+            Image(systemName: symbol).font(.fr(.title3)).foregroundStyle(Theme.accent).frame(width: 24)
             VStack(alignment: .leading, spacing: 4) {
-                Text(title).font(.callout.weight(.semibold))
-                if let detail { Text(detail).font(.caption).foregroundStyle(.secondary) }
+                Text(title).font(.fr(.callout).weight(.semibold))
+                if let detail { Text(detail).font(.fr(.caption)).foregroundStyle(.secondary) }
                 if let code {
-                    Text(code).font(.system(.caption, design: .monospaced)).textSelection(.enabled)
+                    Text(code).font(.fr(.caption, design: .monospaced)).textSelection(.enabled)
                         .padding(6).frame(maxWidth: .infinity, alignment: .leading)
                         .background(.quaternary.opacity(0.6), in: RoundedRectangle(cornerRadius: 6))
                 }
@@ -225,17 +225,17 @@ struct TreemapTile: View {
                     }
                     Spacer(minLength: 0)
                     if size.width > 92 && size.height > 64 {
-                        Text(finding.displayTitle).font(.caption.weight(.medium)).lineLimit(1)
+                        Text(finding.displayTitle).font(.fr(.caption).weight(.medium)).lineLimit(1)
                     }
                     if size.width > 60 && size.height > 50 {
-                        Text(finding.reclaimable.formattedBytes).font(.caption.weight(.semibold)).monospacedDigit()
+                        Text(finding.reclaimable.formattedBytes).font(.fr(.caption).weight(.semibold)).monospacedDigit()
                     }
                 }
                 .padding(8)
                 if size.width > 40 && size.height > 30 {
                     Image(systemName: selected ? "checkmark.circle.fill" : Theme.icon(finding.safety))
                         .foregroundStyle(selected ? Theme.accent : color)
-                        .font(.caption)
+                        .font(.fr(.caption))
                         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topTrailing)
                         .padding(6)
                 }
@@ -265,7 +265,7 @@ private struct TranslatedExplanation: View {
                 Button(showOriginal ? L("Show translation") : L("Show original (English)")) {
                     withAnimation(.snappy) { showOriginal.toggle() }
                 }
-                .buttonStyle(.link).font(.caption)
+                .buttonStyle(.link).font(.fr(.caption))
             }
         }
     }

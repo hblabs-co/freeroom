@@ -143,7 +143,7 @@ struct SafetyBadge: View {
         let label = Label(value.map { "\(Theme.label(safety)) \($0.formattedBytes)" } ?? Theme.label(safety),
                           systemImage: Theme.icon(safety))
             .monospacedDigit()
-            .font(.caption.weight(.semibold))
+            .font(.fr(.caption).weight(.semibold))
             .padding(.horizontal, 8).padding(.vertical, 2)
         switch safety {
         case .safe:
@@ -163,13 +163,13 @@ struct SourceBadge: View {
         switch source {
         case .agent:
             HStack(spacing: 4) { AgentMark(size: 10); Text(L("agent")) }
-                .font(.caption2.weight(.semibold))
+                .font(.fr(.caption2).weight(.semibold))
                 .foregroundStyle(Theme.agent)
                 .padding(.horizontal, 6).padding(.vertical, 2)
                 .background(Theme.agentSoft, in: Capsule())
         case .rule:
             Text(L("rule"))
-                .font(.caption2.weight(.semibold))
+                .font(.fr(.caption2).weight(.semibold))
                 .foregroundStyle(.secondary)
                 .padding(.horizontal, 6).padding(.vertical, 2)
                 .background(.quaternary, in: Capsule())

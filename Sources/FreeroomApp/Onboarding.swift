@@ -52,7 +52,7 @@ struct OnboardingView: View {
             art: AnyView(HStack(spacing: 14) {
                 Image(nsImage: NSApp.applicationIconImage).resizable().frame(width: 64, height: 64)
                 Image(systemName: "arrow.right").foregroundStyle(.secondary)
-                Image(systemName: "externaldrive.fill.badge.checkmark").font(.system(size: 48)).foregroundStyle(Theme.accent)
+                Image(systemName: "externaldrive.fill.badge.checkmark").font(.system(size: FontScale.size(48))).foregroundStyle(Theme.accent)
             }),
             title: L("See your whole disk"),
             text: L("Full Disk Access lets Freeroom measure folders macOS protects, so sizes are exact. Nothing leaves your Mac."),
@@ -67,7 +67,7 @@ struct OnboardingView: View {
 
     private var notifications: some View {
         StepLayout(
-            art: AnyView(Image(systemName: "bell.badge.fill").font(.system(size: 56)).foregroundStyle(Theme.accent)
+            art: AnyView(Image(systemName: "bell.badge.fill").font(.system(size: FontScale.size(56))).foregroundStyle(Theme.accent)
                 .symbolRenderingMode(.hierarchical)),
             title: L("A heads-up, not a nag"),
             text: L("Freeroom checks your disk every few hours with its rules (no AI) and tells you when something big can go."),
@@ -84,11 +84,11 @@ struct OnboardingView: View {
     private var claudeCode: some View {
         StepLayout(
             art: AnyView(HStack(spacing: 12) {
-                VStack(spacing: 4) { AgentMark(size: 40); Text("Claude Code").font(.caption).foregroundStyle(Theme.agent); Text(L("measures & reports")).font(.caption2).foregroundStyle(.secondary) }
+                VStack(spacing: 4) { AgentMark(size: 40); Text("Claude Code").font(.fr(.caption)).foregroundStyle(Theme.agent); Text(L("measures & reports")).font(.fr(.caption2)).foregroundStyle(.secondary) }
                 Image(systemName: "arrow.right").foregroundStyle(.secondary)
-                VStack(spacing: 4) { Image(systemName: "cylinder.split.1x2").font(.system(size: 34)).foregroundStyle(.secondary); Text(L("Local store")).font(.caption); Text(" ").font(.caption2) }
+                VStack(spacing: 4) { Image(systemName: "cylinder.split.1x2").font(.system(size: FontScale.size(34))).foregroundStyle(.secondary); Text(L("Local store")).font(.fr(.caption)); Text(" ").font(.fr(.caption2)) }
                 Image(systemName: "arrow.right").foregroundStyle(.secondary)
-                VStack(spacing: 4) { Image(nsImage: NSApp.applicationIconImage).resizable().frame(width: 42, height: 42); Text("Freeroom").font(.caption); Text(L("you confirm, it cleans")).font(.caption2).foregroundStyle(.secondary) }
+                VStack(spacing: 4) { Image(nsImage: NSApp.applicationIconImage).resizable().frame(width: 42, height: 42); Text("Freeroom").font(.fr(.caption)); Text(L("you confirm, it cleans")).font(.fr(.caption2)).foregroundStyle(.secondary) }
             }),
             title: L("Optional: a deeper look with Claude Code"),
             text: L("The plugin lets your own Claude Code explain what rules can't (old archives, abandoned projects). It can measure and report, never delete."),
@@ -119,7 +119,7 @@ private struct StepLayout: View {
         VStack(spacing: 18) {
             Spacer()
             art.frame(height: 76).scaleEffect(0.85)
-            Text(title).font(.title2.weight(.semibold)).multilineTextAlignment(.center)
+            Text(title).font(.fr(.title2).weight(.semibold)).multilineTextAlignment(.center)
             Text(text).foregroundStyle(.secondary).multilineTextAlignment(.center).frame(maxWidth: 440)
             status.frame(minHeight: 30)
             Spacer()
@@ -137,7 +137,7 @@ struct Chip: View {
     let symbol: String
     let text: String
     var body: some View {
-        Label(text, systemImage: symbol).font(.caption)
+        Label(text, systemImage: symbol).font(.fr(.caption))
             .padding(.horizontal, 10).padding(.vertical, 5)
             .background(.quaternary.opacity(0.6), in: Capsule())
     }

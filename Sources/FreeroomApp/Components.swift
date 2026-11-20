@@ -84,7 +84,7 @@ struct LegendDot: View {
             Text(label).foregroundStyle(.secondary)
             Text(value.formattedBytes).monospacedDigit()
         }
-        .font(.caption)
+        .font(.fr(.caption))
     }
 }
 
@@ -110,7 +110,7 @@ struct RowIcon: View {
     var tint: Color = .secondary
     var body: some View {
         Image(systemName: symbol)
-            .font(.system(size: 12, weight: .semibold))
+            .font(.system(size: FontScale.size(12), weight: .semibold))
             .foregroundStyle(tint)
             .frame(width: 24, height: 24)
             .background(RoundedRectangle(cornerRadius: 6, style: .continuous).fill(.quaternary))
@@ -125,7 +125,7 @@ struct BrandTitle: View {
             Image(nsImage: NSApp.applicationIconImage).resizable().frame(width: compact ? 20 : 28, height: compact ? 20 : 28)
             VStack(alignment: .leading, spacing: 0) {
                 Text("Freeroom").font(compact ? .headline : .title3.weight(.semibold))
-                Text("by HB Labs SAS").font(.caption2).foregroundStyle(.secondary)
+                Text("by HB Labs SAS").font(.fr(.caption2)).foregroundStyle(.secondary)
             }
         }
         .accessibilityElement(children: .combine)

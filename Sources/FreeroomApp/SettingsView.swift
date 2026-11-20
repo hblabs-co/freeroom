@@ -11,7 +11,16 @@ struct SettingsView: View {
                 row("power", L("Open at login")) { Toggle("", isOn: Binding(get: { model.launchAtLogin }, set: { model.launchAtLogin = $0 })) }
                 row("menubar.rectangle", L("Free space in the menu bar")) { Toggle("", isOn: $model.showFreeInMenuBar) }
                 row("square.grid.3x3.square", L("Show disk map")) { Toggle("", isOn: $model.showDiskMap) }
-                row("rectangle.split.3x1", L("Simple mode"), subtitle: L("Big icons and one button; switch anytime in the toolbar")) { Toggle("", isOn: $model.simpleMode) }
+row("textformat.size", L("Text size")) {
+                    Picker("", selection: $model.textSize) {
+                        Text(L("Small")).tag(FontScale.Size.small)
+                        Text(L("Medium")).tag(FontScale.Size.medium)
+                        Text(L("Large")).tag(FontScale.Size.large)
+                    }
+                    .pickerStyle(.segmented)
+                    .frame(maxWidth: 260)
+                }
+                                row("rectangle.split.3x1", L("Simple mode"), subtitle: L("Big icons and one button; switch anytime in the toolbar")) { Toggle("", isOn: $model.simpleMode) }
                 row("speaker.wave.2", L("Sound when cleaning finishes")) { Toggle("", isOn: $model.playSound) }
                 row("clock.arrow.circlepath", L("Check every"), subtitle: L("Rules only, no AI")) {
                     Picker("", selection: $model.checkEveryHours) {
@@ -41,7 +50,7 @@ struct SettingsView: View {
                 HStack(spacing: 12) {
                     AgentMark(size: 28)
                     VStack(alignment: .leading) {
-                        Text(L("Claude Code plugin")).font(.headline)
+                        Text(L("Claude Code plugin")).font(.fr(.headline))
                         Text(model.lastAgentScan.map { String(format: L("Last scan %@"), $0.startedAt.formatted(.relative(presentation: .named))) } ?? L("No agent scan yet"))
                             .foregroundStyle(.secondary)
                     }
@@ -69,14 +78,14 @@ struct SettingsView: View {
 
             VStack(spacing: 10) {
                 Image(nsImage: NSApp.applicationIconImage).resizable().frame(width: 80, height: 80)
-                Text("Freeroom \(Freeroom.version)").font(.title3.weight(.semibold))
-                Text("by HB Labs SAS").font(.headline).foregroundStyle(.secondary)
+                Text("Freeroom \(Freeroom.version)").font(.fr(.title3).weight(.semibold))
+                Text("by HB Labs SAS").font(.fr(.headline)).foregroundStyle(.secondary)
                 Text(L("Open source") + " · MIT").foregroundStyle(.secondary)
                 Link("github.com/hblabs-co/freeroom", destination: URL(string: "https://github.com/hblabs-co/freeroom")!)
-                Text("brew install --cask hblabs-co/tap/freeroom").font(.system(.caption, design: .monospaced)).textSelection(.enabled)
+                Text("brew install --cask hblabs-co/tap/freeroom").font(.fr(.caption, design: .monospaced)).textSelection(.enabled)
                 Text(L("Brand logos from Simple Icons (CC0). Trademarks belong to their owners and are shown only to identify software on your Mac."))
-                    .font(.caption2).foregroundStyle(.secondary).multilineTextAlignment(.center).padding(.horizontal, 30)
-                if let error = model.storeError { Text(error).font(.caption).foregroundStyle(Theme.danger) }
+                    .font(.fr(.caption2)).foregroundStyle(.secondary).multilineTextAlignment(.center).padding(.horizontal, 30)
+                if let error = model.storeError { Text(error).font(.fr(.caption)).foregroundStyle(Theme.danger) }
             }
             .padding()
             .tabItem { Label(L("About"), systemImage: "info.circle") }
@@ -96,7 +105,7 @@ struct SettingsView: View {
                 RowIcon(symbol: symbol)
                 VStack(alignment: .leading, spacing: 1) {
                     Text(title)
-                    if let subtitle { Text(subtitle).font(.caption).foregroundStyle(.secondary) }
+                    if let subtitle { Text(subtitle).font(.fr(.caption)).foregroundStyle(.secondary) }
                 }
             }
         }
@@ -137,7 +146,7 @@ private struct FlowChips: View {
     var body: some View {
         LazyVGrid(columns: [GridItem(.adaptive(minimum: 140), alignment: .leading)], alignment: .leading, spacing: 6) {
             ForEach(items, id: \.self) { item in
-                Label(item, systemImage: symbol).font(.caption).lineLimit(1)
+                Label(item, systemImage: symbol).font(.fr(.caption)).lineLimit(1)
                     .padding(.horizontal, 8).padding(.vertical, 4)
                     .background(.quaternary.opacity(0.6), in: Capsule())
             }
