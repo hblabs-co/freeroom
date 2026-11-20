@@ -13,7 +13,24 @@ struct HistoryView: View {
             .map { ($0.key, $0.value.sorted { $0.at > $1.at }) }
     }
 
+    @State private var tab = 0
+
     var body: some View {
+        VStack(spacing: 0) {
+            Picker("", selection: $tab) {
+                Label(L("Cleanups"), systemImage: "sparkles").tag(0)
+                Label(L("Scans"), systemImage: "magnifyingglass").tag(1)
+            }
+            .pickerStyle(.segmented)
+            .labelsHidden()
+            .frame(maxWidth: 320)
+            .padding(.top, 14)
+            if tab == 0 { cleanups } else { RunsView() }
+        }
+    }
+
+    @ViewBuilder
+    private var cleanups: some View {
         if model.history.isEmpty {
             ContentUnavailableView(L("Nothing cleaned yet"), systemImage: "clock.arrow.circlepath",
                                    description: Text(L("Everything Freeroom cleans will be listed here.")))
@@ -143,5 +160,127 @@ private struct HistoryRow: View {
         .padding(.horizontal, 12).padding(.vertical, 10)
         .contentShape(Rectangle())
         .onTapGesture { if entry.finding != nil { toggle() } }
+    }
+}
+
+/// Every run, rule check or Claude Code scan, with what it found. Expand to see the findings.
+struct RunsView: View {
+    @Environment(AppModel.self) private var model
+    @State private var runs: [ScanSummary] = []
+    @State private var expanded: Set<String> = []
+
+    var body: some View {
+        ScrollView {
+            VStack(alignment: .leading, spacing: 18) {
+                HStack(spacing: 12) {
+                    VStack(alignment: .leading, spacing: 2) {
+                        Text(String(format: L("%@ runs"), "\(runs.count)")).font(.fr(.title3).weight(.semibold))
+                        Button { model.revealDatabase() } label: {
+                            Label(PathUtils.abbreviate(model.databasePath), systemImage: "cylinder.split.1x2")
+                                .font(.fr(.caption, design: .monospaced)).lineLimit(1).truncationMode(.middle)
+                        }
+                        .buttonStyle(.link)
+                        .help(L("Everything is stored locally in this file. Click to show it in Finder."))
+                    }
+                    Spacer()
+                    Button { model.launchClaudeScan() } label: {
+                        Label { Text(L("Analyze with Claude Code")) } icon: { AgentMark(size: 13) }
+                    }
+                    .buttonStyle(.bordered)
+                    Button { model.runRules() } label: { Label(L("Check now"), systemImage: "arrow.clockwise") }
+                        .buttonStyle(.bordered).disabled(model.isRunningRules)
+                }
+                VStack(spacing: 0) {
+                    ForEach(runs) { run in
+                        RunRow(run: run, expanded: expanded.contains(run.id)) {
+                            withAnimation(.snappy) {
+                                if expanded.contains(run.id) { expanded.remove(run.id) } else { expanded.insert(run.id) }
+                            }
+                        }
+                        if run.id != runs.last?.id { Divider().padding(.leading, 52) }
+                    }
+                }
+                .background(RoundedRectangle(cornerRadius: 12, style: .continuous).fill(Color(nsColor: .controlBackgroundColor)))
+                .overlay(RoundedRectangle(cornerRadius: 12, style: .continuous).strokeBorder(Color(nsColor: .separatorColor), lineWidth: 0.5))
+            }
+            .padding(24)
+            .frame(maxWidth: 900)
+            .frame(maxWidth: .infinity)
+        }
+        .task(id: model.lastRuleScan?.id ?? "" + (model.lastAgentScan?.id ?? "")) { runs = model.scanSummaries() }
+        .onAppear { runs = model.scanSummaries() }
+    }
+}
+
+private struct RunRow: View {
+    @Environment(AppModel.self) private var model
+    let run: ScanSummary
+    let expanded: Bool
+    let toggle: () -> Void
+    @State private var items: [Finding] = []
+
+    private var isAgent: Bool { run.scan.source == .agent }
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 8) {
+            HStack(spacing: 12) {
+                Group {
+                    if isAgent { AgentMark(size: 22) } else { RowIcon(symbol: "ruler") }
+                }
+                .frame(width: 28)
+                VStack(alignment: .leading, spacing: 2) {
+                    HStack(spacing: 6) {
+                        Text(isAgent ? L("Claude Code scan") : L("Rule check")).font(.fr(.body).weight(.medium))
+                        if let v = run.scan.pluginVersion {
+                            Text("v\(v)").font(.fr(.caption2, design: .monospaced)).foregroundStyle(.secondary)
+                                .padding(.horizontal, 5).background(.quaternary.opacity(0.6), in: Capsule())
+                        }
+                        if run.scan.endedAt == nil {
+                            Label(L("running"), systemImage: "circle.dotted").font(.fr(.caption)).foregroundStyle(Theme.accent)
+                        }
+                    }
+                    HStack(spacing: 6) {
+                        Text(run.scan.startedAt.formatted(date: .abbreviated, time: .shortened))
+                        if let d = run.duration {
+                            Text("·")
+                            Text(Duration.seconds(d).formatted(.units(allowed: [.minutes, .seconds], width: .abbreviated)))
+                        }
+                        if let note = run.scan.note, !note.isEmpty, note != "auto" { Text("·"); Text(note).lineLimit(1) }
+                    }
+                    .font(.fr(.caption)).foregroundStyle(.secondary)
+                }
+                Spacer()
+                VStack(alignment: .trailing, spacing: 1) {
+                    Text(run.totalBytes.formattedBytes).font(.fr(.body).weight(.semibold)).monospacedDigit()
+                    Text(String(format: L("%@ findings"), "\(run.findingCount)")).font(.fr(.caption)).foregroundStyle(.secondary)
+                }
+                Image(systemName: expanded ? "chevron.up" : "chevron.down").foregroundStyle(.secondary)
+            }
+            .contentShape(Rectangle())
+            .onTapGesture(perform: toggle)
+
+            if expanded {
+                VStack(alignment: .leading, spacing: 6) {
+                    ForEach(items.prefix(40)) { f in
+                        HStack(spacing: 10) {
+                            ItemIcon(icon: f.icon, fallback: f.categoryFallback, size: 22)
+                            Text(f.displayTitle).lineLimit(1)
+                            Spacer()
+                            Text(f.sizeBytes.formattedBytes).monospacedDigit().foregroundStyle(.secondary)
+                            SafetyBadge(safety: f.safety).frame(width: 86, alignment: .leading)
+                        }
+                    }
+                    if items.count > 40 { Text("+ \(items.count - 40)").font(.fr(.caption)).foregroundStyle(.secondary) }
+                    HStack {
+                        Spacer()
+                        Button { model.exportScan(run) } label: { Label(L("Export report…"), systemImage: "square.and.arrow.up") }
+                            .controlSize(.small)
+                    }
+                }
+                .padding(.leading, 40)
+                .task { items = model.findings(forScan: run.id) }
+            }
+        }
+        .padding(.horizontal, 12).padding(.vertical, 10)
     }
 }

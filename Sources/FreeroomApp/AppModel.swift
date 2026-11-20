@@ -19,7 +19,15 @@ final class AppModel {
     var translations: [String: String] = [:]
     var lastRuleScan: ScanRecord?
     var lastAgentScan: ScanRecord?
-    var agentScanLive: Bool { lastAgentScan != nil && lastAgentScan?.endedAt == nil }
+    /// An agent scan is live while open, but not forever: a session that crashed without
+    /// `freeroom scan end` stops counting as live after 2 hours.
+    var agentScanLive: Bool {
+        guard let scan = lastAgentScan, scan.endedAt == nil else { return false }
+        return Date().timeIntervalSince(scan.startedAt) < 2 * 3600
+    }
+    /// Any scan running: the rule engine or Claude Code.
+    var isScanning: Bool { isRunningRules || agentScanLive }
+    var scanStatusText: String { agentScanLive ? L("Claude Code is scanning…") : L("Checking your disk…") }
     /// Ids that appeared in the last reload (for the "new finding" highlight).
     var freshIds: Set<String> = []
     var isRunningRules = false
@@ -198,6 +206,7 @@ final class AppModel {
                 let scan = try store.beginScan(source: .rule)
                 for finding in findings { try store.upsert(finding, scanId: scan.id) }
                 try store.endScan(id: scan.id)
+                try store.pruneRuleScans(keep: 60)
             } catch {}
             await MainActor.run {
                 self.isRunningRules = false
@@ -424,6 +433,66 @@ final class AppModel {
     func openSettings() {
         navigate(to: .settings)
         openMainWindow()
+    }
+
+    // MARK: Runs (scan history) and export
+
+    func scanSummaries() -> [ScanSummary] { (try? store?.scanSummaries(limit: 100)) ?? [] }
+    func findings(forScan id: String) -> [Finding] { (try? store?.findings(scanId: id)) ?? [] }
+    var databasePath: String { store?.path ?? Store.defaultPath }
+
+    func revealDatabase() { reveal(databasePath) }
+
+    /// Saves one run as a Markdown report (the "consolidated file").
+    func exportScan(_ summary: ScanSummary) {
+        let items = findings(forScan: summary.id)
+        let source = summary.scan.source == .agent ? "Claude Code" : "Freeroom rules"
+        var md = "# Freeroom report\n\n"
+        md += "- Run: \(summary.scan.startedAt.formatted(date: .long, time: .shortened)) · \(source)"
+        if let v = summary.scan.pluginVersion { md += " (plugin \(v))" }
+        md += "\n- Findings: \(summary.findingCount) · \(summary.totalBytes.formattedBytes)\n\n"
+        md += "| Item | Size | Class | Action | Explanation |\n|---|---:|---|---|---|\n"
+        for f in items {
+            let action = f.action == .command ? "`\(f.command ?? "")`" : f.action.rawValue
+            md += "| \(f.displayTitle) | \(f.sizeBytes.formattedBytes) | \(f.safety.rawValue) | \(action) | \(explanation(for: f).replacingOccurrences(of: "|", with: "\\|")) |\n"
+        }
+        md += "\n## Paths\n\n"
+        for f in items where !f.paths.isEmpty {
+            md += "**\(f.displayTitle)**\n" + f.paths.prefix(50).map { "- `\(PathUtils.abbreviate($0))`" }.joined(separator: "\n") + "\n\n"
+        }
+        let panel = NSSavePanel()
+        panel.nameFieldStringValue = "freeroom-\(summary.id).md"
+        panel.allowedContentTypes = [.init(filenameExtension: "md") ?? .plainText]
+        NSApp.activate(ignoringOtherApps: true)
+        if panel.runModal() == .OK, let url = panel.url {
+            try? md.write(to: url, atomically: true, encoding: .utf8)
+            NSWorkspace.shared.activateFileViewerSelecting([url])
+        }
+    }
+
+    /// Opens Terminal with the user's own Claude Code running /freeroom:scan, so they see and
+    /// control the agent. Freeroom never runs Claude hidden in the background.
+    func launchClaudeScan(path: String = "~") {
+        let dir = URL(fileURLWithPath: PathUtils.expand("~/Library/Caches/Freeroom"))
+        try? FileManager.default.createDirectory(at: dir, withIntermediateDirectories: true)
+        let script = dir.appendingPathComponent("freeroom-scan.command")
+        let body = """
+        #!/bin/zsh -l
+        clear
+        if ! command -v claude >/dev/null 2>&1; then
+          echo "Claude Code is not installed. See https://docs.claude.com/en/docs/claude-code"
+          exit 1
+        fi
+        claude "/freeroom:scan \(path)"
+
+        """
+        do {
+            try body.write(to: script, atomically: true, encoding: .utf8)
+            try FileManager.default.setAttributes([.posixPermissions: 0o755], ofItemAtPath: script.path)
+            NSWorkspace.shared.open(script)
+        } catch {
+            copyScanCommand()
+        }
     }
 
     func copyScanCommand() {

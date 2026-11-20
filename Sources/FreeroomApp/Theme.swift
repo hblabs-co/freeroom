@@ -120,6 +120,30 @@ enum MenuGlyph {
     private static let lowDot = ##"<circle cx="20.5" cy="4" r="3" fill="#000"/>"##
 
     private static var cache: [Bool: NSImage] = [:]
+    private static var scanCache: [Int: NSImage] = [:]
+
+    /// Glint positions for the "scanning" animation (24×24 viewBox, inside the hexagon).
+    private static let scanGlints: [(Double, Double)] = [(8.5, 7.8), (13.6, 8.6), (16.2, 11.2), (12.0, 12.4)]
+
+    private static func glint(at x: Double, _ y: Double, r: Double = 2.6) -> String {
+        "<path d=\"M\(x) \(y - r)Q\(x + 0.35) \(y - 0.35) \(x + r) \(y)Q\(x + 0.35) \(y + 0.35) \(x) \(y + r)Q\(x - 0.35) \(y + 0.35) \(x - r) \(y)Q\(x - 0.35) \(y - 0.35) \(x) \(y - r)Z\" fill=\"#000\"/>"
+    }
+
+    /// Frame `i` of the scanning animation: the glint moves while Freeroom or Claude Code scans.
+    @MainActor
+    static func scanningImage(frame i: Int) -> NSImage {
+        let index = i % scanGlints.count
+        if let cached = scanCache[index] { return cached }
+        let (x, y) = scanGlints[index]
+        let svg = ##"<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24">"##
+            + hexagon + sweep + glint(at: x, y) + "</svg>"
+        let image = NSImage(data: Data(svg.utf8)) ?? image()
+        image.size = NSSize(width: 18, height: 18)
+        image.isTemplate = true
+        image.accessibilityDescription = "Freeroom – scanning"
+        scanCache[index] = image
+        return image
+    }
 
     @MainActor
     static func image(low: Bool = false) -> NSImage {

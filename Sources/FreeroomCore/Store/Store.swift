@@ -21,6 +21,15 @@ public struct ScanRecord: Codable, Equatable, Sendable {
     public var pluginVersion: String?
 }
 
+/// One run (rule check or agent scan) with what it found.
+public struct ScanSummary: Codable, Equatable, Sendable, Identifiable {
+    public var scan: ScanRecord
+    public var findingCount: Int
+    public var totalBytes: Int64
+    public var id: String { scan.id }
+    public var duration: TimeInterval? { scan.endedAt.map { $0.timeIntervalSince(scan.startedAt) } }
+}
+
 public struct HistoryEntry: Codable, Equatable, Sendable {
     public var findingId: String
     public var title: String
@@ -113,6 +122,32 @@ public final class Store: @unchecked Sendable {
                        endedAt: s.isNull(3) ? nil : Date(timeIntervalSince1970: s.double(3)),
                        note: s.text(4), pluginVersion: s.text(5))
         }
+    }
+
+    /// Runs with their number of findings and total size, newest first.
+    public func scanSummaries(limit: Int = 100) throws -> [ScanSummary] {
+        try query("""
+        SELECT s.id, s.source, s.started_at, s.ended_at, s.note, s.plugin_version,
+               COUNT(f.id), COALESCE(SUM(f.size), 0)
+        FROM scans s LEFT JOIN findings f ON f.scan_id = s.id
+        GROUP BY s.id ORDER BY s.started_at DESC LIMIT ?
+        """, [.int(Int64(limit))]) { r in
+            ScanSummary(
+                scan: ScanRecord(id: r.text(0) ?? "", source: FindingSource(rawValue: r.text(1) ?? "") ?? .rule,
+                                 startedAt: Date(timeIntervalSince1970: r.double(2)),
+                                 endedAt: r.isNull(3) ? nil : Date(timeIntervalSince1970: r.double(3)),
+                                 note: r.text(4), pluginVersion: r.text(5)),
+                findingCount: Int(r.int(6)), totalBytes: r.int(7))
+        }
+    }
+
+    /// Keeps only the newest `keep` rule checks (they run every few hours); agent scans are kept.
+    public func pruneRuleScans(keep: Int = 60) throws {
+        let old = """
+        SELECT id FROM scans WHERE source = 'rule' ORDER BY started_at DESC LIMIT -1 OFFSET ?
+        """
+        try run("DELETE FROM findings WHERE scan_id IN (\(old))", [.int(Int64(keep))])
+        try run("DELETE FROM scans WHERE id IN (\(old))", [.int(Int64(keep))])
     }
 
     /// Most recent scan still open (no end time), optionally for one source.

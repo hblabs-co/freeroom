@@ -14,7 +14,7 @@ struct SimpleView: View {
         } else {
             ScrollView {
                 VStack(spacing: 26) {
-                    if model.agentScanLive { AgentLiveBanner() }
+                    if model.agentScanLive { AgentLiveBanner() } else if model.isRunningRules { ScanningStatus() }
                     hero
                     section(L("Safe to free"), symbol: Theme.icon(.safe), color: Theme.safe, items: safe)
                     section(L("Check these yourself"), symbol: Theme.icon(.review), color: Theme.review, items: review)

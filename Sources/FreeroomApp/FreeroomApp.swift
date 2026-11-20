@@ -47,7 +47,14 @@ private struct MenuBarLabel: View {
 
     var body: some View {
         HStack(spacing: 4) {
-            Image(nsImage: MenuGlyph.image(low: model.lowOnSpace))
+            if model.isScanning {
+                // Animated glyph while the rule engine or Claude Code is scanning.
+                TimelineView(.periodic(from: .now, by: 0.35)) { context in
+                    Image(nsImage: MenuGlyph.scanningImage(frame: Int(context.date.timeIntervalSinceReferenceDate / 0.35)))
+                }
+            } else {
+                Image(nsImage: MenuGlyph.image(low: model.lowOnSpace))
+            }
             if model.showFreeInMenuBar {
                 Text(model.freeBytes.formattedBytes)
             }

@@ -8,6 +8,7 @@ struct MenuPanel: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 14) {
             BrandTitle(compact: true)
+            if model.isScanning { ScanningStatus(compact: true) }
             header
 
             let safeTotal = model.safeFindings.reduce(Int64(0)) { $0 + $1.reclaimable }
@@ -96,15 +97,15 @@ struct MenuPanel: View {
             }
             .buttonStyle(.plain)
         } else {
-            Button { model.copyScanCommand() } label: {
+            Button { model.launchClaudeScan() } label: {
                 HStack(spacing: 10) {
                     RowIcon(symbol: "terminal")
                     VStack(alignment: .leading, spacing: 1) {
-                        Text(L("Deep scan with Claude Code")).font(.fr(.callout).weight(.semibold))
-                        Text(String(format: L("Copy %@"), "/freeroom:scan")).font(.fr(.caption)).foregroundStyle(.secondary)
+                        Text(L("Analyze with Claude Code")).font(.fr(.callout).weight(.semibold))
+                        Text(L("Opens Terminal with /freeroom:scan")).font(.fr(.caption)).foregroundStyle(.secondary)
                     }
                     Spacer()
-                    Image(systemName: "doc.on.doc").foregroundStyle(.secondary)
+                    Image(systemName: "arrow.up.forward.app").foregroundStyle(.secondary)
                 }
                 .padding(10)
                 .background(.quaternary.opacity(0.5), in: RoundedRectangle(cornerRadius: 10, style: .continuous))
@@ -118,7 +119,7 @@ struct MenuPanel: View {
             Button { model.runRules() } label: {
                 Image(systemName: "arrow.clockwise").symbolEffect(.rotate, isActive: model.isRunningRules)
             }.help(L("Check now (no AI)")).disabled(model.isRunningRules)
-            Button { model.copyScanCommand() } label: { Image(systemName: "terminal") }.help(String(format: L("Copy %@"), "/freeroom:scan"))
+            Button { model.launchClaudeScan() } label: { Image(systemName: "terminal") }.help(L("Analyze with Claude Code"))
             Spacer()
             Toggle(isOn: Binding(get: { model.showFreeInMenuBar }, set: { model.showFreeInMenuBar = $0 })) {
                 Image(systemName: "menubar.rectangle")

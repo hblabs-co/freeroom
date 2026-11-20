@@ -176,7 +176,7 @@ struct MainView: View {
         } else {
             ScrollView {
                 VStack(alignment: .leading, spacing: 18) {
-                    if model.agentScanLive { AgentLiveBanner() }
+                    if model.agentScanLive { AgentLiveBanner() } else if model.isRunningRules { ScanningStatus() }
                     hero
                     if model.showDiskMap && sidebar == .everything && search.isEmpty {
                         TreemapView(findings: visible.filter(\.isCleanable))
@@ -288,7 +288,7 @@ struct MainView: View {
             .keyboardShortcut("r")
         }
         ToolbarItem {
-            Button { model.copyScanCommand() } label: { Label(L("Deep scan"), systemImage: "terminal") }
+            Button { model.launchClaudeScan() } label: { Label(L("Analyze with Claude Code"), systemImage: "terminal") }
                 .help(String(format: L("Copy %@ for Claude Code"), "/freeroom:scan"))
         }
         ToolbarItem {
@@ -390,7 +390,7 @@ struct EmptyStateView: View {
                 Text(String(format: L("%@ free"), model.freeBytes.formattedBytes)).foregroundStyle(.secondary).monospacedDigit()
                 HStack {
                     Button(L("Check now")) { model.runRules() }.buttonStyle(.borderedProminent).tint(Theme.accent)
-                    Button(L("Deep scan with Claude Code")) { model.copyScanCommand() }
+                    Button(L("Analyze with Claude Code")) { model.launchClaudeScan() }
                 }
                 HStack(spacing: -6) {
                     ForEach(Array(Catalog.locations.filter { $0.icon?.app != nil || $0.icon?.brand != nil }

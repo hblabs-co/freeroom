@@ -210,6 +210,30 @@ final class StoreTests: XCTestCase {
         _ = try Store(path: path)
     }
 
+    func testScanSummariesAndPruning() throws {
+        let path = NSTemporaryDirectory() + "freeroom-\(UUID().uuidString).db"
+        defer { try? FileManager.default.removeItem(atPath: path) }
+        let store = try Store(path: path)
+        for i in 0..<5 {
+            let scan = try store.beginScan(source: .rule)
+            try store.upsert(Finding(id: "f\(i)", title: "F", paths: [], sizeBytes: 100, safety: .safe, source: .rule,
+                                     category: .other, explanation: "", action: .none), scanId: scan.id)
+            try store.endScan(id: scan.id)
+            Thread.sleep(forTimeInterval: 0.01)
+        }
+        let agent = try store.beginScan(source: .agent, pluginVersion: "0.1.0")
+        let summaries = try store.scanSummaries()
+        XCTAssertEqual(summaries.count, 6)
+        XCTAssertEqual(summaries.first?.scan.id, agent.id)
+        XCTAssertEqual(summaries.first { $0.scan.source == .rule }?.findingCount, 1)
+        XCTAssertEqual(summaries.first { $0.scan.source == .rule }?.totalBytes, 100)
+
+        try store.pruneRuleScans(keep: 2)
+        let after = try store.scanSummaries()
+        XCTAssertEqual(after.filter { $0.scan.source == .rule }.count, 2)
+        XCTAssertEqual(after.filter { $0.scan.source == .agent }.count, 1, "agent scans are never pruned")
+    }
+
     func testFindingJSONIsVersioned() throws {
         let finding = Finding(id: "a", title: "A", paths: [], sizeBytes: 1, safety: .keep, source: .rule,
                               category: .system, explanation: "", action: .none)

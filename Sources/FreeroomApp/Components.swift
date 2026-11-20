@@ -136,3 +136,29 @@ struct BrandTitle: View {
         .accessibilityElement(children: .combine)
     }
 }
+
+/// "Scanning…" status shown in the popover and the main window while a scan runs.
+struct ScanningStatus: View {
+    @Environment(AppModel.self) private var model
+    var compact = false
+
+    var body: some View {
+        HStack(spacing: 10) {
+            if model.agentScanLive {
+                AgentMark(size: compact ? 14 : 18).symbolEffect(.pulse)
+            } else {
+                Image(systemName: "arrow.triangle.2.circlepath")
+                    .symbolEffect(.rotate, isActive: true)
+                    .foregroundStyle(Theme.accent)
+            }
+            Text(model.scanStatusText).font(compact ? .fr(.callout).weight(.semibold) : .fr(.body).weight(.semibold))
+            Spacer()
+            ProgressView().controlSize(.small)
+        }
+        .padding(compact ? 8 : 12)
+        .background(Theme.blue50, in: RoundedRectangle(cornerRadius: compact ? 8 : 12, style: .continuous))
+        .transition(.move(edge: .top).combined(with: .opacity))
+        .accessibilityElement(children: .combine)
+        .accessibilityLabel(model.scanStatusText)
+    }
+}
