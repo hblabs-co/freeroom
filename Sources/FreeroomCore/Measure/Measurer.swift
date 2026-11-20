@@ -50,6 +50,24 @@ public struct MeasureReport: Codable, Equatable, Sendable {
 public struct Measurer: Sendable {
     public var topChildren: Int
 
+    /// Every mount point except "/". Needed because APFS volume groups report the same st_dev for
+    /// the system and data volumes (e.g. /System and /System/Volumes/Data), so a device check alone
+    /// would walk into the data volume and count the whole disk again.
+    public static let mountPoints: Set<String> = {
+        var buffer: UnsafeMutablePointer<statfs>?
+        let count = getmntinfo(&buffer, MNT_NOWAIT)
+        guard count > 0, let buffer else { return [] }
+        var points = Set<String>()
+        for i in 0..<Int(count) {
+            var entry = buffer[i]
+            let path = withUnsafePointer(to: &entry.f_mntonname) {
+                $0.withMemoryRebound(to: CChar.self, capacity: Int(MAXPATHLEN)) { String(cString: $0) }
+            }
+            if path != "/" { points.insert(path) }
+        }
+        return points
+    }()
+
     public init(topChildren: Int = 0) {
         self.topChildren = topChildren
     }
@@ -129,7 +147,7 @@ public struct Measurer: Sendable {
                 guard let st = entry.pointee.fts_statp?.pointee else { continue }
 
                 if info == FTS_D {
-                    if level > 0 && st.st_dev != rootDev {
+                    if level > 0 && (st.st_dev != rootDev || Self.mountPoints.contains(path)) {
                         items[index].skippedMounts.append(path)
                         fts_set(fts, entry, FTS_SKIP)
                         continue

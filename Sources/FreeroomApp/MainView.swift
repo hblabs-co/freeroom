@@ -62,9 +62,9 @@ struct MainView: View {
         } detail: {
             Group {
                 if model.route == .settings {
-                    SettingsView()
+                    VStack(spacing: 0) { RouteHeader(title: L("Settings"), symbol: "gearshape"); SettingsView() }
                 } else if model.route == .history {
-                    HistoryView()
+                    VStack(spacing: 0) { RouteHeader(title: L("History"), symbol: "clock.arrow.circlepath"); HistoryView() }
                 } else {
                     ZStack(alignment: .bottom) {
                         if model.simpleMode { SimpleView() } else { content }
@@ -220,12 +220,16 @@ struct MainView: View {
     }
 
     private var list: some View {
-        let maxSize = Double(visible.first?.sizeBytes ?? 1)
+        // Keep items are listed apart (collapsed) and never counted in totals: they can be huge
+        // system folders that overlap each other.
+        let active = visible.filter { $0.safety != .keep }
+        let kept = visible.filter { $0.safety == .keep }
+        let maxSize = Double(active.first?.sizeBytes ?? 1)
         let groups: [(String, Ecosystem?, [Finding])] = groupByEcosystem
-            ? Dictionary(grouping: visible, by: \.ecosystem)
+            ? Dictionary(grouping: active, by: \.ecosystem)
                 .map { (L($0.key.title), Optional($0.key), $0.value) }
                 .sorted { $0.2.reduce(0) { $0 + $1.sizeBytes } > $1.2.reduce(0) { $0 + $1.sizeBytes } }
-            : [(L("By size"), nil, visible)]
+            : [(L("By size"), nil, active)]
         return VStack(alignment: .leading, spacing: 16) {
             ForEach(groups, id: \.0) { title, eco, items in
                 VStack(alignment: .leading, spacing: 4) {
@@ -252,19 +256,12 @@ struct MainView: View {
                     .overlay(RoundedRectangle(cornerRadius: 12, style: .continuous).strokeBorder(Color(nsColor: .separatorColor), lineWidth: 0.5))
                 }
             }
+            if !kept.isEmpty { KeptSection(items: kept) }
         }
     }
 
     @ToolbarContentBuilder
     private var toolbar: some ToolbarContent {
-        if model.route != .findings {
-            ToolbarItem(placement: .navigation) {
-                Button { model.navigate(to: .findings) } label: { Label(L("Back"), systemImage: "chevron.left") }
-                    .labelStyle(.titleAndIcon)
-                    .keyboardShortcut(.escape, modifiers: [])
-                    .help(L("Back"))
-            }
-        }
         ToolbarItem(placement: .navigation) {
             Picker(L("Mode"), selection: Binding(get: { model.simpleMode }, set: { model.switchMode(simple: $0) })) {
                 Label(L("Simple"), systemImage: "square.grid.2x2.fill").tag(true)
@@ -406,5 +403,56 @@ struct EmptyStateView: View {
             }
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
+    }
+}
+
+/// Clear way back from Settings / History: a big Back button at the top of the content (and Esc).
+private struct RouteHeader: View {
+    @Environment(AppModel.self) private var model
+    let title: String
+    let symbol: String
+
+    var body: some View {
+        HStack(spacing: 14) {
+            Button { model.navigate(to: .findings) } label: {
+                Label(L("Back to results"), systemImage: "chevron.left")
+                    .padding(.horizontal, 4)
+            }
+            .buttonStyle(.bordered)
+            .controlSize(.large)
+            .keyboardShortcut(.cancelAction)
+            .help(L("Back to results") + " (esc)")
+
+            Label(title, systemImage: symbol)
+                .font(.fr(.title2).weight(.semibold))
+            Spacer()
+        }
+        .padding(.horizontal, 24)
+        .padding(.vertical, 14)
+        .overlay(alignment: .bottom) { Divider() }
+    }
+}
+
+/// Big items Freeroom will never delete, collapsed by default.
+private struct KeptSection: View {
+    @Environment(AppModel.self) private var model
+    let items: [Finding]
+    @State private var open = false
+
+    var body: some View {
+        DisclosureGroup(isExpanded: $open) {
+            VStack(spacing: 0) {
+                ForEach(items) { finding in
+                    FindingRow(finding: finding, fraction: 0)
+                    if finding.id != items.last?.id { Divider().padding(.leading, 76) }
+                }
+            }
+            .background(RoundedRectangle(cornerRadius: 12, style: .continuous).fill(Color(nsColor: .controlBackgroundColor)))
+            .padding(.top, 6)
+        } label: {
+            Label(String(format: L("Large, but kept (%@)"), "\(items.count)"), systemImage: "lock.fill")
+                .font(.fr(.headline)).foregroundStyle(.secondary)
+                .help(L("Freeroom never deletes these. They are listed so you know where your space goes."))
+        }
     }
 }

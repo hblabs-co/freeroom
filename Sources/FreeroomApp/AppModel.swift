@@ -148,7 +148,8 @@ final class AppModel {
     var selectedBytes: Int64 { selectedFindings.reduce(0) { $0 + $1.reclaimable } }
 
     var ecosystems: [(Ecosystem, Int64)] {
-        Dictionary(grouping: findings, by: \.ecosystem)
+        // Only what can actually be cleaned counts; Keep items can overlap and exceed the disk.
+        Dictionary(grouping: findings.filter(\.isCleanable), by: \.ecosystem)
             .map { ($0.key, $0.value.reduce(0) { $0 + $1.reclaimable }) }
             .sorted { $0.1 > $1.1 }
     }

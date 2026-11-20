@@ -184,18 +184,31 @@ struct TreemapView: View {
     @Environment(AppModel.self) private var model
     let findings: [Finding]
 
+    /// Tiles below this share of the map are too small for an icon: they are grouped into one
+    /// "+N more" tile instead of showing as empty boxes.
+    private static let minShare = 0.018
+    private static let maxTiles = 24
+
     var body: some View {
-        let items = Array(findings.prefix(40))
+        let total = Double(findings.reduce(Int64(0)) { $0 + $1.reclaimable })
+        let shown = Array(findings.prefix(Self.maxTiles).filter { total > 0 && Double($0.reclaimable) / total >= Self.minShare })
+        let rest = findings.filter { f in !shown.contains { $0.id == f.id } }
+        let restBytes = rest.reduce(Int64(0)) { $0 + $1.reclaimable }
+        let weights = shown.map { Double($0.reclaimable) } + (rest.isEmpty ? [] : [Double(restBytes)])
         GeometryReader { geo in
-            let rects = Treemap.layout(weights: items.map { Double($0.reclaimable) },
-                                       in: CGRect(origin: .zero, size: geo.size))
+            let rects = Treemap.layout(weights: weights, in: CGRect(origin: .zero, size: geo.size))
             ZStack(alignment: .topLeading) {
-                ForEach(Array(items.enumerated()), id: \.element.id) { index, finding in
+                ForEach(Array(shown.enumerated()), id: \.element.id) { index, finding in
                     let rect = rects[index].insetBy(dx: 2, dy: 2)
                     if rect.width > 4 && rect.height > 4 {
                         TreemapTile(finding: finding, size: rect.size)
                             .offset(x: rect.minX, y: rect.minY)
                     }
+                }
+                if !rest.isEmpty, let last = rects.last {
+                    let rect = last.insetBy(dx: 2, dy: 2)
+                    MoreTile(count: rest.count, bytes: restBytes, size: rect.size)
+                        .offset(x: rect.minX, y: rect.minY)
                 }
             }
         }
@@ -272,5 +285,31 @@ private struct TranslatedExplanation: View {
                 .buttonStyle(.link).font(.fr(.caption))
             }
         }
+    }
+}
+
+/// Aggregates the many small items so the map never shows empty boxes.
+private struct MoreTile: View {
+    let count: Int
+    let bytes: Int64
+    let size: CGSize
+
+    var body: some View {
+        ZStack {
+            RoundedRectangle(cornerRadius: 10, style: .continuous).fill(Color.secondary.opacity(0.08))
+            RoundedRectangle(cornerRadius: 10, style: .continuous).strokeBorder(Color(nsColor: .separatorColor), lineWidth: 0.5)
+            VStack(spacing: 2) {
+                if size.height > 34 {
+                    Image(systemName: "square.grid.3x3.fill").foregroundStyle(.secondary)
+                }
+                Text("+\(count)").font(.fr(.callout).weight(.semibold))
+                if size.width > 60 && size.height > 50 {
+                    Text(bytes.formattedBytes).font(.fr(.caption)).monospacedDigit().foregroundStyle(.secondary)
+                }
+            }
+        }
+        .frame(width: size.width, height: size.height)
+        .help(String(format: L("%@ smaller items · %@"), "\(count)", bytes.formattedBytes))
+        .accessibilityLabel(String(format: L("%@ smaller items · %@"), "\(count)", bytes.formattedBytes))
     }
 }

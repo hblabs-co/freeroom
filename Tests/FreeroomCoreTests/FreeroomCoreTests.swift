@@ -72,6 +72,12 @@ final class MeasurerTests: XCTestCase {
         XCTAssertLessThan(item.allocatedBytes, 100_000)
     }
 
+    func testKnowsAPFSDataVolumeMount() {
+        // /System/Volumes/Data shares st_dev with /System on APFS; it must be skipped by path.
+        XCTAssertTrue(Measurer.mountPoints.contains("/System/Volumes/Data"))
+        XCTAssertFalse(Measurer.mountPoints.contains("/"))
+    }
+
     func testMissingPath() {
         let item = Measurer().measure([root + "/nope"]).items[0]
         XCTAssertFalse(item.exists)
