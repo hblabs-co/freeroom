@@ -49,6 +49,8 @@ final class AppModel {
     /// Minimum window width for the current layout. Raised only after an animated expansion,
     /// otherwise macOS would snap the window to the new minimum without animation.
     var windowMinWidth: CGFloat = 720
+    /// Right-hand inspector in Detailed mode.
+    var inspectorVisible = true
     var textSize: FontScale.Size { didSet { defaults.set(textSize.rawValue, forKey: "textSize"); FontScale.factor = textSize.factor } }
     /// Changes when language or text size change, to rebuild the view tree.
     var appearanceKey: String { "\(language)-\(textSize.rawValue)" }
@@ -312,7 +314,9 @@ final class AppModel {
     }
 
     /// Minimum width each mode needs: Detailed = sidebar + list + inspector.
-    static let detailedMinWidth: CGFloat = 1180
+    /// Sidebar (~220) + list (~640) + inspector (~290) + chrome.
+    static let detailedMinWidth: CGFloat = 1240
+    static let detailedDefaultWidth: CGFloat = 1440
     static let simpleDefaultWidth: CGFloat = 900
 
     /// Switches Simple/Detailed with a smooth window resize in both directions.
@@ -328,6 +332,8 @@ final class AppModel {
             // Expanding: animate the window wide first (setFrame(animate:) returns when done),
             // then show the columns and raise the minimum, so nothing snaps.
             resizeWindowForMode(forSimple: false)
+            if inspected == nil { inspected = findings.first(where: \.isCleanable)?.id ?? findings.first?.id }
+            inspectorVisible = true
             simpleMode = false
             windowMinWidth = Self.detailedMinWidth
         }
@@ -350,7 +356,7 @@ final class AppModel {
         guard onboarded, let window = mainWindow, let screen = window.screen ?? NSScreen.main else { return }
         let visible = screen.visibleFrame
         let saved = defaults.double(forKey: simple ? "simpleWidth" : "detailedWidth")
-        var width = saved > 0 ? CGFloat(saved) : (simple ? Self.simpleDefaultWidth : 1240)
+        var width = saved > 0 ? CGFloat(saved) : (simple ? Self.simpleDefaultWidth : Self.detailedDefaultWidth)
         if !simple { width = max(width, Self.detailedMinWidth) }
         width = min(width, visible.width - 20)
         var frame = window.frame
@@ -364,7 +370,7 @@ final class AppModel {
     func expandMainWindow() {
         guard let window = mainWindow, let screen = window.screen ?? NSScreen.main else { return }
         let visible = screen.visibleFrame
-        let size = NSSize(width: min(simpleMode ? Self.simpleDefaultWidth : 1240, visible.width - 40),
+        let size = NSSize(width: min(simpleMode ? Self.simpleDefaultWidth : Self.detailedDefaultWidth, visible.width - 40),
                           height: min(800, visible.height - 40))
         let origin = NSPoint(x: visible.midX - size.width / 2, y: visible.midY - size.height / 2)
         window.setFrame(NSRect(origin: origin, size: size), display: true, animate: true)

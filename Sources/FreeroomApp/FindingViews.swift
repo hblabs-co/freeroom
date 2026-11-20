@@ -32,7 +32,11 @@ struct FindingRow: View {
             }
             .layoutPriority(1)
             Spacer(minLength: 8)
-            SizeBar(fraction: fraction, highlighted: selected).frame(width: 90)
+            // The size bar is the first thing to go when the list column is narrow.
+            ViewThatFits(in: .horizontal) {
+                SizeBar(fraction: fraction, highlighted: selected).frame(width: 90)
+                Color.clear.frame(width: 0)
+            }
             Text(finding.reclaimable.formattedBytes)
                 .font(.fr(.body).weight(.semibold)).monospacedDigit()
                 .frame(width: 78, alignment: .trailing)

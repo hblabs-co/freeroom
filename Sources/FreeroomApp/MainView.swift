@@ -14,7 +14,6 @@ struct MainView: View {
     @State private var sidebar: SidebarItem = .everything
     @State private var search = ""
     @State private var groupByEcosystem = true
-    @State private var showInspector = true
 
     private var visible: [Finding] {
         model.findings.filter { f in
@@ -58,7 +57,7 @@ struct MainView: View {
         let showSidebar = !model.simpleMode && model.route != .settings
         return NavigationSplitView(columnVisibility: Binding(get: { showSidebar ? .all : .detailOnly }, set: { _ in })) {
             sidebarList
-                .navigationSplitViewColumnWidth(min: 220, ideal: 240, max: 300)
+                .navigationSplitViewColumnWidth(min: 200, ideal: 220, max: 280)
                 .toolbar(removing: .sidebarToggle)
         } detail: {
             Group {
@@ -73,8 +72,8 @@ struct MainView: View {
                     }
                 }
             }
-            .inspector(isPresented: Binding(get: { showInspector && !model.simpleMode && model.route == .findings },
-                                            set: { showInspector = $0 })) {
+            .inspector(isPresented: Binding(get: { model.inspectorVisible && !model.simpleMode && model.route == .findings },
+                                            set: { model.inspectorVisible = $0 })) {
                 Group {
                     if let id = model.inspected, let finding = model.finding(id: id) {
                         FindingInspector(finding: finding)
@@ -83,7 +82,7 @@ struct MainView: View {
                                                description: Text(L("Details, evidence and paths appear here.")))
                     }
                 }
-                .inspectorColumnWidth(min: 280, ideal: 310, max: 380)
+                .inspectorColumnWidth(min: 260, ideal: 290, max: 360)
             }
         }
         .searchable(text: $search, placement: .toolbar, prompt: L("Search"))
@@ -291,7 +290,7 @@ struct MainView: View {
                 .help(String(format: L("Copy %@ for Claude Code"), "/freeroom:scan"))
         }
         ToolbarItem {
-            Button { showInspector.toggle() } label: { Label(L("Inspector"), systemImage: "sidebar.right") }
+            Button { model.inspectorVisible.toggle() } label: { Label(L("Inspector"), systemImage: "sidebar.right") }
                 .keyboardShortcut("i", modifiers: [.command, .option])
                 .disabled(model.simpleMode)
         }
