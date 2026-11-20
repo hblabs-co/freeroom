@@ -25,6 +25,7 @@ local AI models, forgotten archives…), explains each item, classifies it as
 
 ```sh
 # App + CLI (planned)
+brew trust --cask hblabs-co/tap/freeroom   # Homebrew asks you to trust third-party casks once
 brew install --cask hblabs-co/tap/freeroom
 ```
 
