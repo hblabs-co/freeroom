@@ -66,7 +66,7 @@ private struct MainWindowSizing: ViewModifier {
     let compact: Bool
     func body(content: Content) -> some View {
         if onboarded {
-            content.frame(minWidth: compact ? 720 : 980, idealWidth: 1240, maxWidth: .infinity,
+            content.frame(minWidth: compact ? 720 : AppModel.detailedMinWidth, idealWidth: 1240, maxWidth: .infinity,
                           minHeight: 640, idealHeight: 800, maxHeight: .infinity)
         } else {
             content.frame(width: 620, height: 600)

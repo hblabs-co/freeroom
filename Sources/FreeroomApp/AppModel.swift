@@ -44,7 +44,15 @@ final class AppModel {
     var showDiskMap: Bool { didSet { defaults.set(showDiskMap, forKey: "diskMap") } }
     var playSound: Bool { didSet { defaults.set(playSound, forKey: "sound") } }
     var onboarded: Bool { didSet { defaults.set(onboarded, forKey: "onboarded") } }
-    var simpleMode: Bool { didSet { defaults.set(simpleMode, forKey: "simpleMode") } }
+    var simpleMode: Bool {
+        didSet {
+            defaults.set(simpleMode, forKey: "simpleMode")
+            guard oldValue != simpleMode else { return }
+            // Remember the width the previous mode had, then give the new mode its own width.
+            if let window = mainWindow { defaults.set(window.frame.width, forKey: oldValue ? "simpleWidth" : "detailedWidth") }
+            DispatchQueue.main.async { self.resizeWindowForMode() }
+        }
+    }
     var textSize: FontScale.Size { didSet { defaults.set(textSize.rawValue, forKey: "textSize"); FontScale.factor = textSize.factor } }
     /// Changes when language or text size change, to rebuild the view tree.
     var appearanceKey: String { "\(language)-\(textSize.rawValue)" }
@@ -300,12 +308,37 @@ final class AppModel {
         NSApp.activate(ignoringOtherApps: true)
     }
 
-    /// After onboarding: grow the compact window to the full app size, centered, animated.
-    func expandMainWindow() {
-        guard let window = NSApp.windows.first(where: { $0.isVisible && $0.canBecomeMain && $0.title == "Freeroom" })
-                ?? NSApp.keyWindow, let screen = window.screen ?? NSScreen.main else { return }
+    /// The app's single main window (the menu bar popover is an NSPanel and is excluded).
+    var mainWindow: NSWindow? {
+        NSApp.windows.first { !($0 is NSPanel) && $0.canBecomeMain && $0.isVisible && $0.identifier?.rawValue.contains("main") == true }
+            ?? NSApp.windows.first { !($0 is NSPanel) && $0.canBecomeMain && $0.isVisible }
+    }
+
+    /// Minimum width each mode needs: Detailed = sidebar + list + inspector.
+    static let detailedMinWidth: CGFloat = 1180
+    static let simpleDefaultWidth: CGFloat = 900
+
+    /// Resizes the window, animated and centered on its current position, to the width of the current mode.
+    func resizeWindowForMode() {
+        guard onboarded, let window = mainWindow, let screen = window.screen ?? NSScreen.main else { return }
         let visible = screen.visibleFrame
-        let size = NSSize(width: min(1240, visible.width - 40), height: min(800, visible.height - 40))
+        let saved = defaults.double(forKey: simpleMode ? "simpleWidth" : "detailedWidth")
+        var width = saved > 0 ? CGFloat(saved) : (simpleMode ? Self.simpleDefaultWidth : 1240)
+        if !simpleMode { width = max(width, Self.detailedMinWidth) }
+        width = min(width, visible.width - 20)
+        var frame = window.frame
+        let center = frame.midX
+        frame.size.width = width
+        frame.origin.x = min(max(visible.minX + 10, center - width / 2), visible.maxX - width - 10)
+        window.setFrame(frame, display: true, animate: true)
+    }
+
+    /// After onboarding: grow the compact window to the size of the current mode, centered, animated.
+    func expandMainWindow() {
+        guard let window = mainWindow, let screen = window.screen ?? NSScreen.main else { return }
+        let visible = screen.visibleFrame
+        let size = NSSize(width: min(simpleMode ? Self.simpleDefaultWidth : 1240, visible.width - 40),
+                          height: min(800, visible.height - 40))
         let origin = NSPoint(x: visible.midX - size.width / 2, y: visible.midY - size.height / 2)
         window.setFrame(NSRect(origin: origin, size: size), display: true, animate: true)
     }
