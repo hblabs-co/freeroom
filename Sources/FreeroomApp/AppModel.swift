@@ -44,22 +44,18 @@ final class AppModel {
     var showDiskMap: Bool { didSet { defaults.set(showDiskMap, forKey: "diskMap") } }
     var playSound: Bool { didSet { defaults.set(playSound, forKey: "sound") } }
     var onboarded: Bool { didSet { defaults.set(onboarded, forKey: "onboarded") } }
-    var simpleMode: Bool {
-        didSet {
-            defaults.set(simpleMode, forKey: "simpleMode")
-            guard oldValue != simpleMode else { return }
-            // Remember the width the previous mode had, then give the new mode its own width.
-            if let window = mainWindow { defaults.set(window.frame.width, forKey: oldValue ? "simpleWidth" : "detailedWidth") }
-            DispatchQueue.main.async { self.resizeWindowForMode() }
-        }
-    }
+    /// Persisted only. Switch modes with `switchMode(simple:)` so the window resizes smoothly.
+    var simpleMode: Bool { didSet { defaults.set(simpleMode, forKey: "simpleMode") } }
+    /// Minimum window width for the current layout. Raised only after an animated expansion,
+    /// otherwise macOS would snap the window to the new minimum without animation.
+    var windowMinWidth: CGFloat = 720
     var textSize: FontScale.Size { didSet { defaults.set(textSize.rawValue, forKey: "textSize"); FontScale.factor = textSize.factor } }
     /// Changes when language or text size change, to rebuild the view tree.
     var appearanceKey: String { "\(language)-\(textSize.rawValue)" }
 
     /// What the single main window shows.
     enum Route: Hashable { case findings, history, settings }
-    var route: Route = .findings
+    var route: Route = .findings { didSet { if oldValue != route { updateWindowMinWidth() } } }
 
     private let defaults = UserDefaults.standard
     private var store: Store?
@@ -79,6 +75,7 @@ final class AppModel {
         playSound = defaults.object(forKey: "sound") as? Bool ?? true
         onboarded = defaults.bool(forKey: "onboarded")
         simpleMode = defaults.object(forKey: "simpleMode") as? Bool ?? true
+        windowMinWidth = (defaults.object(forKey: "simpleMode") as? Bool ?? true) ? 720 : Self.detailedMinWidth
         let savedSize = FontScale.Size(rawValue: defaults.string(forKey: "textSize") ?? "") ?? .medium
         textSize = savedSize
         FontScale.factor = savedSize.factor
@@ -318,13 +315,43 @@ final class AppModel {
     static let detailedMinWidth: CGFloat = 1180
     static let simpleDefaultWidth: CGFloat = 900
 
+    /// Switches Simple/Detailed with a smooth window resize in both directions.
+    func switchMode(simple: Bool) {
+        guard simple != simpleMode else { return }
+        if let window = mainWindow { defaults.set(window.frame.width, forKey: simpleMode ? "simpleWidth" : "detailedWidth") }
+        if simple {
+            // Shrinking: lower the minimum first, show the simple layout, then animate down.
+            windowMinWidth = 720
+            simpleMode = true
+            DispatchQueue.main.async { self.resizeWindowForMode() }
+        } else {
+            // Expanding: animate the window wide first (setFrame(animate:) returns when done),
+            // then show the columns and raise the minimum, so nothing snaps.
+            resizeWindowForMode(forSimple: false)
+            simpleMode = false
+            windowMinWidth = Self.detailedMinWidth
+        }
+    }
+
+    /// Detailed mode on findings/history needs the wide minimum; Simple mode and Settings don't.
+    private func updateWindowMinWidth() {
+        let wide = !simpleMode && route != .settings
+        if wide {
+            if let window = mainWindow, window.frame.width < Self.detailedMinWidth { resizeWindowForMode(forSimple: false) }
+            windowMinWidth = Self.detailedMinWidth
+        } else {
+            windowMinWidth = 720
+        }
+    }
+
     /// Resizes the window, animated and centered on its current position, to the width of the current mode.
-    func resizeWindowForMode() {
+    func resizeWindowForMode(forSimple: Bool? = nil) {
+        let simple = forSimple ?? simpleMode
         guard onboarded, let window = mainWindow, let screen = window.screen ?? NSScreen.main else { return }
         let visible = screen.visibleFrame
-        let saved = defaults.double(forKey: simpleMode ? "simpleWidth" : "detailedWidth")
-        var width = saved > 0 ? CGFloat(saved) : (simpleMode ? Self.simpleDefaultWidth : 1240)
-        if !simpleMode { width = max(width, Self.detailedMinWidth) }
+        let saved = defaults.double(forKey: simple ? "simpleWidth" : "detailedWidth")
+        var width = saved > 0 ? CGFloat(saved) : (simple ? Self.simpleDefaultWidth : 1240)
+        if !simple { width = max(width, Self.detailedMinWidth) }
         width = min(width, visible.width - 20)
         var frame = window.frame
         let center = frame.midX

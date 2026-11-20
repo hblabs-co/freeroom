@@ -262,7 +262,7 @@ struct MainView: View {
             }
         }
         ToolbarItem(placement: .navigation) {
-            Picker(L("Mode"), selection: Binding(get: { model.simpleMode }, set: { model.simpleMode = $0; model.route = .findings })) {
+            Picker(L("Mode"), selection: Binding(get: { model.simpleMode }, set: { model.route = .findings; model.switchMode(simple: $0) })) {
                 Label(L("Simple"), systemImage: "square.grid.2x2.fill").tag(true)
                 Label(L("Detailed"), systemImage: "list.bullet.rectangle").tag(false)
             }

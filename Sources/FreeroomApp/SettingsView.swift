@@ -20,7 +20,7 @@ row("textformat.size", L("Text size")) {
                     .pickerStyle(.segmented)
                     .frame(maxWidth: 260)
                 }
-                                row("rectangle.split.3x1", L("Simple mode"), subtitle: L("Big icons and one button; switch anytime in the toolbar")) { Toggle("", isOn: $model.simpleMode) }
+                                row("rectangle.split.3x1", L("Simple mode"), subtitle: L("Big icons and one button; switch anytime in the toolbar")) { Toggle("", isOn: Binding(get: { model.simpleMode }, set: { model.switchMode(simple: $0) })) }
                 row("speaker.wave.2", L("Sound when cleaning finishes")) { Toggle("", isOn: $model.playSound) }
                 row("clock.arrow.circlepath", L("Check every"), subtitle: L("Rules only, no AI")) {
                     Picker("", selection: $model.checkEveryHours) {
