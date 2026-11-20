@@ -29,7 +29,6 @@ struct OnboardingView: View {
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .padding(.horizontal, 40)
         }
-        .frame(maxWidth: 640, maxHeight: 560)
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .task {
             // Poll Full Disk Access while the user flips the switch in System Settings.
@@ -45,6 +44,7 @@ struct OnboardingView: View {
     private func finish() {
         withAnimation(.smooth) { model.onboarded = true }
         model.runRules()
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.05) { model.expandMainWindow() }
     }
 
     private var diskAccess: some View {
@@ -54,14 +54,14 @@ struct OnboardingView: View {
                 Image(systemName: "arrow.right").foregroundStyle(.secondary)
                 Image(systemName: "externaldrive.fill.badge.checkmark").font(.system(size: 48)).foregroundStyle(Theme.accent)
             }),
-            title: "See your whole disk",
-            text: "Full Disk Access lets Freeroom measure folders macOS protects, so sizes are exact. Nothing leaves your Mac.",
-            status: fullDiskAccess ? AnyView(Label("Access granted", systemImage: "checkmark.circle.fill").foregroundStyle(Theme.safe))
-                                   : AnyView(HStack { ProgressView().controlSize(.small); Text("Waiting for System Settings…").foregroundStyle(.secondary) }),
-            primary: fullDiskAccess ? ("Continue", next) : ("Open System Settings", {
+            title: L("See your whole disk"),
+            text: L("Full Disk Access lets Freeroom measure folders macOS protects, so sizes are exact. Nothing leaves your Mac."),
+            status: fullDiskAccess ? AnyView(Label(L("Access granted"), systemImage: "checkmark.circle.fill").foregroundStyle(Theme.safe))
+                                   : AnyView(HStack { ProgressView().controlSize(.small); Text(L("Waiting for System Settings…")).foregroundStyle(.secondary) }),
+            primary: fullDiskAccess ? (L("Continue"), next) : (L("Open System Settings"), {
                 NSWorkspace.shared.open(URL(string: "x-apple.systempreferences:com.apple.preference.security?Privacy_AllFiles")!)
             }),
-            secondary: fullDiskAccess ? nil : ("Later", next)
+            secondary: fullDiskAccess ? nil : (L("Later"), next)
         )
     }
 
@@ -69,40 +69,40 @@ struct OnboardingView: View {
         StepLayout(
             art: AnyView(Image(systemName: "bell.badge.fill").font(.system(size: 56)).foregroundStyle(Theme.accent)
                 .symbolRenderingMode(.hierarchical)),
-            title: "A heads-up, not a nag",
-            text: "Freeroom checks your disk every few hours with its rules (no AI) and tells you when something big can go.",
+            title: L("A heads-up, not a nag"),
+            text: L("Freeroom checks your disk every few hours with its rules (no AI) and tells you when something big can go."),
             status: AnyView(HStack(spacing: 8) {
-                Chip(symbol: "1.circle", text: "1 per day max")
-                Chip(symbol: "moon", text: "Quiet hours")
-                Chip(symbol: "cpu", text: "No AI, no tokens")
+                Chip(symbol: "1.circle", text: L("1 per day max"))
+                Chip(symbol: "moon", text: L("Quiet hours"))
+                Chip(symbol: "cpu", text: L("No AI, no tokens"))
             }),
-            primary: ("Allow notifications", { model.notificationsEnabled = true; model.requestNotificationPermission(); next() }),
-            secondary: ("Not now", { model.notificationsEnabled = false; next() })
+            primary: (L("Allow notifications"), { model.notificationsEnabled = true; model.requestNotificationPermission(); next() }),
+            secondary: (L("Not now"), { model.notificationsEnabled = false; next() })
         )
     }
 
     private var claudeCode: some View {
         StepLayout(
             art: AnyView(HStack(spacing: 12) {
-                VStack(spacing: 4) { AgentMark(size: 40); Text("Claude Code").font(.caption).foregroundStyle(Theme.agent); Text("measures & reports").font(.caption2).foregroundStyle(.secondary) }
+                VStack(spacing: 4) { AgentMark(size: 40); Text("Claude Code").font(.caption).foregroundStyle(Theme.agent); Text(L("measures & reports")).font(.caption2).foregroundStyle(.secondary) }
                 Image(systemName: "arrow.right").foregroundStyle(.secondary)
-                VStack(spacing: 4) { Image(systemName: "cylinder.split.1x2").font(.system(size: 34)).foregroundStyle(.secondary); Text("Local store").font(.caption); Text(" ").font(.caption2) }
+                VStack(spacing: 4) { Image(systemName: "cylinder.split.1x2").font(.system(size: 34)).foregroundStyle(.secondary); Text(L("Local store")).font(.caption); Text(" ").font(.caption2) }
                 Image(systemName: "arrow.right").foregroundStyle(.secondary)
-                VStack(spacing: 4) { Image(nsImage: NSApp.applicationIconImage).resizable().frame(width: 42, height: 42); Text("Freeroom").font(.caption); Text("you confirm, it cleans").font(.caption2).foregroundStyle(.secondary) }
+                VStack(spacing: 4) { Image(nsImage: NSApp.applicationIconImage).resizable().frame(width: 42, height: 42); Text("Freeroom").font(.caption); Text(L("you confirm, it cleans")).font(.caption2).foregroundStyle(.secondary) }
             }),
-            title: "Optional: a deeper look with Claude Code",
-            text: "The plugin lets your own Claude Code explain what rules can't (old archives, abandoned projects). It can measure and report, never delete.",
+            title: L("Optional: a deeper look with Claude Code"),
+            text: L("The plugin lets your own Claude Code explain what rules can't (old archives, abandoned projects). It can measure and report, never delete."),
             status: AnyView(VStack(spacing: 8) {
                 CopyField(text: "/plugin install freeroom --marketplace hblabs-co/freeroom", prominent: true)
                 switch pluginState {
-                case .some(true): Label("Plugin installed", systemImage: "checkmark.circle.fill").foregroundStyle(Theme.safe)
-                case .some(false): Label("Plugin not detected", systemImage: "questionmark.circle").foregroundStyle(.secondary)
+                case .some(true): Label(L("Plugin installed"), systemImage: "checkmark.circle.fill").foregroundStyle(Theme.safe)
+                case .some(false): Label(L("Plugin not detected"), systemImage: "questionmark.circle").foregroundStyle(.secondary)
                 case nil: ProgressView().controlSize(.small)
                 }
-                Button("Re-check") { Task { pluginState = nil; pluginState = await model.pluginInstalled() } }.buttonStyle(.link)
+                Button(L("Re-check")) { Task { pluginState = nil; pluginState = await model.pluginInstalled() } }.buttonStyle(.link)
             }.task { pluginState = await model.pluginInstalled() }),
-            primary: ("Start first scan", finish),
-            secondary: ("Skip: rules only", finish)
+            primary: (L("Start first scan"), finish),
+            secondary: (L("Skip: rules only"), finish)
         )
     }
 }
@@ -118,8 +118,8 @@ private struct StepLayout: View {
     var body: some View {
         VStack(spacing: 18) {
             Spacer()
-            art.frame(height: 110)
-            Text(title).font(.title.weight(.semibold)).multilineTextAlignment(.center)
+            art.frame(height: 76).scaleEffect(0.85)
+            Text(title).font(.title2.weight(.semibold)).multilineTextAlignment(.center)
             Text(text).foregroundStyle(.secondary).multilineTextAlignment(.center).frame(maxWidth: 440)
             status.frame(minHeight: 30)
             Spacer()

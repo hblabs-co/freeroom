@@ -45,9 +45,9 @@ struct CleanSheet: View {
         VStack(alignment: .leading, spacing: 14) {
             HStack(alignment: .firstTextBaseline) {
                 VStack(alignment: .leading, spacing: 2) {
-                    Text(phase == .review ? "Clean \(items.count) item\(items.count == 1 ? "" : "s")" : "Cleaning…")
+                    Text(phase == .review ? (items.count == 1 ? L("Clean 1 item") : String(format: L("Clean %@ items"), "\(items.count)")) : L("Cleaning…"))
                         .font(.title2.weight(.semibold))
-                    Text("Free space \(freeBefore.formattedBytes) → \((freeBefore + total).formattedBytes)")
+                    Text("\(L("Free space")) \(freeBefore.formattedBytes) → \((freeBefore + total).formattedBytes)")
                         .foregroundStyle(.secondary).monospacedDigit()
                 }
                 Spacer()
@@ -60,22 +60,22 @@ struct CleanSheet: View {
 
             ScrollView {
                 VStack(alignment: .leading, spacing: 14) {
-                    group(.delete, title: "Delete", subtitle: "regenerable", symbol: "xmark.bin")
-                    group(.command, title: "Run cleanup command", subtitle: "the tool's own command", symbol: "terminal")
-                    group(.trash, title: "Move to Trash", subtitle: "recoverable", symbol: "trash")
+                    group(.delete, title: L("Delete"), subtitle: L("regenerable"), symbol: "xmark.bin")
+                    group(.command, title: L("Run cleanup command"), subtitle: L("the tool's own command"), symbol: "terminal")
+                    group(.trash, title: L("Move to Trash"), subtitle: L("recoverable"), symbol: "trash")
                 }
             }
 
             HStack(spacing: 8) {
                 Image(systemName: "checkmark.shield").foregroundStyle(Theme.accent)
-                Text("Review items go to the Trash. Commands run only if allowlisted. Each item is re-checked first.")
+                Text(L("Review items go to the Trash. Commands run only if allowlisted. Each item is re-checked first."))
                     .font(.caption).foregroundStyle(.secondary)
             }
             HStack {
                 Spacer()
-                Button("Cancel") { model.finishClean() }
+                Button(L("Cancel")) { model.finishClean() }
                     .keyboardShortcut(.cancelAction).disabled(phase == .cleaning)
-                Button(phase == .review ? "Clean \(total.formattedBytes)" : "Cleaning…") {
+                Button(phase == .review ? String(format: L("Clean %@"), total.formattedBytes) : L("Cleaning…")) {
                     phase = .cleaning
                     model.clean(items, origin: "app")
                 }
@@ -104,8 +104,8 @@ struct CleanSheet: View {
                         ItemIcon(icon: finding.icon, fallback: finding.categoryFallback, size: 26)
                         VStack(alignment: .leading, spacing: 1) {
                             HStack(spacing: 4) {
-                                Text(finding.title).lineLimit(1)
-                                if finding.needsAdmin { Label("password", systemImage: "lock.fill").font(.caption2).foregroundStyle(.secondary) }
+                                Text(finding.displayTitle).lineLimit(1)
+                                if finding.needsAdmin { Label(L("password"), systemImage: "lock.fill").font(.caption2).foregroundStyle(.secondary) }
                             }
                             if let command = finding.command, action == .command {
                                 Text(command).font(.system(.caption, design: .monospaced)).foregroundStyle(.secondary).lineLimit(1)
@@ -143,7 +143,7 @@ struct CleanSheet: View {
         case nil:
             if phase == .review {
                 Button { withAnimation { items.removeAll { $0.id == finding.id } } } label: { Image(systemName: "xmark") }
-                    .buttonStyle(.borderless).foregroundStyle(.secondary).help("Remove from this clean")
+                    .buttonStyle(.borderless).foregroundStyle(.secondary).help(L("Remove from this clean"))
             } else {
                 ProgressView().controlSize(.small)
             }
@@ -171,16 +171,16 @@ struct CleanSheet: View {
                         .animation(reduceMotion ? nil : .spring(duration: 0.5).delay(0.15 * Double(i)), value: glints)
                 }
             }
-            Text("You freed").font(.title3).foregroundStyle(.secondary)
+            Text(L("You freed")).font(.title3).foregroundStyle(.secondary)
             Text(Int64(shownFreed).formattedBytes)
                 .font(.system(size: 52, weight: .bold, design: .rounded)).monospacedDigit()
                 .contentTransition(.numericText(value: shownFreed))
-                .accessibilityLabel("You freed \(freed.formattedBytes)")
+                .accessibilityLabel(L("You freed") + " " + freed.formattedBytes)
             HStack(spacing: 6) {
                 Image(systemName: "internaldrive")
                 Text("\(freeBefore.formattedBytes) → ").monospacedDigit()
                 Text(model.freeBytes.formattedBytes).monospacedDigit().foregroundStyle(Theme.safe).bold()
-                Text("free")
+                Text(L("free"))
             }
             .foregroundStyle(.secondary)
 
@@ -194,15 +194,15 @@ struct CleanSheet: View {
 
             VStack(spacing: 6) {
                 if !trashed.isEmpty {
-                    NoteRow(symbol: "trash", text: "\(trashed.count) in the Trash · recoverable", button: "Open Trash") { model.openTrash() }
+                    NoteRow(symbol: "trash", text: String(format: L("%@ in the Trash · recoverable"), "\(trashed.count)"), button: L("Open Trash")) { model.openTrash() }
                 }
                 ForEach(skipped + failed) { f in
-                    NoteRow(symbol: "minus.circle", text: "\(f.title) skipped", button: nil) {}
+                    NoteRow(symbol: "minus.circle", text: String(format: L("%@ skipped"), f.displayTitle), button: nil) {}
                 }
             }
             .padding(.horizontal, 30)
             Spacer()
-            Button("Done") { model.finishClean() }
+            Button(L("Done")) { model.finishClean() }
                 .buttonStyle(.borderedProminent).tint(Theme.accent).keyboardShortcut(.defaultAction)
                 .padding(.bottom, 22)
         }

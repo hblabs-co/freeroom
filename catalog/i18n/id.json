@@ -1,0 +1,962 @@
+{
+  "xcode-derived-data": {
+    "title": "Xcode DerivedData",
+    "explanation": "Hasil build dan indeks setiap proyek yang pernah dibuka di Xcode. Dibuat ulang pada build berikutnya."
+  },
+  "xcode-simulator-devices": {
+    "title": "Perangkat simulator (app dan data)",
+    "explanation": "App dan data yang terinstal di simulator iOS. Menghapusnya mengembalikan setiap simulator ke kondisi pabrik."
+  },
+  "xcode-device-support": {
+    "title": "iOS DeviceSupport",
+    "explanation": "Simbol debug yang disalin dari perangkat fisik. Dibuat ulang saat perangkat disambungkan lagi."
+  },
+  "xcode-archives": {
+    "title": "Arsip Xcode",
+    "explanation": "Build app yang diarsipkan. Diperlukan untuk menyimbolisasi laporan crash dari versi yang sudah dirilis."
+  },
+  "xcode-caches": {
+    "title": "Cache Xcode",
+    "explanation": "Cache unduhan dan dokumentasi milik Xcode. Dibuat ulang saat dibutuhkan."
+  },
+  "xcode-device-logs": {
+    "title": "Log perangkat",
+    "explanation": "Log crash dan diagnostik yang diambil dari perangkat yang tersambung. Simpan jika Anda masih men-debug crash."
+  },
+  "xcode-coresimulator-caches": {
+    "title": "Cache simulator",
+    "explanation": "Cache dyld dan cache sementara untuk simulator. Dibuat ulang saat simulator dinyalakan."
+  },
+  "xcode-xctest-devices": {
+    "title": "Perangkat klon XCTest",
+    "explanation": "Klon simulator yang dibuat untuk pengujian paralel. Xcode membuatnya lagi untuk pengujian berikutnya."
+  },
+  "xcode-dvtdownloads": {
+    "title": "Unduhan komponen Xcode",
+    "explanation": "Paket penginstal yang diunduh Xcode untuk komponen yang sudah terinstal."
+  },
+  "xcode-previews": {
+    "title": "Pratinjau SwiftUI",
+    "explanation": "Data simulator untuk menampilkan pratinjau SwiftUI. Dibuat ulang saat pratinjau ditampilkan."
+  },
+  "xcode-unavailable-simulators": {
+    "title": "Simulator tidak tersedia",
+    "explanation": "Simulator untuk runtime yang sudah tidak terinstal. Simulator ini tidak bisa dinyalakan, jadi menghapusnya tidak menghilangkan apa pun."
+  },
+  "xcode-simulator-runtimes": {
+    "title": "Runtime simulator",
+    "explanation": "Runtime iOS/watchOS/visionOS (masing-masing beberapa GB). Hapus yang tidak dipakai di Xcode > Settings > Components."
+  },
+  "xcode-app": {
+    "title": "Xcode",
+    "explanation": "App Xcode itu sendiri (10+ GB). Hapus hanya jika Anda tidak lagi membuat build untuk platform Apple."
+  },
+  "swiftpm-cache": {
+    "title": "Cache Swift Package Manager",
+    "explanation": "Paket dan repositori Swift yang diunduh. Diambil lagi pada resolve berikutnya."
+  },
+  "cocoapods-cache": {
+    "title": "Cache CocoaPods",
+    "explanation": "Pod yang diunduh. Diambil lagi oleh `pod install`."
+  },
+  "cocoapods-repos": {
+    "title": "Repo spec CocoaPods",
+    "explanation": "Salinan lokal indeks spec CocoaPods. CocoaPods modern memakai CDN dan membuatnya ulang jika perlu."
+  },
+  "ios-backups": {
+    "title": "Cadangan iPhone dan iPad",
+    "explanation": "Cadangan perangkat lokal yang dibuat oleh Finder. Hapus yang lama di Finder > perangkat > Kelola Cadangan."
+  },
+  "docker-desktop-disk": {
+    "title": "Image disk Docker Desktop",
+    "explanation": "Disk virtual berisi semua image, container, dan volume. Kecilkan dengan perintah prune, jangan dengan menghapusnya."
+  },
+  "docker-build-cache": {
+    "title": "Cache build Docker",
+    "explanation": "Layer cache dari `docker build`. Ukuran diambil dari `docker system df`; build menjadi lebih lambat sekali."
+  },
+  "docker-dangling-images": {
+    "title": "Image Docker menggantung (dangling)",
+    "explanation": "Layer image tanpa tag yang tersisa dari build ulang. Tidak dipakai oleh container atau tag mana pun."
+  },
+  "docker-desktop-caches": {
+    "title": "Cache app Docker Desktop",
+    "explanation": "Log dan cache pembaruan app Docker Desktop, bukan image atau container Anda."
+  },
+  "docker-cli-config": {
+    "title": "Konfigurasi dan konteks Docker CLI",
+    "explanation": "Kredensial registry dan konteks untuk Docker CLI. Freeroom tidak pernah menyentuhnya."
+  },
+  "docker-model-runner": {
+    "title": "Model Docker Model Runner",
+    "explanation": "Model AI yang diambil dengan `docker model pull`. Hapus yang tidak dipakai dengan `docker model rm`."
+  },
+  "orbstack-data": {
+    "title": "Data OrbStack",
+    "explanation": "Image disk berisi container, image, dan mesin Linux OrbStack. Lakukan prune dari Docker atau hapus mesin di OrbStack."
+  },
+  "colima-data": {
+    "title": "VM Colima",
+    "explanation": "Disk VM Linux Colima berisi image dan container Anda. Gunakan `colima delete` untuk profil yang tidak dibutuhkan lagi."
+  },
+  "lima-vms": {
+    "title": "VM Lima",
+    "explanation": "Disk VM Linux Lima. Hapus yang tidak dipakai dengan `limactl delete <name>`."
+  },
+  "rancher-desktop": {
+    "title": "VM Rancher Desktop",
+    "explanation": "Disk VM Rancher Desktop berisi image dan status Kubernetes. Gunakan Troubleshooting > Factory Reset untuk membersihkan."
+  },
+  "minikube": {
+    "title": "minikube",
+    "explanation": "Kluster minikube, image VM, dan biner Kubernetes yang di-cache. `minikube delete --all --purge` menghapus semuanya."
+  },
+  "testcontainers-config": {
+    "title": "Pengaturan Testcontainers",
+    "explanation": "File pengaturan kecil milik Testcontainers. Tidak ada ruang yang bisa dikosongkan."
+  },
+  "npm-cache": {
+    "title": "Cache npm",
+    "explanation": "Paket npm yang diunduh. Diambil lagi saat instalasi."
+  },
+  "npm-npx-cache": {
+    "title": "Cache npx",
+    "explanation": "Paket yang diunduh untuk menjalankan perintah `npx`. Diunduh lagi saat Anda menjalankannya berikutnya."
+  },
+  "npm-logs": {
+    "title": "Log npm",
+    "explanation": "Log debug dari eksekusi npm."
+  },
+  "pnpm-store": {
+    "title": "Penyimpanan pnpm (store)",
+    "explanation": "Penyimpanan paket berbasis konten. Prune menghapus paket yang tidak dirujuk oleh proyek mana pun."
+  },
+  "yarn-cache": {
+    "title": "Cache Yarn",
+    "explanation": "Paket Yarn yang diunduh."
+  },
+  "yarn-berry-cache": {
+    "title": "Cache global Yarn Berry",
+    "explanation": "Cache paket global Yarn 2+. Diambil lagi saat `yarn install`."
+  },
+  "bun-cache": {
+    "title": "Cache instalasi Bun",
+    "explanation": "Paket yang diunduh oleh `bun install`. Diambil lagi saat dibutuhkan."
+  },
+  "deno-cache": {
+    "title": "Cache Deno",
+    "explanation": "Cache global Deno untuk modul jarak jauh dan paket npm. Dibuat ulang saat dijalankan berikutnya."
+  },
+  "node-gyp-cache": {
+    "title": "Header node-gyp",
+    "explanation": "Header Node.js yang diunduh untuk mengompilasi modul native. Diunduh lagi saat dibutuhkan."
+  },
+  "typescript-cache": {
+    "title": "Cache tipe TypeScript",
+    "explanation": "Definisi tipe yang diunduh otomatis oleh server TypeScript di editor."
+  },
+  "nvm-versions": {
+    "title": "Versi Node.js nvm",
+    "explanation": "Versi Node.js yang terinstal. Hapus yang tidak dipakai dengan `nvm uninstall <version>`."
+  },
+  "nvm-cache": {
+    "title": "Cache unduhan nvm",
+    "explanation": "Arsip Node.js yang diunduh nvm untuk versi yang sudah terinstal."
+  },
+  "fnm-versions": {
+    "title": "Versi Node.js fnm",
+    "explanation": "Versi Node.js yang diinstal oleh fnm. Hapus yang tidak dipakai dengan `fnm uninstall <version>`."
+  },
+  "volta-tools": {
+    "title": "Toolchain Volta",
+    "explanation": "Node, npm, dan alat global yang dikelola Volta. Hapus versi yang tidak dipakai dari Volta."
+  },
+  "playwright-browsers": {
+    "title": "Browser Playwright",
+    "explanation": "Browser yang diunduh untuk pengujian end-to-end. Instal ulang dengan `npx playwright install`."
+  },
+  "puppeteer-browsers": {
+    "title": "Browser Puppeteer",
+    "explanation": "Build Chrome yang diunduh oleh Puppeteer. Diinstal ulang dengan `npx puppeteer browsers install`."
+  },
+  "cypress-cache": {
+    "title": "Biner Cypress",
+    "explanation": "Biner app Cypress untuk setiap versi yang pernah Anda instal. Diinstal ulang oleh `npx cypress install`."
+  },
+  "electron-cache": {
+    "title": "Unduhan Electron",
+    "explanation": "Runtime Electron dan alat build yang diunduh saat membuat app Electron."
+  },
+  "updater-caches": {
+    "title": "Cache pembaru app",
+    "explanation": "Penginstal pembaruan yang diunduh dan sudah diterapkan."
+  },
+  "chrome-headless-shell": {
+    "title": "Chrome headless shell",
+    "explanation": "Build Chrome headless yang diunduh oleh alat pengujian browser. Diunduh lagi saat pengujian membutuhkannya."
+  },
+  "pip-cache": {
+    "title": "Cache pip",
+    "explanation": "Wheel Python yang diunduh."
+  },
+  "uv-cache": {
+    "title": "Cache uv",
+    "explanation": "Paket dan build yang di-cache oleh uv. Diambil lagi pada instalasi berikutnya."
+  },
+  "uv-python": {
+    "title": "Versi Python yang dikelola uv",
+    "explanation": "Interpreter Python yang diinstal oleh uv. Hapus yang tidak dipakai dengan `uv python uninstall <version>`."
+  },
+  "uv-tools": {
+    "title": "Alat uv",
+    "explanation": "Alat baris perintah yang diinstal dengan `uv tool install`. Hapus dengan `uv tool uninstall <name>`."
+  },
+  "poetry-cache": {
+    "title": "Cache Poetry",
+    "explanation": "Paket yang diunduh oleh Poetry. Diambil lagi saat `poetry install`."
+  },
+  "poetry-virtualenvs": {
+    "title": "Virtualenv Poetry",
+    "explanation": "Lingkungan virtual yang dibuat Poetry untuk proyek Anda. Dibuat ulang oleh `poetry install`, tetapi perubahan di dalam lingkungan akan hilang."
+  },
+  "conda-pkgs": {
+    "title": "Cache paket Conda",
+    "explanation": "Paket dan tarball conda yang diunduh. Lingkungan tetap berfungsi; instalasi akan mengunduh ulang."
+  },
+  "pyenv-versions": {
+    "title": "Versi Python pyenv",
+    "explanation": "Versi Python yang di-build oleh pyenv. Hapus yang tidak dipakai dengan `pyenv uninstall <version>`."
+  },
+  "python-matplotlib-cache": {
+    "title": "Cache font Matplotlib",
+    "explanation": "Cache daftar font yang dibuat Matplotlib. Dibuat ulang pada import berikutnya."
+  },
+  "ipython-history": {
+    "title": "Profil IPython",
+    "explanation": "Pengaturan dan riwayat perintah IPython. Kecil; disimpan."
+  },
+  "jupyter-runtime": {
+    "title": "Data Jupyter",
+    "explanation": "Kernel, ekstensi, dan file runtime Jupyter. Biasanya kecil; tinjau dulu sebelum menghapus kernel."
+  },
+  "ollama-models": {
+    "title": "Model Ollama",
+    "explanation": "Model AI lokal. Hapus yang tidak Anda pakai dengan `ollama rm <model>`."
+  },
+  "huggingface-hub": {
+    "title": "Cache Hugging Face",
+    "explanation": "Model dan dataset yang diunduh oleh pustaka Hugging Face. Diunduh lagi saat kode membutuhkannya."
+  },
+  "huggingface-xet": {
+    "title": "Cache Xet Hugging Face",
+    "explanation": "Cache potongan data untuk mempercepat unduhan Hugging Face. Tidak diperlukan untuk menjalankan model."
+  },
+  "lmstudio-models": {
+    "title": "Model LM Studio",
+    "explanation": "Model yang Anda unduh di LM Studio. Hapus yang tidak dipakai dari tab My Models di LM Studio."
+  },
+  "whisper-models": {
+    "title": "Model Whisper",
+    "explanation": "Model ucapan-ke-teks. Diunduh lagi saat digunakan."
+  },
+  "torch-hub": {
+    "title": "Cache PyTorch Hub",
+    "explanation": "Bobot model yang diunduh oleh PyTorch Hub dan torchvision. Diunduh lagi saat kode memuatnya."
+  },
+  "easyocr-models": {
+    "title": "Model EasyOCR",
+    "explanation": "Model OCR yang diunduh oleh EasyOCR. Diunduh lagi pada penggunaan berikutnya."
+  },
+  "claude-code-data": {
+    "title": "Data Claude Code",
+    "explanation": "Pengaturan, memori, dan riwayat sesi Claude Code. Pangkas sesi lama dari Claude Code, jangan secara manual."
+  },
+  "claude-cli-cache": {
+    "title": "Cache CLI Claude Code",
+    "explanation": "Log dan data cache dari CLI Claude Code. Dibuat ulang sesuai kebutuhan."
+  },
+  "claude-desktop-cache": {
+    "title": "Cache Claude",
+    "explanation": "Cache web app Claude. Dibuat ulang otomatis; keluar dari app terlebih dahulu."
+  },
+  "go-modcache": {
+    "title": "Cache modul Go",
+    "explanation": "Modul Go yang diunduh. Diambil lagi oleh `go build`."
+  },
+  "go-build-cache": {
+    "title": "Cache build Go",
+    "explanation": "Paket Go yang sudah dikompilasi."
+  },
+  "gopls-cache": {
+    "title": "Cache gopls",
+    "explanation": "Cache indeks server bahasa Go. Dibuat ulang saat Anda membuka proyek Go."
+  },
+  "golangci-lint-cache": {
+    "title": "Cache golangci-lint",
+    "explanation": "Cache hasil lint. Dibuat ulang saat dijalankan berikutnya."
+  },
+  "go-sumdb": {
+    "title": "Cache database checksum Go",
+    "explanation": "Tile database checksum yang di-cache. Diambil lagi saat modul diverifikasi."
+  },
+  "goimports-cache": {
+    "title": "Cache goimports",
+    "explanation": "Cache indeks paket goimports. Dibuat ulang otomatis."
+  },
+  "cargo-registry": {
+    "title": "Cache registry Cargo",
+    "explanation": "Crate yang diunduh."
+  },
+  "cargo-git": {
+    "title": "Dependensi git Cargo",
+    "explanation": "Checkout git dari crate yang dipakai sebagai dependensi git. Di-clone lagi pada build berikutnya."
+  },
+  "rustup-toolchains": {
+    "title": "Toolchain Rust",
+    "explanation": "Toolchain Rust yang terinstal (masing-masing sekitar 1 GB). Hapus yang tidak dipakai dengan `rustup toolchain uninstall <name>`."
+  },
+  "gradle-cache": {
+    "title": "Cache Gradle",
+    "explanation": "Dependensi yang diunduh dan cache build."
+  },
+  "gradle-wrapper-dists": {
+    "title": "Distribusi wrapper Gradle",
+    "explanation": "Versi Gradle yang diunduh oleh `./gradlew`. Diunduh lagi oleh proyek yang membutuhkannya."
+  },
+  "gradle-daemon": {
+    "title": "Log daemon Gradle",
+    "explanation": "Log dan registry daemon Gradle. Hentikan daemon terlebih dahulu dengan `./gradlew --stop`."
+  },
+  "gradle-jdks": {
+    "title": "JDK yang disediakan Gradle",
+    "explanation": "JDK yang diunduh Gradle untuk toolchain. Diunduh lagi saat build memintanya."
+  },
+  "maven-repo": {
+    "title": "Repositori Maven",
+    "explanation": "Dependensi Java yang diunduh."
+  },
+  "maven-wrapper": {
+    "title": "Distribusi wrapper Maven",
+    "explanation": "Versi Maven yang diunduh oleh `./mvnw`. Diunduh lagi saat dibutuhkan."
+  },
+  "sdkman-candidates": {
+    "title": "Kandidat SDKMAN",
+    "explanation": "JDK dan alat yang diinstal dengan SDKMAN. Hapus versi yang tidak dipakai dengan `sdk uninstall`."
+  },
+  "sdkman-archives": {
+    "title": "Arsip SDKMAN",
+    "explanation": "Arsip unduhan SDK yang sudah terinstal (`sdk flush` juga membersihkannya)."
+  },
+  "system-jdks": {
+    "title": "JDK terinstal",
+    "explanation": "Runtime Java yang terinstal di seluruh sistem. Hapus hanya versi yang tidak dipakai proyek mana pun."
+  },
+  "coursier-cache": {
+    "title": "Cache Coursier",
+    "explanation": "Artefak Scala/JVM yang diunduh oleh Coursier, sbt, dan Metals."
+  },
+  "nuget-packages": {
+    "title": "Paket NuGet",
+    "explanation": "Paket .NET yang diunduh. Dipulihkan pada build berikutnya."
+  },
+  "dotnet-sdks": {
+    "title": "SDK dan runtime .NET",
+    "explanation": "SDK dan runtime .NET yang terinstal. Hapus versi lama sesuai dokumentasi Microsoft."
+  },
+  "dotnet-tools": {
+    "title": "Alat global .NET",
+    "explanation": "Alat .NET global. Hapus yang tidak dipakai dengan `dotnet tool uninstall -g <name>`."
+  },
+  "rbenv-versions": {
+    "title": "Versi Ruby rbenv",
+    "explanation": "Versi Ruby yang di-build oleh rbenv. Hapus yang tidak dipakai dengan `rbenv uninstall <version>`."
+  },
+  "rvm-rubies": {
+    "title": "RVM",
+    "explanation": "Ruby dan gemset yang dikelola RVM. Hapus Ruby yang tidak dipakai dengan `rvm remove <version>`."
+  },
+  "pub-cache": {
+    "title": "Cache pub Dart/Flutter",
+    "explanation": "Paket yang diunduh oleh `dart pub get` / `flutter pub get`. Diambil lagi pada get berikutnya."
+  },
+  "composer-cache": {
+    "title": "Cache Composer",
+    "explanation": "Paket PHP yang diunduh oleh Composer."
+  },
+  "ccache": {
+    "title": "ccache",
+    "explanation": "Cache hasil kompilator untuk C/C++. Build menjadi lebih lambat sampai cache terisi kembali."
+  },
+  "vcpkg-archives": {
+    "title": "Cache biner vcpkg",
+    "explanation": "Pustaka C/C++ siap pakai yang di-cache oleh vcpkg."
+  },
+  "conan-cache": {
+    "title": "Paket Conan",
+    "explanation": "Paket C/C++ yang di-cache oleh Conan 2. Diunduh atau di-build lagi saat dibutuhkan."
+  },
+  "haskell-stack": {
+    "title": "Folder root Haskell Stack",
+    "explanation": "Versi GHC dan snapshot paket yang dipakai Stack. Besar, tetapi membangunnya ulang butuh waktu lama."
+  },
+  "ghcup": {
+    "title": "Toolchain GHCup",
+    "explanation": "Versi GHC, cabal, dan HLS yang diinstal oleh GHCup. Hapus yang tidak dipakai dengan `ghcup rm`."
+  },
+  "opam-root": {
+    "title": "Switch opam",
+    "explanation": "Kompilator dan paket OCaml per switch. Hapus switch yang tidak dipakai dengan `opam switch remove`."
+  },
+  "julia-depot": {
+    "title": "Depot Julia",
+    "explanation": "Paket, artefak, dan cache hasil kompilasi Julia. `Pkg.gc()` menghapus versi yang tidak dipakai."
+  },
+  "platformio": {
+    "title": "PlatformIO core",
+    "explanation": "Toolchain dan platform embedded yang diinstal oleh PlatformIO. Diunduh ulang per proyek saat dibutuhkan."
+  },
+  "arduino-staging": {
+    "title": "Unduhan Arduino",
+    "explanation": "Arsip penginstal paket board yang sudah terinstal."
+  },
+  "arduino-packages": {
+    "title": "Paket board Arduino",
+    "explanation": "Toolchain untuk board Arduino/ESP32. Aman dihapus jika Anda tidak lagi memakai Arduino."
+  },
+  "arduino-ide-cache": {
+    "title": "Cache Arduino IDE",
+    "explanation": "Cache Arduino IDE 2 dan file indeks yang diunduh. Dibuat ulang saat dibuka."
+  },
+  "buf-cache": {
+    "title": "Cache modul Buf",
+    "explanation": "Modul Protobuf yang diunduh oleh Buf CLI."
+  },
+  "homebrew-cache": {
+    "title": "Unduhan Homebrew",
+    "explanation": "Bottle dan unduhan lama. Formula yang terinstal tidak terpengaruh."
+  },
+  "homebrew-logs": {
+    "title": "Log Homebrew",
+    "explanation": "Log build dari instalasi formula."
+  },
+  "homebrew-cellar": {
+    "title": "Paket terinstal Homebrew",
+    "explanation": "Semua yang diinstal dengan Homebrew. Hapus alat dengan `brew uninstall` dan dependensi yang tidak dipakai dengan `brew autoremove`."
+  },
+  "jetbrains-cache": {
+    "title": "Cache JetBrains",
+    "explanation": "Indeks IDE. Dibuat ulang saat proyek dibuka."
+  },
+  "jetbrains-logs": {
+    "title": "Log JetBrains",
+    "explanation": "File log IDE."
+  },
+  "jetbrains-config": {
+    "title": "Pengaturan dan plugin JetBrains",
+    "explanation": "Pengaturan IDE dan plugin yang terinstal. Folder versi lama dapat dihapus dari IDE, jangan secara manual."
+  },
+  "vscode-shipit": {
+    "title": "Sisa pembaruan VS Code",
+    "explanation": "Penginstal pembaruan yang sudah diterapkan."
+  },
+  "vscode-cache": {
+    "title": "Cache VS Code",
+    "explanation": "Cache web, kode terkompilasi, dan unduhan ekstensi VS Code. Dibuat ulang otomatis; keluar dari VS Code terlebih dahulu."
+  },
+  "vscode-logs": {
+    "title": "Log VS Code",
+    "explanation": "Log diagnostik VS Code."
+  },
+  "vscode-workspace-storage": {
+    "title": "Penyimpanan workspace VS Code",
+    "explanation": "Status per workspace (editor yang terbuka, data ekstensi, riwayat lokal). Bertambah untuk setiap folder yang dibuka."
+  },
+  "vscode-extensions": {
+    "title": "Ekstensi VS Code",
+    "explanation": "Ekstensi VS Code yang terinstal. Copot yang tidak dipakai dari tampilan Extensions."
+  },
+  "vscode-settings": {
+    "title": "Pengaturan VS Code",
+    "explanation": "Pengaturan dan pintasan keyboard VS Code Anda."
+  },
+  "cursor-extensions": {
+    "title": "Ekstensi Cursor",
+    "explanation": "Ekstensi Cursor yang terinstal. Copot yang tidak dipakai di Cursor."
+  },
+  "android-sdk": {
+    "title": "Android SDK",
+    "explanation": "Platform Android, alat build, dan system image. Hapus paket yang tidak dipakai di SDK Manager Android Studio."
+  },
+  "android-avds": {
+    "title": "Emulator Android (AVD)",
+    "explanation": "Perangkat virtual beserta datanya (masing-masing beberapa GB). Hapus yang tidak dipakai di Device Manager."
+  },
+  "android-studio-logs": {
+    "title": "Log Android Studio",
+    "explanation": "Log IDE Android Studio."
+  },
+  "postman-cache": {
+    "title": "Cache Postman",
+    "explanation": "Cache web, log, dan sisa pembaruan Postman. Collection disinkronkan ke akun Anda."
+  },
+  "gitkraken-cache": {
+    "title": "Cache GitKraken",
+    "explanation": "Cache web dan sisa pembaruan GitKraken."
+  },
+  "mongodb-compass-cache": {
+    "title": "Cache MongoDB Compass",
+    "explanation": "Cache web dan sisa pembaruan MongoDB Compass."
+  },
+  "lens-cache": {
+    "title": "Cache Lens",
+    "explanation": "Cache web Lens, IDE untuk Kubernetes."
+  },
+  "tableplus-cache": {
+    "title": "Cache TablePlus",
+    "explanation": "Data cache TablePlus. Koneksi tidak disimpan di sini."
+  },
+  "helm-cache": {
+    "title": "Cache Helm",
+    "explanation": "Chart dan indeks repositori yang diunduh. Diambil lagi oleh `helm repo update`."
+  },
+  "kube-config": {
+    "title": "Konfigurasi Kubernetes",
+    "explanation": "kubeconfig berisi kredensial kluster. Freeroom tidak pernah menyentuhnya."
+  },
+  "terraform-plugin-cache": {
+    "title": "Cache plugin Terraform",
+    "explanation": "Cache bersama provider Terraform (hanya jika Anda mengaktifkan plugin_cache_dir). Diunduh ulang oleh `terraform init`."
+  },
+  "terraform-credentials": {
+    "title": "Kredensial Terraform",
+    "explanation": "Token API untuk Terraform Cloud. Tidak pernah dihapus."
+  },
+  "tflint-plugins": {
+    "title": "Cache TFLint",
+    "explanation": "Plugin aturan dan cache TFLint. Diinstal ulang oleh `tflint --init`."
+  },
+  "vagrant-boxes": {
+    "title": "Box Vagrant",
+    "explanation": "Image VM dasar untuk Vagrant. `vagrant box prune` menghapus versi lama."
+  },
+  "aws-config": {
+    "title": "Kredensial AWS",
+    "explanation": "Kredensial dan konfigurasi AWS CLI. Freeroom tidak pernah menyentuhnya."
+  },
+  "azure-cli": {
+    "title": "Data Azure CLI",
+    "explanation": "Token login dan konfigurasi Azure CLI. Tidak pernah dihapus."
+  },
+  "gcloud-config": {
+    "title": "Konfigurasi Google Cloud SDK",
+    "explanation": "Kredensial dan konfigurasi gcloud. Tidak pernah dihapus."
+  },
+  "gh-config": {
+    "title": "Konfigurasi GitHub CLI",
+    "explanation": "Pengaturan dan autentikasi GitHub CLI. Tidak pernah dihapus."
+  },
+  "ssh-keys": {
+    "title": "Kunci SSH",
+    "explanation": "Kunci SSH dan known hosts Anda. Tidak pernah dihapus."
+  },
+  "gnupg": {
+    "title": "Keyring GnuPG",
+    "explanation": "Kunci GPG Anda. Tidak pernah dihapus."
+  },
+  "parallels-vms": {
+    "title": "Mesin virtual Parallels",
+    "explanation": "VM Parallels Anda. Hapus VM yang tidak dipakai dari Parallels Control Center, yang juga menghapus snapshot-nya."
+  },
+  "utm-vms": {
+    "title": "Mesin virtual UTM",
+    "explanation": "VM UTM Anda beserta disknya. Hapus VM yang tidak dipakai dari dalam UTM."
+  },
+  "vmware-fusion-vms": {
+    "title": "Mesin virtual VMware Fusion",
+    "explanation": "VM VMware Fusion Anda. Hapus yang tidak dipakai dari Virtual Machine Library di Fusion."
+  },
+  "virtualbox-vms": {
+    "title": "Mesin virtual VirtualBox",
+    "explanation": "VM VirtualBox Anda. Hapus yang tidak dipakai di VirtualBox dengan 'Hapus semua file' ('Delete all files')."
+  },
+  "browser-caches": {
+    "title": "Cache browser",
+    "explanation": "Cache web Chrome, Arc, Firefox, dan Edge. Sesi, riwayat, dan kata sandi tidak disimpan di sini."
+  },
+  "chrome-ai-model": {
+    "title": "Model AI di perangkat Chrome",
+    "explanation": "Model Gemini Nano yang dipakai AI bawaan Chrome. Chrome mengunduhnya lagi jika suatu fitur membutuhkannya."
+  },
+  "chrome-profile": {
+    "title": "Profil Chrome",
+    "explanation": "Bookmark, riwayat, kata sandi, dan ekstensi Chrome. Hapus data penjelajahan dari Chrome saja."
+  },
+  "chrome-for-testing": {
+    "title": "Profil Chrome for Testing",
+    "explanation": "Profil yang dibuat oleh pengujian browser otomatis. Dibuat ulang pada pengujian berikutnya."
+  },
+  "google-updater": {
+    "title": "Cache Google Updater",
+    "explanation": "Paket pembaruan yang diunduh untuk Chrome dan app Google lainnya."
+  },
+  "safari-cache": {
+    "title": "Cache Safari",
+    "explanation": "Cache web Safari. Riwayat dan bookmark disimpan di tempat lain."
+  },
+  "safari-data": {
+    "title": "Data Safari",
+    "explanation": "Riwayat, bookmark, dan daftar bacaan Safari. Hapus riwayat dari Safari saja."
+  },
+  "firefox-profiles": {
+    "title": "Profil Firefox",
+    "explanation": "Bookmark, riwayat, kata sandi, dan add-on Firefox. Hapus data dari Firefox saja."
+  },
+  "arc-data": {
+    "title": "Data Arc",
+    "explanation": "Space, bar samping, dan profil Arc. Hapus data dari Arc saja."
+  },
+  "slack-cache": {
+    "title": "Cache Slack",
+    "explanation": "Cache web Slack. Pesan tetap ada di workspace Anda. Keluar dari Slack terlebih dahulu."
+  },
+  "teams-cache": {
+    "title": "Cache Microsoft Teams",
+    "explanation": "Cache Microsoft Teams versi baru. Obrolan tetap ada di server Microsoft. Keluar dari Teams terlebih dahulu."
+  },
+  "zoom-cache": {
+    "title": "Cache Zoom",
+    "explanation": "Data cache dan file pembaruan Zoom."
+  },
+  "zoom-recordings": {
+    "title": "Rekaman Zoom",
+    "explanation": "Rapat yang Anda rekam secara lokal. Pindahkan yang ingin disimpan sebelum menghapus."
+  },
+  "discord-cache": {
+    "title": "Cache Discord",
+    "explanation": "Cache web app Discord. Dibuat ulang otomatis; keluar dari app terlebih dahulu."
+  },
+  "whatsapp-cache": {
+    "title": "Cache WhatsApp",
+    "explanation": "Cache sementara app WhatsApp. Obrolan dan media disimpan di tempat lain."
+  },
+  "whatsapp-media": {
+    "title": "Media WhatsApp",
+    "explanation": "Foto, video, dan file dari obrolan Anda. Kelola di WhatsApp > Pengaturan > Penyimpanan."
+  },
+  "messages-attachments": {
+    "title": "Lampiran Pesan",
+    "explanation": "Foto dan file dari obrolan iMessage. Hapus yang besar di Pesan atau Pengaturan Sistem > Umum > Penyimpanan."
+  },
+  "messages-db": {
+    "title": "Riwayat Pesan",
+    "explanation": "Database riwayat iMessage/SMS Anda. Tidak pernah dihapus."
+  },
+  "mail-store": {
+    "title": "Kotak surat Mail",
+    "explanation": "Email dan kotak surat lokal Anda. Gunakan alat bawaan Mail untuk menghapus pesan."
+  },
+  "mail-downloads": {
+    "title": "Unduhan Mail",
+    "explanation": "Lampiran yang Anda buka dari Mail. Aslinya tetap ada di dalam pesan."
+  },
+  "facetime-cache": {
+    "title": "Data FaceTime",
+    "explanation": "Pengaturan dan data panggilan FaceTime. Kecil; disimpan."
+  },
+  "teams-classic-data": {
+    "title": "Data Microsoft Teams (klasik)",
+    "explanation": "Sisa data app Teams klasik yang sudah dihentikan. Tidak dipakai oleh Teams versi baru."
+  },
+  "teamviewer-cache": {
+    "title": "Cache TeamViewer",
+    "explanation": "Data cache TeamViewer."
+  },
+  "figma-cache": {
+    "title": "Cache Figma desktop",
+    "explanation": "Data dan cache app Figma desktop. File tersimpan di cloud; membersihkannya membuat Anda keluar dari akun."
+  },
+  "spotify-cache": {
+    "title": "Cache Spotify",
+    "explanation": "Lagu yang di-cache. Spotify mengunduhnya lagi saat dibutuhkan."
+  },
+  "spotify-offline": {
+    "title": "Penyimpanan offline Spotify",
+    "explanation": "Lagu yang Anda unduh untuk didengarkan offline beserta cache Spotify. Bersihkan di Spotify > Pengaturan > Penyimpanan."
+  },
+  "office-caches": {
+    "title": "Cache Microsoft Office",
+    "explanation": "Cache Word, Excel, PowerPoint, dan Outlook. Dibuat ulang saat dibuka; dokumen tidak disimpan di sini."
+  },
+  "office-font-cache": {
+    "title": "Cache font Office",
+    "explanation": "Cache font yang dipakai bersama oleh app Office. Dibuat ulang saat dibuka berikutnya."
+  },
+  "microsoft-autoupdate": {
+    "title": "Cache Microsoft AutoUpdate",
+    "explanation": "Paket pembaruan Office yang diunduh dan sudah terinstal."
+  },
+  "cloud-storage": {
+    "title": "Folder penyimpanan cloud",
+    "explanation": "File yang disinkronkan oleh OneDrive, Dropbox, Google Drive, dan Box. Kosongkan ruang dengan 'Hapus Unduhan' / 'Kosongkan ruang' ('Free up space')."
+  },
+  "adobe-media-cache": {
+    "title": "Cache media Adobe",
+    "explanation": "File audio hasil konversi (conformed) dan pratinjau untuk Premiere Pro dan After Effects. Dibuat ulang saat proyek dibuka."
+  },
+  "capcut-cache": {
+    "title": "Cache CapCut",
+    "explanation": "Cache efek, template, dan pratinjau CapCut. Proyek disimpan di tempat lain."
+  },
+  "insta360-cache": {
+    "title": "Cache Insta360 Studio",
+    "explanation": "Cache pratinjau dan ekspor Insta360 Studio."
+  },
+  "expressvpn-cache": {
+    "title": "Cache ExpressVPN",
+    "explanation": "Data cache ExpressVPN."
+  },
+  "sentry-crash-caches": {
+    "title": "Cache pelapor crash",
+    "explanation": "Laporan crash yang diantrekan app untuk diunggah."
+  },
+  "photos-library": {
+    "title": "Perpustakaan Foto",
+    "explanation": "Foto dan video Anda. Nyalakan Optimalkan Penyimpanan Mac di pengaturan Foto agar file asli hanya disimpan di iCloud."
+  },
+  "music-media": {
+    "title": "Media perpustakaan Musik",
+    "explanation": "Lagu, unduhan, dan file yang diimpor di Musik. Hapus unduhan dari app Musik."
+  },
+  "music-cache": {
+    "title": "Cache app Musik",
+    "explanation": "Cache artwork dan streaming app Musik."
+  },
+  "tv-media": {
+    "title": "Unduhan app TV",
+    "explanation": "Film dan acara yang diunduh di app TV. Hapus unduhan dari app TV."
+  },
+  "tv-cache": {
+    "title": "Cache app TV",
+    "explanation": "Cache artwork dan streaming app TV."
+  },
+  "podcasts-downloads": {
+    "title": "Unduhan Podcast",
+    "explanation": "Episode podcast yang diunduh. Hapus di Podcast > Pengaturan, atau nyalakan penghapusan otomatis."
+  },
+  "apple-loops": {
+    "title": "Apple Loops dan pustaka suara",
+    "explanation": "Suara dan loop GarageBand/Logic. Kelola di Logic > Sound Library alih-alih menghapus file."
+  },
+  "logic-library-bundle": {
+    "title": "Pustaka Logic Pro",
+    "explanation": "Bundel pustaka suara Logic Pro 12+. Hapus paket suara dari Logic Pro > Sound Library."
+  },
+  "voice-memos": {
+    "title": "Memo Suara",
+    "explanation": "Rekaman suara Anda. Hapus dari app Memo Suara."
+  },
+  "books-data": {
+    "title": "Buku",
+    "explanation": "Buku dan buku audio yang diunduh. Hapus unduhan dari app Buku."
+  },
+  "notes-data": {
+    "title": "Catatan",
+    "explanation": "Catatan Anda beserta lampirannya. Tidak pernah dihapus."
+  },
+  "icloud-drive": {
+    "title": "iCloud Drive",
+    "explanation": "Salinan lokal file iCloud Drive. Gunakan Optimalkan Penyimpanan Mac atau 'Hapus Unduhan', jangan menghapusnya."
+  },
+  "trash": {
+    "title": "Tong Sampah",
+    "explanation": "File yang sudah dipindahkan ke Tong Sampah masih memakai ruang disk sampai Tong Sampah dikosongkan."
+  },
+  "downloads": {
+    "title": "Unduhan",
+    "explanation": "Tinjau secara manual: penginstal dan arsip di sini sering kali sudah tidak dibutuhkan."
+  },
+  "desktop": {
+    "title": "Desktop",
+    "explanation": "Jepretan layar dan file di Desktop. Tinjau secara manual."
+  },
+  "documents": {
+    "title": "Dokumen",
+    "explanation": "Dokumen Anda. Freeroom tidak pernah membersihkan folder ini secara keseluruhan."
+  },
+  "system-temp": {
+    "title": "File sementara sistem",
+    "explanation": "Dikelola oleh macOS dan dibersihkan saat mulai ulang. Jangan dihapus secara manual."
+  },
+  "system-folder": {
+    "title": "Sistem macOS",
+    "explanation": "Volume sistem macOS yang tersegel dan hanya-baca. Tidak bisa dan tidak boleh diubah."
+  },
+  "system-library": {
+    "title": "Perpustakaan Sistem",
+    "explanation": "Pengaturan, driver, dan dukungan app untuk seluruh sistem. Hapus hanya item yang dicantumkan oleh penghapus instalasi suatu app."
+  },
+  "user-library": {
+    "title": "Folder Perpustakaan Anda",
+    "explanation": "Pengaturan dan data setiap app. Bersihkan item tertentu di dalamnya, jangan pernah folder itu sendiri."
+  },
+  "app-support-root": {
+    "title": "Application Support",
+    "explanation": "Data setiap app. Hanya subfolder tertentu yang dikenal yang aman dibersihkan."
+  },
+  "preferences": {
+    "title": "Preferences",
+    "explanation": "Pengaturan app. Menghapusnya mengatur ulang app."
+  },
+  "keychains": {
+    "title": "Rantai Kunci",
+    "explanation": "Kata sandi dan sertifikat Anda. Tidak pernah dihapus."
+  },
+  "containers-root": {
+    "title": "Container app",
+    "explanation": "Data app yang di-sandbox. Menghapus container akan menghapus data app tersebut."
+  },
+  "group-containers-root": {
+    "title": "Container grup",
+    "explanation": "Data yang dipakai bersama oleh app dari pengembang yang sama. Bukan cache."
+  },
+  "vm-swap": {
+    "title": "Swap dan image tidur",
+    "explanation": "File swap memori virtual dan image tidur. Dikelola macOS; mulai ulang untuk memperkecil swap."
+  },
+  "spotlight-index": {
+    "title": "Indeks Spotlight",
+    "explanation": "Indeks pencarian. Bangun ulang dari pengaturan Spotlight jika tampak terlalu besar."
+  },
+  "system-logs": {
+    "title": "Log sistem",
+    "explanation": "Log terpadu (unified log). macOS merotasi dan membatasinya secara otomatis."
+  },
+  "user-logs": {
+    "title": "Log pengguna",
+    "explanation": "Laporan crash dan hang yang sudah dikirim atau tidak dibutuhkan. Laporan baru ditulis sesuai kebutuhan."
+  },
+  "macos-updates": {
+    "title": "Unduhan pembaruan macOS",
+    "explanation": "Pembaruan perangkat lunak yang disiapkan oleh macOS. Instal, atau biarkan macOS menghapusnya."
+  },
+  "system-caches": {
+    "title": "Cache sistem",
+    "explanation": "Cache seluruh sistem yang dikelola oleh macOS dan penginstal. Tidak aman dikosongkan secara manual."
+  },
+  "time-machine-snapshots": {
+    "title": "Snapshot Time Machine lokal",
+    "explanation": "Ditampilkan sebagai ruang yang dapat dibersihkan. macOS menghapusnya otomatis saat ruang dibutuhkan (`tmutil listlocalsnapshots /`)."
+  },
+  "apple-intelligence-assets": {
+    "title": "Aset sistem Apple",
+    "explanation": "Aset sistem yang diunduh (suara, kamus, model AI). Dikelola oleh macOS."
+  },
+  "mobile-sync-config": {
+    "title": "Pengaturan sinkronisasi perangkat",
+    "explanation": "Folder yang berisi cadangan perangkat dan data sinkronisasi. Kelola cadangan dari Finder."
+  },
+  "crash-reporter": {
+    "title": "Data pelapor crash",
+    "explanation": "Metadata laporan crash yang disimpan oleh macOS."
+  },
+  "apple-caches-misc": {
+    "title": "Cache app Apple",
+    "explanation": "Cache App Store, Bantuan, Peta, dan Penjelajahan Aman. Dibuat ulang oleh macOS saat dibutuhkan."
+  },
+  "user-caches-root": {
+    "title": "Folder cache pengguna",
+    "explanation": "Berisi cache setiap app. Bersihkan item yang dikenal di dalamnya, bukan seluruh folder."
+  },
+  "dot-cache-root": {
+    "title": "Folder ~/.cache",
+    "explanation": "Folder cache yang dipakai alat CLI. Bersihkan item yang dikenal di dalamnya, bukan seluruh folder."
+  },
+  "dot-config-root": {
+    "title": "Folder ~/.config",
+    "explanation": "Pengaturan alat baris perintah. Bukan cache."
+  },
+  "dot-local-root": {
+    "title": "Folder ~/.local",
+    "explanation": "Alat CLI yang terinstal beserta datanya. Bersihkan item yang dikenal di dalamnya, bukan seluruh folder."
+  },
+  "shell-history": {
+    "title": "Riwayat shell",
+    "explanation": "Riwayat perintah Anda. Kecil; disimpan."
+  },
+  "git-config": {
+    "title": "Konfigurasi Git",
+    "explanation": "Pengaturan Git Anda."
+  },
+  "docker-unused-images": {
+    "title": "Image Docker yang tidak dipakai",
+    "explanation": "Setiap image yang tidak dipakai container, termasuk yang sengaja Anda ambil. Image ini dapat diambil atau di-build ulang."
+  },
+  "docker-buildx-cache": {
+    "title": "Cache builder Buildx",
+    "explanation": "Cache build dari builder buildx. Build menjadi lebih lambat sekali selama cache terisi kembali."
+  },
+  "docker-stopped-containers": {
+    "title": "Container Docker yang berhenti",
+    "explanation": "Container yang tidak berjalan. Layer yang dapat ditulisnya dan data apa pun di luar volume akan hilang saat dihapus."
+  },
+  "docker-unused-volumes": {
+    "title": "Volume Docker yang tidak dipakai",
+    "explanation": "Volume yang tidak dipakai container mana pun. Sering berisi database; periksa dulu sebelum `docker volume prune`."
+  },
+  "claude-code-versions": {
+    "title": "Versi Claude Code",
+    "explanation": "Build native Claude Code; versi saat ini sedang dipakai. Claude Code menghapus versi lama dengan sendirinya."
+  },
+  "macos-aerials": {
+    "title": "Wallpaper Aerial",
+    "explanation": "Wallpaper dan screen saver Aerial yang diunduh macOS. Dikelola macOS; pilih wallpaper statis untuk menghentikan unduhan."
+  },
+  "xcode-userdata": {
+    "title": "Pengaturan pengguna Xcode",
+    "explanation": "Pintasan tombol, cuplikan kode, tema, dan breakpoint Xcode."
+  },
+  "command-line-tools": {
+    "title": "Command Line Tools",
+    "explanation": "Kompilator dan git yang dipakai Homebrew dan banyak alat. Simpan, kecuali Xcode lengkap terinstal dan dipilih."
+  },
+  "xcode-simulator-system-caches": {
+    "title": "Cache runtime simulator",
+    "explanation": "Cache bersama yang dibuat untuk runtime simulator yang terinstal. Dibuat ulang oleh macOS; perlu akses admin untuk menghapusnya."
+  },
+  "go-bin": {
+    "title": "Biner yang diinstal Go",
+    "explanation": "Alat yang diinstal dengan `go install`. Hapus yang tidak Anda pakai lagi."
+  },
+  "cargo-bin": {
+    "title": "Biner yang diinstal Cargo",
+    "explanation": "Alat yang diinstal dengan `cargo install` serta proxy rustup. Hapus dengan `cargo uninstall <name>`."
+  },
+  "chrome-component-caches": {
+    "title": "Cache komponen Chrome",
+    "explanation": "Penginstal komponen yang diunduh dan cache shader GPU Chrome. Dibuat ulang otomatis; keluar dari Chrome terlebih dahulu."
+  },
+  "vscode-local-history": {
+    "title": "Riwayat lokal VS Code",
+    "explanation": "Versi lama file yang Anda simpan di VS Code (tampilan Timeline). Menghapusnya menghilangkan riwayat urungkan tersebut."
+  },
+  "tectonic-cache": {
+    "title": "Cache bundel TeX Tectonic",
+    "explanation": "File pendukung TeX yang diunduh oleh Tectonic. Diunduh lagi pada build berikutnya."
+  },
+  "zoom-data": {
+    "title": "Data obrolan Zoom",
+    "explanation": "Riwayat obrolan lokal dan pengaturan Zoom. Bukan cache."
+  },
+  "icloud-drive-state": {
+    "title": "Status iCloud Drive",
+    "explanation": "Database sinkronisasi iCloud Drive. Menghapusnya dapat merusak sinkronisasi."
+  },
+  "swift-toolchains": {
+    "title": "Toolchain Swift",
+    "explanation": "Toolchain Swift tambahan dari swift.org atau swiftly. Hapus versi yang tidak lagi Anda pakai untuk build."
+  },
+  "huggingface-datasets": {
+    "title": "Cache dataset Hugging Face",
+    "explanation": "Dataset yang diunduh dan diproses oleh pustaka `datasets`. Diunduh lagi saat kode memuatnya."
+  }
+}

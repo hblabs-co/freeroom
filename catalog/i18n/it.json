@@ -1,0 +1,962 @@
+{
+  "xcode-derived-data": {
+    "title": "Xcode DerivedData",
+    "explanation": "Prodotti di build e indici di ogni progetto mai aperto in Xcode. Ricreati alla build successiva."
+  },
+  "xcode-simulator-devices": {
+    "title": "Dispositivi del simulatore (app e dati)",
+    "explanation": "App e dati installati nei simulatori iOS. Inizializzarli riporta ogni simulatore allo stato di fabbrica."
+  },
+  "xcode-device-support": {
+    "title": "iOS DeviceSupport",
+    "explanation": "Simboli di debug copiati dai dispositivi fisici. Ricreati quando ricolleghi un dispositivo."
+  },
+  "xcode-archives": {
+    "title": "Xcode Archives",
+    "explanation": "Build archiviate delle app. Servono per simbolizzare i crash report delle versioni pubblicate."
+  },
+  "xcode-caches": {
+    "title": "Cache di Xcode",
+    "explanation": "Cache di download e documentazione di Xcode. Ricreate quando servono."
+  },
+  "xcode-device-logs": {
+    "title": "Log dei dispositivi",
+    "explanation": "Log di crash e di diagnostica prelevati dai dispositivi collegati. Conservali se stai ancora analizzando un crash."
+  },
+  "xcode-coresimulator-caches": {
+    "title": "Cache dei simulatori",
+    "explanation": "Cache dyld e temporanee dei simulatori. Rigenerate all'avvio di un simulatore."
+  },
+  "xcode-xctest-devices": {
+    "title": "Dispositivi clone di XCTest",
+    "explanation": "Cloni dei simulatori creati per i test in parallelo. Xcode li ricrea al test successivo."
+  },
+  "xcode-dvtdownloads": {
+    "title": "Download dei componenti di Xcode",
+    "explanation": "Pacchetti di installazione scaricati da Xcode per componenti già installati."
+  },
+  "xcode-previews": {
+    "title": "Anteprime SwiftUI",
+    "explanation": "Dati del simulatore usati per mostrare le anteprime SwiftUI. Ricreati quando visualizzi un'anteprima."
+  },
+  "xcode-unavailable-simulators": {
+    "title": "Simulatori non disponibili",
+    "explanation": "Simulatori di runtime non più installati. Non possono avviarsi, quindi rimuoverli non fa perdere nulla."
+  },
+  "xcode-simulator-runtimes": {
+    "title": "Runtime dei simulatori",
+    "explanation": "Runtime iOS/watchOS/visionOS (diversi GB ciascuno). Rimuovi quelli inutilizzati in Xcode > Settings > Components."
+  },
+  "xcode-app": {
+    "title": "Xcode",
+    "explanation": "L'app Xcode stessa (10+ GB). Rimuovila solo se non sviluppi più per le piattaforme Apple."
+  },
+  "swiftpm-cache": {
+    "title": "Cache di Swift Package Manager",
+    "explanation": "Pacchetti e repository Swift scaricati. Riscaricati alla risoluzione successiva."
+  },
+  "cocoapods-cache": {
+    "title": "Cache di CocoaPods",
+    "explanation": "Pod scaricati. Riscaricati da `pod install`."
+  },
+  "cocoapods-repos": {
+    "title": "Repository delle spec di CocoaPods",
+    "explanation": "Copia locale dell'indice delle spec di CocoaPods. Le versioni recenti usano la CDN e la ricreano se serve."
+  },
+  "ios-backups": {
+    "title": "Backup di iPhone e iPad",
+    "explanation": "Backup locali dei dispositivi creati dal Finder. Elimina quelli vecchi in Finder > dispositivo > Gestisci backup."
+  },
+  "docker-desktop-disk": {
+    "title": "Immagine disco di Docker Desktop",
+    "explanation": "Disco virtuale con tutte le immagini, i container e i volumi. Riducilo con i comandi prune, non eliminandolo."
+  },
+  "docker-build-cache": {
+    "title": "Cache di build di Docker",
+    "explanation": "Layer in cache di `docker build`. Dimensione da `docker system df`; le build rallentano una volta."
+  },
+  "docker-dangling-images": {
+    "title": "Immagini Docker orfane",
+    "explanation": "Layer di immagini senza tag lasciati dalle ricompilazioni. Nessun container o tag li usa."
+  },
+  "docker-desktop-caches": {
+    "title": "Cache dell'app Docker Desktop",
+    "explanation": "Log e cache degli aggiornamenti dell'app Docker Desktop, non le tue immagini o i tuoi container."
+  },
+  "docker-cli-config": {
+    "title": "Configurazione e contesti della CLI di Docker",
+    "explanation": "Credenziali dei registry e contesti della CLI di Docker. Freeroom non li tocca mai."
+  },
+  "docker-model-runner": {
+    "title": "Modelli di Docker Model Runner",
+    "explanation": "Modelli IA scaricati con `docker model pull`. Rimuovi quelli inutilizzati con `docker model rm`."
+  },
+  "orbstack-data": {
+    "title": "Dati di OrbStack",
+    "explanation": "Immagine disco con container, immagini e macchine Linux di OrbStack. Fai prune da Docker o rimuovi macchine in OrbStack."
+  },
+  "colima-data": {
+    "title": "VM di Colima",
+    "explanation": "Dischi delle VM Linux di Colima con le tue immagini e i tuoi container. Usa `colima delete` per i profili che non ti servono più."
+  },
+  "lima-vms": {
+    "title": "VM di Lima",
+    "explanation": "Dischi delle VM Linux di Lima. Rimuovi quelle inutilizzate con `limactl delete <name>`."
+  },
+  "rancher-desktop": {
+    "title": "VM di Rancher Desktop",
+    "explanation": "Disco della VM di Rancher Desktop con immagini e stato di Kubernetes. Per svuotarlo usa Troubleshooting > Factory Reset."
+  },
+  "minikube": {
+    "title": "minikube",
+    "explanation": "Cluster minikube, immagini VM e binari Kubernetes in cache. `minikube delete --all --purge` rimuove tutto."
+  },
+  "testcontainers-config": {
+    "title": "Impostazioni di Testcontainers",
+    "explanation": "Piccolo file di impostazioni di Testcontainers. Nulla da recuperare."
+  },
+  "npm-cache": {
+    "title": "Cache di npm",
+    "explanation": "Pacchetti npm scaricati. Riscaricati all'installazione."
+  },
+  "npm-npx-cache": {
+    "title": "Cache di npx",
+    "explanation": "Pacchetti scaricati per eseguire comandi `npx`. Riscaricati alla prossima esecuzione."
+  },
+  "npm-logs": {
+    "title": "Log di npm",
+    "explanation": "Log di debug delle esecuzioni di npm."
+  },
+  "pnpm-store": {
+    "title": "Store di pnpm",
+    "explanation": "Archivio di pacchetti indirizzato per contenuto. Il prune rimuove i pacchetti non usati da alcun progetto."
+  },
+  "yarn-cache": {
+    "title": "Cache di Yarn",
+    "explanation": "Pacchetti Yarn scaricati."
+  },
+  "yarn-berry-cache": {
+    "title": "Cache globale di Yarn Berry",
+    "explanation": "Cache globale dei pacchetti di Yarn 2+. Riscaricati con `yarn install`."
+  },
+  "bun-cache": {
+    "title": "Cache di installazione di Bun",
+    "explanation": "Pacchetti scaricati da `bun install`. Riscaricati quando servono."
+  },
+  "deno-cache": {
+    "title": "Cache di Deno",
+    "explanation": "Cache globale di Deno con moduli remoti e pacchetti npm. Ricreata all'esecuzione successiva."
+  },
+  "node-gyp-cache": {
+    "title": "Header di node-gyp",
+    "explanation": "Header di Node.js scaricati per compilare moduli nativi. Riscaricati quando servono."
+  },
+  "typescript-cache": {
+    "title": "Cache dei tipi di TypeScript",
+    "explanation": "Definizioni di tipo scaricate automaticamente dal server TypeScript dell'editor."
+  },
+  "nvm-versions": {
+    "title": "Versioni di Node.js di nvm",
+    "explanation": "Versioni di Node.js installate. Rimuovi quelle inutilizzate con `nvm uninstall <version>`."
+  },
+  "nvm-cache": {
+    "title": "Cache dei download di nvm",
+    "explanation": "Archivi di Node.js scaricati da nvm per versioni già installate."
+  },
+  "fnm-versions": {
+    "title": "Versioni di Node.js di fnm",
+    "explanation": "Versioni di Node.js installate da fnm. Rimuovi quelle inutilizzate con `fnm uninstall <version>`."
+  },
+  "volta-tools": {
+    "title": "Toolchain di Volta",
+    "explanation": "Node, npm e strumenti globali gestiti da Volta. Rimuovi le versioni inutilizzate da Volta."
+  },
+  "playwright-browsers": {
+    "title": "Browser di Playwright",
+    "explanation": "Browser scaricati per i test end-to-end. Reinstallali con `npx playwright install`."
+  },
+  "puppeteer-browsers": {
+    "title": "Browser di Puppeteer",
+    "explanation": "Build di Chrome scaricate da Puppeteer. Reinstallate con `npx puppeteer browsers install`."
+  },
+  "cypress-cache": {
+    "title": "Binari di Cypress",
+    "explanation": "Binari dell'app Cypress per ogni versione installata. Reinstallati da `npx cypress install`."
+  },
+  "electron-cache": {
+    "title": "Download di Electron",
+    "explanation": "Runtime e strumenti di build di Electron scaricati durante la compilazione di app Electron."
+  },
+  "updater-caches": {
+    "title": "Cache degli aggiornamenti delle app",
+    "explanation": "Programmi di installazione scaricati per aggiornamenti già applicati."
+  },
+  "chrome-headless-shell": {
+    "title": "Chrome headless shell",
+    "explanation": "Build di Chrome headless scaricate dagli strumenti di test dei browser. Riscaricate quando un test ne ha bisogno."
+  },
+  "pip-cache": {
+    "title": "Cache di pip",
+    "explanation": "Wheel Python scaricati."
+  },
+  "uv-cache": {
+    "title": "Cache di uv",
+    "explanation": "Pacchetti e build in cache di uv. Riscaricati all'installazione successiva."
+  },
+  "uv-python": {
+    "title": "Versioni di Python gestite da uv",
+    "explanation": "Interpreti Python installati da uv. Rimuovi quelli inutilizzati con `uv python uninstall <version>`."
+  },
+  "uv-tools": {
+    "title": "Strumenti di uv",
+    "explanation": "Strumenti da riga di comando installati con `uv tool install`. Rimuovili con `uv tool uninstall <name>`."
+  },
+  "poetry-cache": {
+    "title": "Cache di Poetry",
+    "explanation": "Pacchetti scaricati da Poetry. Riscaricati con `poetry install`."
+  },
+  "poetry-virtualenvs": {
+    "title": "Virtualenv di Poetry",
+    "explanation": "Ambienti virtuali creati da Poetry per i tuoi progetti. Ricreati da `poetry install`, ma le modifiche fatte nell'ambiente vanno perse."
+  },
+  "conda-pkgs": {
+    "title": "Cache dei pacchetti Conda",
+    "explanation": "Pacchetti e tarball conda scaricati. Gli ambienti continuano a funzionare; le installazioni li riscaricano."
+  },
+  "pyenv-versions": {
+    "title": "Versioni di Python di pyenv",
+    "explanation": "Versioni di Python compilate da pyenv. Rimuovi quelle inutilizzate con `pyenv uninstall <version>`."
+  },
+  "python-matplotlib-cache": {
+    "title": "Cache dei font di Matplotlib",
+    "explanation": "Cache dell'elenco dei font creata da Matplotlib. Ricreata all'import successivo."
+  },
+  "ipython-history": {
+    "title": "Profilo IPython",
+    "explanation": "Impostazioni e cronologia dei comandi di IPython. Piccolo; viene conservato."
+  },
+  "jupyter-runtime": {
+    "title": "Dati di Jupyter",
+    "explanation": "Kernel, estensioni e file di runtime di Jupyter. Di solito piccoli; controlla prima di rimuovere i kernel."
+  },
+  "ollama-models": {
+    "title": "Modelli di Ollama",
+    "explanation": "Modelli IA locali. Rimuovi quelli che non usi con `ollama rm <model>`."
+  },
+  "huggingface-hub": {
+    "title": "Cache di Hugging Face",
+    "explanation": "Modelli e dataset scaricati dalle librerie Hugging Face. Riscaricati quando il codice ne ha bisogno."
+  },
+  "huggingface-xet": {
+    "title": "Cache Xet di Hugging Face",
+    "explanation": "Cache di blocchi usata per velocizzare i download da Hugging Face. Non serve per eseguire i modelli."
+  },
+  "lmstudio-models": {
+    "title": "Modelli di LM Studio",
+    "explanation": "Modelli scaricati in LM Studio. Elimina quelli inutilizzati dalla scheda My Models di LM Studio."
+  },
+  "whisper-models": {
+    "title": "Modelli di Whisper",
+    "explanation": "Modelli di trascrizione vocale. Riscaricati quando vengono usati."
+  },
+  "torch-hub": {
+    "title": "Cache di PyTorch Hub",
+    "explanation": "Pesi dei modelli scaricati da PyTorch Hub e torchvision. Riscaricati quando il codice li carica."
+  },
+  "easyocr-models": {
+    "title": "Modelli di EasyOCR",
+    "explanation": "Modelli OCR scaricati da EasyOCR. Riscaricati al prossimo utilizzo."
+  },
+  "claude-code-data": {
+    "title": "Dati di Claude Code",
+    "explanation": "Impostazioni, memoria e cronologia delle sessioni di Claude Code. Elimina le sessioni vecchie da Claude Code, non a mano."
+  },
+  "claude-cli-cache": {
+    "title": "Cache della CLI di Claude Code",
+    "explanation": "Log e dati in cache della CLI di Claude Code. Ricreati quando servono."
+  },
+  "claude-desktop-cache": {
+    "title": "Cache di Claude",
+    "explanation": "Cache web dell'app Claude. Ricreate automaticamente; chiudi prima l'app."
+  },
+  "go-modcache": {
+    "title": "Cache dei moduli Go",
+    "explanation": "Moduli Go scaricati. Riscaricati da `go build`."
+  },
+  "go-build-cache": {
+    "title": "Cache di build di Go",
+    "explanation": "Pacchetti Go compilati."
+  },
+  "gopls-cache": {
+    "title": "Cache di gopls",
+    "explanation": "Cache dell'indice del language server di Go. Ricreata quando apri un progetto Go."
+  },
+  "golangci-lint-cache": {
+    "title": "Cache di golangci-lint",
+    "explanation": "Cache dei risultati del lint. Ricreata all'esecuzione successiva."
+  },
+  "go-sumdb": {
+    "title": "Cache del database dei checksum di Go",
+    "explanation": "Blocchi del database dei checksum in cache. Riscaricati quando i moduli vengono verificati."
+  },
+  "goimports-cache": {
+    "title": "Cache di goimports",
+    "explanation": "Cache dell'indice dei pacchetti di goimports. Ricreata automaticamente."
+  },
+  "cargo-registry": {
+    "title": "Cache del registry di Cargo",
+    "explanation": "Crate scaricati."
+  },
+  "cargo-git": {
+    "title": "Dipendenze git di Cargo",
+    "explanation": "Checkout git dei crate usati come dipendenze git. Clonati di nuovo alla build successiva."
+  },
+  "rustup-toolchains": {
+    "title": "Toolchain di Rust",
+    "explanation": "Toolchain Rust installate (circa 1 GB ciascuna). Rimuovi quelle inutilizzate con `rustup toolchain uninstall <name>`."
+  },
+  "gradle-cache": {
+    "title": "Cache di Gradle",
+    "explanation": "Dipendenze scaricate e cache di build."
+  },
+  "gradle-wrapper-dists": {
+    "title": "Distribuzioni del wrapper di Gradle",
+    "explanation": "Versioni di Gradle scaricate da `./gradlew`. Riscaricate dal progetto che ne ha bisogno."
+  },
+  "gradle-daemon": {
+    "title": "Log dei daemon di Gradle",
+    "explanation": "Log e registro dei daemon di Gradle. Prima ferma i daemon con `./gradlew --stop`."
+  },
+  "gradle-jdks": {
+    "title": "JDK forniti da Gradle",
+    "explanation": "JDK scaricati da Gradle per le toolchain. Riscaricati quando una build li richiede."
+  },
+  "maven-repo": {
+    "title": "Repository Maven",
+    "explanation": "Dipendenze Java scaricate."
+  },
+  "maven-wrapper": {
+    "title": "Distribuzioni del wrapper di Maven",
+    "explanation": "Versioni di Maven scaricate da `./mvnw`. Riscaricate quando servono."
+  },
+  "sdkman-candidates": {
+    "title": "Candidati di SDKMAN",
+    "explanation": "JDK e strumenti installati con SDKMAN. Rimuovi le versioni inutilizzate con `sdk uninstall`."
+  },
+  "sdkman-archives": {
+    "title": "Archivi di SDKMAN",
+    "explanation": "Archivi scaricati di SDK già installati (anche `sdk flush` li elimina)."
+  },
+  "system-jdks": {
+    "title": "JDK installati",
+    "explanation": "Runtime Java installati a livello di sistema. Rimuovi solo le versioni che nessun progetto usa."
+  },
+  "coursier-cache": {
+    "title": "Cache di Coursier",
+    "explanation": "Artefatti Scala/JVM scaricati da Coursier, sbt e Metals."
+  },
+  "nuget-packages": {
+    "title": "Pacchetti NuGet",
+    "explanation": "Pacchetti .NET scaricati. Ripristinati alla build successiva."
+  },
+  "dotnet-sdks": {
+    "title": "SDK e runtime .NET",
+    "explanation": "SDK e runtime .NET installati. Rimuovi le versioni vecchie come indicato da Microsoft."
+  },
+  "dotnet-tools": {
+    "title": "Strumenti globali .NET",
+    "explanation": "Strumenti .NET globali. Rimuovi quelli inutilizzati con `dotnet tool uninstall -g <name>`."
+  },
+  "rbenv-versions": {
+    "title": "Versioni di Ruby di rbenv",
+    "explanation": "Versioni di Ruby compilate da rbenv. Rimuovi quelle inutilizzate con `rbenv uninstall <version>`."
+  },
+  "rvm-rubies": {
+    "title": "RVM",
+    "explanation": "Ruby e gemset gestiti da RVM. Rimuovi i Ruby inutilizzati con `rvm remove <version>`."
+  },
+  "pub-cache": {
+    "title": "Cache pub di Dart/Flutter",
+    "explanation": "Pacchetti scaricati da `dart pub get` / `flutter pub get`. Riscaricati al get successivo."
+  },
+  "composer-cache": {
+    "title": "Cache di Composer",
+    "explanation": "Pacchetti PHP scaricati da Composer."
+  },
+  "ccache": {
+    "title": "ccache",
+    "explanation": "Cache dell'output del compilatore per C/C++. Le build rallentano finché non si riempie di nuovo."
+  },
+  "vcpkg-archives": {
+    "title": "Cache dei binari di vcpkg",
+    "explanation": "Librerie C/C++ precompilate in cache di vcpkg."
+  },
+  "conan-cache": {
+    "title": "Pacchetti Conan",
+    "explanation": "Pacchetti C/C++ in cache di Conan 2. Riscaricati o ricompilati quando servono."
+  },
+  "haskell-stack": {
+    "title": "Root di Haskell Stack",
+    "explanation": "Versioni di GHC e snapshot dei pacchetti usati da Stack. Grande, ma ricompilarlo richiede molto tempo."
+  },
+  "ghcup": {
+    "title": "Toolchain di GHCup",
+    "explanation": "Versioni di GHC, cabal e HLS installate da GHCup. Rimuovi quelle inutilizzate con `ghcup rm`."
+  },
+  "opam-root": {
+    "title": "Switch di opam",
+    "explanation": "Compilatori e pacchetti OCaml per ogni switch. Rimuovi gli switch inutilizzati con `opam switch remove`."
+  },
+  "julia-depot": {
+    "title": "Depot di Julia",
+    "explanation": "Pacchetti, artefatti e cache compilate di Julia. `Pkg.gc()` rimuove le versioni inutilizzate."
+  },
+  "platformio": {
+    "title": "PlatformIO core",
+    "explanation": "Toolchain e piattaforme embedded installate da PlatformIO. Riscaricate per progetto quando servono."
+  },
+  "arduino-staging": {
+    "title": "Download di Arduino",
+    "explanation": "Archivi di installazione di pacchetti di schede già installati."
+  },
+  "arduino-packages": {
+    "title": "Pacchetti delle schede Arduino",
+    "explanation": "Toolchain per schede Arduino/ESP32. Puoi rimuoverle senza rischi se non usi più Arduino."
+  },
+  "arduino-ide-cache": {
+    "title": "Cache di Arduino IDE",
+    "explanation": "Cache di Arduino IDE 2 e file indice scaricati. Ricreati all'avvio."
+  },
+  "buf-cache": {
+    "title": "Cache dei moduli Buf",
+    "explanation": "Moduli Protobuf scaricati dalla CLI di Buf."
+  },
+  "homebrew-cache": {
+    "title": "Download di Homebrew",
+    "explanation": "Bottle e download vecchi. Le formule installate non vengono toccate."
+  },
+  "homebrew-logs": {
+    "title": "Log di Homebrew",
+    "explanation": "Log di build delle installazioni delle formule."
+  },
+  "homebrew-cellar": {
+    "title": "Pacchetti installati con Homebrew",
+    "explanation": "Tutto ciò che hai installato con Homebrew. Rimuovi gli strumenti con `brew uninstall` e le dipendenze inutilizzate con `brew autoremove`."
+  },
+  "jetbrains-cache": {
+    "title": "Cache di JetBrains",
+    "explanation": "Indici degli IDE. Ricreati quando apri un progetto."
+  },
+  "jetbrains-logs": {
+    "title": "Log di JetBrains",
+    "explanation": "File di log degli IDE."
+  },
+  "jetbrains-config": {
+    "title": "Impostazioni e plugin di JetBrains",
+    "explanation": "Impostazioni degli IDE e plugin installati. Le cartelle delle versioni vecchie si rimuovono dall'IDE, non a mano."
+  },
+  "vscode-shipit": {
+    "title": "Residui degli aggiornamenti di VS Code",
+    "explanation": "Programmi di installazione di aggiornamenti già applicati."
+  },
+  "vscode-cache": {
+    "title": "Cache di VS Code",
+    "explanation": "Cache web, del codice compilato e dei download delle estensioni di VS Code. Ricreate automaticamente; chiudi prima VS Code."
+  },
+  "vscode-logs": {
+    "title": "Log di VS Code",
+    "explanation": "Log di diagnostica di VS Code."
+  },
+  "vscode-workspace-storage": {
+    "title": "Spazio di lavoro di VS Code",
+    "explanation": "Stato di ogni workspace (editor aperti, dati delle estensioni, cronologia locale). Cresce per ogni cartella aperta."
+  },
+  "vscode-extensions": {
+    "title": "Estensioni di VS Code",
+    "explanation": "Estensioni di VS Code installate. Disinstalla quelle inutilizzate dalla vista Extensions."
+  },
+  "vscode-settings": {
+    "title": "Impostazioni di VS Code",
+    "explanation": "Le tue impostazioni e scorciatoie da tastiera di VS Code."
+  },
+  "cursor-extensions": {
+    "title": "Estensioni di Cursor",
+    "explanation": "Estensioni di Cursor installate. Disinstalla quelle inutilizzate in Cursor."
+  },
+  "android-sdk": {
+    "title": "Android SDK",
+    "explanation": "Piattaforme Android, strumenti di build e immagini di sistema. Rimuovi i pacchetti inutilizzati dall'SDK Manager di Android Studio."
+  },
+  "android-avds": {
+    "title": "Emulatori Android (AVD)",
+    "explanation": "Dispositivi virtuali con i loro dati (diversi GB ciascuno). Elimina quelli inutilizzati in Device Manager."
+  },
+  "android-studio-logs": {
+    "title": "Log di Android Studio",
+    "explanation": "Log dell'IDE Android Studio."
+  },
+  "postman-cache": {
+    "title": "Cache di Postman",
+    "explanation": "Cache web, log e residui degli aggiornamenti di Postman. Le raccolte sono sincronizzate sul tuo account."
+  },
+  "gitkraken-cache": {
+    "title": "Cache di GitKraken",
+    "explanation": "Cache web e residui degli aggiornamenti di GitKraken."
+  },
+  "mongodb-compass-cache": {
+    "title": "Cache di MongoDB Compass",
+    "explanation": "Cache web e residui degli aggiornamenti di MongoDB Compass."
+  },
+  "lens-cache": {
+    "title": "Cache di Lens",
+    "explanation": "Cache web di Lens, l'IDE per Kubernetes."
+  },
+  "tableplus-cache": {
+    "title": "Cache di TablePlus",
+    "explanation": "Dati in cache di TablePlus. Le connessioni non sono salvate qui."
+  },
+  "helm-cache": {
+    "title": "Cache di Helm",
+    "explanation": "Chart e indici dei repository scaricati. Riscaricati da `helm repo update`."
+  },
+  "kube-config": {
+    "title": "Configurazione di Kubernetes",
+    "explanation": "kubeconfig con le credenziali dei cluster. Freeroom non lo tocca mai."
+  },
+  "terraform-plugin-cache": {
+    "title": "Cache dei plugin di Terraform",
+    "explanation": "Cache condivisa dei provider Terraform (solo se hai attivato plugin_cache_dir). Riscaricati da `terraform init`."
+  },
+  "terraform-credentials": {
+    "title": "Credenziali di Terraform",
+    "explanation": "Token API per Terraform Cloud. Mai eliminati."
+  },
+  "tflint-plugins": {
+    "title": "Cache di TFLint",
+    "explanation": "Plugin delle regole e cache di TFLint. Reinstallati da `tflint --init`."
+  },
+  "vagrant-boxes": {
+    "title": "Box di Vagrant",
+    "explanation": "Immagini VM di base per Vagrant. `vagrant box prune` rimuove le versioni vecchie."
+  },
+  "aws-config": {
+    "title": "Credenziali AWS",
+    "explanation": "Credenziali e configurazione della CLI di AWS. Freeroom non le tocca mai."
+  },
+  "azure-cli": {
+    "title": "Dati della CLI di Azure",
+    "explanation": "Token di accesso e configurazione della CLI di Azure. Mai eliminati."
+  },
+  "gcloud-config": {
+    "title": "Configurazione di Google Cloud SDK",
+    "explanation": "Credenziali e configurazioni di gcloud. Mai eliminate."
+  },
+  "gh-config": {
+    "title": "Configurazione di GitHub CLI",
+    "explanation": "Impostazioni e autenticazione di GitHub CLI. Mai eliminate."
+  },
+  "ssh-keys": {
+    "title": "Chiavi SSH",
+    "explanation": "Le tue chiavi SSH e gli host noti. Mai eliminati."
+  },
+  "gnupg": {
+    "title": "Portachiavi GnuPG",
+    "explanation": "Le tue chiavi GPG. Mai eliminate."
+  },
+  "parallels-vms": {
+    "title": "Macchine virtuali Parallels",
+    "explanation": "Le tue VM Parallels. Elimina le VM inutilizzate da Parallels Control Center, che rimuove anche le istantanee."
+  },
+  "utm-vms": {
+    "title": "Macchine virtuali UTM",
+    "explanation": "Le tue VM UTM e i loro dischi. Elimina le VM inutilizzate dall'interno di UTM."
+  },
+  "vmware-fusion-vms": {
+    "title": "Macchine virtuali VMware Fusion",
+    "explanation": "Le tue VM VMware Fusion. Elimina quelle inutilizzate dalla Virtual Machine Library di Fusion."
+  },
+  "virtualbox-vms": {
+    "title": "Macchine virtuali VirtualBox",
+    "explanation": "Le tue VM VirtualBox. Rimuovi quelle inutilizzate in VirtualBox con 'Delete all files'."
+  },
+  "browser-caches": {
+    "title": "Cache dei browser",
+    "explanation": "Cache web di Chrome, Arc, Firefox ed Edge. Sessioni, cronologia e password non sono salvate qui."
+  },
+  "chrome-ai-model": {
+    "title": "Modello IA on-device di Chrome",
+    "explanation": "Modello Gemini Nano usato dall'IA integrata di Chrome. Chrome lo riscarica se una funzione ne ha bisogno."
+  },
+  "chrome-profile": {
+    "title": "Profilo di Chrome",
+    "explanation": "Preferiti, cronologia, password ed estensioni di Chrome. Cancella i dati di navigazione da Chrome."
+  },
+  "chrome-for-testing": {
+    "title": "Profili di Chrome for Testing",
+    "explanation": "Profili creati dai test automatici dei browser. Ricreati al test successivo."
+  },
+  "google-updater": {
+    "title": "Cache di Google Updater",
+    "explanation": "Pacchetti di aggiornamento scaricati per Chrome e altre app Google."
+  },
+  "safari-cache": {
+    "title": "Cache di Safari",
+    "explanation": "Cache web di Safari. Cronologia e preferiti sono salvati altrove."
+  },
+  "safari-data": {
+    "title": "Dati di Safari",
+    "explanation": "Cronologia, preferiti ed elenco lettura di Safari. Cancella la cronologia da Safari."
+  },
+  "firefox-profiles": {
+    "title": "Profili di Firefox",
+    "explanation": "Segnalibri, cronologia, password e componenti aggiuntivi di Firefox. Cancella i dati da Firefox."
+  },
+  "arc-data": {
+    "title": "Dati di Arc",
+    "explanation": "Spazi, barra laterale e profili di Arc. Cancella i dati da Arc."
+  },
+  "slack-cache": {
+    "title": "Cache di Slack",
+    "explanation": "Cache web di Slack. I messaggi restano nel tuo workspace. Chiudi prima Slack."
+  },
+  "teams-cache": {
+    "title": "Cache di Microsoft Teams",
+    "explanation": "Cache del nuovo Microsoft Teams. Le chat restano sui server di Microsoft. Chiudi prima Teams."
+  },
+  "zoom-cache": {
+    "title": "Cache di Zoom",
+    "explanation": "Dati in cache e file di aggiornamento di Zoom."
+  },
+  "zoom-recordings": {
+    "title": "Registrazioni di Zoom",
+    "explanation": "Riunioni che hai registrato in locale. Sposta ciò che vuoi conservare prima di eliminarle."
+  },
+  "discord-cache": {
+    "title": "Cache di Discord",
+    "explanation": "Cache web dell'app Discord. Ricreate automaticamente; chiudi prima l'app."
+  },
+  "whatsapp-cache": {
+    "title": "Cache di WhatsApp",
+    "explanation": "Cache temporanea dell'app WhatsApp. Chat e contenuti multimediali sono salvati altrove."
+  },
+  "whatsapp-media": {
+    "title": "Contenuti multimediali di WhatsApp",
+    "explanation": "Foto, video e file delle tue chat. Gestiscili in WhatsApp > Impostazioni > Spazio e dati."
+  },
+  "messages-attachments": {
+    "title": "Allegati di Messaggi",
+    "explanation": "Foto e file delle chat iMessage. Rimuovi quelli grandi in Messaggi o in Impostazioni > Generali > Archiviazione."
+  },
+  "messages-db": {
+    "title": "Cronologia di Messaggi",
+    "explanation": "Il database con la cronologia di iMessage/SMS. Mai eliminato."
+  },
+  "mail-store": {
+    "title": "Caselle di Mail",
+    "explanation": "La tua posta locale e le caselle. Usa gli strumenti di Mail per rimuovere i messaggi."
+  },
+  "mail-downloads": {
+    "title": "Download di Mail",
+    "explanation": "Allegati che hai aperto da Mail. Gli originali restano nel messaggio."
+  },
+  "facetime-cache": {
+    "title": "Dati di FaceTime",
+    "explanation": "Impostazioni e dati delle chiamate FaceTime. Piccoli; vengono conservati."
+  },
+  "teams-classic-data": {
+    "title": "Dati di Microsoft Teams (versione classica)",
+    "explanation": "Dati residui della vecchia app Teams classica, dismessa. Non usati dal nuovo Teams."
+  },
+  "teamviewer-cache": {
+    "title": "Cache di TeamViewer",
+    "explanation": "Dati in cache di TeamViewer."
+  },
+  "figma-cache": {
+    "title": "Cache di Figma desktop",
+    "explanation": "Dati e cache dell'app desktop di Figma. I file sono nel cloud; svuotarla ti disconnette."
+  },
+  "spotify-cache": {
+    "title": "Cache di Spotify",
+    "explanation": "Brani in cache. Spotify li riscarica quando servono."
+  },
+  "spotify-offline": {
+    "title": "Archivio offline di Spotify",
+    "explanation": "Brani scaricati per l'ascolto offline più la cache di Spotify. Svuotalo in Spotify > Impostazioni > Archiviazione."
+  },
+  "office-caches": {
+    "title": "Cache di Microsoft Office",
+    "explanation": "Cache di Word, Excel, PowerPoint e Outlook. Ricreate all'avvio; i documenti non sono salvati qui."
+  },
+  "office-font-cache": {
+    "title": "Cache dei font di Office",
+    "explanation": "Cache dei font condivisa dalle app di Office. Ricreata all'avvio successivo."
+  },
+  "microsoft-autoupdate": {
+    "title": "Cache di Microsoft AutoUpdate",
+    "explanation": "Pacchetti di aggiornamento di Office scaricati e già installati."
+  },
+  "cloud-storage": {
+    "title": "Cartelle di archiviazione cloud",
+    "explanation": "File sincronizzati da OneDrive, Dropbox, Google Drive e Box. Libera spazio con 'Rimuovi download' / 'Libera spazio'."
+  },
+  "adobe-media-cache": {
+    "title": "Cache multimediale di Adobe",
+    "explanation": "File audio conformati e di anteprima per Premiere Pro e After Effects. Ricreati quando apri i progetti."
+  },
+  "capcut-cache": {
+    "title": "Cache di CapCut",
+    "explanation": "Cache di effetti, modelli e anteprime di CapCut. I progetti sono salvati altrove."
+  },
+  "insta360-cache": {
+    "title": "Cache di Insta360 Studio",
+    "explanation": "Cache di anteprima ed esportazione di Insta360 Studio."
+  },
+  "expressvpn-cache": {
+    "title": "Cache di ExpressVPN",
+    "explanation": "Dati in cache di ExpressVPN."
+  },
+  "sentry-crash-caches": {
+    "title": "Cache dei report di crash",
+    "explanation": "Report di crash messi in coda dalle app per l'invio."
+  },
+  "photos-library": {
+    "title": "Libreria di Foto",
+    "explanation": "Le tue foto e i tuoi video. Attiva \"Ottimizza spazio Mac\" nelle impostazioni di Foto per tenere gli originali solo su iCloud."
+  },
+  "music-media": {
+    "title": "Contenuti della libreria di Musica",
+    "explanation": "Brani, download e file importati in Musica. Rimuovi i download dall'app Musica."
+  },
+  "music-cache": {
+    "title": "Cache dell'app Musica",
+    "explanation": "Cache delle copertine e dello streaming dell'app Musica."
+  },
+  "tv-media": {
+    "title": "Download dell'app TV",
+    "explanation": "Film e serie scaricati nell'app TV. Rimuovi i download dall'app TV."
+  },
+  "tv-cache": {
+    "title": "Cache dell'app TV",
+    "explanation": "Cache delle copertine e dello streaming dell'app TV."
+  },
+  "podcasts-downloads": {
+    "title": "Download di Podcast",
+    "explanation": "Episodi di podcast scaricati. Rimuovili in Podcast > Impostazioni o attiva la rimozione automatica."
+  },
+  "apple-loops": {
+    "title": "Apple Loops e libreria di suoni",
+    "explanation": "Suoni e loop di GarageBand/Logic. Gestiscili da Logic > Libreria suoni invece di eliminare i file."
+  },
+  "logic-library-bundle": {
+    "title": "Libreria di Logic Pro",
+    "explanation": "Pacchetto della libreria di suoni di Logic Pro 12+. Rimuovi i pacchetti di suoni da Logic Pro > Libreria suoni."
+  },
+  "voice-memos": {
+    "title": "Memo Vocali",
+    "explanation": "Le tue registrazioni vocali. Eliminale dall'app Memo Vocali."
+  },
+  "books-data": {
+    "title": "Libri",
+    "explanation": "Libri e audiolibri scaricati. Rimuovi i download dall'app Libri."
+  },
+  "notes-data": {
+    "title": "Note",
+    "explanation": "Le tue note e i loro allegati. Mai eliminate."
+  },
+  "icloud-drive": {
+    "title": "iCloud Drive",
+    "explanation": "Copie locali dei file di iCloud Drive. Usa \"Ottimizza spazio Mac\" o \"Rimuovi download\" invece di eliminarle."
+  },
+  "trash": {
+    "title": "Cestino",
+    "explanation": "I file già spostati nel Cestino occupano spazio su disco finché non lo svuoti."
+  },
+  "downloads": {
+    "title": "Download",
+    "explanation": "Da controllare a mano: installer e archivi qui spesso non servono più."
+  },
+  "desktop": {
+    "title": "Scrivania",
+    "explanation": "Istantanee dello schermo e file sulla Scrivania. Da controllare a mano."
+  },
+  "documents": {
+    "title": "Documenti",
+    "explanation": "I tuoi documenti. Freeroom non pulisce mai questa cartella nel suo insieme."
+  },
+  "system-temp": {
+    "title": "File temporanei di sistema",
+    "explanation": "Gestiti da macOS e ripuliti al riavvio. Non eliminarli a mano."
+  },
+  "system-folder": {
+    "title": "Sistema macOS",
+    "explanation": "Il volume di sistema di macOS, sigillato e di sola lettura. Non può e non deve essere modificato."
+  },
+  "system-library": {
+    "title": "Libreria di sistema",
+    "explanation": "Impostazioni, driver e supporto app a livello di sistema. Rimuovi solo gli elementi elencati dal programma di disinstallazione di un'app."
+  },
+  "user-library": {
+    "title": "La tua cartella Libreria",
+    "explanation": "Impostazioni e dati di ogni app. Pulisci gli elementi specifici al suo interno, mai l'intera cartella."
+  },
+  "app-support-root": {
+    "title": "Application Support",
+    "explanation": "Dati di ogni app. Solo alcune sottocartelle note possono essere pulite senza rischi."
+  },
+  "preferences": {
+    "title": "Preferences",
+    "explanation": "Impostazioni delle app. Eliminarle ripristina le app."
+  },
+  "keychains": {
+    "title": "Portachiavi",
+    "explanation": "Le tue password e i tuoi certificati. Mai eliminati."
+  },
+  "containers-root": {
+    "title": "Contenitori delle app",
+    "explanation": "Dati delle app in sandbox. Rimuovere un contenitore elimina i dati di quell'app."
+  },
+  "group-containers-root": {
+    "title": "Contenitori di gruppo",
+    "explanation": "Dati condivisi tra le app dello stesso sviluppatore. Non è una cache."
+  },
+  "vm-swap": {
+    "title": "Swap e immagine di stop",
+    "explanation": "File di swap della memoria virtuale e immagine di stop. Li gestisce macOS; riavvia per ridurre lo swap."
+  },
+  "spotlight-index": {
+    "title": "Indice di Spotlight",
+    "explanation": "Indice di ricerca. Ricrealo dalle impostazioni di Spotlight se sembra troppo grande."
+  },
+  "system-logs": {
+    "title": "Log di sistema",
+    "explanation": "Log unificati. macOS li ruota e ne limita la dimensione automaticamente."
+  },
+  "user-logs": {
+    "title": "Log utente",
+    "explanation": "Report di crash e blocchi già inviati o non necessari. Quelli nuovi vengono scritti quando serve."
+  },
+  "macos-updates": {
+    "title": "Download degli aggiornamenti di macOS",
+    "explanation": "Aggiornamenti software preparati da macOS. Installali o lascia che macOS li rimuova."
+  },
+  "system-caches": {
+    "title": "Cache di sistema",
+    "explanation": "Cache a livello di sistema gestite da macOS e dai programmi di installazione. Svuotarle a mano non è sicuro."
+  },
+  "time-machine-snapshots": {
+    "title": "Istantanee locali di Time Machine",
+    "explanation": "Mostrate come spazio eliminabile. macOS le elimina automaticamente quando serve spazio (`tmutil listlocalsnapshots /`)."
+  },
+  "apple-intelligence-assets": {
+    "title": "Risorse di sistema Apple",
+    "explanation": "Risorse di sistema scaricate (voci, dizionari, modelli IA). Gestite da macOS."
+  },
+  "mobile-sync-config": {
+    "title": "Impostazioni di sincronizzazione dei dispositivi",
+    "explanation": "Cartella che contiene i backup e i dati di sincronizzazione dei dispositivi. Gestisci i backup dal Finder."
+  },
+  "crash-reporter": {
+    "title": "Dati dei report di crash",
+    "explanation": "Metadati dei report di crash conservati da macOS."
+  },
+  "apple-caches-misc": {
+    "title": "Cache delle app Apple",
+    "explanation": "Cache di App Store, Aiuto, Mappe e Navigazione sicura. Ricreate da macOS quando servono."
+  },
+  "user-caches-root": {
+    "title": "Cartella delle cache utente",
+    "explanation": "Contiene le cache di ogni app. Pulisci gli elementi noti al suo interno, non l'intera cartella."
+  },
+  "dot-cache-root": {
+    "title": "Cartella ~/.cache",
+    "explanation": "Cartella di cache usata dagli strumenti da riga di comando. Pulisci gli elementi noti al suo interno, non l'intera cartella."
+  },
+  "dot-config-root": {
+    "title": "Cartella ~/.config",
+    "explanation": "Impostazioni degli strumenti da riga di comando. Non è una cache."
+  },
+  "dot-local-root": {
+    "title": "Cartella ~/.local",
+    "explanation": "Strumenti CLI installati e i loro dati. Pulisci gli elementi noti al suo interno, non l'intera cartella."
+  },
+  "shell-history": {
+    "title": "Cronologia della shell",
+    "explanation": "La cronologia dei tuoi comandi. Piccola; viene conservata."
+  },
+  "git-config": {
+    "title": "Configurazione di Git",
+    "explanation": "Le tue impostazioni di Git."
+  },
+  "docker-unused-images": {
+    "title": "Immagini Docker inutilizzate",
+    "explanation": "Tutte le immagini non usate da un container, comprese quelle scaricate di proposito. Si possono riscaricare o ricompilare."
+  },
+  "docker-buildx-cache": {
+    "title": "Cache dei builder Buildx",
+    "explanation": "Cache di build dei builder buildx. Le build rallentano una volta finché la cache non si riempie."
+  },
+  "docker-stopped-containers": {
+    "title": "Container Docker fermi",
+    "explanation": "Container non in esecuzione. Rimuovendoli si perdono il loro layer scrivibile e i dati non salvati in un volume."
+  },
+  "docker-unused-volumes": {
+    "title": "Volumi Docker inutilizzati",
+    "explanation": "Volumi non usati da alcun container. Spesso contengono database; controlla prima di `docker volume prune`."
+  },
+  "claude-code-versions": {
+    "title": "Versioni di Claude Code",
+    "explanation": "Build native di Claude Code; quella attuale è in uso. Claude Code rimuove da solo le versioni vecchie."
+  },
+  "macos-aerials": {
+    "title": "Sfondi aerei",
+    "explanation": "Sfondi e salvaschermo aerei scaricati da macOS. Gestiti da macOS; scegli uno sfondo statico per fermare i download."
+  },
+  "xcode-userdata": {
+    "title": "Impostazioni utente di Xcode",
+    "explanation": "Abbreviazioni da tastiera, snippet di codice, temi e breakpoint di Xcode."
+  },
+  "command-line-tools": {
+    "title": "Command Line Tools",
+    "explanation": "Compilatori e git usati da Homebrew e da molti strumenti. Conservali, a meno che Xcode completo sia installato e selezionato."
+  },
+  "xcode-simulator-system-caches": {
+    "title": "Cache dei runtime dei simulatori",
+    "explanation": "Cache condivise create per i runtime dei simulatori installati. Ricreate da macOS; servono privilegi di amministratore per rimuoverle."
+  },
+  "go-bin": {
+    "title": "Binari installati con Go",
+    "explanation": "Strumenti installati con `go install`. Rimuovi quelli che non usi più."
+  },
+  "cargo-bin": {
+    "title": "Binari installati con Cargo",
+    "explanation": "Strumenti installati con `cargo install` più i proxy di rustup. Rimuovili con `cargo uninstall <name>`."
+  },
+  "chrome-component-caches": {
+    "title": "Cache dei componenti di Chrome",
+    "explanation": "Installer dei componenti scaricati e cache degli shader GPU di Chrome. Ricreate automaticamente; chiudi prima Chrome."
+  },
+  "vscode-local-history": {
+    "title": "Cronologia locale di VS Code",
+    "explanation": "Versioni precedenti dei file salvati in VS Code (vista Timeline). Rimuoverla fa perdere quella cronologia per annullare."
+  },
+  "tectonic-cache": {
+    "title": "Cache dei bundle TeX di Tectonic",
+    "explanation": "File di supporto TeX scaricati da Tectonic. Riscaricati alla build successiva."
+  },
+  "zoom-data": {
+    "title": "Dati delle chat di Zoom",
+    "explanation": "Cronologia locale delle chat e impostazioni di Zoom. Non è una cache."
+  },
+  "icloud-drive-state": {
+    "title": "Stato di iCloud Drive",
+    "explanation": "Database di sincronizzazione di iCloud Drive. Eliminarlo può compromettere la sincronizzazione."
+  },
+  "swift-toolchains": {
+    "title": "Toolchain di Swift",
+    "explanation": "Toolchain Swift aggiuntive da swift.org o swiftly. Rimuovi le versioni che non usi più per compilare."
+  },
+  "huggingface-datasets": {
+    "title": "Cache dei dataset di Hugging Face",
+    "explanation": "Dataset scaricati ed elaborati dalla libreria `datasets`. Riscaricati quando il codice li carica."
+  }
+}

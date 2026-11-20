@@ -1,0 +1,962 @@
+{
+  "xcode-derived-data": {
+    "title": "Xcode DerivedData",
+    "explanation": "Xcode 中打开过的所有项目的构建产物和索引。下次构建时会重新生成。"
+  },
+  "xcode-simulator-devices": {
+    "title": "模拟器设备（App 和数据）",
+    "explanation": "iOS 模拟器中安装的 App 和数据。抹掉后所有模拟器都会恢复到出厂状态。"
+  },
+  "xcode-device-support": {
+    "title": "iOS DeviceSupport",
+    "explanation": "从实体设备复制的调试符号。再次连接设备时会重新生成。"
+  },
+  "xcode-archives": {
+    "title": "Xcode 归档",
+    "explanation": "已归档的 App 构建。符号化已发布版本的崩溃报告时需要用到。"
+  },
+  "xcode-caches": {
+    "title": "Xcode 缓存",
+    "explanation": "Xcode 自身的下载缓存和文档缓存。需要时会重新生成。"
+  },
+  "xcode-device-logs": {
+    "title": "设备日志",
+    "explanation": "从已连接设备获取的崩溃日志和诊断日志。如果你仍在调试某个崩溃，请保留它们。"
+  },
+  "xcode-coresimulator-caches": {
+    "title": "模拟器缓存",
+    "explanation": "模拟器的 dyld 缓存和临时缓存。模拟器启动时会重新生成。"
+  },
+  "xcode-xctest-devices": {
+    "title": "XCTest 克隆设备",
+    "explanation": "为并行测试创建的模拟器克隆。Xcode 会在下次运行测试时重新创建。"
+  },
+  "xcode-dvtdownloads": {
+    "title": "Xcode 组件下载",
+    "explanation": "Xcode 为已安装的组件下载的安装包。"
+  },
+  "xcode-previews": {
+    "title": "SwiftUI 预览",
+    "explanation": "用于渲染 SwiftUI 预览的模拟器数据。显示预览时会重新生成。"
+  },
+  "xcode-unavailable-simulators": {
+    "title": "不可用的模拟器",
+    "explanation": "对应运行时已不再安装的模拟器。它们无法启动，因此移除不会丢失任何东西。"
+  },
+  "xcode-simulator-runtimes": {
+    "title": "模拟器运行时",
+    "explanation": "iOS/watchOS/visionOS 运行时（每个数 GB）。请在 Xcode > Settings > Components 中移除不用的运行时。"
+  },
+  "xcode-app": {
+    "title": "Xcode",
+    "explanation": "Xcode App 本身（10 GB 以上）。仅当你不再为 Apple 平台构建时才移除。"
+  },
+  "swiftpm-cache": {
+    "title": "Swift Package Manager 缓存",
+    "explanation": "已下载的 Swift 软件包和仓库。下次解析依赖时会重新获取。"
+  },
+  "cocoapods-cache": {
+    "title": "CocoaPods 缓存",
+    "explanation": "已下载的 pod。`pod install` 会重新获取。"
+  },
+  "cocoapods-repos": {
+    "title": "CocoaPods spec 仓库",
+    "explanation": "CocoaPods specs 索引的本地副本。新版 CocoaPods 使用 CDN，需要时会重新创建。"
+  },
+  "ios-backups": {
+    "title": "iPhone 和 iPad 备份",
+    "explanation": "由“访达”创建的本地设备备份。请在“访达”> 设备 >“管理备份”中删除旧备份。"
+  },
+  "docker-desktop-disk": {
+    "title": "Docker Desktop 磁盘映像",
+    "explanation": "存放所有镜像、容器和卷的虚拟磁盘。请用 prune 命令缩小它，而不是直接删除。"
+  },
+  "docker-build-cache": {
+    "title": "Docker 构建缓存",
+    "explanation": "`docker build` 缓存的层。大小取自 `docker system df`；删除后构建会变慢一次。"
+  },
+  "docker-dangling-images": {
+    "title": "Docker 悬空镜像",
+    "explanation": "重新构建后遗留的无标签镜像层。没有任何容器或标签使用它们。"
+  },
+  "docker-desktop-caches": {
+    "title": "Docker Desktop App 缓存",
+    "explanation": "Docker Desktop App 的日志和更新缓存，不是你的镜像或容器。"
+  },
+  "docker-cli-config": {
+    "title": "Docker CLI 配置和上下文",
+    "explanation": "Docker CLI 的镜像仓库凭据和上下文。Freeroom 从不触碰它们。"
+  },
+  "docker-model-runner": {
+    "title": "Docker Model Runner 模型",
+    "explanation": "用 `docker model pull` 拉取的 AI 模型。用 `docker model rm` 移除不用的模型。"
+  },
+  "orbstack-data": {
+    "title": "OrbStack 数据",
+    "explanation": "包含 OrbStack 容器、镜像和 Linux 机器的磁盘映像。请在 Docker 中执行 prune，或在 OrbStack 中移除机器。"
+  },
+  "colima-data": {
+    "title": "Colima 虚拟机",
+    "explanation": "Colima 的 Linux 虚拟机磁盘，包含你的镜像和容器。对不再需要的配置文件使用 `colima delete`。"
+  },
+  "lima-vms": {
+    "title": "Lima 虚拟机",
+    "explanation": "Lima Linux 虚拟机的磁盘。用 `limactl delete <name>` 移除不用的虚拟机。"
+  },
+  "rancher-desktop": {
+    "title": "Rancher Desktop 虚拟机",
+    "explanation": "Rancher Desktop 的虚拟机磁盘，包含镜像和 Kubernetes 状态。使用 Troubleshooting > Factory Reset 清除。"
+  },
+  "minikube": {
+    "title": "minikube",
+    "explanation": "minikube 集群、虚拟机映像和缓存的 Kubernetes 二进制文件。`minikube delete --all --purge` 会移除全部内容。"
+  },
+  "testcontainers-config": {
+    "title": "Testcontainers 设置",
+    "explanation": "很小的 Testcontainers 设置文件。没有可回收的空间。"
+  },
+  "npm-cache": {
+    "title": "npm 缓存",
+    "explanation": "已下载的 npm 软件包。安装时会重新获取。"
+  },
+  "npm-npx-cache": {
+    "title": "npx 缓存",
+    "explanation": "为运行 `npx` 命令而下载的软件包。下次运行时会重新下载。"
+  },
+  "npm-logs": {
+    "title": "npm 日志",
+    "explanation": "npm 运行产生的调试日志。"
+  },
+  "pnpm-store": {
+    "title": "pnpm 存储",
+    "explanation": "内容寻址的软件包存储。修剪会移除没有任何项目引用的软件包。"
+  },
+  "yarn-cache": {
+    "title": "Yarn 缓存",
+    "explanation": "已下载的 Yarn 软件包。"
+  },
+  "yarn-berry-cache": {
+    "title": "Yarn Berry 全局缓存",
+    "explanation": "Yarn 2+ 的全局软件包缓存。`yarn install` 会重新获取。"
+  },
+  "bun-cache": {
+    "title": "Bun 安装缓存",
+    "explanation": "`bun install` 下载的软件包。需要时会重新获取。"
+  },
+  "deno-cache": {
+    "title": "Deno 缓存",
+    "explanation": "Deno 的远程模块和 npm 软件包全局缓存。下次运行时会重建。"
+  },
+  "node-gyp-cache": {
+    "title": "node-gyp 头文件",
+    "explanation": "为编译原生模块而下载的 Node.js 头文件。需要时会重新下载。"
+  },
+  "typescript-cache": {
+    "title": "TypeScript 类型缓存",
+    "explanation": "编辑器的 TypeScript 服务器自动下载的类型定义。"
+  },
+  "nvm-versions": {
+    "title": "nvm Node.js 版本",
+    "explanation": "已安装的 Node.js 版本。用 `nvm uninstall <version>` 移除不用的版本。"
+  },
+  "nvm-cache": {
+    "title": "nvm 下载缓存",
+    "explanation": "nvm 为已安装版本下载的 Node.js 压缩包。"
+  },
+  "fnm-versions": {
+    "title": "fnm Node.js 版本",
+    "explanation": "fnm 安装的 Node.js 版本。用 `fnm uninstall <version>` 移除不用的版本。"
+  },
+  "volta-tools": {
+    "title": "Volta 工具链",
+    "explanation": "由 Volta 管理的 Node、npm 和全局工具。请在 Volta 中移除不用的版本。"
+  },
+  "playwright-browsers": {
+    "title": "Playwright 浏览器",
+    "explanation": "为端到端测试下载的浏览器。可用 `npx playwright install` 重新安装。"
+  },
+  "puppeteer-browsers": {
+    "title": "Puppeteer 浏览器",
+    "explanation": "Puppeteer 下载的 Chrome 构建版本。可用 `npx puppeteer browsers install` 重新安装。"
+  },
+  "cypress-cache": {
+    "title": "Cypress 二进制文件",
+    "explanation": "你安装过的每个版本的 Cypress App 二进制文件。可用 `npx cypress install` 重新安装。"
+  },
+  "electron-cache": {
+    "title": "Electron 下载",
+    "explanation": "构建 Electron App 时下载的 Electron 运行时和构建工具。"
+  },
+  "updater-caches": {
+    "title": "App 更新程序缓存",
+    "explanation": "已应用的更新所下载的安装程序。"
+  },
+  "chrome-headless-shell": {
+    "title": "Chrome headless shell",
+    "explanation": "浏览器测试工具下载的无头 Chrome 构建版本。测试需要时会重新下载。"
+  },
+  "pip-cache": {
+    "title": "pip 缓存",
+    "explanation": "已下载的 Python wheel。"
+  },
+  "uv-cache": {
+    "title": "uv 缓存",
+    "explanation": "uv 缓存的软件包和构建。下次安装时会重新获取。"
+  },
+  "uv-python": {
+    "title": "uv 管理的 Python 版本",
+    "explanation": "uv 安装的 Python 解释器。用 `uv python uninstall <version>` 移除不用的版本。"
+  },
+  "uv-tools": {
+    "title": "uv 工具",
+    "explanation": "用 `uv tool install` 安装的命令行工具。用 `uv tool uninstall <name>` 移除。"
+  },
+  "poetry-cache": {
+    "title": "Poetry 缓存",
+    "explanation": "Poetry 下载的软件包。`poetry install` 会重新获取。"
+  },
+  "poetry-virtualenvs": {
+    "title": "Poetry 虚拟环境",
+    "explanation": "Poetry 为你的项目创建的虚拟环境。`poetry install` 会重新创建，但在环境内所做的更改会丢失。"
+  },
+  "conda-pkgs": {
+    "title": "Conda 软件包缓存",
+    "explanation": "已下载的 conda 软件包和压缩包。环境仍可正常使用；安装时会重新下载。"
+  },
+  "pyenv-versions": {
+    "title": "pyenv Python 版本",
+    "explanation": "pyenv 构建的 Python 版本。用 `pyenv uninstall <version>` 移除不用的版本。"
+  },
+  "python-matplotlib-cache": {
+    "title": "Matplotlib 字体缓存",
+    "explanation": "Matplotlib 生成的字体列表缓存。下次导入时会重建。"
+  },
+  "ipython-history": {
+    "title": "IPython 配置文件",
+    "explanation": "IPython 设置和命令历史记录。很小，予以保留。"
+  },
+  "jupyter-runtime": {
+    "title": "Jupyter 数据",
+    "explanation": "Jupyter 内核、扩展和运行时文件。通常很小；移除内核前请先检查。"
+  },
+  "ollama-models": {
+    "title": "Ollama 模型",
+    "explanation": "本地 AI 模型。用 `ollama rm <model>` 移除不用的模型。"
+  },
+  "huggingface-hub": {
+    "title": "Hugging Face 缓存",
+    "explanation": "Hugging Face 库下载的模型和数据集。代码需要时会重新下载。"
+  },
+  "huggingface-xet": {
+    "title": "Hugging Face Xet 缓存",
+    "explanation": "用于加速 Hugging Face 下载的分块缓存。运行模型不需要它。"
+  },
+  "lmstudio-models": {
+    "title": "LM Studio 模型",
+    "explanation": "你在 LM Studio 中下载的模型。请在 LM Studio 的 My Models 标签页中删除不用的模型。"
+  },
+  "whisper-models": {
+    "title": "Whisper 模型",
+    "explanation": "语音转文字模型。使用时会重新下载。"
+  },
+  "torch-hub": {
+    "title": "PyTorch Hub 缓存",
+    "explanation": "PyTorch Hub 和 torchvision 下载的模型权重。代码加载时会重新下载。"
+  },
+  "easyocr-models": {
+    "title": "EasyOCR 模型",
+    "explanation": "EasyOCR 下载的 OCR 模型。下次使用时会重新下载。"
+  },
+  "claude-code-data": {
+    "title": "Claude Code 数据",
+    "explanation": "Claude Code 的设置、记忆和会话历史。请在 Claude Code 中清理旧会话，不要手动删除。"
+  },
+  "claude-cli-cache": {
+    "title": "Claude Code CLI 缓存",
+    "explanation": "Claude Code CLI 的日志和缓存数据。需要时会重新生成。"
+  },
+  "claude-desktop-cache": {
+    "title": "Claude 缓存",
+    "explanation": "Claude App 的网页缓存。会自动重建；请先退出 App。"
+  },
+  "go-modcache": {
+    "title": "Go 模块缓存",
+    "explanation": "已下载的 Go 模块。`go build` 会重新获取。"
+  },
+  "go-build-cache": {
+    "title": "Go 构建缓存",
+    "explanation": "已编译的 Go 软件包。"
+  },
+  "gopls-cache": {
+    "title": "gopls 缓存",
+    "explanation": "Go 语言服务器的索引缓存。打开 Go 项目时会重建。"
+  },
+  "golangci-lint-cache": {
+    "title": "golangci-lint 缓存",
+    "explanation": "lint 结果缓存。下次运行时会重建。"
+  },
+  "go-sumdb": {
+    "title": "Go 校验和数据库缓存",
+    "explanation": "缓存的校验和数据库分块。验证模块时会重新获取。"
+  },
+  "goimports-cache": {
+    "title": "goimports 缓存",
+    "explanation": "goimports 的软件包索引缓存。会自动重建。"
+  },
+  "cargo-registry": {
+    "title": "Cargo 注册表缓存",
+    "explanation": "已下载的 crate。"
+  },
+  "cargo-git": {
+    "title": "Cargo git 依赖",
+    "explanation": "作为 git 依赖使用的 crate 的 git 检出。下次构建时会重新克隆。"
+  },
+  "rustup-toolchains": {
+    "title": "Rust 工具链",
+    "explanation": "已安装的 Rust 工具链（每个约 1 GB）。用 `rustup toolchain uninstall <name>` 移除不用的工具链。"
+  },
+  "gradle-cache": {
+    "title": "Gradle 缓存",
+    "explanation": "已下载的依赖项和构建缓存。"
+  },
+  "gradle-wrapper-dists": {
+    "title": "Gradle wrapper 发行版",
+    "explanation": "`./gradlew` 下载的 Gradle 版本。需要它们的项目会重新下载。"
+  },
+  "gradle-daemon": {
+    "title": "Gradle 守护进程日志",
+    "explanation": "Gradle 守护进程的日志和注册信息。请先用 `./gradlew --stop` 停止守护进程。"
+  },
+  "gradle-jdks": {
+    "title": "Gradle 配置的 JDK",
+    "explanation": "Gradle 为工具链下载的 JDK。构建需要时会重新下载。"
+  },
+  "maven-repo": {
+    "title": "Maven 仓库",
+    "explanation": "已下载的 Java 依赖项。"
+  },
+  "maven-wrapper": {
+    "title": "Maven wrapper 发行版",
+    "explanation": "`./mvnw` 下载的 Maven 版本。需要时会重新下载。"
+  },
+  "sdkman-candidates": {
+    "title": "SDKMAN candidate",
+    "explanation": "用 SDKMAN 安装的 JDK 和工具。用 `sdk uninstall` 移除不用的版本。"
+  },
+  "sdkman-archives": {
+    "title": "SDKMAN 归档",
+    "explanation": "已安装 SDK 的下载压缩包（`sdk flush` 也会清理它们）。"
+  },
+  "system-jdks": {
+    "title": "已安装的 JDK",
+    "explanation": "系统范围安装的 Java 运行时。只移除没有任何项目使用的版本。"
+  },
+  "coursier-cache": {
+    "title": "Coursier 缓存",
+    "explanation": "Coursier、sbt 和 Metals 下载的 Scala/JVM 构件。"
+  },
+  "nuget-packages": {
+    "title": "NuGet 软件包",
+    "explanation": "已下载的 .NET 软件包。下次构建时会还原。"
+  },
+  "dotnet-sdks": {
+    "title": ".NET SDK 和运行时",
+    "explanation": "已安装的 .NET SDK 和运行时。请按 Microsoft 文档的说明移除旧版本。"
+  },
+  "dotnet-tools": {
+    "title": ".NET 全局工具",
+    "explanation": "全局 .NET 工具。用 `dotnet tool uninstall -g <name>` 移除不用的工具。"
+  },
+  "rbenv-versions": {
+    "title": "rbenv Ruby 版本",
+    "explanation": "rbenv 构建的 Ruby 版本。用 `rbenv uninstall <version>` 移除不用的版本。"
+  },
+  "rvm-rubies": {
+    "title": "RVM",
+    "explanation": "由 RVM 管理的 Ruby 和 gemset。用 `rvm remove <version>` 移除不用的 Ruby。"
+  },
+  "pub-cache": {
+    "title": "Dart/Flutter pub 缓存",
+    "explanation": "`dart pub get` / `flutter pub get` 下载的软件包。下次 get 时会重新获取。"
+  },
+  "composer-cache": {
+    "title": "Composer 缓存",
+    "explanation": "Composer 下载的 PHP 软件包。"
+  },
+  "ccache": {
+    "title": "ccache",
+    "explanation": "C/C++ 编译器输出缓存。在缓存重新填满之前，构建会变慢。"
+  },
+  "vcpkg-archives": {
+    "title": "vcpkg 二进制缓存",
+    "explanation": "vcpkg 缓存的预构建 C/C++ 库。"
+  },
+  "conan-cache": {
+    "title": "Conan 软件包",
+    "explanation": "Conan 2 缓存的 C/C++ 软件包。需要时会重新下载或重新构建。"
+  },
+  "haskell-stack": {
+    "title": "Haskell Stack 根目录",
+    "explanation": "Stack 使用的 GHC 版本和软件包快照。体积大，但重新构建耗时较长。"
+  },
+  "ghcup": {
+    "title": "GHCup 工具链",
+    "explanation": "GHCup 安装的 GHC、cabal 和 HLS 版本。用 `ghcup rm` 移除不用的版本。"
+  },
+  "opam-root": {
+    "title": "opam switch",
+    "explanation": "每个 switch 中的 OCaml 编译器和软件包。用 `opam switch remove` 移除不用的 switch。"
+  },
+  "julia-depot": {
+    "title": "Julia depot",
+    "explanation": "Julia 软件包、构件和编译缓存。`Pkg.gc()` 会移除未使用的版本。"
+  },
+  "platformio": {
+    "title": "PlatformIO core",
+    "explanation": "PlatformIO 安装的嵌入式工具链和平台。需要时会按项目重新下载。"
+  },
+  "arduino-staging": {
+    "title": "Arduino 下载",
+    "explanation": "已安装的开发板软件包的安装压缩包。"
+  },
+  "arduino-packages": {
+    "title": "Arduino 开发板软件包",
+    "explanation": "Arduino/ESP32 开发板的工具链。如果你不再使用 Arduino，可以放心移除。"
+  },
+  "arduino-ide-cache": {
+    "title": "Arduino IDE 缓存",
+    "explanation": "Arduino IDE 2 的缓存和下载的索引文件。启动时会重建。"
+  },
+  "buf-cache": {
+    "title": "Buf 模块缓存",
+    "explanation": "Buf CLI 下载的 Protobuf 模块。"
+  },
+  "homebrew-cache": {
+    "title": "Homebrew 下载",
+    "explanation": "旧的 bottle 和下载内容。已安装的 formula 不受影响。"
+  },
+  "homebrew-logs": {
+    "title": "Homebrew 日志",
+    "explanation": "安装 formula 时的构建日志。"
+  },
+  "homebrew-cellar": {
+    "title": "Homebrew 已安装的软件包",
+    "explanation": "用 Homebrew 安装的所有内容。用 `brew uninstall` 移除工具，用 `brew autoremove` 移除不用的依赖。"
+  },
+  "jetbrains-cache": {
+    "title": "JetBrains 缓存",
+    "explanation": "IDE 索引。打开项目时会重建。"
+  },
+  "jetbrains-logs": {
+    "title": "JetBrains 日志",
+    "explanation": "IDE 日志文件。"
+  },
+  "jetbrains-config": {
+    "title": "JetBrains 设置和插件",
+    "explanation": "IDE 设置和已安装的插件。旧版本文件夹可在 IDE 中移除，不要手动删除。"
+  },
+  "vscode-shipit": {
+    "title": "VS Code 更新残留",
+    "explanation": "已应用的更新的安装程序。"
+  },
+  "vscode-cache": {
+    "title": "VS Code 缓存",
+    "explanation": "VS Code 的网页、已编译代码和扩展下载缓存。会自动重建；请先退出 VS Code。"
+  },
+  "vscode-logs": {
+    "title": "VS Code 日志",
+    "explanation": "VS Code 的诊断日志。"
+  },
+  "vscode-workspace-storage": {
+    "title": "VS Code 工作区存储",
+    "explanation": "每个工作区的状态（打开的编辑器、扩展数据、本地历史）。每打开一个文件夹都会增长。"
+  },
+  "vscode-extensions": {
+    "title": "VS Code 扩展",
+    "explanation": "已安装的 VS Code 扩展。请在“扩展”视图中卸载不用的扩展。"
+  },
+  "vscode-settings": {
+    "title": "VS Code 设置",
+    "explanation": "你的 VS Code 设置和键绑定。"
+  },
+  "cursor-extensions": {
+    "title": "Cursor 扩展",
+    "explanation": "已安装的 Cursor 扩展。请在 Cursor 中卸载不用的扩展。"
+  },
+  "android-sdk": {
+    "title": "Android SDK",
+    "explanation": "Android 平台、构建工具和系统映像。请在 Android Studio 的 SDK Manager 中移除不用的软件包。"
+  },
+  "android-avds": {
+    "title": "Android 模拟器（AVD）",
+    "explanation": "包含数据的虚拟设备（每个数 GB）。请在 Device Manager 中删除不用的设备。"
+  },
+  "android-studio-logs": {
+    "title": "Android Studio 日志",
+    "explanation": "Android Studio 的 IDE 日志。"
+  },
+  "postman-cache": {
+    "title": "Postman 缓存",
+    "explanation": "Postman 的网页缓存、日志和更新残留。集合已同步到你的账户。"
+  },
+  "gitkraken-cache": {
+    "title": "GitKraken 缓存",
+    "explanation": "GitKraken 的网页缓存和更新残留。"
+  },
+  "mongodb-compass-cache": {
+    "title": "MongoDB Compass 缓存",
+    "explanation": "MongoDB Compass 的网页缓存和更新残留。"
+  },
+  "lens-cache": {
+    "title": "Lens 缓存",
+    "explanation": "Lens Kubernetes IDE 的网页缓存。"
+  },
+  "tableplus-cache": {
+    "title": "TablePlus 缓存",
+    "explanation": "TablePlus 的缓存数据。连接信息不存储在这里。"
+  },
+  "helm-cache": {
+    "title": "Helm 缓存",
+    "explanation": "已下载的 chart 和仓库索引。`helm repo update` 会重新获取。"
+  },
+  "kube-config": {
+    "title": "Kubernetes 配置",
+    "explanation": "包含集群凭据的 kubeconfig。Freeroom 从不触碰它。"
+  },
+  "terraform-plugin-cache": {
+    "title": "Terraform 插件缓存",
+    "explanation": "Terraform provider 的共享缓存（仅当你启用了 plugin_cache_dir 时）。`terraform init` 会重新下载。"
+  },
+  "terraform-credentials": {
+    "title": "Terraform 凭据",
+    "explanation": "Terraform Cloud 的 API 令牌。从不删除。"
+  },
+  "tflint-plugins": {
+    "title": "TFLint 缓存",
+    "explanation": "TFLint 的规则插件和缓存。`tflint --init` 会重新安装。"
+  },
+  "vagrant-boxes": {
+    "title": "Vagrant box",
+    "explanation": "Vagrant 的基础虚拟机映像。`vagrant box prune` 会移除旧版本。"
+  },
+  "aws-config": {
+    "title": "AWS 凭据",
+    "explanation": "AWS CLI 凭据和配置。Freeroom 从不触碰它们。"
+  },
+  "azure-cli": {
+    "title": "Azure CLI 数据",
+    "explanation": "Azure CLI 登录令牌和配置。从不删除。"
+  },
+  "gcloud-config": {
+    "title": "Google Cloud SDK 配置",
+    "explanation": "gcloud 凭据和配置。从不删除。"
+  },
+  "gh-config": {
+    "title": "GitHub CLI 配置",
+    "explanation": "GitHub CLI 设置和认证信息。从不删除。"
+  },
+  "ssh-keys": {
+    "title": "SSH 密钥",
+    "explanation": "你的 SSH 密钥和已知主机。从不删除。"
+  },
+  "gnupg": {
+    "title": "GnuPG 密钥环",
+    "explanation": "你的 GPG 密钥。从不删除。"
+  },
+  "parallels-vms": {
+    "title": "Parallels 虚拟机",
+    "explanation": "你的 Parallels 虚拟机。请在 Parallels Control Center 中删除不用的虚拟机，快照也会一并移除。"
+  },
+  "utm-vms": {
+    "title": "UTM 虚拟机",
+    "explanation": "你的 UTM 虚拟机及其磁盘。请在 UTM 内删除不用的虚拟机。"
+  },
+  "vmware-fusion-vms": {
+    "title": "VMware Fusion 虚拟机",
+    "explanation": "你的 VMware Fusion 虚拟机。请在 Fusion 的 Virtual Machine Library 中删除不用的虚拟机。"
+  },
+  "virtualbox-vms": {
+    "title": "VirtualBox 虚拟机",
+    "explanation": "你的 VirtualBox 虚拟机。请在 VirtualBox 中用 'Delete all files' 移除不用的虚拟机。"
+  },
+  "browser-caches": {
+    "title": "浏览器缓存",
+    "explanation": "Chrome、Arc、Firefox 和 Edge 的网页缓存。会话、历史记录和密码不存储在这里。"
+  },
+  "chrome-ai-model": {
+    "title": "Chrome 设备端 AI 模型",
+    "explanation": "Chrome 内置 AI 使用的 Gemini Nano 模型。如有功能需要，Chrome 会重新下载。"
+  },
+  "chrome-profile": {
+    "title": "Chrome 个人资料",
+    "explanation": "Chrome 书签、历史记录、密码和扩展程序。请改为在 Chrome 中清除浏览数据。"
+  },
+  "chrome-for-testing": {
+    "title": "Chrome for Testing 个人资料",
+    "explanation": "自动化浏览器测试创建的个人资料。下次运行测试时会重新创建。"
+  },
+  "google-updater": {
+    "title": "Google Updater 缓存",
+    "explanation": "为 Chrome 和其他 Google App 下载的更新包。"
+  },
+  "safari-cache": {
+    "title": "Safari 缓存",
+    "explanation": "Safari 的网页缓存。历史记录和书签存储在别处。"
+  },
+  "safari-data": {
+    "title": "Safari 数据",
+    "explanation": "Safari 历史记录、书签和阅读列表。请改为在 Safari 中清除历史记录。"
+  },
+  "firefox-profiles": {
+    "title": "Firefox 个人资料",
+    "explanation": "Firefox 书签、历史记录、密码和附加组件。请改为在 Firefox 中清除数据。"
+  },
+  "arc-data": {
+    "title": "Arc 数据",
+    "explanation": "Arc 的空间、边栏和个人资料。请改为在 Arc 中清除数据。"
+  },
+  "slack-cache": {
+    "title": "Slack 缓存",
+    "explanation": "Slack 的网页缓存。消息仍保留在你的工作区中。请先退出 Slack。"
+  },
+  "teams-cache": {
+    "title": "Microsoft Teams 缓存",
+    "explanation": "新版 Microsoft Teams 的缓存。聊天保留在 Microsoft 的服务器上。请先退出 Teams。"
+  },
+  "zoom-cache": {
+    "title": "Zoom 缓存",
+    "explanation": "Zoom 的缓存数据和更新文件。"
+  },
+  "zoom-recordings": {
+    "title": "Zoom 录制",
+    "explanation": "你在本地录制的会议。删除前请先移走想保留的内容。"
+  },
+  "discord-cache": {
+    "title": "Discord 缓存",
+    "explanation": "Discord App 的网页缓存。会自动重建；请先退出 App。"
+  },
+  "whatsapp-cache": {
+    "title": "WhatsApp 缓存",
+    "explanation": "WhatsApp App 的临时缓存。聊天和媒体存储在别处。"
+  },
+  "whatsapp-media": {
+    "title": "WhatsApp 媒体",
+    "explanation": "聊天中的照片、视频和文件。请在 WhatsApp > 设置 > 存储 中管理。"
+  },
+  "messages-attachments": {
+    "title": "信息附件",
+    "explanation": "iMessage 聊天中的照片和文件。请在“信息”或“系统设置”>“通用”>“储存空间”中移除大文件。"
+  },
+  "messages-db": {
+    "title": "信息历史记录",
+    "explanation": "你的 iMessage/短信历史数据库。从不删除。"
+  },
+  "mail-store": {
+    "title": "邮件邮箱",
+    "explanation": "你的本地邮件和邮箱。请用“邮件”自带的工具移除邮件。"
+  },
+  "mail-downloads": {
+    "title": "邮件下载",
+    "explanation": "你从“邮件”中打开过的附件。原件仍保留在邮件中。"
+  },
+  "facetime-cache": {
+    "title": "FaceTime 数据",
+    "explanation": "FaceTime 设置和通话数据。很小，予以保留。"
+  },
+  "teams-classic-data": {
+    "title": "Microsoft Teams（经典版）数据",
+    "explanation": "已停用的经典版 Teams App 的残留数据。新版 Teams 不使用它们。"
+  },
+  "teamviewer-cache": {
+    "title": "TeamViewer 缓存",
+    "explanation": "TeamViewer 的缓存数据。"
+  },
+  "figma-cache": {
+    "title": "Figma 桌面版缓存",
+    "explanation": "Figma 桌面 App 的数据和缓存。文件保存在云端；清除后会退出登录。"
+  },
+  "spotify-cache": {
+    "title": "Spotify 缓存",
+    "explanation": "缓存的歌曲。Spotify 会在需要时重新下载。"
+  },
+  "spotify-offline": {
+    "title": "Spotify 离线存储",
+    "explanation": "你为离线收听下载的歌曲以及 Spotify 的缓存。请在 Spotify > 设置 > 存储 中清除。"
+  },
+  "office-caches": {
+    "title": "Microsoft Office 缓存",
+    "explanation": "Word、Excel、PowerPoint 和 Outlook 的缓存。启动时会重建；文档不存储在这里。"
+  },
+  "office-font-cache": {
+    "title": "Office 字体缓存",
+    "explanation": "Office App 共用的字体缓存。下次启动时会重建。"
+  },
+  "microsoft-autoupdate": {
+    "title": "Microsoft AutoUpdate 缓存",
+    "explanation": "已安装的 Office 更新所下载的更新包。"
+  },
+  "cloud-storage": {
+    "title": "云存储文件夹",
+    "explanation": "由 OneDrive、Dropbox、Google Drive 和 Box 同步的文件。请用“移除下载项”/“释放空间”来腾出空间。"
+  },
+  "adobe-media-cache": {
+    "title": "Adobe 媒体缓存",
+    "explanation": "Premiere Pro 和 After Effects 的一致化音频和预览文件。打开项目时会重建。"
+  },
+  "capcut-cache": {
+    "title": "CapCut 缓存",
+    "explanation": "CapCut 的特效、模板和预览缓存。项目存储在别处。"
+  },
+  "insta360-cache": {
+    "title": "Insta360 Studio 缓存",
+    "explanation": "Insta360 Studio 的预览和导出缓存。"
+  },
+  "expressvpn-cache": {
+    "title": "ExpressVPN 缓存",
+    "explanation": "ExpressVPN 的缓存数据。"
+  },
+  "sentry-crash-caches": {
+    "title": "崩溃报告器缓存",
+    "explanation": "App 排队等待上传的崩溃报告。"
+  },
+  "photos-library": {
+    "title": "照片图库",
+    "explanation": "你的照片和视频。在“照片”设置中打开“优化 Mac 储存空间”，即可让原件只保存在 iCloud 中。"
+  },
+  "music-media": {
+    "title": "音乐资料库媒体",
+    "explanation": "“音乐”中的歌曲、下载项和导入的文件。请在“音乐”App 中移除下载项。"
+  },
+  "music-cache": {
+    "title": "音乐 App 缓存",
+    "explanation": "“音乐”App 的插图和流媒体缓存。"
+  },
+  "tv-media": {
+    "title": "TV App 下载",
+    "explanation": "在 TV App 中下载的电影和节目。请在 TV App 中移除下载项。"
+  },
+  "tv-cache": {
+    "title": "TV App 缓存",
+    "explanation": "TV App 的插图和流媒体缓存。"
+  },
+  "podcasts-downloads": {
+    "title": "播客下载",
+    "explanation": "已下载的播客单集。请在“播客”>“设置”中移除，或打开自动移除。"
+  },
+  "apple-loops": {
+    "title": "Apple Loops 和声音资源库",
+    "explanation": "GarageBand/Logic 的声音和乐段。请在 Logic >“声音资源库”中管理，而不是删除文件。"
+  },
+  "logic-library-bundle": {
+    "title": "Logic Pro 资源库",
+    "explanation": "Logic Pro 12 及更高版本的声音资源库包。请在 Logic Pro >“声音资源库”中移除声音包。"
+  },
+  "voice-memos": {
+    "title": "语音备忘录",
+    "explanation": "你的录音。请在“语音备忘录”App 中删除。"
+  },
+  "books-data": {
+    "title": "图书",
+    "explanation": "已下载的图书和有声书。请在“图书”App 中移除下载项。"
+  },
+  "notes-data": {
+    "title": "备忘录",
+    "explanation": "你的备忘录及其附件。从不删除。"
+  },
+  "icloud-drive": {
+    "title": "iCloud 云盘",
+    "explanation": "iCloud 云盘文件的本地副本。请使用“优化 Mac 储存空间”或“移除下载项”，而不是删除。"
+  },
+  "trash": {
+    "title": "废纸篓",
+    "explanation": "已移到废纸篓的文件在清倒废纸篓之前仍会占用磁盘空间。"
+  },
+  "downloads": {
+    "title": "下载",
+    "explanation": "请手动检查：这里的安装程序和压缩包通常已不再需要。"
+  },
+  "desktop": {
+    "title": "桌面",
+    "explanation": "桌面上的截屏和文件。请手动检查。"
+  },
+  "documents": {
+    "title": "文稿",
+    "explanation": "你的文稿。Freeroom 从不整体清理此文件夹。"
+  },
+  "system-temp": {
+    "title": "系统临时文件",
+    "explanation": "由 macOS 管理，重启时清理。请勿手动删除。"
+  },
+  "system-folder": {
+    "title": "macOS 系统",
+    "explanation": "已密封的只读 macOS 系统宗卷。无法更改，也绝不能更改。"
+  },
+  "system-library": {
+    "title": "系统资源库",
+    "explanation": "系统范围的设置、驱动程序和 App 支持文件。只移除 App 卸载程序列出的项目。"
+  },
+  "user-library": {
+    "title": "你的资源库文件夹",
+    "explanation": "所有 App 的设置和数据。请清理其中的特定项目，切勿清理整个文件夹。"
+  },
+  "app-support-root": {
+    "title": "Application Support",
+    "explanation": "所有 App 的数据。只有特定的已知子文件夹可以安全清理。"
+  },
+  "preferences": {
+    "title": "Preferences",
+    "explanation": "App 设置。删除后 App 会被重置。"
+  },
+  "keychains": {
+    "title": "钥匙串",
+    "explanation": "你的密码和证书。从不删除。"
+  },
+  "containers-root": {
+    "title": "App 容器",
+    "explanation": "沙盒化 App 的数据。移除容器会删除该 App 的数据。"
+  },
+  "group-containers-root": {
+    "title": "群组容器",
+    "explanation": "同一开发者的 App 之间共享的数据。不是缓存。"
+  },
+  "vm-swap": {
+    "title": "交换文件和睡眠映像",
+    "explanation": "虚拟内存交换文件和睡眠映像。由 macOS 管理；重启可缩小交换文件。"
+  },
+  "spotlight-index": {
+    "title": "聚焦索引",
+    "explanation": "搜索索引。如果它看起来太大，可在“聚焦”设置中重建。"
+  },
+  "system-logs": {
+    "title": "系统日志",
+    "explanation": "统一日志。macOS 会自动轮换并限制其大小。"
+  },
+  "user-logs": {
+    "title": "用户日志",
+    "explanation": "已发送或不再需要的崩溃和挂起报告。需要时会写入新的报告。"
+  },
+  "macos-updates": {
+    "title": "macOS 更新下载",
+    "explanation": "macOS 暂存的软件更新。请安装它们，或让 macOS 自行移除。"
+  },
+  "system-caches": {
+    "title": "系统缓存",
+    "explanation": "由 macOS 和安装程序管理的系统范围缓存。手动清空并不安全。"
+  },
+  "time-machine-snapshots": {
+    "title": "本地时间机器快照",
+    "explanation": "显示为可清除空间。需要空间时 macOS 会自动删除它们（`tmutil listlocalsnapshots /`）。"
+  },
+  "apple-intelligence-assets": {
+    "title": "Apple 系统资源",
+    "explanation": "已下载的系统资源（语音、词典、AI 模型）。由 macOS 管理。"
+  },
+  "mobile-sync-config": {
+    "title": "设备同步设置",
+    "explanation": "存放设备备份和同步数据的文件夹。请在“访达”中管理备份。"
+  },
+  "crash-reporter": {
+    "title": "崩溃报告器数据",
+    "explanation": "macOS 保留的崩溃报告元数据。"
+  },
+  "apple-caches-misc": {
+    "title": "Apple App 缓存",
+    "explanation": "App Store、帮助、地图和安全浏览的缓存。macOS 会在需要时重建。"
+  },
+  "user-caches-root": {
+    "title": "用户缓存文件夹",
+    "explanation": "存放所有 App 的缓存。请清理其中的已知项目，而不是整个文件夹。"
+  },
+  "dot-cache-root": {
+    "title": "~/.cache 文件夹",
+    "explanation": "命令行工具使用的缓存文件夹。请清理其中的已知项目，而不是整个文件夹。"
+  },
+  "dot-config-root": {
+    "title": "~/.config 文件夹",
+    "explanation": "命令行工具的设置。不是缓存。"
+  },
+  "dot-local-root": {
+    "title": "~/.local 文件夹",
+    "explanation": "已安装的命令行工具及其数据。请清理其中的已知项目，而不是整个文件夹。"
+  },
+  "shell-history": {
+    "title": "Shell 历史记录",
+    "explanation": "你的命令历史记录。很小，予以保留。"
+  },
+  "git-config": {
+    "title": "Git 配置",
+    "explanation": "你的 Git 设置。"
+  },
+  "docker-unused-images": {
+    "title": "未使用的 Docker 镜像",
+    "explanation": "所有未被容器使用的镜像，包括你特意拉取的镜像。它们可以重新拉取或重新构建。"
+  },
+  "docker-buildx-cache": {
+    "title": "Buildx 构建器缓存",
+    "explanation": "buildx 构建器的构建缓存。缓存重新填满期间，构建会变慢一次。"
+  },
+  "docker-stopped-containers": {
+    "title": "已停止的 Docker 容器",
+    "explanation": "未在运行的容器。移除后，其可写层以及不在卷中的任何数据都会丢失。"
+  },
+  "docker-unused-volumes": {
+    "title": "未使用的 Docker 卷",
+    "explanation": "没有容器使用的卷。它们常常存放数据库；执行 `docker volume prune` 前请先检查。"
+  },
+  "claude-code-versions": {
+    "title": "Claude Code 版本",
+    "explanation": "原生 Claude Code 构建；当前版本正在使用中。Claude Code 会自行移除旧版本。"
+  },
+  "macos-aerials": {
+    "title": "航拍壁纸",
+    "explanation": "macOS 下载的航拍壁纸和屏幕保护程序。由 macOS 管理；选择静态壁纸可停止下载。"
+  },
+  "xcode-userdata": {
+    "title": "Xcode 用户设置",
+    "explanation": "Xcode 键绑定、代码片段、主题和断点。"
+  },
+  "command-line-tools": {
+    "title": "Command Line Tools",
+    "explanation": "Homebrew 和许多工具使用的编译器和 git。除非已安装并选择了完整的 Xcode，否则请保留。"
+  },
+  "xcode-simulator-system-caches": {
+    "title": "模拟器运行时缓存",
+    "explanation": "为已安装的模拟器运行时构建的共享缓存。由 macOS 重建；移除需要管理员权限。"
+  },
+  "go-bin": {
+    "title": "Go 安装的二进制文件",
+    "explanation": "用 `go install` 安装的工具。移除你不再使用的工具。"
+  },
+  "cargo-bin": {
+    "title": "Cargo 安装的二进制文件",
+    "explanation": "用 `cargo install` 安装的工具以及 rustup 的代理程序。用 `cargo uninstall <name>` 移除。"
+  },
+  "chrome-component-caches": {
+    "title": "Chrome 组件缓存",
+    "explanation": "Chrome 下载的组件安装程序和 GPU 着色器缓存。会自动重建；请先退出 Chrome。"
+  },
+  "vscode-local-history": {
+    "title": "VS Code 本地历史",
+    "explanation": "你在 VS Code 中保存的文件的早期版本（时间线视图）。移除后会失去这些撤销历史。"
+  },
+  "tectonic-cache": {
+    "title": "Tectonic TeX 包缓存",
+    "explanation": "Tectonic 下载的 TeX 支持文件。下次构建时会重新下载。"
+  },
+  "zoom-data": {
+    "title": "Zoom 聊天数据",
+    "explanation": "Zoom 的本地聊天记录和设置。不是缓存。"
+  },
+  "icloud-drive-state": {
+    "title": "iCloud 云盘状态",
+    "explanation": "iCloud 云盘的同步数据库。删除它可能导致同步失效。"
+  },
+  "swift-toolchains": {
+    "title": "Swift 工具链",
+    "explanation": "来自 swift.org 或 swiftly 的额外 Swift 工具链。移除你不再用于构建的版本。"
+  },
+  "huggingface-datasets": {
+    "title": "Hugging Face 数据集缓存",
+    "explanation": "`datasets` 库下载并处理的数据集。代码加载时会重新下载。"
+  }
+}

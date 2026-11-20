@@ -1,0 +1,962 @@
+{
+  "xcode-derived-data": {
+    "title": "Xcode DerivedData",
+    "explanation": "Продукты сборки и индексы всех проектов, когда-либо открытых в Xcode. Создаются заново при следующей сборке."
+  },
+  "xcode-simulator-devices": {
+    "title": "Устройства симулятора (приложения и данные)",
+    "explanation": "Приложения и данные, установленные в симуляторах iOS. Очистка вернёт все симуляторы к заводскому состоянию."
+  },
+  "xcode-device-support": {
+    "title": "iOS DeviceSupport",
+    "explanation": "Отладочные символы, скопированные с физических устройств. Создаются заново при следующем подключении устройства."
+  },
+  "xcode-archives": {
+    "title": "Архивы Xcode",
+    "explanation": "Архивные сборки приложений. Нужны для символизации отчётов о сбоях выпущенных версий."
+  },
+  "xcode-caches": {
+    "title": "Кэши Xcode",
+    "explanation": "Собственные кэши загрузок и документации Xcode. Создаются заново по мере необходимости."
+  },
+  "xcode-device-logs": {
+    "title": "Журналы устройств",
+    "explanation": "Журналы сбоев и диагностики, полученные с подключённых устройств. Сохраните их, если ещё отлаживаете сбой."
+  },
+  "xcode-coresimulator-caches": {
+    "title": "Кэши симуляторов",
+    "explanation": "Кэши dyld и временные кэши симуляторов. Создаются заново при запуске симулятора."
+  },
+  "xcode-xctest-devices": {
+    "title": "Клоны устройств XCTest",
+    "explanation": "Клоны симуляторов для параллельного тестирования. Xcode создаст их снова при следующем запуске тестов."
+  },
+  "xcode-dvtdownloads": {
+    "title": "Загрузки компонентов Xcode",
+    "explanation": "Установочные пакеты, загруженные Xcode для уже установленных компонентов."
+  },
+  "xcode-previews": {
+    "title": "Превью SwiftUI",
+    "explanation": "Данные симулятора для отображения превью SwiftUI. Создаются заново при показе превью."
+  },
+  "xcode-unavailable-simulators": {
+    "title": "Недоступные симуляторы",
+    "explanation": "Симуляторы для сред выполнения, которые больше не установлены. Они не запускаются, поэтому при удалении ничего не теряется."
+  },
+  "xcode-simulator-runtimes": {
+    "title": "Среды выполнения симуляторов",
+    "explanation": "Среды выполнения iOS/watchOS/visionOS (по несколько ГБ каждая). Удаляйте ненужные в Xcode > Settings > Components."
+  },
+  "xcode-app": {
+    "title": "Xcode",
+    "explanation": "Само приложение Xcode (более 10 ГБ). Удаляйте, только если больше не разрабатываете для платформ Apple."
+  },
+  "swiftpm-cache": {
+    "title": "Кэш Swift Package Manager",
+    "explanation": "Загруженные пакеты и репозитории Swift. Загружаются снова при следующем разрешении зависимостей."
+  },
+  "cocoapods-cache": {
+    "title": "Кэш CocoaPods",
+    "explanation": "Загруженные поды. Загружаются снова командой `pod install`."
+  },
+  "cocoapods-repos": {
+    "title": "Репозитории спецификаций CocoaPods",
+    "explanation": "Локальная копия индекса спецификаций CocoaPods. Современный CocoaPods использует CDN и при необходимости создаст её заново."
+  },
+  "ios-backups": {
+    "title": "Резервные копии iPhone и iPad",
+    "explanation": "Локальные резервные копии устройств, созданные в Finder. Удаляйте старые в Finder > устройство > «Управлять резервными копиями»."
+  },
+  "docker-desktop-disk": {
+    "title": "Образ диска Docker Desktop",
+    "explanation": "Виртуальный диск со всеми образами, контейнерами и томами. Уменьшайте его командами prune, а не удалением."
+  },
+  "docker-build-cache": {
+    "title": "Кэш сборки Docker",
+    "explanation": "Кэшированные слои из `docker build`. Размер берётся из `docker system df`; один раз сборки будут медленнее."
+  },
+  "docker-dangling-images": {
+    "title": "Висячие образы Docker",
+    "explanation": "Слои образов без тегов, оставшиеся после пересборок. Ни один контейнер или тег их не использует."
+  },
+  "docker-desktop-caches": {
+    "title": "Кэши приложения Docker Desktop",
+    "explanation": "Журналы и кэши обновлений приложения Docker Desktop, а не ваши образы или контейнеры."
+  },
+  "docker-cli-config": {
+    "title": "Конфигурация и контексты Docker CLI",
+    "explanation": "Учётные данные реестров и контексты Docker CLI. Freeroom их никогда не трогает."
+  },
+  "docker-model-runner": {
+    "title": "Модели Docker Model Runner",
+    "explanation": "ИИ-модели, загруженные через `docker model pull`. Удаляйте ненужные командой `docker model rm`."
+  },
+  "orbstack-data": {
+    "title": "Данные OrbStack",
+    "explanation": "Образ диска с контейнерами, образами и Linux-машинами OrbStack. Очищайте через Docker или удаляйте машины в OrbStack."
+  },
+  "colima-data": {
+    "title": "Виртуальные машины Colima",
+    "explanation": "Диски Linux-ВМ Colima с вашими образами и контейнерами. Используйте `colima delete` для ненужных профилей."
+  },
+  "lima-vms": {
+    "title": "Виртуальные машины Lima",
+    "explanation": "Диски Linux-ВМ Lima. Удаляйте ненужные командой `limactl delete <name>`."
+  },
+  "rancher-desktop": {
+    "title": "ВМ Rancher Desktop",
+    "explanation": "Диск ВМ Rancher Desktop с образами и состоянием Kubernetes. Для очистки используйте Troubleshooting > Factory Reset."
+  },
+  "minikube": {
+    "title": "minikube",
+    "explanation": "Кластеры minikube, образы ВМ и кэшированные бинарные файлы Kubernetes. `minikube delete --all --purge` удаляет всё."
+  },
+  "testcontainers-config": {
+    "title": "Настройки Testcontainers",
+    "explanation": "Небольшой файл настроек Testcontainers. Места не освободит."
+  },
+  "npm-cache": {
+    "title": "Кэш npm",
+    "explanation": "Загруженные пакеты npm. Загружаются снова при установке."
+  },
+  "npm-npx-cache": {
+    "title": "Кэш npx",
+    "explanation": "Пакеты, загруженные для запуска команд `npx`. Загружаются снова при следующем запуске."
+  },
+  "npm-logs": {
+    "title": "Журналы npm",
+    "explanation": "Отладочные журналы запусков npm."
+  },
+  "pnpm-store": {
+    "title": "Хранилище pnpm",
+    "explanation": "Хранилище пакетов с адресацией по содержимому. Очистка (prune) удаляет пакеты, на которые не ссылается ни один проект."
+  },
+  "yarn-cache": {
+    "title": "Кэш Yarn",
+    "explanation": "Загруженные пакеты Yarn."
+  },
+  "yarn-berry-cache": {
+    "title": "Глобальный кэш Yarn Berry",
+    "explanation": "Глобальный кэш пакетов Yarn 2+. Загружается снова при `yarn install`."
+  },
+  "bun-cache": {
+    "title": "Кэш установки Bun",
+    "explanation": "Пакеты, загруженные `bun install`. Загружаются снова при необходимости."
+  },
+  "deno-cache": {
+    "title": "Кэш Deno",
+    "explanation": "Глобальный кэш удалённых модулей и пакетов npm в Deno. Создаётся заново при следующем запуске."
+  },
+  "node-gyp-cache": {
+    "title": "Заголовки node-gyp",
+    "explanation": "Заголовки Node.js, загруженные для компиляции нативных модулей. Загружаются снова при необходимости."
+  },
+  "typescript-cache": {
+    "title": "Кэш типов TypeScript",
+    "explanation": "Определения типов, автоматически загруженные TypeScript-сервером редактора."
+  },
+  "nvm-versions": {
+    "title": "Версии Node.js в nvm",
+    "explanation": "Установленные версии Node.js. Удаляйте ненужные командой `nvm uninstall <version>`."
+  },
+  "nvm-cache": {
+    "title": "Кэш загрузок nvm",
+    "explanation": "Архивы Node.js, загруженные nvm для уже установленных версий."
+  },
+  "fnm-versions": {
+    "title": "Версии Node.js в fnm",
+    "explanation": "Версии Node.js, установленные fnm. Удаляйте ненужные командой `fnm uninstall <version>`."
+  },
+  "volta-tools": {
+    "title": "Наборы инструментов Volta",
+    "explanation": "Node, npm и глобальные инструменты под управлением Volta. Удаляйте ненужные версии через Volta."
+  },
+  "playwright-browsers": {
+    "title": "Браузеры Playwright",
+    "explanation": "Браузеры, загруженные для сквозных тестов. Переустанавливаются командой `npx playwright install`."
+  },
+  "puppeteer-browsers": {
+    "title": "Браузеры Puppeteer",
+    "explanation": "Сборки Chrome, загруженные Puppeteer. Переустанавливаются командой `npx puppeteer browsers install`."
+  },
+  "cypress-cache": {
+    "title": "Бинарные файлы Cypress",
+    "explanation": "Бинарные файлы приложения Cypress для каждой установленной версии. Переустанавливаются командой `npx cypress install`."
+  },
+  "electron-cache": {
+    "title": "Загрузки Electron",
+    "explanation": "Среды выполнения и инструменты сборки Electron, загруженные при сборке Electron-приложений."
+  },
+  "updater-caches": {
+    "title": "Кэши программ обновления",
+    "explanation": "Загруженные установщики уже применённых обновлений."
+  },
+  "chrome-headless-shell": {
+    "title": "Chrome headless shell",
+    "explanation": "Сборки Chrome без интерфейса, загруженные инструментами браузерного тестирования. Загружаются снова, когда нужны тесту."
+  },
+  "pip-cache": {
+    "title": "Кэш pip",
+    "explanation": "Загруженные пакеты Python (wheels)."
+  },
+  "uv-cache": {
+    "title": "Кэш uv",
+    "explanation": "Пакеты и сборки, кэшированные uv. Загружаются снова при следующей установке."
+  },
+  "uv-python": {
+    "title": "Версии Python под управлением uv",
+    "explanation": "Интерпретаторы Python, установленные uv. Удаляйте ненужные командой `uv python uninstall <version>`."
+  },
+  "uv-tools": {
+    "title": "Инструменты uv",
+    "explanation": "Инструменты командной строки, установленные через `uv tool install`. Удаляются командой `uv tool uninstall <name>`."
+  },
+  "poetry-cache": {
+    "title": "Кэш Poetry",
+    "explanation": "Пакеты, загруженные Poetry. Загружаются снова при `poetry install`."
+  },
+  "poetry-virtualenvs": {
+    "title": "Виртуальные окружения Poetry",
+    "explanation": "Виртуальные окружения, созданные Poetry для ваших проектов. Создаются заново `poetry install`, но изменения внутри окружений теряются."
+  },
+  "conda-pkgs": {
+    "title": "Кэш пакетов Conda",
+    "explanation": "Загруженные пакеты и архивы conda. Окружения продолжат работать; при установке пакеты загрузятся снова."
+  },
+  "pyenv-versions": {
+    "title": "Версии Python в pyenv",
+    "explanation": "Версии Python, собранные pyenv. Удаляйте ненужные командой `pyenv uninstall <version>`."
+  },
+  "python-matplotlib-cache": {
+    "title": "Кэш шрифтов Matplotlib",
+    "explanation": "Кэш списка шрифтов, созданный Matplotlib. Создаётся заново при следующем импорте."
+  },
+  "ipython-history": {
+    "title": "Профиль IPython",
+    "explanation": "Настройки и история команд IPython. Занимает мало места; сохраняется."
+  },
+  "jupyter-runtime": {
+    "title": "Данные Jupyter",
+    "explanation": "Ядра, расширения и служебные файлы Jupyter. Обычно небольшие; проверьте перед удалением ядер."
+  },
+  "ollama-models": {
+    "title": "Модели Ollama",
+    "explanation": "Локальные ИИ-модели. Удаляйте неиспользуемые командой `ollama rm <model>`."
+  },
+  "huggingface-hub": {
+    "title": "Кэш Hugging Face",
+    "explanation": "Модели и наборы данных, загруженные библиотеками Hugging Face. Загружаются снова, когда нужны коду."
+  },
+  "huggingface-xet": {
+    "title": "Кэш Hugging Face Xet",
+    "explanation": "Кэш фрагментов для ускорения загрузок Hugging Face. Не нужен для запуска моделей."
+  },
+  "lmstudio-models": {
+    "title": "Модели LM Studio",
+    "explanation": "Модели, загруженные вами в LM Studio. Удаляйте ненужные на вкладке My Models в LM Studio."
+  },
+  "whisper-models": {
+    "title": "Модели Whisper",
+    "explanation": "Модели распознавания речи. Загружаются снова при использовании."
+  },
+  "torch-hub": {
+    "title": "Кэш PyTorch Hub",
+    "explanation": "Веса моделей, загруженные PyTorch Hub и torchvision. Загружаются снова, когда код их запрашивает."
+  },
+  "easyocr-models": {
+    "title": "Модели EasyOCR",
+    "explanation": "OCR-модели, загруженные EasyOCR. Загружаются снова при следующем использовании."
+  },
+  "claude-code-data": {
+    "title": "Данные Claude Code",
+    "explanation": "Настройки, память и история сеансов Claude Code. Удаляйте старые сеансы через Claude Code, а не вручную."
+  },
+  "claude-cli-cache": {
+    "title": "Кэш Claude Code CLI",
+    "explanation": "Журналы и кэшированные данные Claude Code CLI. Создаются заново по мере необходимости."
+  },
+  "claude-desktop-cache": {
+    "title": "Кэш Claude",
+    "explanation": "Веб-кэши приложения Claude. Создаются заново автоматически; сначала закройте приложение."
+  },
+  "go-modcache": {
+    "title": "Кэш модулей Go",
+    "explanation": "Загруженные модули Go. Загружаются снова при `go build`."
+  },
+  "go-build-cache": {
+    "title": "Кэш сборки Go",
+    "explanation": "Скомпилированные пакеты Go."
+  },
+  "gopls-cache": {
+    "title": "Кэш gopls",
+    "explanation": "Кэш индекса языкового сервера Go. Создаётся заново при открытии Go-проекта."
+  },
+  "golangci-lint-cache": {
+    "title": "Кэш golangci-lint",
+    "explanation": "Кэш результатов линтера. Создаётся заново при следующем запуске."
+  },
+  "go-sumdb": {
+    "title": "Кэш базы контрольных сумм Go",
+    "explanation": "Кэшированные фрагменты базы контрольных сумм. Загружаются снова при проверке модулей."
+  },
+  "goimports-cache": {
+    "title": "Кэш goimports",
+    "explanation": "Кэш индекса пакетов goimports. Создаётся заново автоматически."
+  },
+  "cargo-registry": {
+    "title": "Кэш реестра Cargo",
+    "explanation": "Загруженные крейты."
+  },
+  "cargo-git": {
+    "title": "Git-зависимости Cargo",
+    "explanation": "Git-копии крейтов, используемых как git-зависимости. Клонируются снова при следующей сборке."
+  },
+  "rustup-toolchains": {
+    "title": "Наборы инструментов Rust",
+    "explanation": "Установленные наборы инструментов Rust (около 1 ГБ каждый). Удаляйте ненужные командой `rustup toolchain uninstall <name>`."
+  },
+  "gradle-cache": {
+    "title": "Кэши Gradle",
+    "explanation": "Загруженные зависимости и кэш сборки."
+  },
+  "gradle-wrapper-dists": {
+    "title": "Дистрибутивы Gradle wrapper",
+    "explanation": "Версии Gradle, загруженные `./gradlew`. Загружаются снова проектом, которому они нужны."
+  },
+  "gradle-daemon": {
+    "title": "Журналы демона Gradle",
+    "explanation": "Журналы и реестр демонов Gradle. Сначала остановите демоны командой `./gradlew --stop`."
+  },
+  "gradle-jdks": {
+    "title": "JDK, загруженные Gradle",
+    "explanation": "JDK, загруженные Gradle для наборов инструментов. Загружаются снова, когда их запрашивает сборка."
+  },
+  "maven-repo": {
+    "title": "Репозиторий Maven",
+    "explanation": "Загруженные зависимости Java."
+  },
+  "maven-wrapper": {
+    "title": "Дистрибутивы Maven wrapper",
+    "explanation": "Версии Maven, загруженные `./mvnw`. Загружаются снова при необходимости."
+  },
+  "sdkman-candidates": {
+    "title": "Кандидаты SDKMAN",
+    "explanation": "JDK и инструменты, установленные через SDKMAN. Удаляйте ненужные версии командой `sdk uninstall`."
+  },
+  "sdkman-archives": {
+    "title": "Архивы SDKMAN",
+    "explanation": "Загруженные архивы уже установленных SDK (их также очищает `sdk flush`)."
+  },
+  "system-jdks": {
+    "title": "Установленные JDK",
+    "explanation": "Среды выполнения Java, установленные для всей системы. Удаляйте только версии, которые не использует ни один проект."
+  },
+  "coursier-cache": {
+    "title": "Кэш Coursier",
+    "explanation": "Артефакты Scala/JVM, загруженные Coursier, sbt и Metals."
+  },
+  "nuget-packages": {
+    "title": "Пакеты NuGet",
+    "explanation": "Загруженные пакеты .NET. Восстанавливаются при следующей сборке."
+  },
+  "dotnet-sdks": {
+    "title": "SDK и среды выполнения .NET",
+    "explanation": "Установленные SDK и среды выполнения .NET. Удаляйте старые версии так, как описано в документации Microsoft."
+  },
+  "dotnet-tools": {
+    "title": "Глобальные инструменты .NET",
+    "explanation": "Глобальные инструменты .NET. Удаляйте ненужные командой `dotnet tool uninstall -g <name>`."
+  },
+  "rbenv-versions": {
+    "title": "Версии Ruby в rbenv",
+    "explanation": "Версии Ruby, собранные rbenv. Удаляйте ненужные командой `rbenv uninstall <version>`."
+  },
+  "rvm-rubies": {
+    "title": "RVM",
+    "explanation": "Версии Ruby и наборы гемов под управлением RVM. Удаляйте ненужные версии командой `rvm remove <version>`."
+  },
+  "pub-cache": {
+    "title": "Кэш pub Dart/Flutter",
+    "explanation": "Пакеты, загруженные `dart pub get` / `flutter pub get`. Загружаются снова при следующем get."
+  },
+  "composer-cache": {
+    "title": "Кэш Composer",
+    "explanation": "Пакеты PHP, загруженные Composer."
+  },
+  "ccache": {
+    "title": "ccache",
+    "explanation": "Кэш результатов компилятора C/C++. Сборки будут медленнее, пока кэш не заполнится снова."
+  },
+  "vcpkg-archives": {
+    "title": "Бинарный кэш vcpkg",
+    "explanation": "Готовые библиотеки C/C++, кэшированные vcpkg."
+  },
+  "conan-cache": {
+    "title": "Пакеты Conan",
+    "explanation": "Пакеты C/C++, кэшированные Conan 2. При необходимости загружаются или собираются снова."
+  },
+  "haskell-stack": {
+    "title": "Корневая папка Haskell Stack",
+    "explanation": "Версии GHC и снимки пакетов, используемые Stack. Занимает много места, но пересборка долгая."
+  },
+  "ghcup": {
+    "title": "Наборы инструментов GHCup",
+    "explanation": "Версии GHC, cabal и HLS, установленные GHCup. Удаляйте ненужные командой `ghcup rm`."
+  },
+  "opam-root": {
+    "title": "Окружения opam (switches)",
+    "explanation": "Компиляторы и пакеты OCaml для каждого окружения. Удаляйте ненужные командой `opam switch remove`."
+  },
+  "julia-depot": {
+    "title": "Хранилище Julia (depot)",
+    "explanation": "Пакеты, артефакты и скомпилированные кэши Julia. `Pkg.gc()` удаляет неиспользуемые версии."
+  },
+  "platformio": {
+    "title": "PlatformIO core",
+    "explanation": "Встраиваемые наборы инструментов и платформы, установленные PlatformIO. При необходимости загружаются снова для каждого проекта."
+  },
+  "arduino-staging": {
+    "title": "Загрузки Arduino",
+    "explanation": "Архивы установщиков уже установленных пакетов плат."
+  },
+  "arduino-packages": {
+    "title": "Пакеты плат Arduino",
+    "explanation": "Наборы инструментов для плат Arduino/ESP32. Можно удалить, если вы больше не пользуетесь Arduino."
+  },
+  "arduino-ide-cache": {
+    "title": "Кэш Arduino IDE",
+    "explanation": "Кэши Arduino IDE 2 и загруженные индексные файлы. Создаются заново при запуске."
+  },
+  "buf-cache": {
+    "title": "Кэш модулей Buf",
+    "explanation": "Модули Protobuf, загруженные Buf CLI."
+  },
+  "homebrew-cache": {
+    "title": "Загрузки Homebrew",
+    "explanation": "Старые bottles и загрузки. Установленные формулы не затрагиваются."
+  },
+  "homebrew-logs": {
+    "title": "Журналы Homebrew",
+    "explanation": "Журналы сборки при установке формул."
+  },
+  "homebrew-cellar": {
+    "title": "Установленные пакеты Homebrew",
+    "explanation": "Всё, что установлено через Homebrew. Удаляйте инструменты командой `brew uninstall`, а ненужные зависимости — `brew autoremove`."
+  },
+  "jetbrains-cache": {
+    "title": "Кэши JetBrains",
+    "explanation": "Индексы IDE. Создаются заново при открытии проекта."
+  },
+  "jetbrains-logs": {
+    "title": "Журналы JetBrains",
+    "explanation": "Файлы журналов IDE."
+  },
+  "jetbrains-config": {
+    "title": "Настройки и плагины JetBrains",
+    "explanation": "Настройки IDE и установленные плагины. Папки старых версий удаляйте из IDE, а не вручную."
+  },
+  "vscode-shipit": {
+    "title": "Остатки обновлений VS Code",
+    "explanation": "Установщики уже применённых обновлений."
+  },
+  "vscode-cache": {
+    "title": "Кэши VS Code",
+    "explanation": "Веб-кэш, кэш скомпилированного кода и кэш загрузок расширений VS Code. Создаются заново автоматически; сначала закройте VS Code."
+  },
+  "vscode-logs": {
+    "title": "Журналы VS Code",
+    "explanation": "Диагностические журналы VS Code."
+  },
+  "vscode-workspace-storage": {
+    "title": "Хранилище рабочих областей VS Code",
+    "explanation": "Состояние каждой рабочей области (открытые редакторы, данные расширений, локальная история). Растёт с каждой открытой папкой."
+  },
+  "vscode-extensions": {
+    "title": "Расширения VS Code",
+    "explanation": "Установленные расширения VS Code. Удаляйте ненужные в разделе «Расширения»."
+  },
+  "vscode-settings": {
+    "title": "Настройки VS Code",
+    "explanation": "Ваши настройки и сочетания клавиш VS Code."
+  },
+  "cursor-extensions": {
+    "title": "Расширения Cursor",
+    "explanation": "Установленные расширения Cursor. Удаляйте ненужные в Cursor."
+  },
+  "android-sdk": {
+    "title": "Android SDK",
+    "explanation": "Платформы Android, инструменты сборки и системные образы. Удаляйте ненужные пакеты в SDK Manager в Android Studio."
+  },
+  "android-avds": {
+    "title": "Эмуляторы Android (AVD)",
+    "explanation": "Виртуальные устройства с их данными (по несколько ГБ каждое). Удаляйте ненужные в Device Manager."
+  },
+  "android-studio-logs": {
+    "title": "Журналы Android Studio",
+    "explanation": "Журналы IDE Android Studio."
+  },
+  "postman-cache": {
+    "title": "Кэш Postman",
+    "explanation": "Веб-кэши, журналы и остатки обновлений Postman. Коллекции синхронизируются с вашей учётной записью."
+  },
+  "gitkraken-cache": {
+    "title": "Кэши GitKraken",
+    "explanation": "Веб-кэши и остатки обновлений GitKraken."
+  },
+  "mongodb-compass-cache": {
+    "title": "Кэши MongoDB Compass",
+    "explanation": "Веб-кэши и остатки обновлений MongoDB Compass."
+  },
+  "lens-cache": {
+    "title": "Кэши Lens",
+    "explanation": "Веб-кэши Lens — IDE для Kubernetes."
+  },
+  "tableplus-cache": {
+    "title": "Кэш TablePlus",
+    "explanation": "Кэшированные данные TablePlus. Подключения здесь не хранятся."
+  },
+  "helm-cache": {
+    "title": "Кэш Helm",
+    "explanation": "Загруженные чарты и индексы репозиториев. Загружаются снова командой `helm repo update`."
+  },
+  "kube-config": {
+    "title": "Конфигурация Kubernetes",
+    "explanation": "kubeconfig с учётными данными кластеров. Freeroom его никогда не трогает."
+  },
+  "terraform-plugin-cache": {
+    "title": "Кэш плагинов Terraform",
+    "explanation": "Общий кэш провайдеров Terraform (только если вы включили plugin_cache_dir). Загружается снова командой `terraform init`."
+  },
+  "terraform-credentials": {
+    "title": "Учётные данные Terraform",
+    "explanation": "API-токены для Terraform Cloud. Никогда не удаляются."
+  },
+  "tflint-plugins": {
+    "title": "Кэш TFLint",
+    "explanation": "Плагины правил и кэши TFLint. Переустанавливаются командой `tflint --init`."
+  },
+  "vagrant-boxes": {
+    "title": "Боксы Vagrant",
+    "explanation": "Базовые образы ВМ для Vagrant. `vagrant box prune` удаляет старые версии."
+  },
+  "aws-config": {
+    "title": "Учётные данные AWS",
+    "explanation": "Учётные данные и конфигурация AWS CLI. Freeroom их никогда не трогает."
+  },
+  "azure-cli": {
+    "title": "Данные Azure CLI",
+    "explanation": "Токены входа и конфигурация Azure CLI. Никогда не удаляются."
+  },
+  "gcloud-config": {
+    "title": "Конфигурация Google Cloud SDK",
+    "explanation": "Учётные данные и конфигурации gcloud. Никогда не удаляются."
+  },
+  "gh-config": {
+    "title": "Конфигурация GitHub CLI",
+    "explanation": "Настройки и авторизация GitHub CLI. Никогда не удаляются."
+  },
+  "ssh-keys": {
+    "title": "Ключи SSH",
+    "explanation": "Ваши ключи SSH и известные хосты. Никогда не удаляются."
+  },
+  "gnupg": {
+    "title": "Связка ключей GnuPG",
+    "explanation": "Ваши ключи GPG. Никогда не удаляются."
+  },
+  "parallels-vms": {
+    "title": "Виртуальные машины Parallels",
+    "explanation": "Ваши ВМ Parallels. Удаляйте ненужные ВМ в Parallels Control Center — так удалятся и снимки."
+  },
+  "utm-vms": {
+    "title": "Виртуальные машины UTM",
+    "explanation": "Ваши ВМ UTM и их диски. Удаляйте ненужные ВМ в самом UTM."
+  },
+  "vmware-fusion-vms": {
+    "title": "Виртуальные машины VMware Fusion",
+    "explanation": "Ваши ВМ VMware Fusion. Удаляйте ненужные в Virtual Machine Library в Fusion."
+  },
+  "virtualbox-vms": {
+    "title": "Виртуальные машины VirtualBox",
+    "explanation": "Ваши ВМ VirtualBox. Удаляйте ненужные в VirtualBox с вариантом «Удалить все файлы» ('Delete all files')."
+  },
+  "browser-caches": {
+    "title": "Кэши браузеров",
+    "explanation": "Веб-кэши Chrome, Arc, Firefox и Edge. Сеансы, история и пароли здесь не хранятся."
+  },
+  "chrome-ai-model": {
+    "title": "Локальная ИИ-модель Chrome",
+    "explanation": "Модель Gemini Nano для встроенного ИИ Chrome. Chrome загрузит её снова, если она понадобится функции."
+  },
+  "chrome-profile": {
+    "title": "Профиль Chrome",
+    "explanation": "Закладки, история, пароли и расширения Chrome. Вместо этого очищайте данные браузера в самом Chrome."
+  },
+  "chrome-for-testing": {
+    "title": "Профили Chrome for Testing",
+    "explanation": "Профили, созданные автоматическими браузерными тестами. Создаются заново при следующем запуске тестов."
+  },
+  "google-updater": {
+    "title": "Кэш Google Updater",
+    "explanation": "Загруженные пакеты обновлений для Chrome и других приложений Google."
+  },
+  "safari-cache": {
+    "title": "Кэш Safari",
+    "explanation": "Веб-кэш Safari. История и закладки хранятся в другом месте."
+  },
+  "safari-data": {
+    "title": "Данные Safari",
+    "explanation": "История, закладки и список для чтения Safari. Вместо этого очищайте историю в самом Safari."
+  },
+  "firefox-profiles": {
+    "title": "Профили Firefox",
+    "explanation": "Закладки, история, пароли и дополнения Firefox. Вместо этого очищайте данные в самом Firefox."
+  },
+  "arc-data": {
+    "title": "Данные Arc",
+    "explanation": "Пространства, боковая панель и профили Arc. Вместо этого очищайте данные в самом Arc."
+  },
+  "slack-cache": {
+    "title": "Кэши Slack",
+    "explanation": "Веб-кэши Slack. Сообщения остаются в вашем рабочем пространстве. Сначала закройте Slack."
+  },
+  "teams-cache": {
+    "title": "Кэш Microsoft Teams",
+    "explanation": "Кэш нового Microsoft Teams. Чаты остаются на серверах Microsoft. Сначала закройте Teams."
+  },
+  "zoom-cache": {
+    "title": "Кэши Zoom",
+    "explanation": "Кэшированные данные и файлы обновлений Zoom."
+  },
+  "zoom-recordings": {
+    "title": "Записи Zoom",
+    "explanation": "Встречи, которые вы записали локально. Перед удалением перенесите то, что хотите сохранить."
+  },
+  "discord-cache": {
+    "title": "Кэш Discord",
+    "explanation": "Веб-кэши приложения Discord. Создаются заново автоматически; сначала закройте приложение."
+  },
+  "whatsapp-cache": {
+    "title": "Кэш WhatsApp",
+    "explanation": "Временный кэш приложения WhatsApp. Чаты и медиафайлы хранятся в другом месте."
+  },
+  "whatsapp-media": {
+    "title": "Медиафайлы WhatsApp",
+    "explanation": "Фото, видео и файлы из ваших чатов. Управляйте ими в WhatsApp > Настройки > Хранилище."
+  },
+  "messages-attachments": {
+    "title": "Вложения Сообщений",
+    "explanation": "Фото и файлы из чатов iMessage. Удаляйте большие в Сообщениях или в Системных настройках > Основные > Хранилище."
+  },
+  "messages-db": {
+    "title": "История Сообщений",
+    "explanation": "Ваша база данных истории iMessage/SMS. Никогда не удаляется."
+  },
+  "mail-store": {
+    "title": "Почтовые ящики Почты",
+    "explanation": "Ваша локальная почта и почтовые ящики. Удаляйте сообщения средствами самой Почты."
+  },
+  "mail-downloads": {
+    "title": "Загрузки Почты",
+    "explanation": "Вложения, которые вы открывали из Почты. Оригиналы остаются в письмах."
+  },
+  "facetime-cache": {
+    "title": "Данные FaceTime",
+    "explanation": "Настройки и данные вызовов FaceTime. Занимают мало места; сохраняются."
+  },
+  "teams-classic-data": {
+    "title": "Данные Microsoft Teams (классическая версия)",
+    "explanation": "Оставшиеся данные снятого с поддержки классического Teams. Новый Teams их не использует."
+  },
+  "teamviewer-cache": {
+    "title": "Кэши TeamViewer",
+    "explanation": "Кэшированные данные TeamViewer."
+  },
+  "figma-cache": {
+    "title": "Кэш Figma для компьютера",
+    "explanation": "Данные и кэш приложения Figma для компьютера. Файлы хранятся в облаке; очистка выполнит выход из учётной записи."
+  },
+  "spotify-cache": {
+    "title": "Кэш Spotify",
+    "explanation": "Кэшированные песни. Spotify загрузит их снова при необходимости."
+  },
+  "spotify-offline": {
+    "title": "Офлайн-хранилище Spotify",
+    "explanation": "Песни, загруженные вами для прослушивания офлайн, а также кэш Spotify. Очищайте в Spotify > Настройки > Хранилище."
+  },
+  "office-caches": {
+    "title": "Кэши Microsoft Office",
+    "explanation": "Кэши Word, Excel, PowerPoint и Outlook. Создаются заново при запуске; документы здесь не хранятся."
+  },
+  "office-font-cache": {
+    "title": "Кэш шрифтов Office",
+    "explanation": "Общий кэш шрифтов приложений Office. Создаётся заново при следующем запуске."
+  },
+  "microsoft-autoupdate": {
+    "title": "Кэш Microsoft AutoUpdate",
+    "explanation": "Загруженные пакеты обновлений Office, которые уже установлены."
+  },
+  "cloud-storage": {
+    "title": "Папки облачных хранилищ",
+    "explanation": "Файлы, синхронизированные OneDrive, Dropbox, Google Drive и Box. Освобождайте место командами «Удалить загрузку» / «Освободить место» ('Remove Download' / 'Free up space')."
+  },
+  "adobe-media-cache": {
+    "title": "Медиакэш Adobe",
+    "explanation": "Согласованные аудиофайлы и файлы предпросмотра для Premiere Pro и After Effects. Создаются заново при открытии проектов."
+  },
+  "capcut-cache": {
+    "title": "Кэш CapCut",
+    "explanation": "Кэши эффектов, шаблонов и предпросмотра CapCut. Проекты хранятся в другом месте."
+  },
+  "insta360-cache": {
+    "title": "Кэши Insta360 Studio",
+    "explanation": "Кэши предпросмотра и экспорта Insta360 Studio."
+  },
+  "expressvpn-cache": {
+    "title": "Кэш ExpressVPN",
+    "explanation": "Кэшированные данные ExpressVPN."
+  },
+  "sentry-crash-caches": {
+    "title": "Кэши отчётов о сбоях",
+    "explanation": "Отчёты о сбоях, поставленные приложениями в очередь на отправку."
+  },
+  "photos-library": {
+    "title": "Медиатека Фото",
+    "explanation": "Ваши фото и видео. Включите «Оптимизировать хранилище Mac» в настройках Фото, чтобы оригиналы хранились только в iCloud."
+  },
+  "music-media": {
+    "title": "Медиафайлы медиатеки Музыки",
+    "explanation": "Песни, загрузки и импортированные файлы в Музыке. Удаляйте загрузки в приложении «Музыка»."
+  },
+  "music-cache": {
+    "title": "Кэш приложения «Музыка»",
+    "explanation": "Кэш обложек и потокового воспроизведения приложения «Музыка»."
+  },
+  "tv-media": {
+    "title": "Загрузки приложения TV",
+    "explanation": "Фильмы и сериалы, загруженные в приложении TV. Удаляйте загрузки в приложении TV."
+  },
+  "tv-cache": {
+    "title": "Кэш приложения TV",
+    "explanation": "Кэш обложек и потокового воспроизведения приложения TV."
+  },
+  "podcasts-downloads": {
+    "title": "Загрузки Подкастов",
+    "explanation": "Загруженные выпуски подкастов. Удаляйте их в Подкасты > Настройки или включите автоматическое удаление."
+  },
+  "apple-loops": {
+    "title": "Apple Loops и библиотека звуков",
+    "explanation": "Звуки и лупы GarageBand/Logic. Управляйте ими в Logic > Sound Library, а не удаляйте файлы."
+  },
+  "logic-library-bundle": {
+    "title": "Библиотека Logic Pro",
+    "explanation": "Пакет библиотеки звуков Logic Pro 12+. Удаляйте наборы звуков в Logic Pro > Sound Library."
+  },
+  "voice-memos": {
+    "title": "Диктофон",
+    "explanation": "Ваши голосовые записи. Удаляйте их в приложении «Диктофон»."
+  },
+  "books-data": {
+    "title": "Книги",
+    "explanation": "Загруженные книги и аудиокниги. Удаляйте загрузки в приложении «Книги»."
+  },
+  "notes-data": {
+    "title": "Заметки",
+    "explanation": "Ваши заметки и их вложения. Никогда не удаляются."
+  },
+  "icloud-drive": {
+    "title": "iCloud Drive",
+    "explanation": "Локальные копии файлов iCloud Drive. Вместо удаления используйте «Оптимизировать хранилище Mac» или «Удалить загруженную копию»."
+  },
+  "trash": {
+    "title": "Корзина",
+    "explanation": "Файлы, уже перемещённые в Корзину, занимают место на диске, пока она не очищена."
+  },
+  "downloads": {
+    "title": "Загрузки",
+    "explanation": "Проверьте вручную: установщики и архивы здесь часто больше не нужны."
+  },
+  "desktop": {
+    "title": "Рабочий стол",
+    "explanation": "Снимки экрана и файлы на Рабочем столе. Проверьте вручную."
+  },
+  "documents": {
+    "title": "Документы",
+    "explanation": "Ваши документы. Freeroom никогда не очищает эту папку целиком."
+  },
+  "system-temp": {
+    "title": "Временные файлы системы",
+    "explanation": "Управляются macOS и очищаются при перезагрузке. Не удаляйте вручную."
+  },
+  "system-folder": {
+    "title": "Система macOS",
+    "explanation": "Запечатанный системный том macOS, доступный только для чтения. Его нельзя и не следует изменять."
+  },
+  "system-library": {
+    "title": "Системная папка «Библиотеки»",
+    "explanation": "Общесистемные настройки, драйверы и данные приложений. Удаляйте только объекты, указанные деинсталлятором приложения."
+  },
+  "user-library": {
+    "title": "Ваша папка «Библиотеки»",
+    "explanation": "Настройки и данные всех приложений. Очищайте конкретные объекты внутри, но никогда не саму папку."
+  },
+  "app-support-root": {
+    "title": "Application Support",
+    "explanation": "Данные всех приложений. Безопасно очищать можно только определённые известные подпапки."
+  },
+  "preferences": {
+    "title": "Preferences",
+    "explanation": "Настройки приложений. Их удаление сбрасывает настройки приложений."
+  },
+  "keychains": {
+    "title": "Связки ключей",
+    "explanation": "Ваши пароли и сертификаты. Никогда не удаляются."
+  },
+  "containers-root": {
+    "title": "Контейнеры приложений",
+    "explanation": "Данные приложений в песочнице. Удаление контейнера удаляет данные этого приложения."
+  },
+  "group-containers-root": {
+    "title": "Групповые контейнеры",
+    "explanation": "Данные, общие для приложений одного разработчика. Это не кэш."
+  },
+  "vm-swap": {
+    "title": "Файлы подкачки и образ сна",
+    "explanation": "Файлы подкачки виртуальной памяти и образ сна. Ими управляет macOS; перезагрузите Mac, чтобы уменьшить подкачку."
+  },
+  "spotlight-index": {
+    "title": "Индекс Spotlight",
+    "explanation": "Поисковый индекс. Перестройте его в настройках Spotlight, если он кажется слишком большим."
+  },
+  "system-logs": {
+    "title": "Системные журналы",
+    "explanation": "Единые журналы. macOS автоматически ротирует и ограничивает их."
+  },
+  "user-logs": {
+    "title": "Журналы пользователя",
+    "explanation": "Отчёты о сбоях и зависаниях, уже отправленные или ненужные. Новые создаются по мере необходимости."
+  },
+  "macos-updates": {
+    "title": "Загрузки обновлений macOS",
+    "explanation": "Обновления ПО, подготовленные macOS к установке. Установите их или дайте macOS удалить их."
+  },
+  "system-caches": {
+    "title": "Системные кэши",
+    "explanation": "Общесистемные кэши, которыми управляют macOS и установщики. Очищать вручную небезопасно."
+  },
+  "time-machine-snapshots": {
+    "title": "Локальные снимки Time Machine",
+    "explanation": "Отображаются как очищаемое пространство. macOS автоматически удаляет их, когда нужно место (`tmutil listlocalsnapshots /`)."
+  },
+  "apple-intelligence-assets": {
+    "title": "Системные ресурсы Apple",
+    "explanation": "Загруженные системные ресурсы (голоса, словари, ИИ-модели). Ими управляет macOS."
+  },
+  "mobile-sync-config": {
+    "title": "Настройки синхронизации устройств",
+    "explanation": "Папка с резервными копиями устройств и данными синхронизации. Управляйте резервными копиями через Finder."
+  },
+  "crash-reporter": {
+    "title": "Данные отчётов о сбоях",
+    "explanation": "Метаданные отчётов о сбоях, хранимые macOS."
+  },
+  "apple-caches-misc": {
+    "title": "Кэши приложений Apple",
+    "explanation": "Кэши App Store, Справки, Карт и Безопасного просмотра. macOS создаёт их заново по мере необходимости."
+  },
+  "user-caches-root": {
+    "title": "Папка кэшей пользователя",
+    "explanation": "Содержит кэши всех приложений. Очищайте известные объекты внутри, а не всю папку."
+  },
+  "dot-cache-root": {
+    "title": "Папка ~/.cache",
+    "explanation": "Папка кэша инструментов командной строки. Очищайте известные объекты внутри, а не всю папку."
+  },
+  "dot-config-root": {
+    "title": "Папка ~/.config",
+    "explanation": "Настройки инструментов командной строки. Это не кэш."
+  },
+  "dot-local-root": {
+    "title": "Папка ~/.local",
+    "explanation": "Установленные инструменты командной строки и их данные. Очищайте известные объекты внутри, а не всю папку."
+  },
+  "shell-history": {
+    "title": "История оболочки",
+    "explanation": "Ваша история команд. Занимает мало места; сохраняется."
+  },
+  "git-config": {
+    "title": "Конфигурация Git",
+    "explanation": "Ваши настройки Git."
+  },
+  "docker-unused-images": {
+    "title": "Неиспользуемые образы Docker",
+    "explanation": "Все образы, не используемые контейнерами, включая загруженные вами намеренно. Их можно загрузить или пересобрать снова."
+  },
+  "docker-buildx-cache": {
+    "title": "Кэш сборщиков Buildx",
+    "explanation": "Кэш сборки сборщиков buildx. Один раз сборки будут медленнее, пока кэш заполняется."
+  },
+  "docker-stopped-containers": {
+    "title": "Остановленные контейнеры Docker",
+    "explanation": "Незапущенные контейнеры. При удалении их записываемый слой и все данные вне томов теряются."
+  },
+  "docker-unused-volumes": {
+    "title": "Неиспользуемые тома Docker",
+    "explanation": "Тома, которые не использует ни один контейнер. Часто в них хранятся базы данных; проверьте перед `docker volume prune`."
+  },
+  "claude-code-versions": {
+    "title": "Версии Claude Code",
+    "explanation": "Нативные сборки Claude Code; текущая используется. Claude Code сам удаляет старые версии."
+  },
+  "macos-aerials": {
+    "title": "Заставки «С высоты»",
+    "explanation": "Обои и заставки «С высоты», загруженные macOS. Ими управляет macOS; выберите статичные обои, чтобы остановить загрузки."
+  },
+  "xcode-userdata": {
+    "title": "Пользовательские настройки Xcode",
+    "explanation": "Сочетания клавиш, фрагменты кода, темы и точки останова Xcode."
+  },
+  "command-line-tools": {
+    "title": "Command Line Tools",
+    "explanation": "Компиляторы и git, используемые Homebrew и многими инструментами. Сохраните, если только не установлен и не выбран полный Xcode."
+  },
+  "xcode-simulator-system-caches": {
+    "title": "Кэши сред выполнения симуляторов",
+    "explanation": "Общие кэши, созданные для установленных сред выполнения симуляторов. macOS создаёт их заново; для удаления нужны права администратора."
+  },
+  "go-bin": {
+    "title": "Программы, установленные через Go",
+    "explanation": "Инструменты, установленные через `go install`. Удаляйте те, которыми больше не пользуетесь."
+  },
+  "cargo-bin": {
+    "title": "Программы, установленные через Cargo",
+    "explanation": "Инструменты, установленные через `cargo install`, и прокси rustup. Удаляются командой `cargo uninstall <name>`."
+  },
+  "chrome-component-caches": {
+    "title": "Кэши компонентов Chrome",
+    "explanation": "Загруженные установщики компонентов и кэши GPU-шейдеров Chrome. Создаются заново автоматически; сначала закройте Chrome."
+  },
+  "vscode-local-history": {
+    "title": "Локальная история VS Code",
+    "explanation": "Прежние версии файлов, сохранённых в VS Code (представление Timeline). При удалении эта история отмен теряется."
+  },
+  "tectonic-cache": {
+    "title": "Кэш пакета TeX Tectonic",
+    "explanation": "Вспомогательные файлы TeX, загруженные Tectonic. Загружаются снова при следующей сборке."
+  },
+  "zoom-data": {
+    "title": "Данные чатов Zoom",
+    "explanation": "Локальная история чатов и настройки Zoom. Это не кэш."
+  },
+  "icloud-drive-state": {
+    "title": "Состояние iCloud Drive",
+    "explanation": "База данных синхронизации iCloud Drive. Её удаление может нарушить синхронизацию."
+  },
+  "swift-toolchains": {
+    "title": "Наборы инструментов Swift",
+    "explanation": "Дополнительные наборы инструментов Swift с swift.org или из swiftly. Удаляйте версии, которыми больше не собираете."
+  },
+  "huggingface-datasets": {
+    "title": "Кэш наборов данных Hugging Face",
+    "explanation": "Наборы данных, загруженные и обработанные библиотекой `datasets`. Загружаются снова, когда код их запрашивает."
+  }
+}

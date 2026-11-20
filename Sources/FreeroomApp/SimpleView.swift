@@ -36,7 +36,7 @@ struct SimpleView: View {
                 Text(safeTotal.formattedBytes)
                     .font(.system(size: 56, weight: .bold, design: .rounded)).monospacedDigit()
                     .contentTransition(.numericText(value: Double(safeTotal)))
-                Text("\(model.freeBytes.formattedBytes) \(L("free of")) \(model.totalBytes.formattedBytes)")
+                Text(String(format: L("%@ free of %@"), model.freeBytes.formattedBytes, model.totalBytes.formattedBytes))
                     .foregroundStyle(.secondary).monospacedDigit()
                 Button {
                     model.requestClean(model.safeFindings)
@@ -82,7 +82,7 @@ struct BigTile: View {
             VStack(spacing: 8) {
                 ItemIcon(icon: finding.icon, fallback: finding.categoryFallback, size: 52)
                 Text(finding.reclaimable.formattedBytes).font(.title3.weight(.semibold)).monospacedDigit()
-                Text(finding.title).font(.callout).foregroundStyle(.secondary).lineLimit(2).multilineTextAlignment(.center)
+                Text(finding.displayTitle).font(.callout).foregroundStyle(.secondary).lineLimit(2).multilineTextAlignment(.center)
                     .frame(height: 36, alignment: .top)
             }
             .padding(14)
@@ -104,7 +104,7 @@ struct BigTile: View {
         .buttonStyle(.plain)
         .onHover { hovering = $0 }
         .help(model.explanation(for: finding))
-        .accessibilityLabel("\(finding.title), \(finding.reclaimable.formattedBytes)")
-        .accessibilityValue(selected ? "selected" : "not selected")
+        .accessibilityLabel("\(finding.displayTitle), \(finding.reclaimable.formattedBytes)")
+        .accessibilityValue(selected ? L("selected") : L("not selected"))
     }
 }

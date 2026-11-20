@@ -1,0 +1,962 @@
+{
+  "xcode-derived-data": {
+    "title": "Xcode DerivedData",
+    "explanation": "Xcode में कभी भी खोले गए हर प्रोजेक्ट के बिल्ड प्रोडक्ट और इंडेक्स। अगले बिल्ड पर फिर से बन जाते हैं।"
+  },
+  "xcode-simulator-devices": {
+    "title": "सिम्युलेटर डिवाइस (ऐप्स और डेटा)",
+    "explanation": "iOS सिम्युलेटर में इंस्टॉल किए गए ऐप्स और डेटा। मिटाने पर हर सिम्युलेटर फ़ैक्टरी स्थिति में रीसेट हो जाता है।"
+  },
+  "xcode-device-support": {
+    "title": "iOS DeviceSupport",
+    "explanation": "फ़िज़िकल डिवाइस से कॉपी किए गए डीबग सिंबल। डिवाइस फिर से कनेक्ट करने पर दोबारा बन जाते हैं।"
+  },
+  "xcode-archives": {
+    "title": "Xcode आर्काइव",
+    "explanation": "आर्काइव किए गए ऐप बिल्ड। रिलीज़ किए गए वर्शन की क्रैश रिपोर्ट को सिंबलिकेट करने के लिए ज़रूरी हैं।"
+  },
+  "xcode-caches": {
+    "title": "Xcode कैश",
+    "explanation": "Xcode के अपने डाउनलोड और डॉक्यूमेंटेशन कैश। ज़रूरत पड़ने पर फिर से बन जाते हैं।"
+  },
+  "xcode-device-logs": {
+    "title": "डिवाइस लॉग",
+    "explanation": "कनेक्ट किए गए डिवाइस से लिए गए क्रैश और डायग्नोस्टिक लॉग। अगर आप अभी भी किसी क्रैश को डीबग कर रहे हैं, तो इन्हें रखें।"
+  },
+  "xcode-coresimulator-caches": {
+    "title": "सिम्युलेटर कैश",
+    "explanation": "सिम्युलेटर के लिए Dyld और अस्थायी कैश। सिम्युलेटर बूट होने पर फिर से बन जाते हैं।"
+  },
+  "xcode-xctest-devices": {
+    "title": "XCTest क्लोन डिवाइस",
+    "explanation": "पैरेलल टेस्टिंग के लिए बनाए गए सिम्युलेटर क्लोन। अगले टेस्ट रन के लिए Xcode इन्हें फिर से बना देता है।"
+  },
+  "xcode-dvtdownloads": {
+    "title": "Xcode कंपोनेंट डाउनलोड",
+    "explanation": "उन कंपोनेंट के लिए Xcode द्वारा डाउनलोड किए गए इंस्टॉलर पैकेज, जो पहले ही इंस्टॉल हो चुके हैं।"
+  },
+  "xcode-previews": {
+    "title": "SwiftUI प्रीव्यू",
+    "explanation": "SwiftUI प्रीव्यू दिखाने के लिए इस्तेमाल होने वाला सिम्युलेटर डेटा। प्रीव्यू दिखाने पर फिर से बन जाता है।"
+  },
+  "xcode-unavailable-simulators": {
+    "title": "अनुपलब्ध सिम्युलेटर",
+    "explanation": "उन रनटाइम के सिम्युलेटर जो अब इंस्टॉल नहीं हैं। ये बूट नहीं हो सकते, इसलिए इन्हें हटाने से कुछ भी नहीं खोता।"
+  },
+  "xcode-simulator-runtimes": {
+    "title": "सिम्युलेटर रनटाइम",
+    "explanation": "iOS/watchOS/visionOS रनटाइम (हर एक कई GB)। जो इस्तेमाल नहीं होते, उन्हें Xcode > Settings > Components में हटाएँ।"
+  },
+  "xcode-app": {
+    "title": "Xcode",
+    "explanation": "खुद Xcode ऐप (10+ GB)। इसे तभी हटाएँ जब आप Apple प्लेटफ़ॉर्म के लिए अब बिल्ड नहीं करते।"
+  },
+  "swiftpm-cache": {
+    "title": "Swift Package Manager कैश",
+    "explanation": "डाउनलोड किए गए Swift पैकेज और रिपॉज़िटरी। अगली बार resolve करने पर फिर से फ़ेच हो जाते हैं।"
+  },
+  "cocoapods-cache": {
+    "title": "CocoaPods कैश",
+    "explanation": "डाउनलोड किए गए pods। `pod install` इन्हें फिर से फ़ेच कर लेता है।"
+  },
+  "cocoapods-repos": {
+    "title": "CocoaPods spec रिपॉज़िटरी",
+    "explanation": "CocoaPods specs इंडेक्स की लोकल कॉपी। नया CocoaPods CDN इस्तेमाल करता है और ज़रूरत हो तो इसे फिर से बना देता है।"
+  },
+  "ios-backups": {
+    "title": "iPhone और iPad बैकअप",
+    "explanation": "Finder द्वारा बनाए गए डिवाइस के लोकल बैकअप। पुराने बैकअप Finder > डिवाइस > बैकअप प्रबंधित करें में डिलीट करें।"
+  },
+  "docker-desktop-disk": {
+    "title": "Docker Desktop डिस्क इमेज",
+    "explanation": "सभी इमेज, कंटेनर और वॉल्यूम रखने वाली वर्चुअल डिस्क। इसे prune कमांड से छोटा करें, डिलीट करके नहीं।"
+  },
+  "docker-build-cache": {
+    "title": "Docker बिल्ड कैश",
+    "explanation": "`docker build` की कैश की गई लेयर। साइज़ `docker system df` से आता है; एक बार बिल्ड धीमे होंगे।"
+  },
+  "docker-dangling-images": {
+    "title": "डैंगलिंग Docker इमेज",
+    "explanation": "रीबिल्ड से बची बिना टैग वाली इमेज लेयर। कोई कंटेनर या टैग इनका इस्तेमाल नहीं करता।"
+  },
+  "docker-desktop-caches": {
+    "title": "Docker Desktop ऐप कैश",
+    "explanation": "Docker Desktop ऐप के लॉग और अपडेट कैश, आपकी इमेज या कंटेनर नहीं।"
+  },
+  "docker-cli-config": {
+    "title": "Docker CLI कॉन्फ़िग और कॉन्टेक्स्ट",
+    "explanation": "Docker CLI के लिए रजिस्ट्री क्रेडेंशियल और कॉन्टेक्स्ट। Freeroom इन्हें कभी नहीं छूता।"
+  },
+  "docker-model-runner": {
+    "title": "Docker Model Runner मॉडल",
+    "explanation": "`docker model pull` से लिए गए AI मॉडल। जो इस्तेमाल नहीं होते, उन्हें `docker model rm` से हटाएँ।"
+  },
+  "orbstack-data": {
+    "title": "OrbStack डेटा",
+    "explanation": "OrbStack के कंटेनर, इमेज और Linux मशीन वाली डिस्क इमेज। Docker से prune करें या OrbStack में मशीन हटाएँ।"
+  },
+  "colima-data": {
+    "title": "Colima VM",
+    "explanation": "आपकी इमेज और कंटेनर वाली Colima की Linux VM डिस्क। जिन प्रोफ़ाइल की अब ज़रूरत नहीं, उनके लिए `colima delete` इस्तेमाल करें।"
+  },
+  "lima-vms": {
+    "title": "Lima VM",
+    "explanation": "Lima Linux VM की डिस्क। जो इस्तेमाल नहीं होतीं, उन्हें `limactl delete <name>` से हटाएँ।"
+  },
+  "rancher-desktop": {
+    "title": "Rancher Desktop VM",
+    "explanation": "इमेज और Kubernetes स्टेट वाली Rancher Desktop की VM डिस्क। साफ़ करने के लिए Troubleshooting > Factory Reset इस्तेमाल करें।"
+  },
+  "minikube": {
+    "title": "minikube",
+    "explanation": "minikube क्लस्टर, VM इमेज और कैश की गई Kubernetes बाइनरी। `minikube delete --all --purge` सब कुछ हटा देता है।"
+  },
+  "testcontainers-config": {
+    "title": "Testcontainers सेटिंग्ज़",
+    "explanation": "Testcontainers की छोटी सेटिंग्ज़ फ़ाइल। इससे कोई जगह खाली नहीं होगी।"
+  },
+  "npm-cache": {
+    "title": "npm कैश",
+    "explanation": "डाउनलोड किए गए npm पैकेज। इंस्टॉल करने पर फिर से फ़ेच हो जाते हैं।"
+  },
+  "npm-npx-cache": {
+    "title": "npx कैश",
+    "explanation": "`npx` कमांड चलाने के लिए डाउनलोड किए गए पैकेज। अगली बार चलाने पर फिर से डाउनलोड हो जाते हैं।"
+  },
+  "npm-logs": {
+    "title": "npm लॉग",
+    "explanation": "npm रन के डीबग लॉग।"
+  },
+  "pnpm-store": {
+    "title": "pnpm स्टोर",
+    "explanation": "कंटेंट-एड्रेसेबल पैकेज स्टोर। Prune करने पर वे पैकेज हटते हैं जिन्हें कोई प्रोजेक्ट इस्तेमाल नहीं करता।"
+  },
+  "yarn-cache": {
+    "title": "Yarn कैश",
+    "explanation": "डाउनलोड किए गए Yarn पैकेज।"
+  },
+  "yarn-berry-cache": {
+    "title": "Yarn Berry ग्लोबल कैश",
+    "explanation": "Yarn 2+ का ग्लोबल पैकेज कैश। `yarn install` पर फिर से फ़ेच हो जाता है।"
+  },
+  "bun-cache": {
+    "title": "Bun इंस्टॉल कैश",
+    "explanation": "`bun install` द्वारा डाउनलोड किए गए पैकेज। ज़रूरत पड़ने पर फिर से फ़ेच हो जाते हैं।"
+  },
+  "deno-cache": {
+    "title": "Deno कैश",
+    "explanation": "रिमोट मॉड्यूल और npm पैकेज का Deno का ग्लोबल कैश। अगली बार चलाने पर फिर से बन जाता है।"
+  },
+  "node-gyp-cache": {
+    "title": "node-gyp हेडर",
+    "explanation": "नेटिव मॉड्यूल कंपाइल करने के लिए डाउनलोड किए गए Node.js हेडर। ज़रूरत पड़ने पर फिर से डाउनलोड हो जाते हैं।"
+  },
+  "typescript-cache": {
+    "title": "TypeScript टाइप कैश",
+    "explanation": "एडिटर के TypeScript सर्वर द्वारा अपने आप डाउनलोड की गई टाइप डेफ़िनिशन।"
+  },
+  "nvm-versions": {
+    "title": "nvm Node.js वर्शन",
+    "explanation": "इंस्टॉल किए गए Node.js वर्शन। जो इस्तेमाल नहीं होते, उन्हें `nvm uninstall <version>` से हटाएँ।"
+  },
+  "nvm-cache": {
+    "title": "nvm डाउनलोड कैश",
+    "explanation": "पहले से इंस्टॉल वर्शन के लिए nvm द्वारा डाउनलोड किए गए Node.js आर्काइव।"
+  },
+  "fnm-versions": {
+    "title": "fnm Node.js वर्शन",
+    "explanation": "fnm द्वारा इंस्टॉल किए गए Node.js वर्शन। जो इस्तेमाल नहीं होते, उन्हें `fnm uninstall <version>` से हटाएँ।"
+  },
+  "volta-tools": {
+    "title": "Volta टूलचेन",
+    "explanation": "Volta द्वारा मैनेज किए गए Node, npm और ग्लोबल टूल। जो वर्शन इस्तेमाल नहीं होते, उन्हें Volta से हटाएँ।"
+  },
+  "playwright-browsers": {
+    "title": "Playwright ब्राउज़र",
+    "explanation": "एंड-टू-एंड टेस्ट के लिए डाउनलोड किए गए ब्राउज़र। `npx playwright install` से फिर से इंस्टॉल करें।"
+  },
+  "puppeteer-browsers": {
+    "title": "Puppeteer ब्राउज़र",
+    "explanation": "Puppeteer द्वारा डाउनलोड किए गए Chrome बिल्ड। `npx puppeteer browsers install` से फिर से इंस्टॉल होते हैं।"
+  },
+  "cypress-cache": {
+    "title": "Cypress बाइनरी",
+    "explanation": "आपके इंस्टॉल किए गए हर वर्शन की Cypress ऐप बाइनरी। `npx cypress install` से फिर से इंस्टॉल होती हैं।"
+  },
+  "electron-cache": {
+    "title": "Electron डाउनलोड",
+    "explanation": "Electron ऐप्स बिल्ड करते समय डाउनलोड किए गए Electron रनटाइम और बिल्ड टूल।"
+  },
+  "updater-caches": {
+    "title": "ऐप अपडेटर कैश",
+    "explanation": "उन अपडेट के डाउनलोड किए गए इंस्टॉलर जो पहले ही लागू हो चुके हैं।"
+  },
+  "chrome-headless-shell": {
+    "title": "Chrome headless shell",
+    "explanation": "ब्राउज़र-टेस्टिंग टूल द्वारा डाउनलोड किए गए हेडलेस Chrome बिल्ड। टेस्ट को ज़रूरत होने पर फिर से डाउनलोड हो जाते हैं।"
+  },
+  "pip-cache": {
+    "title": "pip कैश",
+    "explanation": "डाउनलोड किए गए Python wheels।"
+  },
+  "uv-cache": {
+    "title": "uv कैश",
+    "explanation": "uv द्वारा कैश किए गए पैकेज और बिल्ड। अगले इंस्टॉल पर फिर से फ़ेच हो जाते हैं।"
+  },
+  "uv-python": {
+    "title": "uv द्वारा मैनेज किए गए Python वर्शन",
+    "explanation": "uv द्वारा इंस्टॉल किए गए Python इंटरप्रेटर। जो इस्तेमाल नहीं होते, उन्हें `uv python uninstall <version>` से हटाएँ।"
+  },
+  "uv-tools": {
+    "title": "uv टूल",
+    "explanation": "`uv tool install` से इंस्टॉल किए गए कमांड-लाइन टूल। `uv tool uninstall <name>` से हटाएँ।"
+  },
+  "poetry-cache": {
+    "title": "Poetry कैश",
+    "explanation": "Poetry द्वारा डाउनलोड किए गए पैकेज। `poetry install` पर फिर से फ़ेच हो जाते हैं।"
+  },
+  "poetry-virtualenvs": {
+    "title": "Poetry virtualenvs",
+    "explanation": "आपके प्रोजेक्ट के लिए Poetry द्वारा बनाए गए वर्चुअल एनवायरनमेंट। `poetry install` इन्हें फिर से बनाता है, पर एनवायरनमेंट के अंदर किए बदलाव खो जाते हैं।"
+  },
+  "conda-pkgs": {
+    "title": "Conda पैकेज कैश",
+    "explanation": "डाउनलोड किए गए conda पैकेज और tarballs। एनवायरनमेंट काम करते रहेंगे; इंस्टॉल फिर से डाउनलोड करेंगे।"
+  },
+  "pyenv-versions": {
+    "title": "pyenv Python वर्शन",
+    "explanation": "pyenv द्वारा बिल्ड किए गए Python वर्शन। जो इस्तेमाल नहीं होते, उन्हें `pyenv uninstall <version>` से हटाएँ।"
+  },
+  "python-matplotlib-cache": {
+    "title": "Matplotlib फ़ॉन्ट कैश",
+    "explanation": "Matplotlib द्वारा बनाया गया फ़ॉन्ट लिस्ट कैश। अगले import पर फिर से बन जाता है।"
+  },
+  "ipython-history": {
+    "title": "IPython प्रोफ़ाइल",
+    "explanation": "IPython सेटिंग्ज़ और कमांड हिस्ट्री। छोटी है; रखी जाती है।"
+  },
+  "jupyter-runtime": {
+    "title": "Jupyter डेटा",
+    "explanation": "Jupyter कर्नेल, एक्सटेंशन और रनटाइम फ़ाइलें। आमतौर पर छोटी; कर्नेल हटाने से पहले जाँच लें।"
+  },
+  "ollama-models": {
+    "title": "Ollama मॉडल",
+    "explanation": "लोकल AI मॉडल। जो इस्तेमाल नहीं करते, उन्हें `ollama rm <model>` से हटाएँ।"
+  },
+  "huggingface-hub": {
+    "title": "Hugging Face कैश",
+    "explanation": "Hugging Face लाइब्रेरी द्वारा डाउनलोड किए गए मॉडल और डेटासेट। कोड को ज़रूरत होने पर फिर से डाउनलोड हो जाते हैं।"
+  },
+  "huggingface-xet": {
+    "title": "Hugging Face Xet कैश",
+    "explanation": "Hugging Face डाउनलोड तेज़ करने के लिए इस्तेमाल होने वाला चंक कैश। मॉडल चलाने के लिए ज़रूरी नहीं।"
+  },
+  "lmstudio-models": {
+    "title": "LM Studio मॉडल",
+    "explanation": "LM Studio में आपके डाउनलोड किए गए मॉडल। जो इस्तेमाल नहीं होते, उन्हें LM Studio के My Models टैब से डिलीट करें।"
+  },
+  "whisper-models": {
+    "title": "Whisper मॉडल",
+    "explanation": "स्पीच-टू-टेक्स्ट मॉडल। इस्तेमाल करने पर फिर से डाउनलोड हो जाते हैं।"
+  },
+  "torch-hub": {
+    "title": "PyTorch Hub कैश",
+    "explanation": "PyTorch Hub और torchvision द्वारा डाउनलोड किए गए मॉडल वेट। कोड लोड करने पर फिर से डाउनलोड हो जाते हैं।"
+  },
+  "easyocr-models": {
+    "title": "EasyOCR मॉडल",
+    "explanation": "EasyOCR द्वारा डाउनलोड किए गए OCR मॉडल। अगली बार इस्तेमाल पर फिर से डाउनलोड हो जाते हैं।"
+  },
+  "claude-code-data": {
+    "title": "Claude Code डेटा",
+    "explanation": "Claude Code सेटिंग्ज़, मेमोरी और सेशन हिस्ट्री। पुराने सेशन Claude Code से हटाएँ, हाथ से नहीं।"
+  },
+  "claude-cli-cache": {
+    "title": "Claude Code CLI कैश",
+    "explanation": "Claude Code CLI के लॉग और कैश किया गया डेटा। ज़रूरत के अनुसार फिर से बन जाता है।"
+  },
+  "claude-desktop-cache": {
+    "title": "Claude कैश",
+    "explanation": "Claude ऐप के वेब कैश। अपने आप फिर से बन जाते हैं; पहले ऐप बंद करें।"
+  },
+  "go-modcache": {
+    "title": "Go मॉड्यूल कैश",
+    "explanation": "डाउनलोड किए गए Go मॉड्यूल। `go build` इन्हें फिर से फ़ेच कर लेता है।"
+  },
+  "go-build-cache": {
+    "title": "Go बिल्ड कैश",
+    "explanation": "कंपाइल किए गए Go पैकेज।"
+  },
+  "gopls-cache": {
+    "title": "gopls कैश",
+    "explanation": "Go लैंग्वेज सर्वर का इंडेक्स कैश। Go प्रोजेक्ट खोलने पर फिर से बन जाता है।"
+  },
+  "golangci-lint-cache": {
+    "title": "golangci-lint कैश",
+    "explanation": "Lint नतीजों का कैश। अगली बार चलाने पर फिर से बन जाता है।"
+  },
+  "go-sumdb": {
+    "title": "Go checksum डेटाबेस कैश",
+    "explanation": "कैश की गई checksum डेटाबेस टाइल। मॉड्यूल वेरिफ़ाई होने पर फिर से फ़ेच हो जाती हैं।"
+  },
+  "goimports-cache": {
+    "title": "goimports कैश",
+    "explanation": "goimports का पैकेज इंडेक्स कैश। अपने आप फिर से बन जाता है।"
+  },
+  "cargo-registry": {
+    "title": "Cargo रजिस्ट्री कैश",
+    "explanation": "डाउनलोड किए गए crates।"
+  },
+  "cargo-git": {
+    "title": "Cargo git डिपेंडेंसी",
+    "explanation": "git डिपेंडेंसी के रूप में इस्तेमाल होने वाले crates के git चेकआउट। अगले बिल्ड पर फिर से क्लोन हो जाते हैं।"
+  },
+  "rustup-toolchains": {
+    "title": "Rust टूलचेन",
+    "explanation": "इंस्टॉल किए गए Rust टूलचेन (हर एक लगभग 1 GB)। जो इस्तेमाल नहीं होते, उन्हें `rustup toolchain uninstall <name>` से हटाएँ।"
+  },
+  "gradle-cache": {
+    "title": "Gradle कैश",
+    "explanation": "डाउनलोड की गई डिपेंडेंसी और बिल्ड कैश।"
+  },
+  "gradle-wrapper-dists": {
+    "title": "Gradle wrapper डिस्ट्रिब्यूशन",
+    "explanation": "`./gradlew` द्वारा डाउनलोड किए गए Gradle वर्शन। जिस प्रोजेक्ट को ज़रूरत हो, वह इन्हें फिर से डाउनलोड कर लेता है।"
+  },
+  "gradle-daemon": {
+    "title": "Gradle daemon लॉग",
+    "explanation": "Gradle daemons के लॉग और रजिस्ट्री। पहले `./gradlew --stop` से daemons बंद करें।"
+  },
+  "gradle-jdks": {
+    "title": "Gradle द्वारा दिए गए JDK",
+    "explanation": "टूलचेन के लिए Gradle द्वारा डाउनलोड किए गए JDK। किसी बिल्ड के माँगने पर फिर से डाउनलोड हो जाते हैं।"
+  },
+  "maven-repo": {
+    "title": "Maven रिपॉज़िटरी",
+    "explanation": "डाउनलोड की गई Java डिपेंडेंसी।"
+  },
+  "maven-wrapper": {
+    "title": "Maven wrapper डिस्ट्रिब्यूशन",
+    "explanation": "`./mvnw` द्वारा डाउनलोड किए गए Maven वर्शन। ज़रूरत पड़ने पर फिर से डाउनलोड हो जाते हैं।"
+  },
+  "sdkman-candidates": {
+    "title": "SDKMAN candidates",
+    "explanation": "SDKMAN से इंस्टॉल किए गए JDK और टूल। जो वर्शन इस्तेमाल नहीं होते, उन्हें `sdk uninstall` से हटाएँ।"
+  },
+  "sdkman-archives": {
+    "title": "SDKMAN आर्काइव",
+    "explanation": "पहले से इंस्टॉल SDK के डाउनलोड किए गए आर्काइव (`sdk flush` भी इन्हें साफ़ करता है)।"
+  },
+  "system-jdks": {
+    "title": "इंस्टॉल किए गए JDK",
+    "explanation": "पूरे सिस्टम में इंस्टॉल किए गए Java रनटाइम। सिर्फ़ वे वर्शन हटाएँ जिन्हें कोई प्रोजेक्ट इस्तेमाल नहीं करता।"
+  },
+  "coursier-cache": {
+    "title": "Coursier कैश",
+    "explanation": "Coursier, sbt और Metals द्वारा डाउनलोड किए गए Scala/JVM आर्टिफ़ैक्ट।"
+  },
+  "nuget-packages": {
+    "title": "NuGet पैकेज",
+    "explanation": "डाउनलोड किए गए .NET पैकेज। अगले बिल्ड पर फिर से restore हो जाते हैं।"
+  },
+  "dotnet-sdks": {
+    "title": ".NET SDK और रनटाइम",
+    "explanation": "इंस्टॉल किए गए .NET SDK और रनटाइम। पुराने वर्शन Microsoft के बताए तरीके से हटाएँ।"
+  },
+  "dotnet-tools": {
+    "title": ".NET ग्लोबल टूल",
+    "explanation": "ग्लोबल .NET टूल। जो इस्तेमाल नहीं होते, उन्हें `dotnet tool uninstall -g <name>` से हटाएँ।"
+  },
+  "rbenv-versions": {
+    "title": "rbenv Ruby वर्शन",
+    "explanation": "rbenv द्वारा बिल्ड किए गए Ruby वर्शन। जो इस्तेमाल नहीं होते, उन्हें `rbenv uninstall <version>` से हटाएँ।"
+  },
+  "rvm-rubies": {
+    "title": "RVM",
+    "explanation": "RVM द्वारा मैनेज किए गए rubies और gemsets। जो rubies इस्तेमाल नहीं होते, उन्हें `rvm remove <version>` से हटाएँ।"
+  },
+  "pub-cache": {
+    "title": "Dart/Flutter pub कैश",
+    "explanation": "`dart pub get` / `flutter pub get` द्वारा डाउनलोड किए गए पैकेज। अगली बार get करने पर फिर से फ़ेच हो जाते हैं।"
+  },
+  "composer-cache": {
+    "title": "Composer कैश",
+    "explanation": "Composer द्वारा डाउनलोड किए गए PHP पैकेज।"
+  },
+  "ccache": {
+    "title": "ccache",
+    "explanation": "C/C++ के लिए कंपाइलर आउटपुट कैश। इसके फिर से भरने तक बिल्ड धीमे रहेंगे।"
+  },
+  "vcpkg-archives": {
+    "title": "vcpkg बाइनरी कैश",
+    "explanation": "vcpkg द्वारा कैश की गई पहले से बिल्ड C/C++ लाइब्रेरी।"
+  },
+  "conan-cache": {
+    "title": "Conan पैकेज",
+    "explanation": "Conan 2 द्वारा कैश किए गए C/C++ पैकेज। ज़रूरत पड़ने पर फिर से डाउनलोड या बिल्ड हो जाते हैं।"
+  },
+  "haskell-stack": {
+    "title": "Haskell Stack रूट",
+    "explanation": "Stack द्वारा इस्तेमाल किए जाने वाले GHC वर्शन और पैकेज स्नैपशॉट। बड़ा है, पर फिर से बिल्ड करने में लंबा समय लगता है।"
+  },
+  "ghcup": {
+    "title": "GHCup टूलचेन",
+    "explanation": "GHCup द्वारा इंस्टॉल किए गए GHC, cabal और HLS वर्शन। जो इस्तेमाल नहीं होते, उन्हें `ghcup rm` से हटाएँ।"
+  },
+  "opam-root": {
+    "title": "opam switches",
+    "explanation": "हर switch के OCaml कंपाइलर और पैकेज। जो switches इस्तेमाल नहीं होते, उन्हें `opam switch remove` से हटाएँ।"
+  },
+  "julia-depot": {
+    "title": "Julia depot",
+    "explanation": "Julia पैकेज, आर्टिफ़ैक्ट और कंपाइल किए गए कैश। `Pkg.gc()` इस्तेमाल न होने वाले वर्शन हटाता है।"
+  },
+  "platformio": {
+    "title": "PlatformIO core",
+    "explanation": "PlatformIO द्वारा इंस्टॉल किए गए एम्बेडेड टूलचेन और प्लेटफ़ॉर्म। ज़रूरत पड़ने पर हर प्रोजेक्ट के लिए फिर से डाउनलोड हो जाते हैं।"
+  },
+  "arduino-staging": {
+    "title": "Arduino डाउनलोड",
+    "explanation": "पहले से इंस्टॉल बोर्ड पैकेज के इंस्टॉलर आर्काइव।"
+  },
+  "arduino-packages": {
+    "title": "Arduino बोर्ड पैकेज",
+    "explanation": "Arduino/ESP32 बोर्ड के टूलचेन। अगर आप अब Arduino इस्तेमाल नहीं करते, तो हटाना सुरक्षित है।"
+  },
+  "arduino-ide-cache": {
+    "title": "Arduino IDE कैश",
+    "explanation": "Arduino IDE 2 के कैश और डाउनलोड की गई इंडेक्स फ़ाइलें। शुरू करने पर फिर से बन जाते हैं।"
+  },
+  "buf-cache": {
+    "title": "Buf मॉड्यूल कैश",
+    "explanation": "Buf CLI द्वारा डाउनलोड किए गए Protobuf मॉड्यूल।"
+  },
+  "homebrew-cache": {
+    "title": "Homebrew डाउनलोड",
+    "explanation": "पुराने bottles और डाउनलोड। इंस्टॉल किए गए formulae पर कोई असर नहीं पड़ता।"
+  },
+  "homebrew-logs": {
+    "title": "Homebrew लॉग",
+    "explanation": "formula इंस्टॉल के बिल्ड लॉग।"
+  },
+  "homebrew-cellar": {
+    "title": "Homebrew से इंस्टॉल पैकेज",
+    "explanation": "Homebrew से इंस्टॉल की गई हर चीज़। टूल `brew uninstall` से और बेकार डिपेंडेंसी `brew autoremove` से हटाएँ।"
+  },
+  "jetbrains-cache": {
+    "title": "JetBrains कैश",
+    "explanation": "IDE इंडेक्स। प्रोजेक्ट खोलने पर फिर से बन जाते हैं।"
+  },
+  "jetbrains-logs": {
+    "title": "JetBrains लॉग",
+    "explanation": "IDE लॉग फ़ाइलें।"
+  },
+  "jetbrains-config": {
+    "title": "JetBrains सेटिंग्ज़ और प्लगइन",
+    "explanation": "IDE सेटिंग्ज़ और इंस्टॉल किए गए प्लगइन। पुराने वर्शन फ़ोल्डर IDE से हटाए जा सकते हैं, हाथ से नहीं।"
+  },
+  "vscode-shipit": {
+    "title": "VS Code अपडेट के बचे हिस्से",
+    "explanation": "उन अपडेट के इंस्टॉलर जो पहले ही लागू हो चुके हैं।"
+  },
+  "vscode-cache": {
+    "title": "VS Code कैश",
+    "explanation": "VS Code के वेब, कंपाइल्ड-कोड और एक्सटेंशन डाउनलोड कैश। अपने आप फिर से बन जाते हैं; पहले VS Code बंद करें।"
+  },
+  "vscode-logs": {
+    "title": "VS Code लॉग",
+    "explanation": "VS Code के डायग्नोस्टिक लॉग।"
+  },
+  "vscode-workspace-storage": {
+    "title": "VS Code वर्कस्पेस स्टोरेज",
+    "explanation": "हर वर्कस्पेस की स्थिति (खुले एडिटर, एक्सटेंशन डेटा, लोकल हिस्ट्री)। खोले गए हर फ़ोल्डर के साथ बढ़ता है।"
+  },
+  "vscode-extensions": {
+    "title": "VS Code एक्सटेंशन",
+    "explanation": "इंस्टॉल किए गए VS Code एक्सटेंशन। जो इस्तेमाल नहीं होते, उन्हें Extensions व्यू से अनइंस्टॉल करें।"
+  },
+  "vscode-settings": {
+    "title": "VS Code सेटिंग्ज़",
+    "explanation": "आपकी VS Code सेटिंग्ज़ और कीबाइंडिंग।"
+  },
+  "cursor-extensions": {
+    "title": "Cursor एक्सटेंशन",
+    "explanation": "इंस्टॉल किए गए Cursor एक्सटेंशन। जो इस्तेमाल नहीं होते, उन्हें Cursor में अनइंस्टॉल करें।"
+  },
+  "android-sdk": {
+    "title": "Android SDK",
+    "explanation": "Android प्लेटफ़ॉर्म, बिल्ड टूल और सिस्टम इमेज। जो पैकेज इस्तेमाल नहीं होते, उन्हें Android Studio के SDK Manager में हटाएँ।"
+  },
+  "android-avds": {
+    "title": "Android एम्युलेटर (AVD)",
+    "explanation": "डेटा सहित वर्चुअल डिवाइस (हर एक कई GB)। जो इस्तेमाल नहीं होते, उन्हें Device Manager में डिलीट करें।"
+  },
+  "android-studio-logs": {
+    "title": "Android Studio लॉग",
+    "explanation": "Android Studio के IDE लॉग।"
+  },
+  "postman-cache": {
+    "title": "Postman कैश",
+    "explanation": "Postman के वेब कैश, लॉग और अपडेट के बचे हिस्से। कलेक्शन आपके अकाउंट से सिंक रहते हैं।"
+  },
+  "gitkraken-cache": {
+    "title": "GitKraken कैश",
+    "explanation": "GitKraken के वेब कैश और अपडेट के बचे हिस्से।"
+  },
+  "mongodb-compass-cache": {
+    "title": "MongoDB Compass कैश",
+    "explanation": "MongoDB Compass के वेब कैश और अपडेट के बचे हिस्से।"
+  },
+  "lens-cache": {
+    "title": "Lens कैश",
+    "explanation": "Lens Kubernetes IDE के वेब कैश।"
+  },
+  "tableplus-cache": {
+    "title": "TablePlus कैश",
+    "explanation": "TablePlus का कैश किया गया डेटा। कनेक्शन यहाँ स्टोर नहीं होते।"
+  },
+  "helm-cache": {
+    "title": "Helm कैश",
+    "explanation": "डाउनलोड किए गए charts और रिपॉज़िटरी इंडेक्स। `helm repo update` इन्हें फिर से फ़ेच कर लेता है।"
+  },
+  "kube-config": {
+    "title": "Kubernetes कॉन्फ़िग",
+    "explanation": "क्लस्टर क्रेडेंशियल वाला kubeconfig। Freeroom इसे कभी नहीं छूता।"
+  },
+  "terraform-plugin-cache": {
+    "title": "Terraform प्लगइन कैश",
+    "explanation": "Terraform providers का साझा कैश (सिर्फ़ तब जब आपने plugin_cache_dir चालू किया हो)। `terraform init` इसे फिर से डाउनलोड कर लेता है।"
+  },
+  "terraform-credentials": {
+    "title": "Terraform क्रेडेंशियल",
+    "explanation": "Terraform Cloud के API टोकन। कभी डिलीट नहीं किए जाते।"
+  },
+  "tflint-plugins": {
+    "title": "TFLint कैश",
+    "explanation": "TFLint के रूल प्लगइन और कैश। `tflint --init` से फिर से इंस्टॉल होते हैं।"
+  },
+  "vagrant-boxes": {
+    "title": "Vagrant boxes",
+    "explanation": "Vagrant के लिए बेस VM इमेज। `vagrant box prune` पुराने वर्शन हटाता है।"
+  },
+  "aws-config": {
+    "title": "AWS क्रेडेंशियल",
+    "explanation": "AWS CLI क्रेडेंशियल और कॉन्फ़िग। Freeroom इन्हें कभी नहीं छूता।"
+  },
+  "azure-cli": {
+    "title": "Azure CLI डेटा",
+    "explanation": "Azure CLI लॉगिन टोकन और कॉन्फ़िग। कभी डिलीट नहीं किए जाते।"
+  },
+  "gcloud-config": {
+    "title": "Google Cloud SDK कॉन्फ़िग",
+    "explanation": "gcloud क्रेडेंशियल और कॉन्फ़िगरेशन। कभी डिलीट नहीं किए जाते।"
+  },
+  "gh-config": {
+    "title": "GitHub CLI कॉन्फ़िग",
+    "explanation": "GitHub CLI सेटिंग्ज़ और ऑथेंटिकेशन। कभी डिलीट नहीं किए जाते।"
+  },
+  "ssh-keys": {
+    "title": "SSH कीज़",
+    "explanation": "आपकी SSH कीज़ और known hosts। कभी डिलीट नहीं किए जाते।"
+  },
+  "gnupg": {
+    "title": "GnuPG कीरिंग",
+    "explanation": "आपकी GPG कीज़। कभी डिलीट नहीं की जातीं।"
+  },
+  "parallels-vms": {
+    "title": "Parallels वर्चुअल मशीन",
+    "explanation": "आपकी Parallels VM। जो इस्तेमाल नहीं होतीं, उन्हें Parallels Control Center से डिलीट करें, इससे स्नैपशॉट भी हट जाते हैं।"
+  },
+  "utm-vms": {
+    "title": "UTM वर्चुअल मशीन",
+    "explanation": "आपकी UTM VM और उनकी डिस्क। जो इस्तेमाल नहीं होतीं, उन्हें UTM के अंदर से डिलीट करें।"
+  },
+  "vmware-fusion-vms": {
+    "title": "VMware Fusion वर्चुअल मशीन",
+    "explanation": "आपकी VMware Fusion VM। जो इस्तेमाल नहीं होतीं, उन्हें Fusion की Virtual Machine Library से डिलीट करें।"
+  },
+  "virtualbox-vms": {
+    "title": "VirtualBox वर्चुअल मशीन",
+    "explanation": "आपकी VirtualBox VM। जो इस्तेमाल नहीं होतीं, उन्हें VirtualBox में 'Delete all files' (सभी फ़ाइलें डिलीट करें) से हटाएँ।"
+  },
+  "browser-caches": {
+    "title": "ब्राउज़र कैश",
+    "explanation": "Chrome, Arc, Firefox और Edge के वेब कैश। सेशन, हिस्ट्री और पासवर्ड यहाँ स्टोर नहीं होते।"
+  },
+  "chrome-ai-model": {
+    "title": "Chrome ऑन-डिवाइस AI मॉडल",
+    "explanation": "Chrome के बिल्ट-इन AI द्वारा इस्तेमाल होने वाला Gemini Nano मॉडल। किसी फ़ीचर को ज़रूरत हो तो Chrome इसे फिर से डाउनलोड कर लेता है।"
+  },
+  "chrome-profile": {
+    "title": "Chrome प्रोफ़ाइल",
+    "explanation": "Chrome बुकमार्क, हिस्ट्री, पासवर्ड और एक्सटेंशन। इसके बजाय Chrome से ब्राउज़िंग डेटा साफ़ करें।"
+  },
+  "chrome-for-testing": {
+    "title": "Chrome for Testing प्रोफ़ाइल",
+    "explanation": "ऑटोमेटेड ब्राउज़र टेस्ट द्वारा बनाई गई प्रोफ़ाइल। अगले टेस्ट रन पर फिर से बन जाती हैं।"
+  },
+  "google-updater": {
+    "title": "Google Updater कैश",
+    "explanation": "Chrome और अन्य Google ऐप्स के डाउनलोड किए गए अपडेट पैकेज।"
+  },
+  "safari-cache": {
+    "title": "Safari कैश",
+    "explanation": "Safari का वेब कैश। हिस्ट्री और बुकमार्क कहीं और स्टोर होते हैं।"
+  },
+  "safari-data": {
+    "title": "Safari डेटा",
+    "explanation": "Safari हिस्ट्री, बुकमार्क और रीडिंग लिस्ट। इसके बजाय Safari से हिस्ट्री साफ़ करें।"
+  },
+  "firefox-profiles": {
+    "title": "Firefox प्रोफ़ाइल",
+    "explanation": "Firefox बुकमार्क, हिस्ट्री, पासवर्ड और ऐड-ऑन। इसके बजाय Firefox से डेटा साफ़ करें।"
+  },
+  "arc-data": {
+    "title": "Arc डेटा",
+    "explanation": "Arc स्पेस, साइडबार और प्रोफ़ाइल। इसके बजाय Arc से डेटा साफ़ करें।"
+  },
+  "slack-cache": {
+    "title": "Slack कैश",
+    "explanation": "Slack के वेब कैश। मैसेज आपके वर्कस्पेस में रहते हैं। पहले Slack बंद करें।"
+  },
+  "teams-cache": {
+    "title": "Microsoft Teams कैश",
+    "explanation": "नए Microsoft Teams का कैश। चैट Microsoft के सर्वर पर रहती हैं। पहले Teams बंद करें।"
+  },
+  "zoom-cache": {
+    "title": "Zoom कैश",
+    "explanation": "Zoom का कैश किया गया डेटा और अपडेट फ़ाइलें।"
+  },
+  "zoom-recordings": {
+    "title": "Zoom रिकॉर्डिंग",
+    "explanation": "आपके द्वारा लोकल रूप से रिकॉर्ड की गई मीटिंग। डिलीट करने से पहले जो रखना है उसे कहीं और ले जाएँ।"
+  },
+  "discord-cache": {
+    "title": "Discord कैश",
+    "explanation": "Discord ऐप के वेब कैश। अपने आप फिर से बन जाते हैं; पहले ऐप बंद करें।"
+  },
+  "whatsapp-cache": {
+    "title": "WhatsApp कैश",
+    "explanation": "WhatsApp ऐप का अस्थायी कैश। चैट और मीडिया कहीं और स्टोर होते हैं।"
+  },
+  "whatsapp-media": {
+    "title": "WhatsApp मीडिया",
+    "explanation": "आपकी चैट की तस्वीरें, वीडियो और फ़ाइलें। WhatsApp > सेटिंग्ज़ > स्टोरेज में मैनेज करें।"
+  },
+  "messages-attachments": {
+    "title": "संदेश अटैचमेंट",
+    "explanation": "iMessage चैट की तस्वीरें और फ़ाइलें। बड़ी फ़ाइलें संदेश में या सिस्टम सेटिंग्ज़ > सामान्य > स्टोरेज में हटाएँ।"
+  },
+  "messages-db": {
+    "title": "संदेश हिस्ट्री",
+    "explanation": "आपका iMessage/SMS हिस्ट्री डेटाबेस। कभी डिलीट नहीं किया जाता।"
+  },
+  "mail-store": {
+    "title": "मेल मेलबॉक्स",
+    "explanation": "आपकी लोकल मेल और मेलबॉक्स। मैसेज हटाने के लिए मेल के अपने टूल इस्तेमाल करें।"
+  },
+  "mail-downloads": {
+    "title": "मेल डाउनलोड",
+    "explanation": "मेल से खोले गए अटैचमेंट। मूल फ़ाइलें मैसेज में बनी रहती हैं।"
+  },
+  "facetime-cache": {
+    "title": "FaceTime डेटा",
+    "explanation": "FaceTime सेटिंग्ज़ और कॉल डेटा। छोटा है; रखा जाता है।"
+  },
+  "teams-classic-data": {
+    "title": "Microsoft Teams (classic) डेटा",
+    "explanation": "बंद हो चुके classic Teams ऐप का बचा हुआ डेटा। नया Teams इसका इस्तेमाल नहीं करता।"
+  },
+  "teamviewer-cache": {
+    "title": "TeamViewer कैश",
+    "explanation": "TeamViewer का कैश किया गया डेटा।"
+  },
+  "figma-cache": {
+    "title": "Figma डेस्कटॉप कैश",
+    "explanation": "Figma डेस्कटॉप ऐप का डेटा और कैश। फ़ाइलें क्लाउड में रहती हैं; साफ़ करने पर आप साइन आउट हो जाते हैं।"
+  },
+  "spotify-cache": {
+    "title": "Spotify कैश",
+    "explanation": "कैश किए गए गाने। ज़रूरत पड़ने पर Spotify इन्हें फिर से डाउनलोड कर लेता है।"
+  },
+  "spotify-offline": {
+    "title": "Spotify ऑफ़लाइन स्टोरेज",
+    "explanation": "ऑफ़लाइन सुनने के लिए आपके डाउनलोड किए गए गाने और Spotify का कैश। Spotify > सेटिंग्ज़ > स्टोरेज में साफ़ करें।"
+  },
+  "office-caches": {
+    "title": "Microsoft Office कैश",
+    "explanation": "Word, Excel, PowerPoint और Outlook के कैश। लॉन्च पर फिर से बन जाते हैं; दस्तावेज़ यहाँ स्टोर नहीं होते।"
+  },
+  "office-font-cache": {
+    "title": "Office फ़ॉन्ट कैश",
+    "explanation": "Office ऐप्स द्वारा साझा फ़ॉन्ट कैश। अगले लॉन्च पर फिर से बन जाता है।"
+  },
+  "microsoft-autoupdate": {
+    "title": "Microsoft AutoUpdate कैश",
+    "explanation": "डाउनलोड किए गए Office अपडेट पैकेज जो पहले ही इंस्टॉल हो चुके हैं।"
+  },
+  "cloud-storage": {
+    "title": "क्लाउड स्टोरेज फ़ोल्डर",
+    "explanation": "OneDrive, Dropbox, Google Drive और Box द्वारा सिंक की गई फ़ाइलें। 'डाउनलोड हटाएँ' / 'Free up space' से जगह खाली करें।"
+  },
+  "adobe-media-cache": {
+    "title": "Adobe मीडिया कैश",
+    "explanation": "Premiere Pro और After Effects के लिए conformed ऑडियो और प्रीव्यू फ़ाइलें। प्रोजेक्ट खोलने पर फिर से बन जाती हैं।"
+  },
+  "capcut-cache": {
+    "title": "CapCut कैश",
+    "explanation": "CapCut के इफ़ेक्ट, टेम्पलेट और प्रीव्यू कैश। प्रोजेक्ट कहीं और स्टोर होते हैं।"
+  },
+  "insta360-cache": {
+    "title": "Insta360 Studio कैश",
+    "explanation": "Insta360 Studio के प्रीव्यू और एक्सपोर्ट कैश।"
+  },
+  "expressvpn-cache": {
+    "title": "ExpressVPN कैश",
+    "explanation": "ExpressVPN का कैश किया गया डेटा।"
+  },
+  "sentry-crash-caches": {
+    "title": "क्रैश रिपोर्टर कैश",
+    "explanation": "ऐप्स द्वारा अपलोड के लिए कतार में रखी गई क्रैश रिपोर्ट।"
+  },
+  "photos-library": {
+    "title": "तस्वीरें लाइब्रेरी",
+    "explanation": "आपकी तस्वीरें और वीडियो। मूल फ़ाइलें सिर्फ़ iCloud में रखने के लिए तस्वीरें सेटिंग्ज़ में Mac स्टोरेज ऑप्टिमाइज़ करें चालू करें।"
+  },
+  "music-media": {
+    "title": "संगीत लाइब्रेरी मीडिया",
+    "explanation": "संगीत में गाने, डाउनलोड और इंपोर्ट की गई फ़ाइलें। डाउनलोड संगीत ऐप से हटाएँ।"
+  },
+  "music-cache": {
+    "title": "संगीत ऐप कैश",
+    "explanation": "संगीत ऐप का आर्टवर्क और स्ट्रीमिंग कैश।"
+  },
+  "tv-media": {
+    "title": "TV ऐप डाउनलोड",
+    "explanation": "TV ऐप में डाउनलोड की गई फ़िल्में और शो। डाउनलोड TV ऐप से हटाएँ।"
+  },
+  "tv-cache": {
+    "title": "TV ऐप कैश",
+    "explanation": "TV ऐप का आर्टवर्क और स्ट्रीमिंग कैश।"
+  },
+  "podcasts-downloads": {
+    "title": "पॉडकास्ट डाउनलोड",
+    "explanation": "डाउनलोड किए गए पॉडकास्ट एपिसोड। इन्हें पॉडकास्ट > सेटिंग्ज़ में हटाएँ, या अपने आप हटाना चालू करें।"
+  },
+  "apple-loops": {
+    "title": "Apple Loops और साउंड लाइब्रेरी",
+    "explanation": "GarageBand/Logic के साउंड और loops। फ़ाइलें डिलीट करने के बजाय Logic > Sound Library में मैनेज करें।"
+  },
+  "logic-library-bundle": {
+    "title": "Logic Pro लाइब्रेरी",
+    "explanation": "Logic Pro 12+ का साउंड लाइब्रेरी बंडल। साउंड पैक Logic Pro > Sound Library से हटाएँ।"
+  },
+  "voice-memos": {
+    "title": "वॉइस मेमो",
+    "explanation": "आपकी वॉइस रिकॉर्डिंग। इन्हें वॉइस मेमो ऐप से डिलीट करें।"
+  },
+  "books-data": {
+    "title": "बुक्स",
+    "explanation": "डाउनलोड की गई किताबें और ऑडियोबुक। डाउनलोड बुक्स ऐप से हटाएँ।"
+  },
+  "notes-data": {
+    "title": "नोट्स",
+    "explanation": "आपके नोट्स और उनके अटैचमेंट। कभी डिलीट नहीं किए जाते।"
+  },
+  "icloud-drive": {
+    "title": "iCloud Drive",
+    "explanation": "iCloud Drive फ़ाइलों की लोकल कॉपी। डिलीट करने के बजाय Mac स्टोरेज ऑप्टिमाइज़ करें या 'डाउनलोड हटाएँ' इस्तेमाल करें।"
+  },
+  "trash": {
+    "title": "ट्रैश",
+    "explanation": "ट्रैश में पहले से ले जाई गई फ़ाइलें, उसे खाली किए जाने तक डिस्क स्पेस घेरती रहती हैं।"
+  },
+  "downloads": {
+    "title": "डाउनलोड",
+    "explanation": "हाथ से जाँचें: यहाँ के इंस्टॉलर और आर्काइव की अक्सर अब ज़रूरत नहीं होती।"
+  },
+  "desktop": {
+    "title": "डेस्कटॉप",
+    "explanation": "डेस्कटॉप पर स्क्रीनशॉट और फ़ाइलें। हाथ से जाँचें।"
+  },
+  "documents": {
+    "title": "दस्तावेज़",
+    "explanation": "आपके दस्तावेज़। Freeroom इस फ़ोल्डर को पूरा कभी साफ़ नहीं करता।"
+  },
+  "system-temp": {
+    "title": "सिस्टम की अस्थायी फ़ाइलें",
+    "explanation": "macOS द्वारा मैनेज की जाती हैं और रीस्टार्ट पर साफ़ हो जाती हैं। हाथ से डिलीट न करें।"
+  },
+  "system-folder": {
+    "title": "macOS सिस्टम",
+    "explanation": "सील किया गया, सिर्फ़-पढ़ने योग्य macOS सिस्टम वॉल्यूम। इसे न बदला जा सकता है, न बदलना चाहिए।"
+  },
+  "system-library": {
+    "title": "सिस्टम लाइब्रेरी",
+    "explanation": "पूरे सिस्टम की सेटिंग्ज़, ड्राइवर और ऐप सपोर्ट। सिर्फ़ वही आइटम हटाएँ जो किसी ऐप का अनइंस्टॉलर बताए।"
+  },
+  "user-library": {
+    "title": "आपका लाइब्रेरी फ़ोल्डर",
+    "explanation": "हर ऐप की सेटिंग्ज़ और डेटा। इसके अंदर के खास आइटम साफ़ करें, पूरा फ़ोल्डर कभी नहीं।"
+  },
+  "app-support-root": {
+    "title": "Application Support",
+    "explanation": "हर ऐप का डेटा। सिर्फ़ खास, जाने-पहचाने सबफ़ोल्डर साफ़ करना सुरक्षित है।"
+  },
+  "preferences": {
+    "title": "Preferences",
+    "explanation": "ऐप सेटिंग्ज़। इन्हें डिलीट करने से ऐप्स रीसेट हो जाते हैं।"
+  },
+  "keychains": {
+    "title": "कीचेन",
+    "explanation": "आपके पासवर्ड और सर्टिफ़िकेट। कभी डिलीट नहीं किए जाते।"
+  },
+  "containers-root": {
+    "title": "ऐप कंटेनर",
+    "explanation": "सैंडबॉक्स किए गए ऐप का डेटा। कंटेनर हटाने से उस ऐप का डेटा डिलीट हो जाता है।"
+  },
+  "group-containers-root": {
+    "title": "ग्रुप कंटेनर",
+    "explanation": "एक ही डेवलपर के ऐप्स के बीच साझा डेटा। यह कैश नहीं है।"
+  },
+  "vm-swap": {
+    "title": "स्वैप और स्लीप इमेज",
+    "explanation": "वर्चुअल मेमोरी स्वैप फ़ाइलें और स्लीप इमेज। macOS इन्हें मैनेज करता है; स्वैप घटाने के लिए रीस्टार्ट करें।"
+  },
+  "spotlight-index": {
+    "title": "Spotlight इंडेक्स",
+    "explanation": "सर्च इंडेक्स। अगर यह बहुत बड़ा लगे, तो Spotlight सेटिंग्ज़ से इसे फिर से बनाएँ।"
+  },
+  "system-logs": {
+    "title": "सिस्टम लॉग",
+    "explanation": "Unified logs। macOS इन्हें अपने आप रोटेट और सीमित करता है।"
+  },
+  "user-logs": {
+    "title": "यूज़र लॉग",
+    "explanation": "क्रैश और हैंग रिपोर्ट जो पहले ही भेजी जा चुकी हैं या ज़रूरी नहीं हैं। नई रिपोर्ट ज़रूरत के अनुसार लिखी जाती हैं।"
+  },
+  "macos-updates": {
+    "title": "macOS अपडेट डाउनलोड",
+    "explanation": "macOS द्वारा तैयार रखे गए सॉफ़्टवेयर अपडेट। इन्हें इंस्टॉल करें या macOS को हटाने दें।"
+  },
+  "system-caches": {
+    "title": "सिस्टम कैश",
+    "explanation": "macOS और इंस्टॉलर द्वारा मैनेज किए जाने वाले सिस्टम-व्यापी कैश। हाथ से खाली करना सुरक्षित नहीं है।"
+  },
+  "time-machine-snapshots": {
+    "title": "लोकल Time Machine स्नैपशॉट",
+    "explanation": "purgeable स्पेस के रूप में दिखते हैं। जगह की ज़रूरत होने पर macOS इन्हें अपने आप डिलीट कर देता है (`tmutil listlocalsnapshots /`)।"
+  },
+  "apple-intelligence-assets": {
+    "title": "Apple सिस्टम एसेट",
+    "explanation": "डाउनलोड किए गए सिस्टम एसेट (आवाज़ें, डिक्शनरी, AI मॉडल)। macOS द्वारा मैनेज किए जाते हैं।"
+  },
+  "mobile-sync-config": {
+    "title": "डिवाइस सिंक सेटिंग्ज़",
+    "explanation": "डिवाइस बैकअप और सिंक डेटा रखने वाला फ़ोल्डर। बैकअप Finder से मैनेज करें।"
+  },
+  "crash-reporter": {
+    "title": "क्रैश रिपोर्टर डेटा",
+    "explanation": "macOS द्वारा रखा गया क्रैश रिपोर्ट मेटाडेटा।"
+  },
+  "apple-caches-misc": {
+    "title": "Apple ऐप कैश",
+    "explanation": "App Store, सहायता, मैप्स और Safe Browsing के कैश। ज़रूरत पड़ने पर macOS इन्हें फिर से बना देता है।"
+  },
+  "user-caches-root": {
+    "title": "यूज़र कैश फ़ोल्डर",
+    "explanation": "हर ऐप के कैश रखता है। इसके अंदर के जाने-पहचाने आइटम साफ़ करें, पूरा फ़ोल्डर नहीं।"
+  },
+  "dot-cache-root": {
+    "title": "~/.cache फ़ोल्डर",
+    "explanation": "CLI टूल द्वारा इस्तेमाल होने वाला कैश फ़ोल्डर। इसके अंदर के जाने-पहचाने आइटम साफ़ करें, पूरा फ़ोल्डर नहीं।"
+  },
+  "dot-config-root": {
+    "title": "~/.config फ़ोल्डर",
+    "explanation": "कमांड-लाइन टूल की सेटिंग्ज़। यह कैश नहीं है।"
+  },
+  "dot-local-root": {
+    "title": "~/.local फ़ोल्डर",
+    "explanation": "इंस्टॉल किए गए CLI टूल और उनका डेटा। इसके अंदर के जाने-पहचाने आइटम साफ़ करें, पूरा फ़ोल्डर नहीं।"
+  },
+  "shell-history": {
+    "title": "शेल हिस्ट्री",
+    "explanation": "आपकी कमांड हिस्ट्री। छोटी है; रखी जाती है।"
+  },
+  "git-config": {
+    "title": "Git कॉन्फ़िग",
+    "explanation": "आपकी Git सेटिंग्ज़।"
+  },
+  "docker-unused-images": {
+    "title": "इस्तेमाल न होने वाली Docker इमेज",
+    "explanation": "हर वह इमेज जिसे कोई कंटेनर इस्तेमाल नहीं करता, जानबूझकर pull की गई इमेज भी। इन्हें फिर से pull या रीबिल्ड किया जा सकता है।"
+  },
+  "docker-buildx-cache": {
+    "title": "Buildx बिल्डर कैश",
+    "explanation": "buildx बिल्डर का बिल्ड कैश। कैश फिर से भरने तक एक बार बिल्ड धीमे होंगे।"
+  },
+  "docker-stopped-containers": {
+    "title": "रुके हुए Docker कंटेनर",
+    "explanation": "जो कंटेनर चल नहीं रहे। हटाने पर उनकी writable लेयर और वॉल्यूम में न रखा गया सारा डेटा खो जाता है।"
+  },
+  "docker-unused-volumes": {
+    "title": "इस्तेमाल न होने वाले Docker वॉल्यूम",
+    "explanation": "ऐसे वॉल्यूम जिन्हें कोई कंटेनर इस्तेमाल नहीं करता। इनमें अक्सर डेटाबेस होते हैं; `docker volume prune` से पहले जाँच लें।"
+  },
+  "claude-code-versions": {
+    "title": "Claude Code वर्शन",
+    "explanation": "नेटिव Claude Code बिल्ड; मौजूदा वर्शन इस्तेमाल में है। Claude Code पुराने वर्शन खुद हटा देता है।"
+  },
+  "macos-aerials": {
+    "title": "एरियल वॉलपेपर",
+    "explanation": "macOS द्वारा डाउनलोड किए गए एरियल वॉलपेपर और स्क्रीन सेवर। macOS इन्हें मैनेज करता है; डाउनलोड रोकने के लिए स्थिर वॉलपेपर चुनें।"
+  },
+  "xcode-userdata": {
+    "title": "Xcode यूज़र सेटिंग्ज़",
+    "explanation": "Xcode की कीबाइंडिंग, कोड स्निपेट, थीम और ब्रेकपॉइंट।"
+  },
+  "command-line-tools": {
+    "title": "Command Line Tools",
+    "explanation": "Homebrew और कई टूल द्वारा इस्तेमाल होने वाले कंपाइलर और git। रखें, जब तक पूरा Xcode इंस्टॉल और चुना हुआ न हो।"
+  },
+  "xcode-simulator-system-caches": {
+    "title": "सिम्युलेटर रनटाइम कैश",
+    "explanation": "इंस्टॉल किए गए सिम्युलेटर रनटाइम के लिए बने साझा कैश। macOS इन्हें फिर से बनाता है; हटाने के लिए एडमिन अधिकार चाहिए।"
+  },
+  "go-bin": {
+    "title": "Go से इंस्टॉल बाइनरी",
+    "explanation": "`go install` से इंस्टॉल किए गए टूल। जिन्हें अब इस्तेमाल नहीं करते, उन्हें हटाएँ।"
+  },
+  "cargo-bin": {
+    "title": "Cargo से इंस्टॉल बाइनरी",
+    "explanation": "`cargo install` से इंस्टॉल किए गए टूल और rustup के प्रॉक्सी। `cargo uninstall <name>` से हटाएँ।"
+  },
+  "chrome-component-caches": {
+    "title": "Chrome कंपोनेंट कैश",
+    "explanation": "Chrome के डाउनलोड किए गए कंपोनेंट इंस्टॉलर और GPU शेडर कैश। अपने आप फिर से बन जाते हैं; पहले Chrome बंद करें।"
+  },
+  "vscode-local-history": {
+    "title": "VS Code लोकल हिस्ट्री",
+    "explanation": "VS Code में सेव की गई फ़ाइलों के पुराने वर्शन (Timeline व्यू)। इसे हटाने से वह undo हिस्ट्री खो जाती है।"
+  },
+  "tectonic-cache": {
+    "title": "Tectonic TeX बंडल कैश",
+    "explanation": "Tectonic द्वारा डाउनलोड की गई TeX सपोर्ट फ़ाइलें। अगले बिल्ड पर फिर से डाउनलोड हो जाती हैं।"
+  },
+  "zoom-data": {
+    "title": "Zoom चैट डेटा",
+    "explanation": "Zoom की लोकल चैट हिस्ट्री और सेटिंग्ज़। यह कैश नहीं है।"
+  },
+  "icloud-drive-state": {
+    "title": "iCloud Drive स्थिति",
+    "explanation": "iCloud Drive का सिंक डेटाबेस। इसे डिलीट करने से सिंकिंग खराब हो सकती है।"
+  },
+  "swift-toolchains": {
+    "title": "Swift टूलचेन",
+    "explanation": "swift.org या swiftly से लिए गए अतिरिक्त Swift टूलचेन। जिन वर्शन से अब बिल्ड नहीं करते, उन्हें हटाएँ।"
+  },
+  "huggingface-datasets": {
+    "title": "Hugging Face डेटासेट कैश",
+    "explanation": "`datasets` लाइब्रेरी द्वारा डाउनलोड और प्रोसेस किए गए डेटासेट। कोड लोड करने पर फिर से डाउनलोड हो जाते हैं।"
+  }
+}

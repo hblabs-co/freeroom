@@ -47,7 +47,7 @@ final class AppModel {
     var simpleMode: Bool { didSet { defaults.set(simpleMode, forKey: "simpleMode") } }
 
     /// What the single main window shows.
-    enum Route: Hashable { case findings, settings }
+    enum Route: Hashable { case findings, history, settings }
     var route: Route = .findings
 
     private let defaults = UserDefaults.standard
@@ -116,7 +116,9 @@ final class AppModel {
     }
 
     func explanation(for finding: Finding) -> String {
-        translations[finding.id] ?? finding.explanation
+        translations[finding.id]
+            ?? Catalog.translation(forFindingId: finding.id, lang: language)?.explanation
+            ?? finding.explanation
     }
 
     // MARK: Derived
@@ -189,7 +191,8 @@ final class AppModel {
                 let outcome = cleaner.clean(finding)
                 if case .cleaned(let freed) = outcome {
                     try? store?.recordCleanup(HistoryEntry(findingId: finding.id, title: finding.title,
-                                                           freedBytes: freed, at: Date(), origin: origin))
+                                                           freedBytes: freed, at: Date(), origin: origin,
+                                                           finding: finding))
                 }
                 await MainActor.run {
                     withAnimation(.smooth) { self.cleanResults[finding.id] = outcome }
@@ -226,13 +229,13 @@ final class AppModel {
         content.categoryIdentifier = NotificationDelegate.categoryId
         var attachmentIcon: FindingIcon?
         if lowOnSpace {
-            content.title = "Disk almost full · \(freeBytes.formattedBytes) free"
-            content.body = "\(total(.safe).formattedBytes) can be freed safely."
+            content.title = String(format: L("Disk almost full · %@ free"), freeBytes.formattedBytes)
+            content.body = String(format: L("%@ can be freed safely."), total(.safe).formattedBytes)
             attachmentIcon = FindingIcon(symbol: "internaldrive")
             content.userInfo = ["action": "safe"]
         } else if let top = suggestions.first, top.sizeBytes > 5_000_000_000 {
-            content.title = "\(top.title) · \(top.sizeBytes.formattedBytes)"
-            content.body = "Safe: \(explanation(for: top))"
+            content.title = "\(top.displayTitle) · \(top.sizeBytes.formattedBytes)"
+            content.body = String(format: L("Safe: %@"), explanation(for: top))
             attachmentIcon = top.icon
             content.userInfo = ["findingId": top.id]
         } else {
@@ -264,7 +267,7 @@ final class AppModel {
             do {
                 if newValue { try SMAppService.mainApp.register() } else { try SMAppService.mainApp.unregister() }
             } catch {
-                storeError = "Launch at login: \(error.localizedDescription)"
+                storeError = "\(L("Launch at login")): \(error.localizedDescription)"
             }
         }
     }
@@ -289,6 +292,16 @@ final class AppModel {
     func openMainWindow() {
         openWindowAction?("main")
         NSApp.activate(ignoringOtherApps: true)
+    }
+
+    /// After onboarding: grow the compact window to the full app size, centered, animated.
+    func expandMainWindow() {
+        guard let window = NSApp.windows.first(where: { $0.isVisible && $0.canBecomeMain && $0.title == "Freeroom" })
+                ?? NSApp.keyWindow, let screen = window.screen ?? NSScreen.main else { return }
+        let visible = screen.visibleFrame
+        let size = NSSize(width: min(1240, visible.width - 40), height: min(800, visible.height - 40))
+        let origin = NSPoint(x: visible.midX - size.width / 2, y: visible.midY - size.height / 2)
+        window.setFrame(NSRect(origin: origin, size: size), display: true, animate: true)
     }
 
     func openSettings() {
@@ -316,8 +329,8 @@ final class NotificationDelegate: NSObject, UNUserNotificationCenterDelegate, @u
     static let category = UNNotificationCategory(
         identifier: categoryId,
         actions: [
-            UNNotificationAction(identifier: "review", title: "Review", options: [.foreground]),
-            UNNotificationAction(identifier: "later", title: "Later", options: []),
+            UNNotificationAction(identifier: "review", title: L("Review"), options: [.foreground]),
+            UNNotificationAction(identifier: "later", title: L("Later"), options: []),
         ],
         intentIdentifiers: [])
 

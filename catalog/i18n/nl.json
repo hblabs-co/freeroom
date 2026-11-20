@@ -1,0 +1,962 @@
+{
+  "xcode-derived-data": {
+    "title": "Xcode DerivedData",
+    "explanation": "Buildproducten en indexen van elk project dat ooit in Xcode is geopend. Opnieuw aangemaakt bij de volgende build."
+  },
+  "xcode-simulator-devices": {
+    "title": "Simulatorapparaten (apps en gegevens)",
+    "explanation": "Apps en gegevens die in iOS-simulators zijn geïnstalleerd. Wissen zet elke simulator terug naar de fabrieksinstellingen."
+  },
+  "xcode-device-support": {
+    "title": "iOS DeviceSupport",
+    "explanation": "Debugsymbolen gekopieerd van fysieke apparaten. Opnieuw aangemaakt wanneer een apparaat weer wordt aangesloten."
+  },
+  "xcode-archives": {
+    "title": "Xcode Archives",
+    "explanation": "Gearchiveerde app-builds. Nodig om crashrapporten van uitgebrachte versies te symboliseren."
+  },
+  "xcode-caches": {
+    "title": "Xcode-caches",
+    "explanation": "Eigen download- en documentatiecaches van Xcode. Opnieuw aangemaakt wanneer nodig."
+  },
+  "xcode-device-logs": {
+    "title": "Apparaatlogs",
+    "explanation": "Crash- en diagnoselogs van aangesloten apparaten. Bewaar ze als je nog een crash aan het debuggen bent."
+  },
+  "xcode-coresimulator-caches": {
+    "title": "Simulatorcaches",
+    "explanation": "Dyld- en tijdelijke caches voor simulators. Opnieuw aangemaakt wanneer een simulator opstart."
+  },
+  "xcode-xctest-devices": {
+    "title": "XCTest-kloonapparaten",
+    "explanation": "Simulatorklonen voor parallelle tests. Xcode maakt ze opnieuw aan bij de volgende testrun."
+  },
+  "xcode-dvtdownloads": {
+    "title": "Xcode-componentdownloads",
+    "explanation": "Installatiepakketten die Xcode heeft gedownload voor componenten die al geïnstalleerd zijn."
+  },
+  "xcode-previews": {
+    "title": "SwiftUI-voorvertoningen",
+    "explanation": "Simulatorgegevens voor het weergeven van SwiftUI-voorvertoningen. Opnieuw aangemaakt wanneer een voorvertoning wordt getoond."
+  },
+  "xcode-unavailable-simulators": {
+    "title": "Niet-beschikbare simulators",
+    "explanation": "Simulators voor runtimes die niet meer geïnstalleerd zijn. Ze kunnen niet opstarten, dus verwijderen kost niets."
+  },
+  "xcode-simulator-runtimes": {
+    "title": "Simulatorruntimes",
+    "explanation": "iOS/watchOS/visionOS-runtimes (elk enkele GB). Verwijder ongebruikte in Xcode > Settings > Components."
+  },
+  "xcode-app": {
+    "title": "Xcode",
+    "explanation": "De Xcode-app zelf (10+ GB). Verwijder hem alleen als je niet meer voor Apple-platforms bouwt."
+  },
+  "swiftpm-cache": {
+    "title": "Swift Package Manager-cache",
+    "explanation": "Gedownloade Swift-pakketten en -repository's. Opnieuw opgehaald bij de volgende resolve."
+  },
+  "cocoapods-cache": {
+    "title": "CocoaPods-cache",
+    "explanation": "Gedownloade pods. Opnieuw opgehaald door `pod install`."
+  },
+  "cocoapods-repos": {
+    "title": "CocoaPods-specrepository's",
+    "explanation": "Lokale kopie van de CocoaPods-specindex. Moderne CocoaPods gebruikt de CDN en maakt hem zo nodig opnieuw aan."
+  },
+  "ios-backups": {
+    "title": "iPhone- en iPad-reservekopieën",
+    "explanation": "Lokale reservekopieën van apparaten gemaakt via de Finder. Verwijder oude in Finder > apparaat > Beheer reservekopieën."
+  },
+  "docker-desktop-disk": {
+    "title": "Docker Desktop-schijfkopie",
+    "explanation": "Virtuele schijf met al je images, containers en volumes. Verklein hem met de prune-commando's, niet door hem te verwijderen."
+  },
+  "docker-build-cache": {
+    "title": "Docker-buildcache",
+    "explanation": "Gecachete lagen van `docker build`. Grootte volgens `docker system df`; builds zijn één keer trager."
+  },
+  "docker-dangling-images": {
+    "title": "Losse Docker-images",
+    "explanation": "Images zonder tag die achterblijven na rebuilds. Geen container of tag gebruikt ze."
+  },
+  "docker-desktop-caches": {
+    "title": "Docker Desktop-appcaches",
+    "explanation": "Logs en updatecaches van de Docker Desktop-app, niet je images of containers."
+  },
+  "docker-cli-config": {
+    "title": "Docker CLI-configuratie en -contexts",
+    "explanation": "Registry-inloggegevens en contexts voor de Docker CLI. Freeroom komt er nooit aan."
+  },
+  "docker-model-runner": {
+    "title": "Docker Model Runner-modellen",
+    "explanation": "AI-modellen opgehaald met `docker model pull`. Verwijder ongebruikte met `docker model rm`."
+  },
+  "orbstack-data": {
+    "title": "OrbStack-gegevens",
+    "explanation": "Schijfkopie met de containers, images en Linux-machines van OrbStack. Prune via Docker of verwijder machines in OrbStack."
+  },
+  "colima-data": {
+    "title": "Colima-VM's",
+    "explanation": "Linux-VM-schijven van Colima met je images en containers. Gebruik `colima delete` voor profielen die je niet meer nodig hebt."
+  },
+  "lima-vms": {
+    "title": "Lima-VM's",
+    "explanation": "Schijven van Lima-Linux-VM's. Verwijder ongebruikte met `limactl delete <name>`."
+  },
+  "rancher-desktop": {
+    "title": "Rancher Desktop-VM",
+    "explanation": "VM-schijf van Rancher Desktop met images en Kubernetes-status. Wis via Troubleshooting > Factory Reset."
+  },
+  "minikube": {
+    "title": "minikube",
+    "explanation": "minikube-clusters, VM-images en gecachete Kubernetes-binaries. `minikube delete --all --purge` verwijdert alles."
+  },
+  "testcontainers-config": {
+    "title": "Testcontainers-instellingen",
+    "explanation": "Klein instellingenbestand van Testcontainers. Niets te winnen."
+  },
+  "npm-cache": {
+    "title": "npm-cache",
+    "explanation": "Gedownloade npm-pakketten. Opnieuw opgehaald bij installatie."
+  },
+  "npm-npx-cache": {
+    "title": "npx-cache",
+    "explanation": "Pakketten gedownload om `npx`-commando's uit te voeren. Opnieuw gedownload als je ze weer uitvoert."
+  },
+  "npm-logs": {
+    "title": "npm-logs",
+    "explanation": "Debuglogs van npm-runs."
+  },
+  "pnpm-store": {
+    "title": "pnpm-store",
+    "explanation": "Content-addressable pakketopslag. Prunen verwijdert pakketten waar geen project naar verwijst."
+  },
+  "yarn-cache": {
+    "title": "Yarn-cache",
+    "explanation": "Gedownloade Yarn-pakketten."
+  },
+  "yarn-berry-cache": {
+    "title": "Globale Yarn Berry-cache",
+    "explanation": "Globale pakketcache van Yarn 2+. Opnieuw opgehaald bij `yarn install`."
+  },
+  "bun-cache": {
+    "title": "Bun-installatiecache",
+    "explanation": "Pakketten gedownload door `bun install`. Opnieuw opgehaald wanneer nodig."
+  },
+  "deno-cache": {
+    "title": "Deno-cache",
+    "explanation": "Globale cache van Deno met externe modules en npm-pakketten. Opnieuw aangemaakt bij de volgende run."
+  },
+  "node-gyp-cache": {
+    "title": "node-gyp-headers",
+    "explanation": "Node.js-headers gedownload om native modules te compileren. Opnieuw gedownload wanneer nodig."
+  },
+  "typescript-cache": {
+    "title": "TypeScript-typecache",
+    "explanation": "Typedefinities die de TypeScript-server van de editor automatisch heeft gedownload."
+  },
+  "nvm-versions": {
+    "title": "nvm-Node.js-versies",
+    "explanation": "Geïnstalleerde Node.js-versies. Verwijder ongebruikte met `nvm uninstall <version>`."
+  },
+  "nvm-cache": {
+    "title": "nvm-downloadcache",
+    "explanation": "Node.js-archieven die nvm heeft gedownload voor versies die al geïnstalleerd zijn."
+  },
+  "fnm-versions": {
+    "title": "fnm-Node.js-versies",
+    "explanation": "Node.js-versies geïnstalleerd door fnm. Verwijder ongebruikte met `fnm uninstall <version>`."
+  },
+  "volta-tools": {
+    "title": "Volta-toolchains",
+    "explanation": "Node, npm en globale tools beheerd door Volta. Verwijder ongebruikte versies via Volta."
+  },
+  "playwright-browsers": {
+    "title": "Playwright-browsers",
+    "explanation": "Browsers gedownload voor end-to-endtests. Opnieuw installeren met `npx playwright install`."
+  },
+  "puppeteer-browsers": {
+    "title": "Puppeteer-browsers",
+    "explanation": "Chrome-builds gedownload door Puppeteer. Opnieuw geïnstalleerd met `npx puppeteer browsers install`."
+  },
+  "cypress-cache": {
+    "title": "Cypress-binaries",
+    "explanation": "Cypress-appbinaries voor elke versie die je hebt geïnstalleerd. Opnieuw geïnstalleerd door `npx cypress install`."
+  },
+  "electron-cache": {
+    "title": "Electron-downloads",
+    "explanation": "Electron-runtimes en buildtools gedownload bij het bouwen van Electron-apps."
+  },
+  "updater-caches": {
+    "title": "Caches van app-updaters",
+    "explanation": "Gedownloade installatieprogramma's van updates die al zijn toegepast."
+  },
+  "chrome-headless-shell": {
+    "title": "Chrome headless shell",
+    "explanation": "Headless Chrome-builds gedownload door browsertesttools. Opnieuw gedownload wanneer een test ze nodig heeft."
+  },
+  "pip-cache": {
+    "title": "pip-cache",
+    "explanation": "Gedownloade Python-wheels."
+  },
+  "uv-cache": {
+    "title": "uv-cache",
+    "explanation": "Pakketten en builds gecachet door uv. Opnieuw opgehaald bij de volgende installatie."
+  },
+  "uv-python": {
+    "title": "Door uv beheerde Python-versies",
+    "explanation": "Python-interpreters geïnstalleerd door uv. Verwijder ongebruikte met `uv python uninstall <version>`."
+  },
+  "uv-tools": {
+    "title": "uv-tools",
+    "explanation": "Opdrachtregeltools geïnstalleerd met `uv tool install`. Verwijder met `uv tool uninstall <name>`."
+  },
+  "poetry-cache": {
+    "title": "Poetry-cache",
+    "explanation": "Pakketten gedownload door Poetry. Opnieuw opgehaald bij `poetry install`."
+  },
+  "poetry-virtualenvs": {
+    "title": "Poetry-virtualenvs",
+    "explanation": "Virtuele omgevingen die Poetry voor je projecten heeft gemaakt. Opnieuw aangemaakt door `poetry install`, maar wijzigingen in de omgeving gaan verloren."
+  },
+  "conda-pkgs": {
+    "title": "Conda-pakketcache",
+    "explanation": "Gedownloade conda-pakketten en tarballs. Omgevingen blijven werken; installaties downloaden opnieuw."
+  },
+  "pyenv-versions": {
+    "title": "pyenv-Python-versies",
+    "explanation": "Python-versies gebouwd door pyenv. Verwijder ongebruikte met `pyenv uninstall <version>`."
+  },
+  "python-matplotlib-cache": {
+    "title": "Matplotlib-lettertypecache",
+    "explanation": "Cache van de lettertypelijst, gebouwd door Matplotlib. Opnieuw aangemaakt bij de volgende import."
+  },
+  "ipython-history": {
+    "title": "IPython-profiel",
+    "explanation": "IPython-instellingen en opdrachtgeschiedenis. Klein; blijft bewaard."
+  },
+  "jupyter-runtime": {
+    "title": "Jupyter-gegevens",
+    "explanation": "Jupyter-kernels, -extensies en runtimebestanden. Meestal klein; controleer voordat je kernels verwijdert."
+  },
+  "ollama-models": {
+    "title": "Ollama-modellen",
+    "explanation": "Lokale AI-modellen. Verwijder de modellen die je niet gebruikt met `ollama rm <model>`."
+  },
+  "huggingface-hub": {
+    "title": "Hugging Face-cache",
+    "explanation": "Modellen en datasets gedownload door Hugging Face-bibliotheken. Opnieuw gedownload wanneer code ze nodig heeft."
+  },
+  "huggingface-xet": {
+    "title": "Hugging Face Xet-cache",
+    "explanation": "Chunkcache om Hugging Face-downloads te versnellen. Niet nodig om modellen te draaien."
+  },
+  "lmstudio-models": {
+    "title": "LM Studio-modellen",
+    "explanation": "Modellen die je in LM Studio hebt gedownload. Verwijder ongebruikte via het tabblad My Models van LM Studio."
+  },
+  "whisper-models": {
+    "title": "Whisper-modellen",
+    "explanation": "Spraak-naar-tekstmodellen. Opnieuw gedownload bij gebruik."
+  },
+  "torch-hub": {
+    "title": "PyTorch Hub-cache",
+    "explanation": "Modelgewichten gedownload door PyTorch Hub en torchvision. Opnieuw gedownload wanneer code ze laadt."
+  },
+  "easyocr-models": {
+    "title": "EasyOCR-modellen",
+    "explanation": "OCR-modellen gedownload door EasyOCR. Opnieuw gedownload bij het volgende gebruik."
+  },
+  "claude-code-data": {
+    "title": "Claude Code-gegevens",
+    "explanation": "Instellingen, geheugen en sessiegeschiedenis van Claude Code. Ruim oude sessies op via Claude Code, niet handmatig."
+  },
+  "claude-cli-cache": {
+    "title": "Claude Code CLI-cache",
+    "explanation": "Logs en gecachete gegevens van de Claude Code CLI. Opnieuw aangemaakt wanneer nodig."
+  },
+  "claude-desktop-cache": {
+    "title": "Claude-cache",
+    "explanation": "Webcaches van de Claude-app. Automatisch opnieuw aangemaakt; stop eerst de app."
+  },
+  "go-modcache": {
+    "title": "Go-modulecache",
+    "explanation": "Gedownloade Go-modules. Opnieuw opgehaald door `go build`."
+  },
+  "go-build-cache": {
+    "title": "Go-buildcache",
+    "explanation": "Gecompileerde Go-pakketten."
+  },
+  "gopls-cache": {
+    "title": "gopls-cache",
+    "explanation": "Indexcache van de Go-taalserver. Opnieuw aangemaakt als je een Go-project opent."
+  },
+  "golangci-lint-cache": {
+    "title": "golangci-lint-cache",
+    "explanation": "Cache met lintresultaten. Opnieuw aangemaakt bij de volgende run."
+  },
+  "go-sumdb": {
+    "title": "Cache van Go-checksumdatabase",
+    "explanation": "Gecachete tegels van de checksumdatabase. Opnieuw opgehaald wanneer modules worden geverifieerd."
+  },
+  "goimports-cache": {
+    "title": "goimports-cache",
+    "explanation": "Pakketindexcache van goimports. Automatisch opnieuw aangemaakt."
+  },
+  "cargo-registry": {
+    "title": "Cargo-registrycache",
+    "explanation": "Gedownloade crates."
+  },
+  "cargo-git": {
+    "title": "Cargo-git-afhankelijkheden",
+    "explanation": "Git-checkouts van crates die als git-afhankelijkheid worden gebruikt. Opnieuw gekloond bij de volgende build."
+  },
+  "rustup-toolchains": {
+    "title": "Rust-toolchains",
+    "explanation": "Geïnstalleerde Rust-toolchains (elk ongeveer 1 GB). Verwijder ongebruikte met `rustup toolchain uninstall <name>`."
+  },
+  "gradle-cache": {
+    "title": "Gradle-caches",
+    "explanation": "Gedownloade afhankelijkheden en buildcache."
+  },
+  "gradle-wrapper-dists": {
+    "title": "Gradle-wrapperdistributies",
+    "explanation": "Gradle-versies gedownload door `./gradlew`. Opnieuw gedownload door het project dat ze nodig heeft."
+  },
+  "gradle-daemon": {
+    "title": "Gradle-daemonlogs",
+    "explanation": "Logs en register van Gradle-daemons. Stop de daemons eerst met `./gradlew --stop`."
+  },
+  "gradle-jdks": {
+    "title": "Door Gradle geleverde JDK's",
+    "explanation": "JDK's die Gradle voor toolchains heeft gedownload. Opnieuw gedownload wanneer een build erom vraagt."
+  },
+  "maven-repo": {
+    "title": "Maven-repository",
+    "explanation": "Gedownloade Java-afhankelijkheden."
+  },
+  "maven-wrapper": {
+    "title": "Maven-wrapperdistributies",
+    "explanation": "Maven-versies gedownload door `./mvnw`. Opnieuw gedownload wanneer nodig."
+  },
+  "sdkman-candidates": {
+    "title": "SDKMAN-candidates",
+    "explanation": "JDK's en tools geïnstalleerd met SDKMAN. Verwijder ongebruikte versies met `sdk uninstall`."
+  },
+  "sdkman-archives": {
+    "title": "SDKMAN-archieven",
+    "explanation": "Gedownloade archieven van SDK's die al geïnstalleerd zijn (`sdk flush` ruimt ze ook op)."
+  },
+  "system-jdks": {
+    "title": "Geïnstalleerde JDK's",
+    "explanation": "Java-runtimes die systeembreed zijn geïnstalleerd. Verwijder alleen versies die geen project gebruikt."
+  },
+  "coursier-cache": {
+    "title": "Coursier-cache",
+    "explanation": "Scala/JVM-artefacten gedownload door Coursier, sbt en Metals."
+  },
+  "nuget-packages": {
+    "title": "NuGet-pakketten",
+    "explanation": "Gedownloade .NET-pakketten. Hersteld bij de volgende build."
+  },
+  "dotnet-sdks": {
+    "title": ".NET-SDK's en -runtimes",
+    "explanation": "Geïnstalleerde .NET-SDK's en -runtimes. Verwijder oude versies zoals Microsoft beschrijft."
+  },
+  "dotnet-tools": {
+    "title": "Globale .NET-tools",
+    "explanation": "Globale .NET-tools. Verwijder ongebruikte met `dotnet tool uninstall -g <name>`."
+  },
+  "rbenv-versions": {
+    "title": "rbenv-Ruby-versies",
+    "explanation": "Ruby-versies gebouwd door rbenv. Verwijder ongebruikte met `rbenv uninstall <version>`."
+  },
+  "rvm-rubies": {
+    "title": "RVM",
+    "explanation": "Rubies en gemsets beheerd door RVM. Verwijder ongebruikte rubies met `rvm remove <version>`."
+  },
+  "pub-cache": {
+    "title": "Dart/Flutter-pubcache",
+    "explanation": "Pakketten gedownload door `dart pub get` / `flutter pub get`. Opnieuw opgehaald bij de volgende get."
+  },
+  "composer-cache": {
+    "title": "Composer-cache",
+    "explanation": "PHP-pakketten gedownload door Composer."
+  },
+  "ccache": {
+    "title": "ccache",
+    "explanation": "Cache van compileruitvoer voor C/C++. Builds zijn trager tot de cache weer gevuld is."
+  },
+  "vcpkg-archives": {
+    "title": "vcpkg-binaire cache",
+    "explanation": "Vooraf gebouwde C/C++-bibliotheken gecachet door vcpkg."
+  },
+  "conan-cache": {
+    "title": "Conan-pakketten",
+    "explanation": "C/C++-pakketten gecachet door Conan 2. Opnieuw gedownload of gebouwd wanneer nodig."
+  },
+  "haskell-stack": {
+    "title": "Haskell Stack-root",
+    "explanation": "GHC-versies en pakketsnapshots gebruikt door Stack. Groot, maar opnieuw opbouwen duurt lang."
+  },
+  "ghcup": {
+    "title": "GHCup-toolchains",
+    "explanation": "GHC-, cabal- en HLS-versies geïnstalleerd door GHCup. Verwijder ongebruikte met `ghcup rm`."
+  },
+  "opam-root": {
+    "title": "opam-switches",
+    "explanation": "OCaml-compilers en -pakketten per switch. Verwijder ongebruikte switches met `opam switch remove`."
+  },
+  "julia-depot": {
+    "title": "Julia-depot",
+    "explanation": "Julia-pakketten, -artefacten en gecompileerde caches. `Pkg.gc()` verwijdert ongebruikte versies."
+  },
+  "platformio": {
+    "title": "PlatformIO core",
+    "explanation": "Embedded toolchains en platforms geïnstalleerd door PlatformIO. Per project opnieuw gedownload wanneer nodig."
+  },
+  "arduino-staging": {
+    "title": "Arduino-downloads",
+    "explanation": "Installatiearchieven van boardpakketten die al geïnstalleerd zijn."
+  },
+  "arduino-packages": {
+    "title": "Arduino-boardpakketten",
+    "explanation": "Toolchains voor Arduino/ESP32-boards. Veilig te verwijderen als je Arduino niet meer gebruikt."
+  },
+  "arduino-ide-cache": {
+    "title": "Arduino IDE-cache",
+    "explanation": "Caches en gedownloade indexbestanden van Arduino IDE 2. Opnieuw aangemaakt bij het starten."
+  },
+  "buf-cache": {
+    "title": "Buf-modulecache",
+    "explanation": "Protobuf-modules gedownload door de Buf CLI."
+  },
+  "homebrew-cache": {
+    "title": "Homebrew-downloads",
+    "explanation": "Oude bottles en downloads. Geïnstalleerde formulae blijven ongemoeid."
+  },
+  "homebrew-logs": {
+    "title": "Homebrew-logs",
+    "explanation": "Buildlogs van formula-installaties."
+  },
+  "homebrew-cellar": {
+    "title": "Met Homebrew geïnstalleerde pakketten",
+    "explanation": "Alles wat met Homebrew is geïnstalleerd. Verwijder tools met `brew uninstall` en ongebruikte afhankelijkheden met `brew autoremove`."
+  },
+  "jetbrains-cache": {
+    "title": "JetBrains-caches",
+    "explanation": "IDE-indexen. Opnieuw aangemaakt als een project wordt geopend."
+  },
+  "jetbrains-logs": {
+    "title": "JetBrains-logs",
+    "explanation": "Logbestanden van de IDE."
+  },
+  "jetbrains-config": {
+    "title": "JetBrains-instellingen en -plug-ins",
+    "explanation": "IDE-instellingen en geïnstalleerde plug-ins. Oude versiemappen kun je via de IDE verwijderen, niet handmatig."
+  },
+  "vscode-shipit": {
+    "title": "Restanten van VS Code-updates",
+    "explanation": "Installatieprogramma's van updates die al zijn toegepast."
+  },
+  "vscode-cache": {
+    "title": "VS Code-caches",
+    "explanation": "Web-, gecompileerde-code- en extensiedownloadcaches van VS Code. Automatisch opnieuw aangemaakt; stop eerst VS Code."
+  },
+  "vscode-logs": {
+    "title": "VS Code-logs",
+    "explanation": "Diagnoselogs van VS Code."
+  },
+  "vscode-workspace-storage": {
+    "title": "VS Code-werkruimteopslag",
+    "explanation": "Status per werkruimte (geopende editors, extensiegegevens, lokale geschiedenis). Groeit met elke geopende map."
+  },
+  "vscode-extensions": {
+    "title": "VS Code-extensies",
+    "explanation": "Geïnstalleerde VS Code-extensies. Verwijder ongebruikte via de weergave Extensions."
+  },
+  "vscode-settings": {
+    "title": "VS Code-instellingen",
+    "explanation": "Je VS Code-instellingen en toetscombinaties."
+  },
+  "cursor-extensions": {
+    "title": "Cursor-extensies",
+    "explanation": "Geïnstalleerde Cursor-extensies. Verwijder ongebruikte in Cursor."
+  },
+  "android-sdk": {
+    "title": "Android SDK",
+    "explanation": "Android-platforms, buildtools en systeemimages. Verwijder ongebruikte pakketten in de SDK Manager van Android Studio."
+  },
+  "android-avds": {
+    "title": "Android-emulators (AVD's)",
+    "explanation": "Virtuele apparaten met hun gegevens (elk enkele GB). Verwijder ongebruikte in Device Manager."
+  },
+  "android-studio-logs": {
+    "title": "Android Studio-logs",
+    "explanation": "IDE-logs van Android Studio."
+  },
+  "postman-cache": {
+    "title": "Postman-cache",
+    "explanation": "Webcaches, logs en updaterestanten van Postman. Collecties worden met je account gesynchroniseerd."
+  },
+  "gitkraken-cache": {
+    "title": "GitKraken-caches",
+    "explanation": "Webcaches en updaterestanten van GitKraken."
+  },
+  "mongodb-compass-cache": {
+    "title": "MongoDB Compass-caches",
+    "explanation": "Webcaches en updaterestanten van MongoDB Compass."
+  },
+  "lens-cache": {
+    "title": "Lens-caches",
+    "explanation": "Webcaches van de Lens Kubernetes IDE."
+  },
+  "tableplus-cache": {
+    "title": "TablePlus-cache",
+    "explanation": "Gecachete gegevens van TablePlus. Verbindingen worden hier niet bewaard."
+  },
+  "helm-cache": {
+    "title": "Helm-cache",
+    "explanation": "Gedownloade charts en repository-indexen. Opnieuw opgehaald door `helm repo update`."
+  },
+  "kube-config": {
+    "title": "Kubernetes-configuratie",
+    "explanation": "kubeconfig met inloggegevens voor clusters. Freeroom komt er nooit aan."
+  },
+  "terraform-plugin-cache": {
+    "title": "Terraform-plug-incache",
+    "explanation": "Gedeelde cache van Terraform-providers (alleen als je plugin_cache_dir hebt ingeschakeld). Opnieuw gedownload door `terraform init`."
+  },
+  "terraform-credentials": {
+    "title": "Terraform-inloggegevens",
+    "explanation": "API-tokens voor Terraform Cloud. Worden nooit verwijderd."
+  },
+  "tflint-plugins": {
+    "title": "TFLint-cache",
+    "explanation": "Regelplug-ins en caches van TFLint. Opnieuw geïnstalleerd door `tflint --init`."
+  },
+  "vagrant-boxes": {
+    "title": "Vagrant-boxes",
+    "explanation": "Basis-VM-images voor Vagrant. `vagrant box prune` verwijdert oude versies."
+  },
+  "aws-config": {
+    "title": "AWS-inloggegevens",
+    "explanation": "Inloggegevens en configuratie van de AWS CLI. Freeroom komt er nooit aan."
+  },
+  "azure-cli": {
+    "title": "Azure CLI-gegevens",
+    "explanation": "Inlogtokens en configuratie van de Azure CLI. Worden nooit verwijderd."
+  },
+  "gcloud-config": {
+    "title": "Google Cloud SDK-configuratie",
+    "explanation": "Inloggegevens en configuraties van gcloud. Worden nooit verwijderd."
+  },
+  "gh-config": {
+    "title": "GitHub CLI-configuratie",
+    "explanation": "Instellingen en authenticatie van de GitHub CLI. Worden nooit verwijderd."
+  },
+  "ssh-keys": {
+    "title": "SSH-sleutels",
+    "explanation": "Je SSH-sleutels en bekende hosts. Worden nooit verwijderd."
+  },
+  "gnupg": {
+    "title": "GnuPG-sleutelbos",
+    "explanation": "Je GPG-sleutels. Worden nooit verwijderd."
+  },
+  "parallels-vms": {
+    "title": "Parallels-virtuele machines",
+    "explanation": "Je Parallels-VM's. Verwijder ongebruikte VM's via Parallels Control Center; dat verwijdert ook snapshots."
+  },
+  "utm-vms": {
+    "title": "UTM-virtuele machines",
+    "explanation": "Je UTM-VM's en hun schijven. Verwijder ongebruikte VM's vanuit UTM zelf."
+  },
+  "vmware-fusion-vms": {
+    "title": "VMware Fusion-virtuele machines",
+    "explanation": "Je VMware Fusion-VM's. Verwijder ongebruikte via de Virtual Machine Library van Fusion."
+  },
+  "virtualbox-vms": {
+    "title": "VirtualBox-virtuele machines",
+    "explanation": "Je VirtualBox-VM's. Verwijder ongebruikte in VirtualBox met 'Alle bestanden verwijderen'."
+  },
+  "browser-caches": {
+    "title": "Browsercaches",
+    "explanation": "Webcaches van Chrome, Arc, Firefox en Edge. Sessies, geschiedenis en wachtwoorden worden hier niet bewaard."
+  },
+  "chrome-ai-model": {
+    "title": "On-device AI-model van Chrome",
+    "explanation": "Gemini Nano-model voor de ingebouwde AI van Chrome. Chrome downloadt het opnieuw als een functie het nodig heeft."
+  },
+  "chrome-profile": {
+    "title": "Chrome-profiel",
+    "explanation": "Bladwijzers, geschiedenis, wachtwoorden en extensies van Chrome. Wis browsegegevens liever via Chrome."
+  },
+  "chrome-for-testing": {
+    "title": "Chrome for Testing-profielen",
+    "explanation": "Profielen aangemaakt door geautomatiseerde browsertests. Opnieuw aangemaakt bij de volgende testrun."
+  },
+  "google-updater": {
+    "title": "Google Updater-cache",
+    "explanation": "Gedownloade updatepakketten voor Chrome en andere Google-apps."
+  },
+  "safari-cache": {
+    "title": "Safari-cache",
+    "explanation": "Webcache van Safari. Geschiedenis en bladwijzers worden elders bewaard."
+  },
+  "safari-data": {
+    "title": "Safari-gegevens",
+    "explanation": "Geschiedenis, bladwijzers en leeslijst van Safari. Wis de geschiedenis liever via Safari."
+  },
+  "firefox-profiles": {
+    "title": "Firefox-profielen",
+    "explanation": "Bladwijzers, geschiedenis, wachtwoorden en add-ons van Firefox. Wis gegevens liever via Firefox."
+  },
+  "arc-data": {
+    "title": "Arc-gegevens",
+    "explanation": "Spaces, navigatiekolom en profielen van Arc. Wis gegevens liever via Arc."
+  },
+  "slack-cache": {
+    "title": "Slack-caches",
+    "explanation": "Webcaches van Slack. Berichten blijven in je workspace. Stop Slack eerst."
+  },
+  "teams-cache": {
+    "title": "Microsoft Teams-cache",
+    "explanation": "Cache van de nieuwe Microsoft Teams. Chats blijven op de servers van Microsoft. Stop Teams eerst."
+  },
+  "zoom-cache": {
+    "title": "Zoom-caches",
+    "explanation": "Gecachete gegevens en updatebestanden van Zoom."
+  },
+  "zoom-recordings": {
+    "title": "Zoom-opnamen",
+    "explanation": "Vergaderingen die je lokaal hebt opgenomen. Verplaats wat je wilt bewaren voordat je verwijdert."
+  },
+  "discord-cache": {
+    "title": "Discord-cache",
+    "explanation": "Webcaches van de Discord-app. Automatisch opnieuw aangemaakt; stop eerst de app."
+  },
+  "whatsapp-cache": {
+    "title": "WhatsApp-cache",
+    "explanation": "Tijdelijke cache van de WhatsApp-app. Chats en media worden elders bewaard."
+  },
+  "whatsapp-media": {
+    "title": "WhatsApp-media",
+    "explanation": "Foto's, video's en bestanden uit je chats. Beheer via WhatsApp > Instellingen > Opslag."
+  },
+  "messages-attachments": {
+    "title": "Bijlagen in Berichten",
+    "explanation": "Foto's en bestanden uit iMessage-chats. Verwijder grote in Berichten of via Instellingen > Algemeen > Opslag."
+  },
+  "messages-db": {
+    "title": "Geschiedenis van Berichten",
+    "explanation": "Je database met iMessage- en sms-geschiedenis. Wordt nooit verwijderd."
+  },
+  "mail-store": {
+    "title": "Mailboxen van Mail",
+    "explanation": "Je lokale e-mail en mailboxen. Gebruik de eigen functies van Mail om berichten te verwijderen."
+  },
+  "mail-downloads": {
+    "title": "Mail Downloads",
+    "explanation": "Bijlagen die je vanuit Mail hebt geopend. De originelen blijven in het bericht."
+  },
+  "facetime-cache": {
+    "title": "FaceTime-gegevens",
+    "explanation": "FaceTime-instellingen en gespreksgegevens. Klein; blijft bewaard."
+  },
+  "teams-classic-data": {
+    "title": "Microsoft Teams (klassiek)-gegevens",
+    "explanation": "Achtergebleven gegevens van de stopgezette klassieke Teams-app. Niet gebruikt door de nieuwe Teams."
+  },
+  "teamviewer-cache": {
+    "title": "TeamViewer-caches",
+    "explanation": "Gecachete gegevens van TeamViewer."
+  },
+  "figma-cache": {
+    "title": "Figma-desktopcache",
+    "explanation": "Gegevens en cache van de Figma-desktopapp. Bestanden staan in de cloud; wissen meldt je af."
+  },
+  "spotify-cache": {
+    "title": "Spotify-cache",
+    "explanation": "Gecachete nummers. Spotify downloadt ze opnieuw wanneer nodig."
+  },
+  "spotify-offline": {
+    "title": "Offline opslag van Spotify",
+    "explanation": "Nummers die je offline wilt beluisteren plus de cache van Spotify. Wis via Spotify > Instellingen > Opslag."
+  },
+  "office-caches": {
+    "title": "Microsoft Office-caches",
+    "explanation": "Caches van Word, Excel, PowerPoint en Outlook. Opnieuw aangemaakt bij het openen; documenten worden hier niet bewaard."
+  },
+  "office-font-cache": {
+    "title": "Office-lettertypecache",
+    "explanation": "Lettertypecache gedeeld door Office-apps. Opnieuw aangemaakt bij het volgende openen."
+  },
+  "microsoft-autoupdate": {
+    "title": "Microsoft AutoUpdate-cache",
+    "explanation": "Gedownloade Office-updatepakketten die al geïnstalleerd zijn."
+  },
+  "cloud-storage": {
+    "title": "Cloudopslagmappen",
+    "explanation": "Bestanden gesynchroniseerd door OneDrive, Dropbox, Google Drive en Box. Maak ruimte vrij met 'Verwijder download' / 'Ruimte vrijmaken'."
+  },
+  "adobe-media-cache": {
+    "title": "Adobe-mediacache",
+    "explanation": "Geconformeerde audio- en voorvertoningsbestanden voor Premiere Pro en After Effects. Opnieuw aangemaakt als projecten worden geopend."
+  },
+  "capcut-cache": {
+    "title": "CapCut-cache",
+    "explanation": "Effecten, sjablonen en voorvertoningscaches van CapCut. Projecten worden elders bewaard."
+  },
+  "insta360-cache": {
+    "title": "Insta360 Studio-caches",
+    "explanation": "Voorvertonings- en exportcaches van Insta360 Studio."
+  },
+  "expressvpn-cache": {
+    "title": "ExpressVPN-cache",
+    "explanation": "Gecachete gegevens van ExpressVPN."
+  },
+  "sentry-crash-caches": {
+    "title": "Caches van crashrapportage",
+    "explanation": "Crashrapporten die apps in de wachtrij hebben gezet om te uploaden."
+  },
+  "photos-library": {
+    "title": "Foto's-bibliotheek",
+    "explanation": "Je foto's en video's. Schakel 'Optimaliseer Mac-opslag' in bij de Foto's-instellingen om originelen alleen in iCloud te bewaren."
+  },
+  "music-media": {
+    "title": "Media in Muziek-bibliotheek",
+    "explanation": "Nummers, downloads en geïmporteerde bestanden in Muziek. Verwijder downloads via de Muziek-app."
+  },
+  "music-cache": {
+    "title": "Cache van Muziek-app",
+    "explanation": "Illustratie- en streamingcache van de Muziek-app."
+  },
+  "tv-media": {
+    "title": "Downloads in TV-app",
+    "explanation": "Films en series gedownload in de TV-app. Verwijder downloads via de TV-app."
+  },
+  "tv-cache": {
+    "title": "Cache van TV-app",
+    "explanation": "Illustratie- en streamingcache van de TV-app."
+  },
+  "podcasts-downloads": {
+    "title": "Podcasts-downloads",
+    "explanation": "Gedownloade podcastafleveringen. Verwijder ze via Podcasts > Instellingen of schakel automatisch verwijderen in."
+  },
+  "apple-loops": {
+    "title": "Apple Loops en geluidsbibliotheek",
+    "explanation": "Geluiden en loops van GarageBand/Logic. Beheer ze via Logic > Sound Library in plaats van bestanden te verwijderen."
+  },
+  "logic-library-bundle": {
+    "title": "Logic Pro-bibliotheek",
+    "explanation": "Geluidsbibliotheekbundel van Logic Pro 12+. Verwijder geluidspakketten via Logic Pro > Sound Library."
+  },
+  "voice-memos": {
+    "title": "Dictafoon",
+    "explanation": "Je spraakopnamen. Verwijder ze in de Dictafoon-app."
+  },
+  "books-data": {
+    "title": "Boeken",
+    "explanation": "Gedownloade boeken en audioboeken. Verwijder downloads via de Boeken-app."
+  },
+  "notes-data": {
+    "title": "Notities",
+    "explanation": "Je notities en hun bijlagen. Worden nooit verwijderd."
+  },
+  "icloud-drive": {
+    "title": "iCloud Drive",
+    "explanation": "Lokale kopieën van iCloud Drive-bestanden. Gebruik 'Optimaliseer Mac-opslag' of 'Verwijder download' in plaats van verwijderen."
+  },
+  "trash": {
+    "title": "Prullenmand",
+    "explanation": "Bestanden die al naar de prullenmand zijn verplaatst, nemen schijfruimte in tot deze wordt leeggemaakt."
+  },
+  "downloads": {
+    "title": "Downloads",
+    "explanation": "Handmatig controleren: installatieprogramma's en archieven hier zijn vaak niet meer nodig."
+  },
+  "desktop": {
+    "title": "Bureaublad",
+    "explanation": "Schermafbeeldingen en bestanden op het bureaublad. Handmatig controleren."
+  },
+  "documents": {
+    "title": "Documenten",
+    "explanation": "Je documenten. Freeroom ruimt deze map nooit als geheel op."
+  },
+  "system-temp": {
+    "title": "Tijdelijke systeembestanden",
+    "explanation": "Beheerd door macOS en opgeruimd bij herstarten. Niet handmatig verwijderen."
+  },
+  "system-folder": {
+    "title": "macOS-systeem",
+    "explanation": "Het verzegelde, alleen-lezen systeemvolume van macOS. Kan en mag niet worden gewijzigd."
+  },
+  "system-library": {
+    "title": "Systeembibliotheek",
+    "explanation": "Systeembrede instellingen, stuurprogramma's en appondersteuning. Verwijder alleen onderdelen die het verwijderprogramma van een app noemt."
+  },
+  "user-library": {
+    "title": "Je Bibliotheek-map",
+    "explanation": "Instellingen en gegevens van alle apps. Ruim specifieke onderdelen erin op, nooit de map zelf."
+  },
+  "app-support-root": {
+    "title": "Application Support",
+    "explanation": "Gegevens van alle apps. Alleen specifieke bekende submappen zijn veilig om op te ruimen."
+  },
+  "preferences": {
+    "title": "Preferences",
+    "explanation": "App-instellingen. Verwijderen zet apps terug naar de standaardinstellingen."
+  },
+  "keychains": {
+    "title": "Sleutelhangers",
+    "explanation": "Je wachtwoorden en certificaten. Worden nooit verwijderd."
+  },
+  "containers-root": {
+    "title": "App-containers",
+    "explanation": "Gegevens van gesandboxte apps. Een container verwijderen wist de gegevens van die app."
+  },
+  "group-containers-root": {
+    "title": "Groepscontainers",
+    "explanation": "Gegevens die gedeeld worden tussen apps van dezelfde ontwikkelaar. Geen cache."
+  },
+  "vm-swap": {
+    "title": "Swap- en sluimerbestand",
+    "explanation": "Swapbestanden voor virtueel geheugen en het sluimerbestand. macOS beheert ze; herstart om swap te verkleinen."
+  },
+  "spotlight-index": {
+    "title": "Spotlight-index",
+    "explanation": "Zoekindex. Bouw hem opnieuw op via de Spotlight-instellingen als hij te groot lijkt."
+  },
+  "system-logs": {
+    "title": "Systeemlogs",
+    "explanation": "Unified logs. macOS roteert en beperkt ze automatisch."
+  },
+  "user-logs": {
+    "title": "Gebruikerslogs",
+    "explanation": "Crash- en hangrapporten die al verstuurd of niet nodig zijn. Nieuwe worden aangemaakt wanneer nodig."
+  },
+  "macos-updates": {
+    "title": "Downloads van macOS-updates",
+    "explanation": "Software-updates die macOS heeft klaargezet. Installeer ze of laat macOS ze verwijderen."
+  },
+  "system-caches": {
+    "title": "Systeemcaches",
+    "explanation": "Systeembrede caches beheerd door macOS en installatieprogramma's. Niet veilig om handmatig te legen."
+  },
+  "time-machine-snapshots": {
+    "title": "Lokale Time Machine-snapshots",
+    "explanation": "Getoond als vrij te maken ruimte. macOS verwijdert ze automatisch als er ruimte nodig is (`tmutil listlocalsnapshots /`)."
+  },
+  "apple-intelligence-assets": {
+    "title": "Apple-systeemonderdelen",
+    "explanation": "Gedownloade systeemonderdelen (stemmen, woordenboeken, AI-modellen). Beheerd door macOS."
+  },
+  "mobile-sync-config": {
+    "title": "Apparaatsynchronisatie-instellingen",
+    "explanation": "Map met reservekopieën van apparaten en synchronisatiegegevens. Beheer reservekopieën via de Finder."
+  },
+  "crash-reporter": {
+    "title": "Crashrapportagegegevens",
+    "explanation": "Metagegevens van crashrapporten die macOS bewaart."
+  },
+  "apple-caches-misc": {
+    "title": "Caches van Apple-apps",
+    "explanation": "Caches van App Store, Help, Kaarten en Safe Browsing. Door macOS opnieuw aangemaakt wanneer nodig."
+  },
+  "user-caches-root": {
+    "title": "Map met gebruikerscaches",
+    "explanation": "Bevat de caches van alle apps. Ruim de bekende onderdelen erin op, niet de hele map."
+  },
+  "dot-cache-root": {
+    "title": "Map ~/.cache",
+    "explanation": "Cachemap gebruikt door CLI-tools. Ruim de bekende onderdelen erin op, niet de hele map."
+  },
+  "dot-config-root": {
+    "title": "Map ~/.config",
+    "explanation": "Instellingen van opdrachtregeltools. Geen cache."
+  },
+  "dot-local-root": {
+    "title": "Map ~/.local",
+    "explanation": "Geïnstalleerde CLI-tools en hun gegevens. Ruim bekende onderdelen erin op, niet de hele map."
+  },
+  "shell-history": {
+    "title": "Shellgeschiedenis",
+    "explanation": "Je opdrachtgeschiedenis. Klein; blijft bewaard."
+  },
+  "git-config": {
+    "title": "Git-configuratie",
+    "explanation": "Je Git-instellingen."
+  },
+  "docker-unused-images": {
+    "title": "Ongebruikte Docker-images",
+    "explanation": "Elke image die geen container gebruikt, ook die je bewust hebt opgehaald. Ze kunnen opnieuw worden opgehaald of gebouwd."
+  },
+  "docker-buildx-cache": {
+    "title": "Buildx-buildercache",
+    "explanation": "Buildcache van buildx-builders. Builds zijn één keer trager terwijl de cache weer vult."
+  },
+  "docker-stopped-containers": {
+    "title": "Gestopte Docker-containers",
+    "explanation": "Containers die niet draaien. Hun beschrijfbare laag en alle gegevens buiten een volume gaan verloren bij verwijderen."
+  },
+  "docker-unused-volumes": {
+    "title": "Ongebruikte Docker-volumes",
+    "explanation": "Volumes die geen container gebruikt. Ze bevatten vaak databases; controleer dit vóór `docker volume prune`."
+  },
+  "claude-code-versions": {
+    "title": "Claude Code-versies",
+    "explanation": "Native builds van Claude Code; de huidige is in gebruik. Claude Code verwijdert oude versies zelf."
+  },
+  "macos-aerials": {
+    "title": "Luchtopname-achtergronden",
+    "explanation": "Luchtopname-achtergronden en schermbeveiligingen die macOS heeft gedownload. Beheerd door macOS; kies een statische achtergrond om downloads te stoppen."
+  },
+  "xcode-userdata": {
+    "title": "Xcode-gebruikersinstellingen",
+    "explanation": "Toetscombinaties, codefragmenten, thema's en breakpoints van Xcode."
+  },
+  "command-line-tools": {
+    "title": "Command Line Tools",
+    "explanation": "Compilers en git, gebruikt door Homebrew en veel tools. Behouden, tenzij volledige Xcode is geïnstalleerd en geselecteerd."
+  },
+  "xcode-simulator-system-caches": {
+    "title": "Caches van simulatorruntimes",
+    "explanation": "Gedeelde caches gebouwd voor geïnstalleerde simulatorruntimes. Opnieuw aangemaakt door macOS; verwijderen vereist beheerdersrechten."
+  },
+  "go-bin": {
+    "title": "Met Go geïnstalleerde binaries",
+    "explanation": "Tools geïnstalleerd met `go install`. Verwijder de tools die je niet meer gebruikt."
+  },
+  "cargo-bin": {
+    "title": "Met Cargo geïnstalleerde binaries",
+    "explanation": "Tools geïnstalleerd met `cargo install` plus de proxy's van rustup. Verwijder met `cargo uninstall <name>`."
+  },
+  "chrome-component-caches": {
+    "title": "Chrome-componentcaches",
+    "explanation": "Gedownloade componentinstallers en GPU-shadercaches van Chrome. Automatisch opnieuw aangemaakt; stop eerst Chrome."
+  },
+  "vscode-local-history": {
+    "title": "Lokale geschiedenis van VS Code",
+    "explanation": "Eerdere versies van bestanden die je in VS Code hebt bewaard (Timeline-weergave). Verwijderen wist die ongedaan-maakgeschiedenis."
+  },
+  "tectonic-cache": {
+    "title": "Tectonic-TeX-bundelcache",
+    "explanation": "TeX-ondersteuningsbestanden gedownload door Tectonic. Opnieuw gedownload bij de volgende build."
+  },
+  "zoom-data": {
+    "title": "Zoom-chatgegevens",
+    "explanation": "Lokale chatgeschiedenis en instellingen van Zoom. Geen cache."
+  },
+  "icloud-drive-state": {
+    "title": "iCloud Drive-status",
+    "explanation": "Synchronisatiedatabase van iCloud Drive. Verwijderen kan de synchronisatie verstoren."
+  },
+  "swift-toolchains": {
+    "title": "Swift-toolchains",
+    "explanation": "Extra Swift-toolchains van swift.org of swiftly. Verwijder versies waarmee je niet meer bouwt."
+  },
+  "huggingface-datasets": {
+    "title": "Hugging Face-datasetcache",
+    "explanation": "Datasets gedownload en verwerkt door de bibliotheek `datasets`. Opnieuw gedownload wanneer code ze laadt."
+  }
+}

@@ -66,4 +66,20 @@ public enum Catalog {
     public static func location(id: String) -> KnownLocation? {
         locations.first { $0.id == id }
     }
+
+    public struct Translation: Codable, Equatable, Sendable {
+        public var title: String
+        public var explanation: String
+    }
+
+    /// lang → catalog id → translated title and explanation (embedded, no tokens at runtime).
+    public static let translations: [String: [String: Translation]] = {
+        (try? JSONDecoder().decode([String: [String: Translation]].self, from: Data(CatalogData.i18n.utf8))) ?? [:]
+    }()
+
+    /// Translation for a finding produced from the catalog (`catalog:<id>`), if any.
+    public static func translation(forFindingId findingId: String, lang: String) -> Translation? {
+        guard findingId.hasPrefix("catalog:") else { return nil }
+        return translations[lang]?[String(findingId.dropFirst("catalog:".count))]
+    }
 }

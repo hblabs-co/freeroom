@@ -12,14 +12,25 @@ struct DiskRing: View {
             Circle().stroke(.quaternary, lineWidth: 7)
             Circle()
                 .trim(from: 0, to: max(0.02, min(1, used)))
-                .stroke(warning ? Theme.danger : Theme.accent, style: StrokeStyle(lineWidth: 7, lineCap: .round))
+                .stroke(Theme.accent, style: StrokeStyle(lineWidth: 7, lineCap: .round))
                 .rotationEffect(.degrees(-90))
                 .animation(.smooth, value: used)
             Image(nsImage: NSApp.applicationIconImage).resizable().frame(width: size * 0.48, height: size * 0.48)
         }
         .frame(width: size, height: size)
+        .overlay(alignment: .topTrailing) {
+            if warning {
+                // Warnings are signalled by a clear icon, not by recoloring surfaces.
+                Image(systemName: "exclamationmark.triangle.fill")
+                    .font(.system(size: size * 0.26, weight: .bold))
+                    .symbolRenderingMode(.palette)
+                    .foregroundStyle(.white, Theme.danger)
+                    .background(Circle().fill(.background).padding(-3))
+                    .offset(x: 4, y: -4)
+            }
+        }
         .accessibilityElement()
-        .accessibilityLabel("Disk \(Int(used * 100)) percent used")
+        .accessibilityLabel(String(format: L("Disk %@ percent used"), "\(Int(used * 100))"))
     }
 }
 
@@ -58,7 +69,7 @@ struct DiskBar: View {
         .frame(height: 10)
         .animation(.smooth, value: free)
         .accessibilityElement()
-        .accessibilityLabel("Disk: \(safe.formattedBytes) safe, \(review.formattedBytes) to review, \(free.formattedBytes) free of \(total.formattedBytes)")
+        .accessibilityLabel(String(format: L("Disk: %@ safe, %@ to review, %@ free of %@"), safe.formattedBytes, review.formattedBytes, free.formattedBytes, total.formattedBytes))
     }
 }
 

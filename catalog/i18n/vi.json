@@ -1,0 +1,962 @@
+{
+  "xcode-derived-data": {
+    "title": "Xcode DerivedData",
+    "explanation": "Sản phẩm build và chỉ mục của mọi dự án từng mở trong Xcode. Được tạo lại ở lần build tiếp theo."
+  },
+  "xcode-simulator-devices": {
+    "title": "Thiết bị Simulator (ứng dụng và dữ liệu)",
+    "explanation": "Ứng dụng và dữ liệu đã cài trong các iOS simulator. Xóa sẽ đưa mọi simulator về trạng thái xuất xưởng."
+  },
+  "xcode-device-support": {
+    "title": "iOS DeviceSupport",
+    "explanation": "Ký hiệu gỡ lỗi sao chép từ thiết bị thật. Được tạo lại khi kết nối lại thiết bị."
+  },
+  "xcode-archives": {
+    "title": "Bản lưu trữ Xcode (Archives)",
+    "explanation": "Các bản build ứng dụng đã lưu trữ. Cần để giải mã (symbolicate) báo cáo sự cố của các phiên bản đã phát hành."
+  },
+  "xcode-caches": {
+    "title": "Bộ nhớ đệm Xcode",
+    "explanation": "Bộ nhớ đệm tải xuống và tài liệu của chính Xcode. Được tạo lại khi cần."
+  },
+  "xcode-device-logs": {
+    "title": "Nhật ký thiết bị",
+    "explanation": "Nhật ký sự cố và chẩn đoán lấy từ các thiết bị đã kết nối. Hãy giữ lại nếu bạn vẫn đang gỡ lỗi một sự cố."
+  },
+  "xcode-coresimulator-caches": {
+    "title": "Bộ nhớ đệm Simulator",
+    "explanation": "Bộ nhớ đệm dyld và tạm thời của simulator. Được tạo lại khi simulator khởi động."
+  },
+  "xcode-xctest-devices": {
+    "title": "Thiết bị nhân bản XCTest",
+    "explanation": "Bản sao simulator tạo ra để chạy kiểm thử song song. Xcode sẽ tạo lại chúng ở lần chạy kiểm thử tiếp theo."
+  },
+  "xcode-dvtdownloads": {
+    "title": "Thành phần Xcode đã tải về",
+    "explanation": "Gói cài đặt Xcode đã tải cho các thành phần mà nó đã cài xong."
+  },
+  "xcode-previews": {
+    "title": "Bản xem trước SwiftUI",
+    "explanation": "Dữ liệu simulator dùng để hiển thị bản xem trước SwiftUI. Được tạo lại khi bản xem trước được hiển thị."
+  },
+  "xcode-unavailable-simulators": {
+    "title": "Simulator không khả dụng",
+    "explanation": "Simulator của các runtime không còn được cài. Chúng không thể khởi động nên xóa đi không mất gì."
+  },
+  "xcode-simulator-runtimes": {
+    "title": "Runtime của Simulator",
+    "explanation": "Runtime iOS/watchOS/visionOS (mỗi cái vài GB). Xóa các runtime không dùng trong Xcode > Settings > Components."
+  },
+  "xcode-app": {
+    "title": "Xcode",
+    "explanation": "Chính ứng dụng Xcode (10+ GB). Chỉ xóa nếu bạn không còn build cho các nền tảng của Apple."
+  },
+  "swiftpm-cache": {
+    "title": "Bộ nhớ đệm Swift Package Manager",
+    "explanation": "Các gói và kho Swift đã tải về. Sẽ được tải lại ở lần resolve tiếp theo."
+  },
+  "cocoapods-cache": {
+    "title": "Bộ nhớ đệm CocoaPods",
+    "explanation": "Các pod đã tải về. Được `pod install` tải lại."
+  },
+  "cocoapods-repos": {
+    "title": "Kho spec CocoaPods",
+    "explanation": "Bản sao cục bộ của chỉ mục spec CocoaPods. CocoaPods hiện đại dùng CDN và tạo lại nó nếu cần."
+  },
+  "ios-backups": {
+    "title": "Bản sao lưu iPhone và iPad",
+    "explanation": "Bản sao lưu thiết bị cục bộ do Finder tạo. Xóa bản cũ trong Finder > thiết bị > Quản lý bản sao lưu."
+  },
+  "docker-desktop-disk": {
+    "title": "Ảnh đĩa Docker Desktop",
+    "explanation": "Ổ đĩa ảo chứa mọi image, container và volume. Hãy thu nhỏ bằng các lệnh prune, đừng xóa tệp này."
+  },
+  "docker-build-cache": {
+    "title": "Bộ nhớ đệm build Docker",
+    "explanation": "Các layer đã lưu đệm từ `docker build`. Dung lượng lấy từ `docker system df`; các lần build sẽ chậm hơn một lần."
+  },
+  "docker-dangling-images": {
+    "title": "Image Docker lơ lửng (dangling)",
+    "explanation": "Các layer image không có tag còn sót lại sau khi build lại. Không container hay tag nào dùng chúng."
+  },
+  "docker-desktop-caches": {
+    "title": "Bộ nhớ đệm ứng dụng Docker Desktop",
+    "explanation": "Nhật ký và bộ nhớ đệm cập nhật của ứng dụng Docker Desktop, không phải image hay container của bạn."
+  },
+  "docker-cli-config": {
+    "title": "Cấu hình và context Docker CLI",
+    "explanation": "Thông tin đăng nhập registry và context của Docker CLI. Freeroom không bao giờ động đến chúng."
+  },
+  "docker-model-runner": {
+    "title": "Mô hình Docker Model Runner",
+    "explanation": "Các mô hình AI đã tải bằng `docker model pull`. Xóa mô hình không dùng bằng `docker model rm`."
+  },
+  "orbstack-data": {
+    "title": "Dữ liệu OrbStack",
+    "explanation": "Ảnh đĩa chứa container, image và máy Linux của OrbStack. Dọn bằng prune trong Docker hoặc xóa máy trong OrbStack."
+  },
+  "colima-data": {
+    "title": "Máy ảo Colima",
+    "explanation": "Ổ đĩa máy ảo Linux của Colima chứa image và container của bạn. Dùng `colima delete` cho các profile không còn cần."
+  },
+  "lima-vms": {
+    "title": "Máy ảo Lima",
+    "explanation": "Ổ đĩa của các máy ảo Linux Lima. Xóa máy không dùng bằng `limactl delete <name>`."
+  },
+  "rancher-desktop": {
+    "title": "Máy ảo Rancher Desktop",
+    "explanation": "Ổ đĩa máy ảo của Rancher Desktop chứa image và trạng thái Kubernetes. Dùng Troubleshooting > Factory Reset để xóa."
+  },
+  "minikube": {
+    "title": "minikube",
+    "explanation": "Các cluster minikube, image máy ảo và tệp nhị phân Kubernetes đã lưu đệm. `minikube delete --all --purge` xóa tất cả."
+  },
+  "testcontainers-config": {
+    "title": "Cài đặt Testcontainers",
+    "explanation": "Tệp cài đặt nhỏ của Testcontainers. Không có gì để thu hồi."
+  },
+  "npm-cache": {
+    "title": "Bộ nhớ đệm npm",
+    "explanation": "Các gói npm đã tải về. Được tải lại khi cài đặt."
+  },
+  "npm-npx-cache": {
+    "title": "Bộ nhớ đệm npx",
+    "explanation": "Các gói tải về để chạy lệnh `npx`. Được tải lại ở lần chạy sau."
+  },
+  "npm-logs": {
+    "title": "Nhật ký npm",
+    "explanation": "Nhật ký gỡ lỗi từ các lần chạy npm."
+  },
+  "pnpm-store": {
+    "title": "Kho pnpm (store)",
+    "explanation": "Kho gói định địa chỉ theo nội dung. Prune sẽ xóa các gói không dự án nào tham chiếu."
+  },
+  "yarn-cache": {
+    "title": "Bộ nhớ đệm Yarn",
+    "explanation": "Các gói Yarn đã tải về."
+  },
+  "yarn-berry-cache": {
+    "title": "Bộ nhớ đệm toàn cục Yarn Berry",
+    "explanation": "Bộ nhớ đệm gói toàn cục của Yarn 2+. Được tải lại khi chạy `yarn install`."
+  },
+  "bun-cache": {
+    "title": "Bộ nhớ đệm cài đặt Bun",
+    "explanation": "Các gói do `bun install` tải về. Được tải lại khi cần."
+  },
+  "deno-cache": {
+    "title": "Bộ nhớ đệm Deno",
+    "explanation": "Bộ nhớ đệm toàn cục của Deno cho module từ xa và gói npm. Được tạo lại ở lần chạy tiếp theo."
+  },
+  "node-gyp-cache": {
+    "title": "Header node-gyp",
+    "explanation": "Header Node.js tải về để biên dịch module native. Được tải lại khi cần."
+  },
+  "typescript-cache": {
+    "title": "Bộ nhớ đệm kiểu TypeScript",
+    "explanation": "Định nghĩa kiểu mà TypeScript server của trình soạn thảo tự động tải về."
+  },
+  "nvm-versions": {
+    "title": "Các phiên bản Node.js của nvm",
+    "explanation": "Các phiên bản Node.js đã cài. Xóa bản không dùng bằng `nvm uninstall <version>`."
+  },
+  "nvm-cache": {
+    "title": "Bộ nhớ đệm tải xuống của nvm",
+    "explanation": "Các tệp nén Node.js mà nvm đã tải cho những phiên bản đã được cài."
+  },
+  "fnm-versions": {
+    "title": "Các phiên bản Node.js của fnm",
+    "explanation": "Các phiên bản Node.js do fnm cài. Xóa bản không dùng bằng `fnm uninstall <version>`."
+  },
+  "volta-tools": {
+    "title": "Bộ công cụ Volta",
+    "explanation": "Node, npm và các công cụ toàn cục do Volta quản lý. Xóa phiên bản không dùng từ Volta."
+  },
+  "playwright-browsers": {
+    "title": "Trình duyệt Playwright",
+    "explanation": "Các trình duyệt tải về cho kiểm thử end-to-end. Cài lại bằng `npx playwright install`."
+  },
+  "puppeteer-browsers": {
+    "title": "Trình duyệt Puppeteer",
+    "explanation": "Các bản Chrome do Puppeteer tải về. Cài lại bằng `npx puppeteer browsers install`."
+  },
+  "cypress-cache": {
+    "title": "Tệp nhị phân Cypress",
+    "explanation": "Tệp nhị phân ứng dụng Cypress cho mỗi phiên bản bạn đã cài. Cài lại bằng `npx cypress install`."
+  },
+  "electron-cache": {
+    "title": "Tệp tải về của Electron",
+    "explanation": "Runtime Electron và công cụ build tải về khi build ứng dụng Electron."
+  },
+  "updater-caches": {
+    "title": "Bộ nhớ đệm trình cập nhật ứng dụng",
+    "explanation": "Bộ cài đặt đã tải của các bản cập nhật đã được áp dụng."
+  },
+  "chrome-headless-shell": {
+    "title": "Chrome headless shell",
+    "explanation": "Các bản Chrome không giao diện do công cụ kiểm thử trình duyệt tải về. Được tải lại khi một bài kiểm thử cần."
+  },
+  "pip-cache": {
+    "title": "Bộ nhớ đệm pip",
+    "explanation": "Các wheel Python đã tải về."
+  },
+  "uv-cache": {
+    "title": "Bộ nhớ đệm uv",
+    "explanation": "Gói và bản build do uv lưu đệm. Được tải lại ở lần cài đặt tiếp theo."
+  },
+  "uv-python": {
+    "title": "Các phiên bản Python do uv quản lý",
+    "explanation": "Trình thông dịch Python do uv cài. Xóa bản không dùng bằng `uv python uninstall <version>`."
+  },
+  "uv-tools": {
+    "title": "Công cụ uv",
+    "explanation": "Công cụ dòng lệnh cài bằng `uv tool install`. Xóa bằng `uv tool uninstall <name>`."
+  },
+  "poetry-cache": {
+    "title": "Bộ nhớ đệm Poetry",
+    "explanation": "Các gói do Poetry tải về. Được tải lại khi chạy `poetry install`."
+  },
+  "poetry-virtualenvs": {
+    "title": "Virtualenv của Poetry",
+    "explanation": "Môi trường ảo Poetry tạo cho các dự án của bạn. `poetry install` tạo lại chúng, nhưng các thay đổi bên trong môi trường sẽ mất."
+  },
+  "conda-pkgs": {
+    "title": "Bộ nhớ đệm gói Conda",
+    "explanation": "Các gói conda và tệp tarball đã tải về. Các môi trường vẫn hoạt động; lần cài sau sẽ tải lại."
+  },
+  "pyenv-versions": {
+    "title": "Các phiên bản Python của pyenv",
+    "explanation": "Các phiên bản Python do pyenv build. Xóa bản không dùng bằng `pyenv uninstall <version>`."
+  },
+  "python-matplotlib-cache": {
+    "title": "Bộ nhớ đệm phông chữ Matplotlib",
+    "explanation": "Bộ nhớ đệm danh sách phông chữ do Matplotlib tạo. Được tạo lại ở lần import tiếp theo."
+  },
+  "ipython-history": {
+    "title": "Hồ sơ IPython",
+    "explanation": "Cài đặt và lịch sử lệnh của IPython. Nhỏ; được giữ lại."
+  },
+  "jupyter-runtime": {
+    "title": "Dữ liệu Jupyter",
+    "explanation": "Kernel, tiện ích mở rộng và tệp runtime của Jupyter. Thường nhỏ; hãy xem xét trước khi xóa kernel."
+  },
+  "ollama-models": {
+    "title": "Mô hình Ollama",
+    "explanation": "Các mô hình AI cục bộ. Xóa mô hình bạn không dùng bằng `ollama rm <model>`."
+  },
+  "huggingface-hub": {
+    "title": "Bộ nhớ đệm Hugging Face",
+    "explanation": "Mô hình và tập dữ liệu do thư viện Hugging Face tải về. Được tải lại khi mã cần đến."
+  },
+  "huggingface-xet": {
+    "title": "Bộ nhớ đệm Hugging Face Xet",
+    "explanation": "Bộ nhớ đệm khối dùng để tăng tốc tải xuống từ Hugging Face. Không cần để chạy mô hình."
+  },
+  "lmstudio-models": {
+    "title": "Mô hình LM Studio",
+    "explanation": "Các mô hình bạn đã tải trong LM Studio. Xóa mô hình không dùng ở tab My Models của LM Studio."
+  },
+  "whisper-models": {
+    "title": "Mô hình Whisper",
+    "explanation": "Mô hình chuyển giọng nói thành văn bản. Được tải lại khi sử dụng."
+  },
+  "torch-hub": {
+    "title": "Bộ nhớ đệm PyTorch Hub",
+    "explanation": "Trọng số mô hình do PyTorch Hub và torchvision tải về. Được tải lại khi mã nạp chúng."
+  },
+  "easyocr-models": {
+    "title": "Mô hình EasyOCR",
+    "explanation": "Mô hình OCR do EasyOCR tải về. Được tải lại ở lần dùng tiếp theo."
+  },
+  "claude-code-data": {
+    "title": "Dữ liệu Claude Code",
+    "explanation": "Cài đặt, bộ nhớ và lịch sử phiên của Claude Code. Hãy dọn phiên cũ từ Claude Code, đừng xóa thủ công."
+  },
+  "claude-cli-cache": {
+    "title": "Bộ nhớ đệm Claude Code CLI",
+    "explanation": "Nhật ký và dữ liệu lưu đệm của Claude Code CLI. Được tạo lại khi cần."
+  },
+  "claude-desktop-cache": {
+    "title": "Bộ nhớ đệm Claude",
+    "explanation": "Bộ nhớ đệm web của ứng dụng Claude. Tự động tạo lại; hãy thoát ứng dụng trước."
+  },
+  "go-modcache": {
+    "title": "Bộ nhớ đệm module Go",
+    "explanation": "Các module Go đã tải về. Được `go build` tải lại."
+  },
+  "go-build-cache": {
+    "title": "Bộ nhớ đệm build Go",
+    "explanation": "Các gói Go đã biên dịch."
+  },
+  "gopls-cache": {
+    "title": "Bộ nhớ đệm gopls",
+    "explanation": "Bộ nhớ đệm chỉ mục của language server Go. Được tạo lại khi bạn mở dự án Go."
+  },
+  "golangci-lint-cache": {
+    "title": "Bộ nhớ đệm golangci-lint",
+    "explanation": "Bộ nhớ đệm kết quả lint. Được tạo lại ở lần chạy tiếp theo."
+  },
+  "go-sumdb": {
+    "title": "Bộ nhớ đệm cơ sở dữ liệu checksum Go",
+    "explanation": "Các tile cơ sở dữ liệu checksum đã lưu đệm. Được tải lại khi xác minh module."
+  },
+  "goimports-cache": {
+    "title": "Bộ nhớ đệm goimports",
+    "explanation": "Bộ nhớ đệm chỉ mục gói của goimports. Tự động tạo lại."
+  },
+  "cargo-registry": {
+    "title": "Bộ nhớ đệm registry Cargo",
+    "explanation": "Các crate đã tải về."
+  },
+  "cargo-git": {
+    "title": "Phụ thuộc git của Cargo",
+    "explanation": "Bản checkout git của các crate dùng làm phụ thuộc git. Được clone lại ở lần build tiếp theo."
+  },
+  "rustup-toolchains": {
+    "title": "Toolchain Rust",
+    "explanation": "Các toolchain Rust đã cài (mỗi cái khoảng 1 GB). Xóa cái không dùng bằng `rustup toolchain uninstall <name>`."
+  },
+  "gradle-cache": {
+    "title": "Bộ nhớ đệm Gradle",
+    "explanation": "Phụ thuộc đã tải về và bộ nhớ đệm build."
+  },
+  "gradle-wrapper-dists": {
+    "title": "Bản phân phối Gradle wrapper",
+    "explanation": "Các phiên bản Gradle do `./gradlew` tải về. Dự án cần đến sẽ tải lại chúng."
+  },
+  "gradle-daemon": {
+    "title": "Nhật ký Gradle daemon",
+    "explanation": "Nhật ký và registry của Gradle daemon. Hãy dừng daemon trước bằng `./gradlew --stop`."
+  },
+  "gradle-jdks": {
+    "title": "JDK do Gradle cung cấp",
+    "explanation": "JDK mà Gradle tải về cho toolchain. Được tải lại khi một bản build yêu cầu."
+  },
+  "maven-repo": {
+    "title": "Kho Maven",
+    "explanation": "Các phụ thuộc Java đã tải về."
+  },
+  "maven-wrapper": {
+    "title": "Bản phân phối Maven wrapper",
+    "explanation": "Các phiên bản Maven do `./mvnw` tải về. Được tải lại khi cần."
+  },
+  "sdkman-candidates": {
+    "title": "Candidate của SDKMAN",
+    "explanation": "JDK và công cụ cài bằng SDKMAN. Xóa phiên bản không dùng bằng `sdk uninstall`."
+  },
+  "sdkman-archives": {
+    "title": "Tệp nén SDKMAN",
+    "explanation": "Tệp nén đã tải của các SDK đã được cài (`sdk flush` cũng dọn chúng)."
+  },
+  "system-jdks": {
+    "title": "JDK đã cài",
+    "explanation": "Java runtime cài cho toàn hệ thống. Chỉ xóa phiên bản không dự án nào dùng."
+  },
+  "coursier-cache": {
+    "title": "Bộ nhớ đệm Coursier",
+    "explanation": "Artifact Scala/JVM do Coursier, sbt và Metals tải về."
+  },
+  "nuget-packages": {
+    "title": "Gói NuGet",
+    "explanation": "Các gói .NET đã tải về. Được khôi phục ở lần build tiếp theo."
+  },
+  "dotnet-sdks": {
+    "title": "SDK và runtime .NET",
+    "explanation": "Các SDK và runtime .NET đã cài. Xóa phiên bản cũ theo hướng dẫn của Microsoft."
+  },
+  "dotnet-tools": {
+    "title": "Công cụ toàn cục .NET",
+    "explanation": "Các công cụ .NET toàn cục. Xóa công cụ không dùng bằng `dotnet tool uninstall -g <name>`."
+  },
+  "rbenv-versions": {
+    "title": "Các phiên bản Ruby của rbenv",
+    "explanation": "Các phiên bản Ruby do rbenv build. Xóa bản không dùng bằng `rbenv uninstall <version>`."
+  },
+  "rvm-rubies": {
+    "title": "RVM",
+    "explanation": "Các bản Ruby và gemset do RVM quản lý. Xóa bản Ruby không dùng bằng `rvm remove <version>`."
+  },
+  "pub-cache": {
+    "title": "Bộ nhớ đệm pub của Dart/Flutter",
+    "explanation": "Các gói do `dart pub get` / `flutter pub get` tải về. Được tải lại ở lần get tiếp theo."
+  },
+  "composer-cache": {
+    "title": "Bộ nhớ đệm Composer",
+    "explanation": "Các gói PHP do Composer tải về."
+  },
+  "ccache": {
+    "title": "ccache",
+    "explanation": "Bộ nhớ đệm kết quả biên dịch C/C++. Các lần build sẽ chậm hơn cho đến khi bộ nhớ đệm đầy lại."
+  },
+  "vcpkg-archives": {
+    "title": "Bộ nhớ đệm nhị phân vcpkg",
+    "explanation": "Thư viện C/C++ dựng sẵn do vcpkg lưu đệm."
+  },
+  "conan-cache": {
+    "title": "Gói Conan",
+    "explanation": "Các gói C/C++ do Conan 2 lưu đệm. Được tải hoặc build lại khi cần."
+  },
+  "haskell-stack": {
+    "title": "Thư mục gốc Haskell Stack",
+    "explanation": "Các phiên bản GHC và snapshot gói mà Stack dùng. Lớn, nhưng build lại mất nhiều thời gian."
+  },
+  "ghcup": {
+    "title": "Toolchain GHCup",
+    "explanation": "Các phiên bản GHC, cabal và HLS do GHCup cài. Xóa bản không dùng bằng `ghcup rm`."
+  },
+  "opam-root": {
+    "title": "Các switch opam",
+    "explanation": "Trình biên dịch và gói OCaml cho mỗi switch. Xóa switch không dùng bằng `opam switch remove`."
+  },
+  "julia-depot": {
+    "title": "Depot của Julia",
+    "explanation": "Gói, artifact và bộ nhớ đệm đã biên dịch của Julia. `Pkg.gc()` xóa các phiên bản không dùng."
+  },
+  "platformio": {
+    "title": "PlatformIO core",
+    "explanation": "Toolchain và nền tảng nhúng do PlatformIO cài. Được tải lại theo từng dự án khi cần."
+  },
+  "arduino-staging": {
+    "title": "Tệp tải về của Arduino",
+    "explanation": "Tệp nén cài đặt của các gói bo mạch đã được cài."
+  },
+  "arduino-packages": {
+    "title": "Gói bo mạch Arduino",
+    "explanation": "Toolchain cho bo mạch Arduino/ESP32. An toàn để xóa nếu bạn không còn dùng Arduino."
+  },
+  "arduino-ide-cache": {
+    "title": "Bộ nhớ đệm Arduino IDE",
+    "explanation": "Bộ nhớ đệm và tệp chỉ mục đã tải của Arduino IDE 2. Được tạo lại khi khởi động."
+  },
+  "buf-cache": {
+    "title": "Bộ nhớ đệm module Buf",
+    "explanation": "Các module Protobuf do Buf CLI tải về."
+  },
+  "homebrew-cache": {
+    "title": "Tệp tải về của Homebrew",
+    "explanation": "Bottle cũ và tệp đã tải. Không ảnh hưởng đến các formula đã cài."
+  },
+  "homebrew-logs": {
+    "title": "Nhật ký Homebrew",
+    "explanation": "Nhật ký build từ các lần cài formula."
+  },
+  "homebrew-cellar": {
+    "title": "Gói đã cài bằng Homebrew",
+    "explanation": "Mọi thứ đã cài bằng Homebrew. Gỡ công cụ bằng `brew uninstall` và phụ thuộc không dùng bằng `brew autoremove`."
+  },
+  "jetbrains-cache": {
+    "title": "Bộ nhớ đệm JetBrains",
+    "explanation": "Chỉ mục của IDE. Được tạo lại khi mở dự án."
+  },
+  "jetbrains-logs": {
+    "title": "Nhật ký JetBrains",
+    "explanation": "Các tệp nhật ký của IDE."
+  },
+  "jetbrains-config": {
+    "title": "Cài đặt và plugin JetBrains",
+    "explanation": "Cài đặt IDE và plugin đã cài. Thư mục phiên bản cũ có thể được xóa từ IDE, đừng xóa thủ công."
+  },
+  "vscode-shipit": {
+    "title": "Tệp sót lại từ cập nhật VS Code",
+    "explanation": "Bộ cài đặt của các bản cập nhật đã được áp dụng."
+  },
+  "vscode-cache": {
+    "title": "Bộ nhớ đệm VS Code",
+    "explanation": "Bộ nhớ đệm web, mã đã biên dịch và tải tiện ích mở rộng của VS Code. Tự động tạo lại; hãy thoát VS Code trước."
+  },
+  "vscode-logs": {
+    "title": "Nhật ký VS Code",
+    "explanation": "Nhật ký chẩn đoán của VS Code."
+  },
+  "vscode-workspace-storage": {
+    "title": "Dữ liệu workspace VS Code",
+    "explanation": "Trạng thái theo từng workspace (trình soạn thảo đang mở, dữ liệu tiện ích mở rộng, lịch sử cục bộ). Tăng lên với mỗi thư mục được mở."
+  },
+  "vscode-extensions": {
+    "title": "Tiện ích mở rộng VS Code",
+    "explanation": "Các tiện ích mở rộng VS Code đã cài. Gỡ cái không dùng trong chế độ xem Extensions."
+  },
+  "vscode-settings": {
+    "title": "Cài đặt VS Code",
+    "explanation": "Cài đặt và phím tắt VS Code của bạn."
+  },
+  "cursor-extensions": {
+    "title": "Tiện ích mở rộng Cursor",
+    "explanation": "Các tiện ích mở rộng Cursor đã cài. Gỡ cái không dùng trong Cursor."
+  },
+  "android-sdk": {
+    "title": "Android SDK",
+    "explanation": "Nền tảng Android, công cụ build và system image. Xóa gói không dùng trong SDK Manager của Android Studio."
+  },
+  "android-avds": {
+    "title": "Trình giả lập Android (AVD)",
+    "explanation": "Thiết bị ảo cùng dữ liệu của chúng (mỗi cái vài GB). Xóa cái không dùng trong Device Manager."
+  },
+  "android-studio-logs": {
+    "title": "Nhật ký Android Studio",
+    "explanation": "Nhật ký IDE của Android Studio."
+  },
+  "postman-cache": {
+    "title": "Bộ nhớ đệm Postman",
+    "explanation": "Bộ nhớ đệm web, nhật ký và tệp cập nhật sót lại của Postman. Collection được đồng bộ với tài khoản của bạn."
+  },
+  "gitkraken-cache": {
+    "title": "Bộ nhớ đệm GitKraken",
+    "explanation": "Bộ nhớ đệm web và tệp cập nhật sót lại của GitKraken."
+  },
+  "mongodb-compass-cache": {
+    "title": "Bộ nhớ đệm MongoDB Compass",
+    "explanation": "Bộ nhớ đệm web và tệp cập nhật sót lại của MongoDB Compass."
+  },
+  "lens-cache": {
+    "title": "Bộ nhớ đệm Lens",
+    "explanation": "Bộ nhớ đệm web của Lens Kubernetes IDE."
+  },
+  "tableplus-cache": {
+    "title": "Bộ nhớ đệm TablePlus",
+    "explanation": "Dữ liệu lưu đệm của TablePlus. Các kết nối không được lưu ở đây."
+  },
+  "helm-cache": {
+    "title": "Bộ nhớ đệm Helm",
+    "explanation": "Chart và chỉ mục kho đã tải về. Được `helm repo update` tải lại."
+  },
+  "kube-config": {
+    "title": "Cấu hình Kubernetes",
+    "explanation": "kubeconfig chứa thông tin đăng nhập cluster. Freeroom không bao giờ động đến nó."
+  },
+  "terraform-plugin-cache": {
+    "title": "Bộ nhớ đệm plugin Terraform",
+    "explanation": "Bộ nhớ đệm dùng chung của provider Terraform (chỉ khi bạn bật plugin_cache_dir). Được `terraform init` tải lại."
+  },
+  "terraform-credentials": {
+    "title": "Thông tin đăng nhập Terraform",
+    "explanation": "API token cho Terraform Cloud. Không bao giờ bị xóa."
+  },
+  "tflint-plugins": {
+    "title": "Bộ nhớ đệm TFLint",
+    "explanation": "Plugin quy tắc và bộ nhớ đệm của TFLint. Được `tflint --init` cài lại."
+  },
+  "vagrant-boxes": {
+    "title": "Box Vagrant",
+    "explanation": "Image máy ảo gốc cho Vagrant. `vagrant box prune` xóa các phiên bản cũ."
+  },
+  "aws-config": {
+    "title": "Thông tin đăng nhập AWS",
+    "explanation": "Thông tin đăng nhập và cấu hình AWS CLI. Freeroom không bao giờ động đến chúng."
+  },
+  "azure-cli": {
+    "title": "Dữ liệu Azure CLI",
+    "explanation": "Token đăng nhập và cấu hình Azure CLI. Không bao giờ bị xóa."
+  },
+  "gcloud-config": {
+    "title": "Cấu hình Google Cloud SDK",
+    "explanation": "Thông tin đăng nhập và cấu hình gcloud. Không bao giờ bị xóa."
+  },
+  "gh-config": {
+    "title": "Cấu hình GitHub CLI",
+    "explanation": "Cài đặt và xác thực GitHub CLI. Không bao giờ bị xóa."
+  },
+  "ssh-keys": {
+    "title": "Khóa SSH",
+    "explanation": "Khóa SSH và danh sách known hosts của bạn. Không bao giờ bị xóa."
+  },
+  "gnupg": {
+    "title": "Chuỗi khóa GnuPG",
+    "explanation": "Các khóa GPG của bạn. Không bao giờ bị xóa."
+  },
+  "parallels-vms": {
+    "title": "Máy ảo Parallels",
+    "explanation": "Các máy ảo Parallels của bạn. Xóa máy ảo không dùng từ Parallels Control Center, thao tác này cũng xóa snapshot."
+  },
+  "utm-vms": {
+    "title": "Máy ảo UTM",
+    "explanation": "Các máy ảo UTM và ổ đĩa của chúng. Xóa máy ảo không dùng từ bên trong UTM."
+  },
+  "vmware-fusion-vms": {
+    "title": "Máy ảo VMware Fusion",
+    "explanation": "Các máy ảo VMware Fusion của bạn. Xóa máy không dùng từ Virtual Machine Library của Fusion."
+  },
+  "virtualbox-vms": {
+    "title": "Máy ảo VirtualBox",
+    "explanation": "Các máy ảo VirtualBox của bạn. Xóa máy không dùng trong VirtualBox bằng 'Xóa tất cả tệp' ('Delete all files')."
+  },
+  "browser-caches": {
+    "title": "Bộ nhớ đệm trình duyệt",
+    "explanation": "Bộ nhớ đệm web của Chrome, Arc, Firefox và Edge. Phiên, lịch sử và mật khẩu không được lưu ở đây."
+  },
+  "chrome-ai-model": {
+    "title": "Mô hình AI trên thiết bị của Chrome",
+    "explanation": "Mô hình Gemini Nano dùng cho AI tích hợp của Chrome. Chrome tải lại nếu một tính năng cần đến."
+  },
+  "chrome-profile": {
+    "title": "Hồ sơ Chrome",
+    "explanation": "Dấu trang, lịch sử, mật khẩu và tiện ích mở rộng của Chrome. Hãy xóa dữ liệu duyệt web từ Chrome."
+  },
+  "chrome-for-testing": {
+    "title": "Hồ sơ Chrome for Testing",
+    "explanation": "Hồ sơ do các bài kiểm thử trình duyệt tự động tạo. Được tạo lại ở lần chạy kiểm thử tiếp theo."
+  },
+  "google-updater": {
+    "title": "Bộ nhớ đệm Google Updater",
+    "explanation": "Gói cập nhật đã tải cho Chrome và các ứng dụng Google khác."
+  },
+  "safari-cache": {
+    "title": "Bộ nhớ đệm Safari",
+    "explanation": "Bộ nhớ đệm web của Safari. Lịch sử và dấu trang được lưu ở nơi khác."
+  },
+  "safari-data": {
+    "title": "Dữ liệu Safari",
+    "explanation": "Lịch sử, dấu trang và danh sách đọc của Safari. Hãy xóa lịch sử từ Safari."
+  },
+  "firefox-profiles": {
+    "title": "Hồ sơ Firefox",
+    "explanation": "Dấu trang, lịch sử, mật khẩu và tiện ích bổ sung của Firefox. Hãy xóa dữ liệu từ Firefox."
+  },
+  "arc-data": {
+    "title": "Dữ liệu Arc",
+    "explanation": "Space, thanh bên và hồ sơ của Arc. Hãy xóa dữ liệu từ Arc."
+  },
+  "slack-cache": {
+    "title": "Bộ nhớ đệm Slack",
+    "explanation": "Bộ nhớ đệm web của Slack. Tin nhắn vẫn nằm trong workspace của bạn. Hãy thoát Slack trước."
+  },
+  "teams-cache": {
+    "title": "Bộ nhớ đệm Microsoft Teams",
+    "explanation": "Bộ nhớ đệm của Microsoft Teams mới. Các cuộc trò chuyện vẫn nằm trên máy chủ của Microsoft. Hãy thoát Teams trước."
+  },
+  "zoom-cache": {
+    "title": "Bộ nhớ đệm Zoom",
+    "explanation": "Dữ liệu lưu đệm và tệp cập nhật của Zoom."
+  },
+  "zoom-recordings": {
+    "title": "Bản ghi Zoom",
+    "explanation": "Các cuộc họp bạn đã ghi cục bộ. Hãy di chuyển những gì muốn giữ trước khi xóa."
+  },
+  "discord-cache": {
+    "title": "Bộ nhớ đệm Discord",
+    "explanation": "Bộ nhớ đệm web của ứng dụng Discord. Tự động tạo lại; hãy thoát ứng dụng trước."
+  },
+  "whatsapp-cache": {
+    "title": "Bộ nhớ đệm WhatsApp",
+    "explanation": "Bộ nhớ đệm tạm thời của ứng dụng WhatsApp. Cuộc trò chuyện và phương tiện được lưu ở nơi khác."
+  },
+  "whatsapp-media": {
+    "title": "Phương tiện WhatsApp",
+    "explanation": "Ảnh, video và tệp từ các cuộc trò chuyện của bạn. Quản lý trong WhatsApp > Cài đặt > Dung lượng."
+  },
+  "messages-attachments": {
+    "title": "Tệp đính kèm Tin nhắn",
+    "explanation": "Ảnh và tệp từ các cuộc trò chuyện iMessage. Xóa tệp lớn trong Tin nhắn hoặc Cài đặt hệ thống > Cài đặt chung > Dung lượng."
+  },
+  "messages-db": {
+    "title": "Lịch sử Tin nhắn",
+    "explanation": "Cơ sở dữ liệu lịch sử iMessage/SMS của bạn. Không bao giờ bị xóa."
+  },
+  "mail-store": {
+    "title": "Hộp thư Mail",
+    "explanation": "Thư và hộp thư cục bộ của bạn. Dùng công cụ của chính Mail để xóa thư."
+  },
+  "mail-downloads": {
+    "title": "Tệp tải về của Mail",
+    "explanation": "Tệp đính kèm bạn đã mở từ Mail. Bản gốc vẫn nằm trong thư."
+  },
+  "facetime-cache": {
+    "title": "Dữ liệu FaceTime",
+    "explanation": "Cài đặt và dữ liệu cuộc gọi FaceTime. Nhỏ; được giữ lại."
+  },
+  "teams-classic-data": {
+    "title": "Dữ liệu Microsoft Teams (classic)",
+    "explanation": "Dữ liệu sót lại của ứng dụng Teams classic đã ngừng hoạt động. Teams mới không dùng đến."
+  },
+  "teamviewer-cache": {
+    "title": "Bộ nhớ đệm TeamViewer",
+    "explanation": "Dữ liệu lưu đệm của TeamViewer."
+  },
+  "figma-cache": {
+    "title": "Bộ nhớ đệm Figma desktop",
+    "explanation": "Dữ liệu và bộ nhớ đệm của ứng dụng Figma desktop. Tệp nằm trên đám mây; xóa sẽ đăng xuất bạn."
+  },
+  "spotify-cache": {
+    "title": "Bộ nhớ đệm Spotify",
+    "explanation": "Các bài hát đã lưu đệm. Spotify sẽ tải lại khi cần."
+  },
+  "spotify-offline": {
+    "title": "Bộ nhớ ngoại tuyến Spotify",
+    "explanation": "Bài hát bạn đã tải để nghe ngoại tuyến cùng bộ nhớ đệm của Spotify. Xóa trong Spotify > Cài đặt > Bộ nhớ."
+  },
+  "office-caches": {
+    "title": "Bộ nhớ đệm Microsoft Office",
+    "explanation": "Bộ nhớ đệm của Word, Excel, PowerPoint và Outlook. Được tạo lại khi mở; tài liệu không được lưu ở đây."
+  },
+  "office-font-cache": {
+    "title": "Bộ nhớ đệm phông chữ Office",
+    "explanation": "Bộ nhớ đệm phông chữ dùng chung bởi các ứng dụng Office. Được tạo lại ở lần mở tiếp theo."
+  },
+  "microsoft-autoupdate": {
+    "title": "Bộ nhớ đệm Microsoft AutoUpdate",
+    "explanation": "Gói cập nhật Office đã tải và đã được cài."
+  },
+  "cloud-storage": {
+    "title": "Thư mục lưu trữ đám mây",
+    "explanation": "Tệp được đồng bộ bởi OneDrive, Dropbox, Google Drive và Box. Giải phóng dung lượng bằng 'Xóa bản tải về' / 'Giải phóng dung lượng' ('Remove Download' / 'Free up space')."
+  },
+  "adobe-media-cache": {
+    "title": "Bộ nhớ đệm phương tiện Adobe",
+    "explanation": "Tệp âm thanh đã chuyển đổi (conformed) và tệp xem trước cho Premiere Pro và After Effects. Được tạo lại khi mở dự án."
+  },
+  "capcut-cache": {
+    "title": "Bộ nhớ đệm CapCut",
+    "explanation": "Bộ nhớ đệm hiệu ứng, mẫu và bản xem trước của CapCut. Dự án được lưu ở nơi khác."
+  },
+  "insta360-cache": {
+    "title": "Bộ nhớ đệm Insta360 Studio",
+    "explanation": "Bộ nhớ đệm xem trước và xuất của Insta360 Studio."
+  },
+  "expressvpn-cache": {
+    "title": "Bộ nhớ đệm ExpressVPN",
+    "explanation": "Dữ liệu lưu đệm của ExpressVPN."
+  },
+  "sentry-crash-caches": {
+    "title": "Bộ nhớ đệm trình báo cáo sự cố",
+    "explanation": "Báo cáo sự cố mà ứng dụng xếp hàng chờ tải lên."
+  },
+  "photos-library": {
+    "title": "Thư viện Ảnh",
+    "explanation": "Ảnh và video của bạn. Bật Tối ưu hóa dung lượng máy Mac trong cài đặt Ảnh để chỉ giữ bản gốc trên iCloud."
+  },
+  "music-media": {
+    "title": "Phương tiện thư viện Nhạc",
+    "explanation": "Bài hát, bản tải về và tệp đã nhập trong Nhạc. Xóa bản tải về từ ứng dụng Nhạc."
+  },
+  "music-cache": {
+    "title": "Bộ nhớ đệm ứng dụng Nhạc",
+    "explanation": "Bộ nhớ đệm ảnh bìa và phát trực tuyến của ứng dụng Nhạc."
+  },
+  "tv-media": {
+    "title": "Tệp tải về của ứng dụng TV",
+    "explanation": "Phim và chương trình đã tải trong ứng dụng TV. Xóa bản tải về từ ứng dụng TV."
+  },
+  "tv-cache": {
+    "title": "Bộ nhớ đệm ứng dụng TV",
+    "explanation": "Bộ nhớ đệm ảnh bìa và phát trực tuyến của ứng dụng TV."
+  },
+  "podcasts-downloads": {
+    "title": "Tệp tải về của Podcast",
+    "explanation": "Các tập podcast đã tải về. Xóa chúng trong Podcast > Cài đặt, hoặc bật tự động xóa."
+  },
+  "apple-loops": {
+    "title": "Apple Loops và thư viện âm thanh",
+    "explanation": "Âm thanh và loop của GarageBand/Logic. Quản lý trong Logic > Sound Library thay vì xóa tệp."
+  },
+  "logic-library-bundle": {
+    "title": "Thư viện Logic Pro",
+    "explanation": "Gói thư viện âm thanh của Logic Pro 12+. Xóa gói âm thanh từ Logic Pro > Sound Library."
+  },
+  "voice-memos": {
+    "title": "Ghi âm",
+    "explanation": "Các bản ghi âm giọng nói của bạn. Xóa chúng từ ứng dụng Ghi âm."
+  },
+  "books-data": {
+    "title": "Sách",
+    "explanation": "Sách và sách nói đã tải về. Xóa bản tải về từ ứng dụng Sách."
+  },
+  "notes-data": {
+    "title": "Ghi chú",
+    "explanation": "Ghi chú và tệp đính kèm của bạn. Không bao giờ bị xóa."
+  },
+  "icloud-drive": {
+    "title": "iCloud Drive",
+    "explanation": "Bản sao cục bộ của tệp iCloud Drive. Dùng Tối ưu hóa dung lượng máy Mac hoặc 'Xóa bản tải về' thay vì xóa."
+  },
+  "trash": {
+    "title": "Thùng rác",
+    "explanation": "Tệp đã chuyển vào Thùng rác vẫn chiếm dung lượng ổ đĩa cho đến khi bạn dọn sạch Thùng rác."
+  },
+  "downloads": {
+    "title": "Tải về",
+    "explanation": "Hãy xem xét thủ công: bộ cài đặt và tệp nén ở đây thường không còn cần nữa."
+  },
+  "desktop": {
+    "title": "Màn hình nền",
+    "explanation": "Ảnh chụp màn hình và tệp trên Màn hình nền. Hãy xem xét thủ công."
+  },
+  "documents": {
+    "title": "Tài liệu",
+    "explanation": "Tài liệu của bạn. Freeroom không bao giờ dọn toàn bộ thư mục này."
+  },
+  "system-temp": {
+    "title": "Tệp tạm thời của hệ thống",
+    "explanation": "Do macOS quản lý và dọn khi khởi động lại. Đừng xóa thủ công."
+  },
+  "system-folder": {
+    "title": "Hệ thống macOS",
+    "explanation": "Ổ đĩa hệ thống macOS được niêm phong, chỉ đọc. Không thể và không được thay đổi."
+  },
+  "system-library": {
+    "title": "Thư viện hệ thống",
+    "explanation": "Cài đặt, trình điều khiển và dữ liệu hỗ trợ ứng dụng cho toàn hệ thống. Chỉ xóa mục mà trình gỡ cài đặt của ứng dụng liệt kê."
+  },
+  "user-library": {
+    "title": "Thư mục Thư viện của bạn",
+    "explanation": "Cài đặt và dữ liệu của mọi ứng dụng. Dọn các mục cụ thể bên trong, không bao giờ xóa cả thư mục."
+  },
+  "app-support-root": {
+    "title": "Application Support",
+    "explanation": "Dữ liệu của mọi ứng dụng. Chỉ một số thư mục con cụ thể đã biết là an toàn để dọn."
+  },
+  "preferences": {
+    "title": "Preferences",
+    "explanation": "Cài đặt ứng dụng. Xóa chúng sẽ đặt lại các ứng dụng."
+  },
+  "keychains": {
+    "title": "Chuỗi khóa",
+    "explanation": "Mật khẩu và chứng chỉ của bạn. Không bao giờ bị xóa."
+  },
+  "containers-root": {
+    "title": "Container ứng dụng",
+    "explanation": "Dữ liệu ứng dụng chạy trong sandbox. Xóa một container sẽ xóa dữ liệu của ứng dụng đó."
+  },
+  "group-containers-root": {
+    "title": "Container nhóm",
+    "explanation": "Dữ liệu dùng chung giữa các ứng dụng của cùng nhà phát triển. Không phải bộ nhớ đệm."
+  },
+  "vm-swap": {
+    "title": "Swap và ảnh ngủ",
+    "explanation": "Tệp hoán đổi bộ nhớ ảo và ảnh ngủ (sleep image). macOS quản lý chúng; khởi động lại để thu nhỏ swap."
+  },
+  "spotlight-index": {
+    "title": "Chỉ mục Spotlight",
+    "explanation": "Chỉ mục tìm kiếm. Tạo lại chỉ mục từ cài đặt Spotlight nếu nó có vẻ quá lớn."
+  },
+  "system-logs": {
+    "title": "Nhật ký hệ thống",
+    "explanation": "Nhật ký hợp nhất. macOS tự động xoay vòng và giới hạn chúng."
+  },
+  "user-logs": {
+    "title": "Nhật ký người dùng",
+    "explanation": "Báo cáo sự cố và treo máy đã được gửi hoặc không cần nữa. Báo cáo mới được ghi khi cần."
+  },
+  "macos-updates": {
+    "title": "Bản cập nhật macOS đã tải",
+    "explanation": "Bản cập nhật phần mềm do macOS chuẩn bị sẵn. Hãy cài đặt hoặc để macOS tự xóa."
+  },
+  "system-caches": {
+    "title": "Bộ nhớ đệm hệ thống",
+    "explanation": "Bộ nhớ đệm toàn hệ thống do macOS và trình cài đặt quản lý. Không an toàn để xóa thủ công."
+  },
+  "time-machine-snapshots": {
+    "title": "Snapshot Time Machine cục bộ",
+    "explanation": "Hiển thị là dung lượng có thể xóa. macOS tự động xóa chúng khi cần dung lượng (`tmutil listlocalsnapshots /`)."
+  },
+  "apple-intelligence-assets": {
+    "title": "Tài nguyên hệ thống Apple",
+    "explanation": "Tài nguyên hệ thống đã tải (giọng nói, từ điển, mô hình AI). Do macOS quản lý."
+  },
+  "mobile-sync-config": {
+    "title": "Cài đặt đồng bộ thiết bị",
+    "explanation": "Thư mục chứa bản sao lưu thiết bị và dữ liệu đồng bộ. Quản lý bản sao lưu từ Finder."
+  },
+  "crash-reporter": {
+    "title": "Dữ liệu trình báo cáo sự cố",
+    "explanation": "Siêu dữ liệu báo cáo sự cố do macOS lưu giữ."
+  },
+  "apple-caches-misc": {
+    "title": "Bộ nhớ đệm ứng dụng Apple",
+    "explanation": "Bộ nhớ đệm của App Store, Trợ giúp, Bản đồ và Duyệt web an toàn. macOS tạo lại khi cần."
+  },
+  "user-caches-root": {
+    "title": "Thư mục bộ nhớ đệm người dùng",
+    "explanation": "Chứa bộ nhớ đệm của mọi ứng dụng. Dọn các mục đã biết bên trong, không phải cả thư mục."
+  },
+  "dot-cache-root": {
+    "title": "Thư mục ~/.cache",
+    "explanation": "Thư mục bộ nhớ đệm do công cụ CLI sử dụng. Dọn các mục đã biết bên trong, không phải cả thư mục."
+  },
+  "dot-config-root": {
+    "title": "Thư mục ~/.config",
+    "explanation": "Cài đặt của công cụ dòng lệnh. Không phải bộ nhớ đệm."
+  },
+  "dot-local-root": {
+    "title": "Thư mục ~/.local",
+    "explanation": "Công cụ CLI đã cài và dữ liệu của chúng. Dọn các mục đã biết bên trong, không phải cả thư mục."
+  },
+  "shell-history": {
+    "title": "Lịch sử shell",
+    "explanation": "Lịch sử lệnh của bạn. Nhỏ; được giữ lại."
+  },
+  "git-config": {
+    "title": "Cấu hình Git",
+    "explanation": "Cài đặt Git của bạn."
+  },
+  "docker-unused-images": {
+    "title": "Image Docker không dùng",
+    "explanation": "Mọi image không được container nào dùng, kể cả những image bạn chủ ý pull. Có thể pull hoặc build lại."
+  },
+  "docker-buildx-cache": {
+    "title": "Bộ nhớ đệm builder Buildx",
+    "explanation": "Bộ nhớ đệm build của các builder buildx. Các lần build sẽ chậm hơn một lần trong khi bộ nhớ đệm đầy lại."
+  },
+  "docker-stopped-containers": {
+    "title": "Container Docker đã dừng",
+    "explanation": "Các container không chạy. Khi xóa, layer ghi được của chúng và mọi dữ liệu không nằm trong volume sẽ bị mất."
+  },
+  "docker-unused-volumes": {
+    "title": "Volume Docker không dùng",
+    "explanation": "Các volume không container nào dùng. Chúng thường chứa cơ sở dữ liệu; hãy kiểm tra trước khi chạy `docker volume prune`."
+  },
+  "claude-code-versions": {
+    "title": "Các phiên bản Claude Code",
+    "explanation": "Các bản build Claude Code native; bản hiện tại đang được dùng. Claude Code tự xóa phiên bản cũ."
+  },
+  "macos-aerials": {
+    "title": "Hình nền Aerial",
+    "explanation": "Hình nền và trình bảo vệ màn hình Aerial mà macOS đã tải. Do macOS quản lý; chọn hình nền tĩnh để ngừng tải xuống."
+  },
+  "xcode-userdata": {
+    "title": "Cài đặt người dùng Xcode",
+    "explanation": "Phím tắt, đoạn mã mẫu, chủ đề và breakpoint của Xcode."
+  },
+  "command-line-tools": {
+    "title": "Command Line Tools",
+    "explanation": "Trình biên dịch và git được Homebrew và nhiều công cụ dùng. Hãy giữ lại trừ khi đã cài và chọn Xcode đầy đủ."
+  },
+  "xcode-simulator-system-caches": {
+    "title": "Bộ nhớ đệm runtime Simulator",
+    "explanation": "Bộ nhớ đệm dùng chung tạo cho các runtime simulator đã cài. macOS tạo lại; cần quyền quản trị để xóa."
+  },
+  "go-bin": {
+    "title": "Tệp nhị phân cài bằng Go",
+    "explanation": "Công cụ cài bằng `go install`. Xóa những cái bạn không còn dùng."
+  },
+  "cargo-bin": {
+    "title": "Tệp nhị phân cài bằng Cargo",
+    "explanation": "Công cụ cài bằng `cargo install` cùng proxy của rustup. Xóa bằng `cargo uninstall <name>`."
+  },
+  "chrome-component-caches": {
+    "title": "Bộ nhớ đệm thành phần Chrome",
+    "explanation": "Bộ cài thành phần đã tải và bộ nhớ đệm shader GPU của Chrome. Tự động tạo lại; hãy thoát Chrome trước."
+  },
+  "vscode-local-history": {
+    "title": "Lịch sử cục bộ VS Code",
+    "explanation": "Các phiên bản trước của tệp bạn đã lưu trong VS Code (chế độ xem Timeline). Xóa đi sẽ mất lịch sử hoàn tác đó."
+  },
+  "tectonic-cache": {
+    "title": "Bộ nhớ đệm gói TeX Tectonic",
+    "explanation": "Tệp hỗ trợ TeX do Tectonic tải về. Được tải lại ở lần build tiếp theo."
+  },
+  "zoom-data": {
+    "title": "Dữ liệu trò chuyện Zoom",
+    "explanation": "Lịch sử trò chuyện cục bộ và cài đặt của Zoom. Không phải bộ nhớ đệm."
+  },
+  "icloud-drive-state": {
+    "title": "Trạng thái iCloud Drive",
+    "explanation": "Cơ sở dữ liệu đồng bộ của iCloud Drive. Xóa nó có thể làm hỏng việc đồng bộ."
+  },
+  "swift-toolchains": {
+    "title": "Toolchain Swift",
+    "explanation": "Các toolchain Swift bổ sung từ swift.org hoặc swiftly. Xóa phiên bản bạn không còn dùng để build."
+  },
+  "huggingface-datasets": {
+    "title": "Bộ nhớ đệm tập dữ liệu Hugging Face",
+    "explanation": "Tập dữ liệu do thư viện `datasets` tải về và xử lý. Được tải lại khi mã nạp chúng."
+  }
+}

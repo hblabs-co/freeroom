@@ -10,6 +10,7 @@ struct FreeroomApp: App {
         MenuBarExtra {
             MenuPanel()
                 .environment(model)
+                .environment(\.locale, Locale(identifier: model.language))
                 .id(model.language)
         } label: {
             MenuBarLabel().environment(model)
@@ -20,11 +21,12 @@ struct FreeroomApp: App {
         Window("Freeroom", id: "main") {
             MainView()
                 .environment(model)
+                .environment(\.locale, Locale(identifier: model.language))
                 .id(model.language)
-                .frame(minWidth: 980, minHeight: 640)
+                .modifier(MainWindowSizing(onboarded: model.onboarded))
         }
         .defaultSize(width: 1240, height: 800)
-        .windowResizability(.contentMinSize)
+        .windowResizability(.contentSize)
         .commands {
             CommandGroup(replacing: .appSettings) {
                 Button(L("Settings…")) { model.openSettings() }
@@ -43,7 +45,7 @@ private struct MenuBarLabel: View {
 
     var body: some View {
         HStack(spacing: 4) {
-            Image(nsImage: MenuGlyph.image(usedFraction: model.usedFraction))
+            Image(nsImage: MenuGlyph.image(low: model.lowOnSpace))
             if model.showFreeInMenuBar {
                 Text(model.freeBytes.formattedBytes)
             }
@@ -51,6 +53,19 @@ private struct MenuBarLabel: View {
         .task {
             model.openWindowAction = { id in openWindow(id: id) }
             if !model.onboarded { model.openMainWindow() }
+        }
+    }
+}
+
+/// Onboarding uses a compact, fixed-size window; afterwards the window can grow (min 980×640).
+private struct MainWindowSizing: ViewModifier {
+    let onboarded: Bool
+    func body(content: Content) -> some View {
+        if onboarded {
+            content.frame(minWidth: 980, idealWidth: 1240, maxWidth: .infinity,
+                          minHeight: 640, idealHeight: 800, maxHeight: .infinity)
+        } else {
+            content.frame(width: 620, height: 600)
         }
     }
 }

@@ -6,6 +6,7 @@ enum SidebarItem: Hashable {
     case ecosystem(String)
     case source(FindingSource)
     case settings
+    case history
 }
 
 struct MainView: View {
@@ -19,11 +20,11 @@ struct MainView: View {
     private var visible: [Finding] {
         model.findings.filter { f in
             let inSidebar: Bool = switch sidebar {
-            case .everything, .settings: true
+            case .everything, .settings, .history: true
             case .ecosystem(let id): f.ecosystem.id == id
             case .source(let s): f.source == s
             }
-            return inSidebar && (search.isEmpty || f.title.localizedCaseInsensitiveContains(search)
+            return inSidebar && (search.isEmpty || f.title.localizedCaseInsensitiveContains(search) || f.displayTitle.localizedCaseInsensitiveContains(search)
                                  || f.paths.contains { $0.localizedCaseInsensitiveContains(search) })
         }
     }
@@ -41,9 +42,13 @@ struct MainView: View {
 
     private var sidebarSelection: Binding<SidebarItem> {
         Binding(
-            get: { model.route == .settings ? .settings : sidebar },
+            get: { model.route == .settings ? .settings : model.route == .history ? .history : sidebar },
             set: { item in
-                if item == .settings { model.route = .settings } else { model.route = .findings; sidebar = item }
+                switch item {
+                case .settings: model.route = .settings
+                case .history: model.route = .history
+                default: model.route = .findings; sidebar = item
+                }
             })
     }
 
@@ -57,6 +62,8 @@ struct MainView: View {
             Group {
                 if model.route == .settings {
                     SettingsView()
+                } else if model.route == .history {
+                    HistoryView()
                 } else {
                     ZStack(alignment: .bottom) {
                         if model.simpleMode { SimpleView() } else { content }
@@ -84,8 +91,8 @@ struct MainView: View {
                                     set: { if !$0 { model.finishClean() } })) {
             CleanSheet(items: model.pendingClean ?? []).environment(model)
         }
-        .navigationTitle(model.route == .settings ? L("Settings") : title)
-        .navigationSubtitle("\(model.freeBytes.formattedBytes) \(L("free of")) \(model.totalBytes.formattedBytes)")
+        .navigationTitle(model.route == .settings ? L("Settings") : model.route == .history ? L("History") : title)
+        .navigationSubtitle(String(format: L("%@ free of %@"), model.freeBytes.formattedBytes, model.totalBytes.formattedBytes))
         .onKeyPress(.space) {
             guard let id = model.inspected, let f = model.finding(id: id), f.isCleanable else { return .ignored }
             if model.selection.contains(id) { model.selection.remove(id) } else { model.selection.insert(id) }
@@ -96,11 +103,12 @@ struct MainView: View {
 
     private var title: String {
         switch sidebar {
-        case .everything: "Everything"
-        case .ecosystem(let id): model.ecosystems.first { $0.0.id == id }?.0.title ?? "Freeroom"
-        case .source(.agent): "Found by Claude Code"
-        case .source(.rule): "Found by rules"
-        case .settings: "Settings"
+        case .everything: L("Everything")
+        case .ecosystem(let id): model.ecosystems.first { $0.0.id == id }.map { L($0.0.title) } ?? "Freeroom"
+        case .source(.agent): L("Found by Claude Code")
+        case .source(.rule): L("Found by rules")
+        case .settings: L("Settings")
+        case .history: L("History")
         }
     }
 
@@ -108,27 +116,32 @@ struct MainView: View {
 
     private var sidebarList: some View {
         List(selection: sidebarSelection) {
-            Label { HStack { Text("Everything"); Spacer(); Text(model.cleanableTotal.formattedBytes).monospacedDigit().foregroundStyle(.secondary) } }
+            Label { HStack { Text(L("Everything")); Spacer(); Text(model.cleanableTotal.formattedBytes).monospacedDigit().foregroundStyle(.secondary) } }
                 icon: { Image(systemName: "square.grid.2x2") }
                 .tag(SidebarItem.everything)
 
-            Section("Ecosystems") {
+            Section(L("Ecosystems")) {
                 ForEach(model.ecosystems, id: \.0) { eco, bytes in
                     HStack(spacing: 8) {
                         ItemIcon(icon: eco.icon, fallback: "folder", size: 20)
-                        Text(eco.title).lineLimit(1)
+                        Text(L(eco.title)).lineLimit(1)
                         Spacer()
                         Text(bytes.formattedBytes).monospacedDigit().foregroundStyle(.secondary).font(.callout)
                     }
                     .tag(SidebarItem.ecosystem(eco.id))
                 }
             }
-            Section("Found by") {
-                Label("Rules", systemImage: "ruler").badge(model.findings.filter { $0.source == .rule }.count)
+            Section(L("Found by")) {
+                Label(L("Rules"), systemImage: "ruler").badge(model.findings.filter { $0.source == .rule }.count)
                     .tag(SidebarItem.source(.rule))
                 Label { Text("Claude Code") } icon: { AgentMark(size: 14) }
                     .badge(model.findings.filter { $0.source == .agent }.count)
                     .tag(SidebarItem.source(.agent))
+            }
+            Section {
+                Label { HStack { Text(L("History")); Spacer(); Text(model.freedAllTime.formattedBytes).monospacedDigit().foregroundStyle(.secondary) } }
+                    icon: { Image(systemName: "clock.arrow.circlepath") }
+                    .tag(SidebarItem.history)
             }
         }
         .safeAreaInset(edge: .top) {
@@ -137,7 +150,7 @@ struct MainView: View {
         .safeAreaInset(edge: .bottom) {
             VStack(alignment: .leading, spacing: 6) {
                 if model.freedAllTime > 0 {
-                    Label("\(model.freedAllTime.formattedBytes) \(L("freed so far"))", systemImage: "clock.arrow.circlepath")
+                    Label(String(format: L("%@ freed so far"), model.freedAllTime.formattedBytes), systemImage: "clock.arrow.circlepath")
                         .font(.caption).foregroundStyle(.secondary)
                 }
                 Button { model.route = model.route == .settings ? .findings : .settings } label: {
@@ -179,7 +192,7 @@ struct MainView: View {
     private var hero: some View {
         HStack(alignment: .top, spacing: 24) {
             VStack(alignment: .leading, spacing: 6) {
-                Text("You can free up to").foregroundStyle(.secondary)
+                Text(L("You can free up to")).foregroundStyle(.secondary)
                 Text(model.cleanableTotal.formattedBytes)
                     .font(.system(size: 40, weight: .semibold, design: .rounded)).monospacedDigit()
                     .contentTransition(.numericText(value: Double(model.cleanableTotal)))
@@ -193,9 +206,9 @@ struct MainView: View {
                 DiskBar(total: model.totalBytes, free: model.freeBytes, safe: model.total(.safe),
                         review: model.total(.review), keep: model.findings.filter { $0.safety == .keep }.reduce(0) { $0 + $1.sizeBytes })
                 HStack(spacing: 12) {
-                    LegendDot(symbol: Theme.icon(.safe), color: Theme.safe, label: "Safe", value: model.total(.safe))
-                    LegendDot(symbol: Theme.icon(.review), color: Theme.review, label: "Review", value: model.total(.review))
-                    LegendDot(symbol: "circle", color: .secondary, label: "Free", value: model.freeBytes)
+                    LegendDot(symbol: Theme.icon(.safe), color: Theme.safe, label: L("Safe"), value: model.total(.safe))
+                    LegendDot(symbol: Theme.icon(.review), color: Theme.review, label: L("Review"), value: model.total(.review))
+                    LegendDot(symbol: "circle", color: .secondary, label: L("Free"), value: model.freeBytes)
                 }
             }
         }
@@ -205,9 +218,9 @@ struct MainView: View {
         let maxSize = Double(visible.first?.sizeBytes ?? 1)
         let groups: [(String, Ecosystem?, [Finding])] = groupByEcosystem
             ? Dictionary(grouping: visible, by: \.ecosystem)
-                .map { ($0.key.title, Optional($0.key), $0.value) }
+                .map { (L($0.key.title), Optional($0.key), $0.value) }
                 .sorted { $0.2.reduce(0) { $0 + $1.sizeBytes } > $1.2.reduce(0) { $0 + $1.sizeBytes } }
-            : [("By size", nil, visible)]
+            : [(L("By size"), nil, visible)]
         return VStack(alignment: .leading, spacing: 16) {
             ForEach(groups, id: \.0) { title, eco, items in
                 VStack(alignment: .leading, spacing: 4) {
@@ -216,7 +229,7 @@ struct MainView: View {
                         Text(title).font(.headline)
                         let cleanable = items.filter { $0.isCleanable && $0.safety == .safe }
                         if !cleanable.isEmpty {
-                            Button("Select all") { model.selection.formUnion(cleanable.map(\.id)) }
+                            Button(L("Select all")) { model.selection.formUnion(cleanable.map(\.id)) }
                                 .buttonStyle(.link).font(.callout)
                         }
                         Spacer()
@@ -249,27 +262,27 @@ struct MainView: View {
             .help(L("Simple: big icons and one button. Detailed: disk map, list and inspector."))
         }
         ToolbarItem {
-            Picker("Group", selection: $groupByEcosystem) {
-                Label("Ecosystem", systemImage: "square.grid.2x2").tag(true)
-                Label("Size", systemImage: "list.number").tag(false)
+            Picker(L("Group"), selection: $groupByEcosystem) {
+                Label(L("Ecosystem"), systemImage: "square.grid.2x2").tag(true)
+                Label(L("Size"), systemImage: "list.number").tag(false)
             }
             .pickerStyle(.segmented)
-            .help("Group by ecosystem or list by size")
+            .help(L("Group by ecosystem or list by size"))
         }
         ToolbarItem {
             Button { model.runRules() } label: {
-                Label("Check now", systemImage: "arrow.clockwise")
+                Label(L("Check now"), systemImage: "arrow.clockwise")
                     .symbolEffect(.rotate, isActive: model.isRunningRules)
             }
-            .help("Check now: rules only, no AI (⌘R)")
+            .help(L("Check now: rules only, no AI") + " (⌘R)")
             .keyboardShortcut("r")
         }
         ToolbarItem {
-            Button { model.copyScanCommand() } label: { Label("Deep scan", systemImage: "terminal") }
-                .help("Copy /freeroom:scan for Claude Code")
+            Button { model.copyScanCommand() } label: { Label(L("Deep scan"), systemImage: "terminal") }
+                .help(String(format: L("Copy %@ for Claude Code"), "/freeroom:scan"))
         }
         ToolbarItem {
-            Button { showInspector.toggle() } label: { Label("Inspector", systemImage: "sidebar.right") }
+            Button { showInspector.toggle() } label: { Label(L("Inspector"), systemImage: "sidebar.right") }
                 .keyboardShortcut("i", modifiers: [.command, .option])
                 .disabled(model.simpleMode)
         }
@@ -302,7 +315,7 @@ struct SelectionBar: View {
         HStack(spacing: 12) {
             if model.selection.isEmpty {
                 Image(systemName: "keyboard").foregroundStyle(.secondary)
-                Text("space selects · ⌘A all Safe · ⌘⏎ clean").foregroundStyle(.secondary).font(.callout)
+                Text(L("space selects · ⌘A all Safe · ⌘⏎ clean")).foregroundStyle(.secondary).font(.callout)
             } else {
                 HStack(spacing: -8) {
                     ForEach(model.selectedFindings.prefix(5)) { f in
@@ -310,14 +323,14 @@ struct SelectionBar: View {
                             .background(Circle().fill(.background).padding(-2))
                     }
                 }
-                Text("**\(model.selectedBytes.formattedBytes)** · \(model.selection.count) items")
+                Text("**\(model.selectedBytes.formattedBytes)** · \(String(format: L("%@ items"), "\(model.selection.count)"))")
                     .monospacedDigit()
-                Text("→ \((model.freeBytes + model.selectedBytes).formattedBytes) free")
+                Text("→ " + String(format: L("%@ free"), (model.freeBytes + model.selectedBytes).formattedBytes))
                     .foregroundStyle(.secondary).monospacedDigit()
                 Button { model.selection = [] } label: { Image(systemName: "xmark.circle.fill") }
-                    .buttonStyle(.borderless).foregroundStyle(.secondary).help("Clear selection")
+                    .buttonStyle(.borderless).foregroundStyle(.secondary).help(L("Clear selection"))
             }
-            Button("Review & clean") { model.requestClean(model.selectedFindings) }
+            Button(L("Review & clean")) { model.requestClean(model.selectedFindings) }
                 .buttonStyle(.borderedProminent).tint(Theme.accent)
                 .disabled(model.selection.isEmpty)
         }
@@ -334,9 +347,9 @@ struct AgentLiveBanner: View {
         HStack(spacing: 10) {
             AgentMark(size: 18).symbolEffect(.pulse)
             VStack(alignment: .leading, spacing: 2) {
-                Text("Claude Code is scanning…").font(.callout.weight(.semibold))
+                Text(L("Claude Code is scanning…")).font(.callout.weight(.semibold))
                 let agent = model.findings.filter { $0.source == .agent }
-                Text(agent.first.map { "\(agent.count) findings · latest: \($0.title) \($0.sizeBytes.formattedBytes)" } ?? "Waiting for the first finding")
+                Text(agent.first.map { String(format: L("%@ findings · latest: %@ %@"), "\(agent.count)", $0.displayTitle, $0.sizeBytes.formattedBytes) } ?? L("Waiting for the first finding"))
                     .font(.caption)
             }
             Spacer()
@@ -354,14 +367,14 @@ struct EmptyStateView: View {
         VStack(spacing: 14) {
             if model.isRunningRules {
                 ProgressView().controlSize(.large)
-                Text("Measuring \(Catalog.locations.count) known locations…").foregroundStyle(.secondary)
+                Text(String(format: L("Measuring %@ known locations…"), "\(Catalog.locations.count)")).foregroundStyle(.secondary)
             } else {
                 Image(nsImage: NSApp.applicationIconImage).resizable().frame(width: 96, height: 96)
-                Text("Nothing worth cleaning").font(.title2.weight(.semibold))
-                Text("\(model.freeBytes.formattedBytes) free").foregroundStyle(.secondary).monospacedDigit()
+                Text(L("Nothing worth cleaning")).font(.title2.weight(.semibold))
+                Text(String(format: L("%@ free"), model.freeBytes.formattedBytes)).foregroundStyle(.secondary).monospacedDigit()
                 HStack {
-                    Button("Check now") { model.runRules() }.buttonStyle(.borderedProminent).tint(Theme.accent)
-                    Button("Deep scan with Claude Code") { model.copyScanCommand() }
+                    Button(L("Check now")) { model.runRules() }.buttonStyle(.borderedProminent).tint(Theme.accent)
+                    Button(L("Deep scan with Claude Code")) { model.copyScanCommand() }
                 }
                 HStack(spacing: -6) {
                     ForEach(Array(Catalog.locations.filter { $0.icon?.app != nil || $0.icon?.brand != nil }
@@ -370,7 +383,7 @@ struct EmptyStateView: View {
                     }
                 }
                 .padding(.top, 10)
-                Text("Watching \(Catalog.locations.count) known locations").font(.caption).foregroundStyle(.secondary)
+                Text(String(format: L("Watching %@ known locations"), "\(Catalog.locations.count)")).font(.caption).foregroundStyle(.secondary)
             }
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)

@@ -55,11 +55,19 @@ struct Ecosystem: Hashable, Identifiable {
 extension Finding {
     var ecosystem: Ecosystem { Ecosystem.of(self) }
 
+    /// Title in the app language (embedded catalog translations; English for agent findings).
+    var displayTitle: String {
+        Catalog.translation(forFindingId: id, lang: L10n.current)?.title ?? title
+    }
+
+    /// Whether a translated explanation exists for the current language.
+    var hasCatalogTranslation: Bool { Catalog.translation(forFindingId: id, lang: L10n.current) != nil }
+
     /// The short gray line next to the title in a row.
     var meta: String {
-        if id == "projects:build-folders" { return "\(paths.count) folders" }
-        if action == .command, let tool = command?.split(separator: " ").first { return "\(tool) cleanup" }
-        if paths.count > 1 { return "\(paths.count) locations" }
+        if id == "projects:build-folders" { return String(format: L("%@ folders"), "\(paths.count)") }
+        if action == .command, let tool = command?.split(separator: " ").first { return String(format: L("%@ cleanup"), String(tool)) }
+        if paths.count > 1 { return String(format: L("%@ locations"), "\(paths.count)") }
         if let path = paths.first { return (path as NSString).lastPathComponent }
         return ""
     }

@@ -1,0 +1,962 @@
+{
+  "xcode-derived-data": {
+    "title": "Xcode DerivedData",
+    "explanation": "Xcode で開いたすべてのプロジェクトのビルド成果物とインデックス。次回のビルドで再作成されます。"
+  },
+  "xcode-simulator-devices": {
+    "title": "シミュレータのデバイス（App とデータ）",
+    "explanation": "iOS シミュレータにインストールされた App とデータ。消去するとすべてのシミュレータが工場出荷時の状態にリセットされます。"
+  },
+  "xcode-device-support": {
+    "title": "iOS DeviceSupport",
+    "explanation": "実機からコピーされたデバッグシンボル。デバイスを再接続すると再作成されます。"
+  },
+  "xcode-archives": {
+    "title": "Xcode のアーカイブ",
+    "explanation": "アーカイブされた App のビルド。リリース済みバージョンのクラッシュレポートをシンボル化するのに必要です。"
+  },
+  "xcode-caches": {
+    "title": "Xcode のキャッシュ",
+    "explanation": "Xcode 自身のダウンロードキャッシュとドキュメントキャッシュ。必要に応じて再作成されます。"
+  },
+  "xcode-device-logs": {
+    "title": "デバイスのログ",
+    "explanation": "接続したデバイスから取得したクラッシュログと診断ログ。クラッシュをまだデバッグ中なら残しておいてください。"
+  },
+  "xcode-coresimulator-caches": {
+    "title": "シミュレータのキャッシュ",
+    "explanation": "シミュレータ用の dyld キャッシュと一時キャッシュ。シミュレータの起動時に再生成されます。"
+  },
+  "xcode-xctest-devices": {
+    "title": "XCTest のクローンデバイス",
+    "explanation": "並列テスト用に作られたシミュレータのクローン。次回のテスト実行時に Xcode が再作成します。"
+  },
+  "xcode-dvtdownloads": {
+    "title": "Xcode コンポーネントのダウンロード",
+    "explanation": "Xcode がダウンロードした、インストール済みコンポーネントのインストーラパッケージ。"
+  },
+  "xcode-previews": {
+    "title": "SwiftUI プレビュー",
+    "explanation": "SwiftUI プレビューの描画に使われるシミュレータのデータ。プレビューを表示すると再作成されます。"
+  },
+  "xcode-unavailable-simulators": {
+    "title": "利用できないシミュレータ",
+    "explanation": "インストールされていないランタイム用のシミュレータ。起動できないため、削除しても失うものはありません。"
+  },
+  "xcode-simulator-runtimes": {
+    "title": "シミュレータのランタイム",
+    "explanation": "iOS/watchOS/visionOS のランタイム（各数 GB）。使わないものは Xcode > Settings > Components で削除してください。"
+  },
+  "xcode-app": {
+    "title": "Xcode",
+    "explanation": "Xcode App 本体（10 GB 以上）。Apple プラットフォーム向けのビルドをもう行わない場合にのみ削除してください。"
+  },
+  "swiftpm-cache": {
+    "title": "Swift Package Manager のキャッシュ",
+    "explanation": "ダウンロードされた Swift パッケージとリポジトリ。次回の依存関係の解決時に再取得されます。"
+  },
+  "cocoapods-cache": {
+    "title": "CocoaPods のキャッシュ",
+    "explanation": "ダウンロードされた Pod。`pod install` で再取得されます。"
+  },
+  "cocoapods-repos": {
+    "title": "CocoaPods の spec リポジトリ",
+    "explanation": "CocoaPods の specs インデックスのローカルコピー。最近の CocoaPods は CDN を使い、必要なら再作成します。"
+  },
+  "ios-backups": {
+    "title": "iPhone と iPad のバックアップ",
+    "explanation": "Finder で作成したデバイスのローカルバックアップ。古いものは Finder > デバイス >「バックアップを管理」で削除してください。"
+  },
+  "docker-desktop-disk": {
+    "title": "Docker Desktop のディスクイメージ",
+    "explanation": "すべてのイメージ、コンテナ、ボリュームを格納する仮想ディスク。削除せずに prune コマンドで縮小してください。"
+  },
+  "docker-build-cache": {
+    "title": "Docker のビルドキャッシュ",
+    "explanation": "`docker build` でキャッシュされたレイヤー。サイズは `docker system df` で取得します。削除後、ビルドが一度だけ遅くなります。"
+  },
+  "docker-dangling-images": {
+    "title": "Docker の dangling イメージ",
+    "explanation": "再ビルドで残ったタグなしのイメージレイヤー。どのコンテナやタグにも使われていません。"
+  },
+  "docker-desktop-caches": {
+    "title": "Docker Desktop App のキャッシュ",
+    "explanation": "Docker Desktop App のログとアップデートキャッシュ。イメージやコンテナは含まれません。"
+  },
+  "docker-cli-config": {
+    "title": "Docker CLI の設定とコンテキスト",
+    "explanation": "Docker CLI のレジストリ認証情報とコンテキスト。Freeroom がこれらに触れることはありません。"
+  },
+  "docker-model-runner": {
+    "title": "Docker Model Runner のモデル",
+    "explanation": "`docker model pull` で取得した AI モデル。使わないものは `docker model rm` で削除してください。"
+  },
+  "orbstack-data": {
+    "title": "OrbStack のデータ",
+    "explanation": "OrbStack のコンテナ、イメージ、Linux マシンを含むディスクイメージ。Docker から prune するか、OrbStack でマシンを削除してください。"
+  },
+  "colima-data": {
+    "title": "Colima の VM",
+    "explanation": "イメージとコンテナを含む Colima の Linux VM ディスク。不要になったプロファイルには `colima delete` を使ってください。"
+  },
+  "lima-vms": {
+    "title": "Lima の VM",
+    "explanation": "Lima の Linux VM のディスク。使わないものは `limactl delete <name>` で削除してください。"
+  },
+  "rancher-desktop": {
+    "title": "Rancher Desktop の VM",
+    "explanation": "イメージと Kubernetes の状態を含む Rancher Desktop の VM ディスク。消去するには Troubleshooting > Factory Reset を使ってください。"
+  },
+  "minikube": {
+    "title": "minikube",
+    "explanation": "minikube のクラスタ、VM イメージ、キャッシュされた Kubernetes バイナリ。`minikube delete --all --purge` ですべて削除されます。"
+  },
+  "testcontainers-config": {
+    "title": "Testcontainers の設定",
+    "explanation": "Testcontainers の小さな設定ファイル。空き容量は増えません。"
+  },
+  "npm-cache": {
+    "title": "npm のキャッシュ",
+    "explanation": "ダウンロードされた npm パッケージ。インストール時に再取得されます。"
+  },
+  "npm-npx-cache": {
+    "title": "npx のキャッシュ",
+    "explanation": "`npx` コマンドの実行用にダウンロードされたパッケージ。次回実行時に再ダウンロードされます。"
+  },
+  "npm-logs": {
+    "title": "npm のログ",
+    "explanation": "npm 実行時のデバッグログ。"
+  },
+  "pnpm-store": {
+    "title": "pnpm のストア",
+    "explanation": "コンテンツアドレス方式のパッケージストア。prune すると、どのプロジェクトからも参照されていないパッケージが削除されます。"
+  },
+  "yarn-cache": {
+    "title": "Yarn のキャッシュ",
+    "explanation": "ダウンロードされた Yarn パッケージ。"
+  },
+  "yarn-berry-cache": {
+    "title": "Yarn Berry のグローバルキャッシュ",
+    "explanation": "Yarn 2 以降のグローバルパッケージキャッシュ。`yarn install` で再取得されます。"
+  },
+  "bun-cache": {
+    "title": "Bun のインストールキャッシュ",
+    "explanation": "`bun install` でダウンロードされたパッケージ。必要に応じて再取得されます。"
+  },
+  "deno-cache": {
+    "title": "Deno のキャッシュ",
+    "explanation": "リモートモジュールと npm パッケージの Deno のグローバルキャッシュ。次回実行時に再作成されます。"
+  },
+  "node-gyp-cache": {
+    "title": "node-gyp のヘッダ",
+    "explanation": "ネイティブモジュールのコンパイル用にダウンロードされた Node.js のヘッダ。必要に応じて再ダウンロードされます。"
+  },
+  "typescript-cache": {
+    "title": "TypeScript の型キャッシュ",
+    "explanation": "エディタの TypeScript サーバが自動的にダウンロードした型定義。"
+  },
+  "nvm-versions": {
+    "title": "nvm の Node.js バージョン",
+    "explanation": "インストール済みの Node.js バージョン。使わないものは `nvm uninstall <version>` で削除してください。"
+  },
+  "nvm-cache": {
+    "title": "nvm のダウンロードキャッシュ",
+    "explanation": "インストール済みのバージョン用に nvm がダウンロードした Node.js のアーカイブ。"
+  },
+  "fnm-versions": {
+    "title": "fnm の Node.js バージョン",
+    "explanation": "fnm でインストールされた Node.js バージョン。使わないものは `fnm uninstall <version>` で削除してください。"
+  },
+  "volta-tools": {
+    "title": "Volta のツールチェーン",
+    "explanation": "Volta が管理する Node、npm、グローバルツール。使わないバージョンは Volta から削除してください。"
+  },
+  "playwright-browsers": {
+    "title": "Playwright のブラウザ",
+    "explanation": "E2E テスト用にダウンロードされたブラウザ。`npx playwright install` で再インストールできます。"
+  },
+  "puppeteer-browsers": {
+    "title": "Puppeteer のブラウザ",
+    "explanation": "Puppeteer がダウンロードした Chrome のビルド。`npx puppeteer browsers install` で再インストールされます。"
+  },
+  "cypress-cache": {
+    "title": "Cypress のバイナリ",
+    "explanation": "インストールした各バージョンの Cypress App のバイナリ。`npx cypress install` で再インストールされます。"
+  },
+  "electron-cache": {
+    "title": "Electron のダウンロード",
+    "explanation": "Electron App のビルド時にダウンロードされた Electron ランタイムとビルドツール。"
+  },
+  "updater-caches": {
+    "title": "App アップデータのキャッシュ",
+    "explanation": "適用済みのアップデートのダウンロード済みインストーラ。"
+  },
+  "chrome-headless-shell": {
+    "title": "Chrome headless shell",
+    "explanation": "ブラウザテストツールがダウンロードしたヘッドレス Chrome のビルド。テストで必要になると再ダウンロードされます。"
+  },
+  "pip-cache": {
+    "title": "pip のキャッシュ",
+    "explanation": "ダウンロードされた Python の wheel。"
+  },
+  "uv-cache": {
+    "title": "uv のキャッシュ",
+    "explanation": "uv がキャッシュしたパッケージとビルド。次回のインストール時に再取得されます。"
+  },
+  "uv-python": {
+    "title": "uv が管理する Python バージョン",
+    "explanation": "uv でインストールされた Python インタプリタ。使わないものは `uv python uninstall <version>` で削除してください。"
+  },
+  "uv-tools": {
+    "title": "uv のツール",
+    "explanation": "`uv tool install` でインストールしたコマンドラインツール。`uv tool uninstall <name>` で削除します。"
+  },
+  "poetry-cache": {
+    "title": "Poetry のキャッシュ",
+    "explanation": "Poetry がダウンロードしたパッケージ。`poetry install` で再取得されます。"
+  },
+  "poetry-virtualenvs": {
+    "title": "Poetry の仮想環境",
+    "explanation": "Poetry がプロジェクト用に作成した仮想環境。`poetry install` で再作成されますが、環境内で行った変更は失われます。"
+  },
+  "conda-pkgs": {
+    "title": "Conda のパッケージキャッシュ",
+    "explanation": "ダウンロードされた conda パッケージと tarball。環境はそのまま動作しますが、インストール時に再ダウンロードされます。"
+  },
+  "pyenv-versions": {
+    "title": "pyenv の Python バージョン",
+    "explanation": "pyenv でビルドされた Python バージョン。使わないものは `pyenv uninstall <version>` で削除してください。"
+  },
+  "python-matplotlib-cache": {
+    "title": "Matplotlib のフォントキャッシュ",
+    "explanation": "Matplotlib が作成したフォント一覧のキャッシュ。次回の import 時に再作成されます。"
+  },
+  "ipython-history": {
+    "title": "IPython のプロファイル",
+    "explanation": "IPython の設定とコマンド履歴。小さいため残します。"
+  },
+  "jupyter-runtime": {
+    "title": "Jupyter のデータ",
+    "explanation": "Jupyter のカーネル、拡張機能、ランタイムファイル。通常は小さいですが、カーネルを削除する前に確認してください。"
+  },
+  "ollama-models": {
+    "title": "Ollama のモデル",
+    "explanation": "ローカル AI モデル。使わないものは `ollama rm <model>` で削除してください。"
+  },
+  "huggingface-hub": {
+    "title": "Hugging Face のキャッシュ",
+    "explanation": "Hugging Face のライブラリがダウンロードしたモデルとデータセット。コードで必要になると再ダウンロードされます。"
+  },
+  "huggingface-xet": {
+    "title": "Hugging Face Xet のキャッシュ",
+    "explanation": "Hugging Face のダウンロードを高速化するためのチャンクキャッシュ。モデルの実行には不要です。"
+  },
+  "lmstudio-models": {
+    "title": "LM Studio のモデル",
+    "explanation": "LM Studio でダウンロードしたモデル。使わないものは LM Studio の My Models タブから削除してください。"
+  },
+  "whisper-models": {
+    "title": "Whisper のモデル",
+    "explanation": "音声をテキストに変換するモデル。使用時に再ダウンロードされます。"
+  },
+  "torch-hub": {
+    "title": "PyTorch Hub のキャッシュ",
+    "explanation": "PyTorch Hub と torchvision がダウンロードしたモデルの重み。コードで読み込む際に再ダウンロードされます。"
+  },
+  "easyocr-models": {
+    "title": "EasyOCR のモデル",
+    "explanation": "EasyOCR がダウンロードした OCR モデル。次回使用時に再ダウンロードされます。"
+  },
+  "claude-code-data": {
+    "title": "Claude Code のデータ",
+    "explanation": "Claude Code の設定、メモリ、セッション履歴。古いセッションは手動ではなく Claude Code から整理してください。"
+  },
+  "claude-cli-cache": {
+    "title": "Claude Code CLI のキャッシュ",
+    "explanation": "Claude Code CLI のログとキャッシュデータ。必要に応じて再作成されます。"
+  },
+  "claude-desktop-cache": {
+    "title": "Claude のキャッシュ",
+    "explanation": "Claude App の Web キャッシュ。自動的に再作成されます。先に App を終了してください。"
+  },
+  "go-modcache": {
+    "title": "Go のモジュールキャッシュ",
+    "explanation": "ダウンロードされた Go モジュール。`go build` で再取得されます。"
+  },
+  "go-build-cache": {
+    "title": "Go のビルドキャッシュ",
+    "explanation": "コンパイル済みの Go パッケージ。"
+  },
+  "gopls-cache": {
+    "title": "gopls のキャッシュ",
+    "explanation": "Go 言語サーバのインデックスキャッシュ。Go プロジェクトを開くと再作成されます。"
+  },
+  "golangci-lint-cache": {
+    "title": "golangci-lint のキャッシュ",
+    "explanation": "Lint 結果のキャッシュ。次回実行時に再作成されます。"
+  },
+  "go-sumdb": {
+    "title": "Go のチェックサムデータベースのキャッシュ",
+    "explanation": "キャッシュされたチェックサムデータベースのタイル。モジュールの検証時に再取得されます。"
+  },
+  "goimports-cache": {
+    "title": "goimports のキャッシュ",
+    "explanation": "goimports のパッケージインデックスのキャッシュ。自動的に再作成されます。"
+  },
+  "cargo-registry": {
+    "title": "Cargo のレジストリキャッシュ",
+    "explanation": "ダウンロードされた crate。"
+  },
+  "cargo-git": {
+    "title": "Cargo の git 依存関係",
+    "explanation": "git 依存関係として使われる crate の git チェックアウト。次回のビルドで再クローンされます。"
+  },
+  "rustup-toolchains": {
+    "title": "Rust のツールチェーン",
+    "explanation": "インストール済みの Rust ツールチェーン（各約 1 GB）。使わないものは `rustup toolchain uninstall <name>` で削除してください。"
+  },
+  "gradle-cache": {
+    "title": "Gradle のキャッシュ",
+    "explanation": "ダウンロードされた依存関係とビルドキャッシュ。"
+  },
+  "gradle-wrapper-dists": {
+    "title": "Gradle wrapper のディストリビューション",
+    "explanation": "`./gradlew` がダウンロードした Gradle バージョン。必要とするプロジェクトが再ダウンロードします。"
+  },
+  "gradle-daemon": {
+    "title": "Gradle デーモンのログ",
+    "explanation": "Gradle デーモンのログとレジストリ。先に `./gradlew --stop` でデーモンを停止してください。"
+  },
+  "gradle-jdks": {
+    "title": "Gradle がプロビジョニングした JDK",
+    "explanation": "Gradle がツールチェーン用にダウンロードした JDK。ビルドで要求されると再ダウンロードされます。"
+  },
+  "maven-repo": {
+    "title": "Maven リポジトリ",
+    "explanation": "ダウンロードされた Java の依存関係。"
+  },
+  "maven-wrapper": {
+    "title": "Maven wrapper のディストリビューション",
+    "explanation": "`./mvnw` がダウンロードした Maven バージョン。必要に応じて再ダウンロードされます。"
+  },
+  "sdkman-candidates": {
+    "title": "SDKMAN の candidate",
+    "explanation": "SDKMAN でインストールした JDK とツール。使わないバージョンは `sdk uninstall` で削除してください。"
+  },
+  "sdkman-archives": {
+    "title": "SDKMAN のアーカイブ",
+    "explanation": "インストール済みの SDK のダウンロード済みアーカイブ（`sdk flush` でも消去できます）。"
+  },
+  "system-jdks": {
+    "title": "インストール済みの JDK",
+    "explanation": "システム全体にインストールされた Java ランタイム。どのプロジェクトも使っていないバージョンだけを削除してください。"
+  },
+  "coursier-cache": {
+    "title": "Coursier のキャッシュ",
+    "explanation": "Coursier、sbt、Metals がダウンロードした Scala/JVM のアーティファクト。"
+  },
+  "nuget-packages": {
+    "title": "NuGet パッケージ",
+    "explanation": "ダウンロードされた .NET パッケージ。次回のビルド時に復元されます。"
+  },
+  "dotnet-sdks": {
+    "title": ".NET SDK とランタイム",
+    "explanation": "インストール済みの .NET SDK とランタイム。古いバージョンは Microsoft のドキュメントに従って削除してください。"
+  },
+  "dotnet-tools": {
+    "title": ".NET グローバルツール",
+    "explanation": "グローバルな .NET ツール。使わないものは `dotnet tool uninstall -g <name>` で削除してください。"
+  },
+  "rbenv-versions": {
+    "title": "rbenv の Ruby バージョン",
+    "explanation": "rbenv でビルドされた Ruby バージョン。使わないものは `rbenv uninstall <version>` で削除してください。"
+  },
+  "rvm-rubies": {
+    "title": "RVM",
+    "explanation": "RVM が管理する Ruby と gemset。使わない Ruby は `rvm remove <version>` で削除してください。"
+  },
+  "pub-cache": {
+    "title": "Dart/Flutter の pub キャッシュ",
+    "explanation": "`dart pub get` / `flutter pub get` がダウンロードしたパッケージ。次回の get で再取得されます。"
+  },
+  "composer-cache": {
+    "title": "Composer のキャッシュ",
+    "explanation": "Composer がダウンロードした PHP パッケージ。"
+  },
+  "ccache": {
+    "title": "ccache",
+    "explanation": "C/C++ のコンパイラ出力キャッシュ。キャッシュが再び溜まるまでビルドが遅くなります。"
+  },
+  "vcpkg-archives": {
+    "title": "vcpkg のバイナリキャッシュ",
+    "explanation": "vcpkg がキャッシュしたビルド済みの C/C++ ライブラリ。"
+  },
+  "conan-cache": {
+    "title": "Conan のパッケージ",
+    "explanation": "Conan 2 がキャッシュした C/C++ パッケージ。必要に応じて再ダウンロードまたは再ビルドされます。"
+  },
+  "haskell-stack": {
+    "title": "Haskell Stack のルート",
+    "explanation": "Stack が使う GHC バージョンとパッケージのスナップショット。容量は大きいですが、再ビルドには時間がかかります。"
+  },
+  "ghcup": {
+    "title": "GHCup のツールチェーン",
+    "explanation": "GHCup でインストールした GHC、cabal、HLS のバージョン。使わないものは `ghcup rm` で削除してください。"
+  },
+  "opam-root": {
+    "title": "opam の switch",
+    "explanation": "switch ごとの OCaml コンパイラとパッケージ。使わない switch は `opam switch remove` で削除してください。"
+  },
+  "julia-depot": {
+    "title": "Julia の depot",
+    "explanation": "Julia のパッケージ、アーティファクト、コンパイル済みキャッシュ。`Pkg.gc()` で未使用のバージョンが削除されます。"
+  },
+  "platformio": {
+    "title": "PlatformIO core",
+    "explanation": "PlatformIO がインストールした組み込み向けのツールチェーンとプラットフォーム。必要に応じてプロジェクトごとに再ダウンロードされます。"
+  },
+  "arduino-staging": {
+    "title": "Arduino のダウンロード",
+    "explanation": "インストール済みのボードパッケージのインストーラアーカイブ。"
+  },
+  "arduino-packages": {
+    "title": "Arduino のボードパッケージ",
+    "explanation": "Arduino/ESP32 ボード用のツールチェーン。Arduino をもう使わないなら削除しても安全です。"
+  },
+  "arduino-ide-cache": {
+    "title": "Arduino IDE のキャッシュ",
+    "explanation": "Arduino IDE 2 のキャッシュとダウンロードされたインデックスファイル。起動時に再作成されます。"
+  },
+  "buf-cache": {
+    "title": "Buf のモジュールキャッシュ",
+    "explanation": "Buf CLI がダウンロードした Protobuf モジュール。"
+  },
+  "homebrew-cache": {
+    "title": "Homebrew のダウンロード",
+    "explanation": "古い bottle とダウンロード。インストール済みの formula には影響しません。"
+  },
+  "homebrew-logs": {
+    "title": "Homebrew のログ",
+    "explanation": "formula のインストール時のビルドログ。"
+  },
+  "homebrew-cellar": {
+    "title": "Homebrew でインストールしたパッケージ",
+    "explanation": "Homebrew でインストールしたすべてのもの。ツールは `brew uninstall`、不要な依存関係は `brew autoremove` で削除してください。"
+  },
+  "jetbrains-cache": {
+    "title": "JetBrains のキャッシュ",
+    "explanation": "IDE のインデックス。プロジェクトを開くと再作成されます。"
+  },
+  "jetbrains-logs": {
+    "title": "JetBrains のログ",
+    "explanation": "IDE のログファイル。"
+  },
+  "jetbrains-config": {
+    "title": "JetBrains の設定とプラグイン",
+    "explanation": "IDE の設定とインストール済みのプラグイン。古いバージョンのフォルダは手動ではなく IDE から削除できます。"
+  },
+  "vscode-shipit": {
+    "title": "VS Code のアップデートの残り",
+    "explanation": "適用済みのアップデートのインストーラ。"
+  },
+  "vscode-cache": {
+    "title": "VS Code のキャッシュ",
+    "explanation": "VS Code の Web、コンパイル済みコード、拡張機能ダウンロードのキャッシュ。自動的に再作成されます。先に VS Code を終了してください。"
+  },
+  "vscode-logs": {
+    "title": "VS Code のログ",
+    "explanation": "VS Code の診断ログ。"
+  },
+  "vscode-workspace-storage": {
+    "title": "VS Code のワークスペースストレージ",
+    "explanation": "ワークスペースごとの状態（開いているエディタ、拡張機能のデータ、ローカル履歴）。フォルダを開くたびに増えていきます。"
+  },
+  "vscode-extensions": {
+    "title": "VS Code の拡張機能",
+    "explanation": "インストール済みの VS Code 拡張機能。使わないものは拡張機能ビューからアンインストールしてください。"
+  },
+  "vscode-settings": {
+    "title": "VS Code の設定",
+    "explanation": "VS Code の設定とキーバインド。"
+  },
+  "cursor-extensions": {
+    "title": "Cursor の拡張機能",
+    "explanation": "インストール済みの Cursor 拡張機能。使わないものは Cursor でアンインストールしてください。"
+  },
+  "android-sdk": {
+    "title": "Android SDK",
+    "explanation": "Android のプラットフォーム、ビルドツール、システムイメージ。使わないパッケージは Android Studio の SDK Manager で削除してください。"
+  },
+  "android-avds": {
+    "title": "Android エミュレータ（AVD）",
+    "explanation": "データを含む仮想デバイス（各数 GB）。使わないものは Device Manager で削除してください。"
+  },
+  "android-studio-logs": {
+    "title": "Android Studio のログ",
+    "explanation": "Android Studio の IDE ログ。"
+  },
+  "postman-cache": {
+    "title": "Postman のキャッシュ",
+    "explanation": "Postman の Web キャッシュ、ログ、アップデートの残り。コレクションはアカウントに同期されています。"
+  },
+  "gitkraken-cache": {
+    "title": "GitKraken のキャッシュ",
+    "explanation": "GitKraken の Web キャッシュとアップデートの残り。"
+  },
+  "mongodb-compass-cache": {
+    "title": "MongoDB Compass のキャッシュ",
+    "explanation": "MongoDB Compass の Web キャッシュとアップデートの残り。"
+  },
+  "lens-cache": {
+    "title": "Lens のキャッシュ",
+    "explanation": "Kubernetes IDE である Lens の Web キャッシュ。"
+  },
+  "tableplus-cache": {
+    "title": "TablePlus のキャッシュ",
+    "explanation": "TablePlus のキャッシュデータ。接続情報はここには保存されていません。"
+  },
+  "helm-cache": {
+    "title": "Helm のキャッシュ",
+    "explanation": "ダウンロードされた chart とリポジトリのインデックス。`helm repo update` で再取得されます。"
+  },
+  "kube-config": {
+    "title": "Kubernetes の設定",
+    "explanation": "クラスタの認証情報を含む kubeconfig。Freeroom がこれに触れることはありません。"
+  },
+  "terraform-plugin-cache": {
+    "title": "Terraform のプラグインキャッシュ",
+    "explanation": "Terraform プロバイダの共有キャッシュ（plugin_cache_dir を有効にした場合のみ）。`terraform init` で再ダウンロードされます。"
+  },
+  "terraform-credentials": {
+    "title": "Terraform の認証情報",
+    "explanation": "Terraform Cloud の API トークン。削除されることはありません。"
+  },
+  "tflint-plugins": {
+    "title": "TFLint のキャッシュ",
+    "explanation": "TFLint のルールプラグインとキャッシュ。`tflint --init` で再インストールされます。"
+  },
+  "vagrant-boxes": {
+    "title": "Vagrant の box",
+    "explanation": "Vagrant のベース VM イメージ。`vagrant box prune` で古いバージョンが削除されます。"
+  },
+  "aws-config": {
+    "title": "AWS の認証情報",
+    "explanation": "AWS CLI の認証情報と設定。Freeroom がこれらに触れることはありません。"
+  },
+  "azure-cli": {
+    "title": "Azure CLI のデータ",
+    "explanation": "Azure CLI のログイントークンと設定。削除されることはありません。"
+  },
+  "gcloud-config": {
+    "title": "Google Cloud SDK の設定",
+    "explanation": "gcloud の認証情報と構成。削除されることはありません。"
+  },
+  "gh-config": {
+    "title": "GitHub CLI の設定",
+    "explanation": "GitHub CLI の設定と認証情報。削除されることはありません。"
+  },
+  "ssh-keys": {
+    "title": "SSH 鍵",
+    "explanation": "SSH 鍵と known hosts。削除されることはありません。"
+  },
+  "gnupg": {
+    "title": "GnuPG のキーリング",
+    "explanation": "GPG 鍵。削除されることはありません。"
+  },
+  "parallels-vms": {
+    "title": "Parallels の仮想マシン",
+    "explanation": "Parallels の VM。使わない VM は Parallels Control Center から削除してください。スナップショットも一緒に削除されます。"
+  },
+  "utm-vms": {
+    "title": "UTM の仮想マシン",
+    "explanation": "UTM の VM とそのディスク。使わない VM は UTM 内で削除してください。"
+  },
+  "vmware-fusion-vms": {
+    "title": "VMware Fusion の仮想マシン",
+    "explanation": "VMware Fusion の VM。使わないものは Fusion の Virtual Machine Library から削除してください。"
+  },
+  "virtualbox-vms": {
+    "title": "VirtualBox の仮想マシン",
+    "explanation": "VirtualBox の VM。使わないものは VirtualBox で 'Delete all files' を選んで削除してください。"
+  },
+  "browser-caches": {
+    "title": "ブラウザのキャッシュ",
+    "explanation": "Chrome、Arc、Firefox、Edge の Web キャッシュ。セッション、履歴、パスワードはここには保存されていません。"
+  },
+  "chrome-ai-model": {
+    "title": "Chrome のオンデバイス AI モデル",
+    "explanation": "Chrome の組み込み AI が使う Gemini Nano モデル。機能で必要になると Chrome が再ダウンロードします。"
+  },
+  "chrome-profile": {
+    "title": "Chrome のプロファイル",
+    "explanation": "Chrome のブックマーク、履歴、パスワード、拡張機能。代わりに Chrome から閲覧履歴データを削除してください。"
+  },
+  "chrome-for-testing": {
+    "title": "Chrome for Testing のプロファイル",
+    "explanation": "自動ブラウザテストが作成したプロファイル。次回のテスト実行時に再作成されます。"
+  },
+  "google-updater": {
+    "title": "Google Updater のキャッシュ",
+    "explanation": "Chrome などの Google App 用にダウンロードされたアップデートパッケージ。"
+  },
+  "safari-cache": {
+    "title": "Safari のキャッシュ",
+    "explanation": "Safari の Web キャッシュ。履歴とブックマークは別の場所に保存されています。"
+  },
+  "safari-data": {
+    "title": "Safari のデータ",
+    "explanation": "Safari の履歴、ブックマーク、リーディングリスト。代わりに Safari から履歴を消去してください。"
+  },
+  "firefox-profiles": {
+    "title": "Firefox のプロファイル",
+    "explanation": "Firefox のブックマーク、履歴、パスワード、アドオン。代わりに Firefox からデータを消去してください。"
+  },
+  "arc-data": {
+    "title": "Arc のデータ",
+    "explanation": "Arc のスペース、サイドバー、プロファイル。代わりに Arc からデータを消去してください。"
+  },
+  "slack-cache": {
+    "title": "Slack のキャッシュ",
+    "explanation": "Slack の Web キャッシュ。メッセージはワークスペースに残ります。先に Slack を終了してください。"
+  },
+  "teams-cache": {
+    "title": "Microsoft Teams のキャッシュ",
+    "explanation": "新しい Microsoft Teams のキャッシュ。チャットは Microsoft のサーバに残ります。先に Teams を終了してください。"
+  },
+  "zoom-cache": {
+    "title": "Zoom のキャッシュ",
+    "explanation": "Zoom のキャッシュデータとアップデートファイル。"
+  },
+  "zoom-recordings": {
+    "title": "Zoom のレコーディング",
+    "explanation": "ローカルにレコーディングしたミーティング。削除する前に、残したいものを移動してください。"
+  },
+  "discord-cache": {
+    "title": "Discord のキャッシュ",
+    "explanation": "Discord App の Web キャッシュ。自動的に再作成されます。先に App を終了してください。"
+  },
+  "whatsapp-cache": {
+    "title": "WhatsApp のキャッシュ",
+    "explanation": "WhatsApp App の一時キャッシュ。チャットとメディアは別の場所に保存されています。"
+  },
+  "whatsapp-media": {
+    "title": "WhatsApp のメディア",
+    "explanation": "チャットの写真、ビデオ、ファイル。WhatsApp > 設定 > ストレージ で管理してください。"
+  },
+  "messages-attachments": {
+    "title": "メッセージの添付ファイル",
+    "explanation": "iMessage のチャットの写真とファイル。大きなものは「メッセージ」または「システム設定」>「一般」>「ストレージ」で削除してください。"
+  },
+  "messages-db": {
+    "title": "メッセージの履歴",
+    "explanation": "iMessage/SMS の履歴データベース。削除されることはありません。"
+  },
+  "mail-store": {
+    "title": "メールのメールボックス",
+    "explanation": "ローカルのメールとメールボックス。メッセージを削除するには「メール」自体の機能を使ってください。"
+  },
+  "mail-downloads": {
+    "title": "メールのダウンロード",
+    "explanation": "「メール」から開いた添付ファイル。元のファイルはメッセージ内に残っています。"
+  },
+  "facetime-cache": {
+    "title": "FaceTime のデータ",
+    "explanation": "FaceTime の設定と通話データ。小さいため残します。"
+  },
+  "teams-classic-data": {
+    "title": "Microsoft Teams（クラシック）のデータ",
+    "explanation": "提供が終了したクラシック版 Teams App の残りのデータ。新しい Teams では使われません。"
+  },
+  "teamviewer-cache": {
+    "title": "TeamViewer のキャッシュ",
+    "explanation": "TeamViewer のキャッシュデータ。"
+  },
+  "figma-cache": {
+    "title": "Figma デスクトップのキャッシュ",
+    "explanation": "Figma デスクトップ App のデータとキャッシュ。ファイルはクラウドにありますが、消去するとサインアウトされます。"
+  },
+  "spotify-cache": {
+    "title": "Spotify のキャッシュ",
+    "explanation": "キャッシュされた曲。必要に応じて Spotify が再ダウンロードします。"
+  },
+  "spotify-offline": {
+    "title": "Spotify のオフラインストレージ",
+    "explanation": "オフライン再生用にダウンロードした曲と Spotify のキャッシュ。Spotify > 設定 > ストレージ で消去してください。"
+  },
+  "office-caches": {
+    "title": "Microsoft Office のキャッシュ",
+    "explanation": "Word、Excel、PowerPoint、Outlook のキャッシュ。起動時に再作成されます。書類はここには保存されていません。"
+  },
+  "office-font-cache": {
+    "title": "Office のフォントキャッシュ",
+    "explanation": "Office App で共有されるフォントキャッシュ。次回起動時に再作成されます。"
+  },
+  "microsoft-autoupdate": {
+    "title": "Microsoft AutoUpdate のキャッシュ",
+    "explanation": "インストール済みの Office アップデートのダウンロード済みパッケージ。"
+  },
+  "cloud-storage": {
+    "title": "クラウドストレージのフォルダ",
+    "explanation": "OneDrive、Dropbox、Google Drive、Box で同期されたファイル。空き容量を増やすには「ダウンロードを削除」/「空き領域を増やす」を使ってください。"
+  },
+  "adobe-media-cache": {
+    "title": "Adobe のメディアキャッシュ",
+    "explanation": "Premiere Pro と After Effects のコンフォーム済みオーディオとプレビューファイル。プロジェクトを開くと再作成されます。"
+  },
+  "capcut-cache": {
+    "title": "CapCut のキャッシュ",
+    "explanation": "CapCut のエフェクト、テンプレート、プレビューのキャッシュ。プロジェクトは別の場所に保存されています。"
+  },
+  "insta360-cache": {
+    "title": "Insta360 Studio のキャッシュ",
+    "explanation": "Insta360 Studio のプレビューと書き出しのキャッシュ。"
+  },
+  "expressvpn-cache": {
+    "title": "ExpressVPN のキャッシュ",
+    "explanation": "ExpressVPN のキャッシュデータ。"
+  },
+  "sentry-crash-caches": {
+    "title": "クラッシュレポーターのキャッシュ",
+    "explanation": "App がアップロード待ちにしているクラッシュレポート。"
+  },
+  "photos-library": {
+    "title": "写真ライブラリ",
+    "explanation": "写真とビデオ。「写真」の設定で「Mac のストレージを最適化」をオンにすると、オリジナルは iCloud にのみ保存されます。"
+  },
+  "music-media": {
+    "title": "ミュージックライブラリのメディア",
+    "explanation": "「ミュージック」の曲、ダウンロード、読み込んだファイル。ダウンロードはミュージック App から削除してください。"
+  },
+  "music-cache": {
+    "title": "ミュージック App のキャッシュ",
+    "explanation": "ミュージック App のアートワークとストリーミングのキャッシュ。"
+  },
+  "tv-media": {
+    "title": "TV App のダウンロード",
+    "explanation": "TV App でダウンロードした映画と番組。ダウンロードは TV App から削除してください。"
+  },
+  "tv-cache": {
+    "title": "TV App のキャッシュ",
+    "explanation": "TV App のアートワークとストリーミングのキャッシュ。"
+  },
+  "podcasts-downloads": {
+    "title": "Podcast のダウンロード",
+    "explanation": "ダウンロードした Podcast のエピソード。Podcast >「設定」で削除するか、自動削除をオンにしてください。"
+  },
+  "apple-loops": {
+    "title": "Apple Loops とサウンドライブラリ",
+    "explanation": "GarageBand/Logic のサウンドとループ。ファイルを削除するのではなく、Logic >「サウンドライブラリ」で管理してください。"
+  },
+  "logic-library-bundle": {
+    "title": "Logic Pro のライブラリ",
+    "explanation": "Logic Pro 12 以降のサウンドライブラリバンドル。サウンドパックは Logic Pro >「サウンドライブラリ」から削除してください。"
+  },
+  "voice-memos": {
+    "title": "ボイスメモ",
+    "explanation": "音声の録音。ボイスメモ App から削除してください。"
+  },
+  "books-data": {
+    "title": "ブック",
+    "explanation": "ダウンロードしたブックとオーディオブック。ダウンロードはブック App から削除してください。"
+  },
+  "notes-data": {
+    "title": "メモ",
+    "explanation": "メモとその添付ファイル。削除されることはありません。"
+  },
+  "icloud-drive": {
+    "title": "iCloud Drive",
+    "explanation": "iCloud Drive のファイルのローカルコピー。削除せずに「Mac のストレージを最適化」または「ダウンロードを削除」を使ってください。"
+  },
+  "trash": {
+    "title": "ゴミ箱",
+    "explanation": "ゴミ箱に移動したファイルは、ゴミ箱を空にするまでディスク容量を使い続けます。"
+  },
+  "downloads": {
+    "title": "ダウンロード",
+    "explanation": "手動で確認してください。ここにあるインストーラやアーカイブは不要になっていることがよくあります。"
+  },
+  "desktop": {
+    "title": "デスクトップ",
+    "explanation": "デスクトップ上のスクリーンショットとファイル。手動で確認してください。"
+  },
+  "documents": {
+    "title": "書類",
+    "explanation": "あなたの書類。Freeroom がこのフォルダ全体をクリーンアップすることはありません。"
+  },
+  "system-temp": {
+    "title": "システムの一時ファイル",
+    "explanation": "macOS が管理し、再起動時に消去されます。手動で削除しないでください。"
+  },
+  "system-folder": {
+    "title": "macOS システム",
+    "explanation": "封印された読み取り専用の macOS システムボリューム。変更できず、変更してはいけません。"
+  },
+  "system-library": {
+    "title": "システムのライブラリ",
+    "explanation": "システム全体の設定、ドライバ、App のサポートファイル。App のアンインストーラが示す項目だけを削除してください。"
+  },
+  "user-library": {
+    "title": "ユーザのライブラリフォルダ",
+    "explanation": "すべての App の設定とデータ。フォルダ自体ではなく、中の特定の項目をクリーンアップしてください。"
+  },
+  "app-support-root": {
+    "title": "Application Support",
+    "explanation": "すべての App のデータ。クリーンアップしても安全なのは、既知の特定のサブフォルダだけです。"
+  },
+  "preferences": {
+    "title": "Preferences",
+    "explanation": "App の設定。削除すると App がリセットされます。"
+  },
+  "keychains": {
+    "title": "キーチェーン",
+    "explanation": "パスワードと証明書。削除されることはありません。"
+  },
+  "containers-root": {
+    "title": "App のコンテナ",
+    "explanation": "サンドボックス化された App のデータ。コンテナを削除すると、その App のデータが削除されます。"
+  },
+  "group-containers-root": {
+    "title": "グループコンテナ",
+    "explanation": "同じデベロッパの App 間で共有されるデータ。キャッシュではありません。"
+  },
+  "vm-swap": {
+    "title": "スワップとスリープイメージ",
+    "explanation": "仮想メモリのスワップファイルとスリープイメージ。macOS が管理します。スワップを縮小するには再起動してください。"
+  },
+  "spotlight-index": {
+    "title": "Spotlight のインデックス",
+    "explanation": "検索インデックス。大きすぎるように見える場合は Spotlight の設定から再構築してください。"
+  },
+  "system-logs": {
+    "title": "システムログ",
+    "explanation": "統合ログ。macOS が自動的にローテーションし、サイズを制限します。"
+  },
+  "user-logs": {
+    "title": "ユーザのログ",
+    "explanation": "送信済み、または不要になったクラッシュレポートとハングレポート。新しいものは必要に応じて書き込まれます。"
+  },
+  "macos-updates": {
+    "title": "macOS アップデートのダウンロード",
+    "explanation": "macOS がステージングしたソフトウェアアップデート。インストールするか、macOS に削除させてください。"
+  },
+  "system-caches": {
+    "title": "システムのキャッシュ",
+    "explanation": "macOS とインストーラが管理するシステム全体のキャッシュ。手動で空にするのは安全ではありません。"
+  },
+  "time-machine-snapshots": {
+    "title": "Time Machine のローカルスナップショット",
+    "explanation": "パージ可能な領域として表示されます。容量が必要になると macOS が自動的に削除します（`tmutil listlocalsnapshots /`）。"
+  },
+  "apple-intelligence-assets": {
+    "title": "Apple のシステムアセット",
+    "explanation": "ダウンロードされたシステムアセット（音声、辞書、AI モデル）。macOS が管理します。"
+  },
+  "mobile-sync-config": {
+    "title": "デバイスの同期設定",
+    "explanation": "デバイスのバックアップと同期データを保持するフォルダ。バックアップは Finder から管理してください。"
+  },
+  "crash-reporter": {
+    "title": "クラッシュレポーターのデータ",
+    "explanation": "macOS が保持するクラッシュレポートのメタデータ。"
+  },
+  "apple-caches-misc": {
+    "title": "Apple の App のキャッシュ",
+    "explanation": "App Store、ヘルプ、マップ、セーフブラウジングのキャッシュ。必要に応じて macOS が再作成します。"
+  },
+  "user-caches-root": {
+    "title": "ユーザのキャッシュフォルダ",
+    "explanation": "すべての App のキャッシュを保持します。フォルダ全体ではなく、中の既知の項目をクリーンアップしてください。"
+  },
+  "dot-cache-root": {
+    "title": "~/.cache フォルダ",
+    "explanation": "CLI ツールが使うキャッシュフォルダ。フォルダ全体ではなく、中の既知の項目をクリーンアップしてください。"
+  },
+  "dot-config-root": {
+    "title": "~/.config フォルダ",
+    "explanation": "コマンドラインツールの設定。キャッシュではありません。"
+  },
+  "dot-local-root": {
+    "title": "~/.local フォルダ",
+    "explanation": "インストールされた CLI ツールとそのデータ。フォルダ全体ではなく、中の既知の項目をクリーンアップしてください。"
+  },
+  "shell-history": {
+    "title": "シェルの履歴",
+    "explanation": "コマンド履歴。小さいため残します。"
+  },
+  "git-config": {
+    "title": "Git の設定",
+    "explanation": "Git の設定。"
+  },
+  "docker-unused-images": {
+    "title": "未使用の Docker イメージ",
+    "explanation": "コンテナで使われていないすべてのイメージ。意図的に pull したものも含みます。再度 pull または再ビルドできます。"
+  },
+  "docker-buildx-cache": {
+    "title": "Buildx ビルダーのキャッシュ",
+    "explanation": "buildx ビルダーのビルドキャッシュ。キャッシュが再び溜まるまで、ビルドが一度だけ遅くなります。"
+  },
+  "docker-stopped-containers": {
+    "title": "停止中の Docker コンテナ",
+    "explanation": "実行されていないコンテナ。削除すると、書き込み可能レイヤーとボリューム外のデータはすべて失われます。"
+  },
+  "docker-unused-volumes": {
+    "title": "未使用の Docker ボリューム",
+    "explanation": "どのコンテナも使っていないボリューム。データベースが入っていることが多いので、`docker volume prune` の前に確認してください。"
+  },
+  "claude-code-versions": {
+    "title": "Claude Code のバージョン",
+    "explanation": "ネイティブ版 Claude Code のビルド。現在のものは使用中です。古いバージョンは Claude Code 自身が削除します。"
+  },
+  "macos-aerials": {
+    "title": "空撮の壁紙",
+    "explanation": "macOS がダウンロードした空撮の壁紙とスクリーンセーバ。macOS が管理します。ダウンロードを止めるには静止画の壁紙を選んでください。"
+  },
+  "xcode-userdata": {
+    "title": "Xcode のユーザ設定",
+    "explanation": "Xcode のキーバインド、コードスニペット、テーマ、ブレークポイント。"
+  },
+  "command-line-tools": {
+    "title": "Command Line Tools",
+    "explanation": "Homebrew や多くのツールが使うコンパイラと git。完全版の Xcode がインストールされ選択されている場合を除き、残してください。"
+  },
+  "xcode-simulator-system-caches": {
+    "title": "シミュレータランタイムのキャッシュ",
+    "explanation": "インストール済みのシミュレータランタイム用に作られた共有キャッシュ。macOS が再作成します。削除には管理者権限が必要です。"
+  },
+  "go-bin": {
+    "title": "Go でインストールしたバイナリ",
+    "explanation": "`go install` でインストールしたツール。使わなくなったものを削除してください。"
+  },
+  "cargo-bin": {
+    "title": "Cargo でインストールしたバイナリ",
+    "explanation": "`cargo install` でインストールしたツールと rustup のプロキシ。`cargo uninstall <name>` で削除します。"
+  },
+  "chrome-component-caches": {
+    "title": "Chrome のコンポーネントキャッシュ",
+    "explanation": "Chrome のダウンロード済みコンポーネントインストーラと GPU シェーダキャッシュ。自動的に再作成されます。先に Chrome を終了してください。"
+  },
+  "vscode-local-history": {
+    "title": "VS Code のローカル履歴",
+    "explanation": "VS Code で保存したファイルの以前のバージョン（タイムラインビュー）。削除するとその取り消し履歴は失われます。"
+  },
+  "tectonic-cache": {
+    "title": "Tectonic の TeX バンドルキャッシュ",
+    "explanation": "Tectonic がダウンロードした TeX のサポートファイル。次回のビルドで再ダウンロードされます。"
+  },
+  "zoom-data": {
+    "title": "Zoom のチャットデータ",
+    "explanation": "Zoom のローカルのチャット履歴と設定。キャッシュではありません。"
+  },
+  "icloud-drive-state": {
+    "title": "iCloud Drive の状態",
+    "explanation": "iCloud Drive の同期データベース。削除すると同期が壊れることがあります。"
+  },
+  "swift-toolchains": {
+    "title": "Swift のツールチェーン",
+    "explanation": "swift.org や swiftly から入手した追加の Swift ツールチェーン。ビルドに使わなくなったバージョンを削除してください。"
+  },
+  "huggingface-datasets": {
+    "title": "Hugging Face のデータセットキャッシュ",
+    "explanation": "`datasets` ライブラリがダウンロードして処理したデータセット。コードで読み込む際に再ダウンロードされます。"
+  }
+}

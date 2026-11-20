@@ -20,12 +20,12 @@ struct FindingRow: View {
             ))
             .toggleStyle(.checkbox).labelsHidden()
             .disabled(!finding.isCleanable)
-            .help(finding.isCleanable ? "Select" : "Freeroom never deletes Keep items")
+            .help(finding.isCleanable ? L("Select") : L("Freeroom never deletes Keep items"))
 
             ItemIcon(icon: finding.icon, fallback: finding.categoryFallback, size: 30)
 
             HStack(spacing: 6) {
-                Text(finding.title).font(.body.weight(.medium)).lineLimit(1)
+                Text(finding.displayTitle).font(.body.weight(.medium)).lineLimit(1)
                 Text(finding.meta).foregroundStyle(.secondary).lineLimit(1)
                 if finding.source == .agent { AgentMark(size: 11) }
                 if finding.needsAdmin { Image(systemName: "lock.fill").font(.caption).foregroundStyle(.secondary) }
@@ -54,12 +54,12 @@ struct FindingRow: View {
         .onHover { hovering = $0 }
         .help(model.explanation(for: finding))
         .accessibilityElement(children: .combine)
-        .accessibilityLabel("\(finding.title), \(finding.reclaimable.formattedBytes), \(Theme.label(finding.safety)), found by \(finding.source == .agent ? "Claude Code" : "rule")")
-        .accessibilityValue(selected ? "selected" : "not selected")
-        .accessibilityAction(named: "Inspect") { model.inspected = finding.id }
+        .accessibilityLabel("\(finding.displayTitle), \(finding.reclaimable.formattedBytes), \(Theme.label(finding.safety)), \(String(format: L("found by %@"), finding.source == .agent ? "Claude Code" : L("rule")))")
+        .accessibilityValue(selected ? L("selected") : L("not selected"))
+        .accessibilityAction(named: Text(L("Inspect"))) { model.inspected = finding.id }
         .contextMenu {
-            if let path = finding.paths.first { Button("Reveal in Finder") { model.reveal(path) } }
-            if finding.isCleanable { Button("Clean…") { model.requestClean([finding]) } }
+            if let path = finding.paths.first { Button(L("Reveal in Finder")) { model.reveal(path) } }
+            if finding.isCleanable { Button(L("Clean…")) { model.requestClean([finding]) } }
         }
         .animation(.smooth(duration: 1.6), value: fresh)
     }
@@ -75,22 +75,22 @@ struct FindingInspector: View {
             VStack(alignment: .leading, spacing: 16) {
                 ItemIcon(icon: finding.icon, fallback: finding.categoryFallback, size: 60)
                 VStack(alignment: .leading, spacing: 4) {
-                    Text(finding.title).font(.title3.weight(.semibold))
+                    Text(finding.displayTitle).font(.title3.weight(.semibold))
                     Text(finding.reclaimable.formattedBytes)
                         .font(.system(size: 30, weight: .semibold, design: .rounded)).monospacedDigit()
                     HStack { SafetyBadge(safety: finding.safety); SourceBadge(source: finding.source) }
                 }
-                Text(model.explanation(for: finding)).foregroundStyle(.secondary).fixedSize(horizontal: false, vertical: true)
+                TranslatedExplanation(finding: finding)
 
                 actionCard
 
                 if finding.sharedBytes > 0 {
-                    InfoCard(symbol: "link", title: "\(finding.sharedBytes.formattedBytes) won't be freed",
-                             detail: "Hard-linked from elsewhere (e.g. a package store).")
+                    InfoCard(symbol: "link", title: String(format: L("%@ won't be freed"), finding.sharedBytes.formattedBytes),
+                             detail: L("Hard-linked from elsewhere (e.g. a package store)."))
                 }
 
                 if let v = finding.verification, !v.evidence.isEmpty {
-                    DisclosureGroup(finding.safety == .safe ? "Why it's safe" : "Why to review") {
+                    DisclosureGroup(finding.safety == .safe ? L("Why it's safe") : L("Why to review")) {
                         HStack(alignment: .top, spacing: 8) {
                             if finding.source == .agent { AgentMark(size: 12) } else { Image(systemName: "ruler").foregroundStyle(.secondary) }
                             Text(v.evidence).font(.callout)
@@ -104,7 +104,7 @@ struct FindingInspector: View {
                 }
 
                 if !finding.paths.isEmpty {
-                    DisclosureGroup("Locations (\(finding.paths.count))") {
+                    DisclosureGroup(String(format: L("Locations (%@)"), "\(finding.paths.count)")) {
                         VStack(alignment: .leading, spacing: 4) {
                             ForEach(finding.paths.prefix(30), id: \.self) { path in
                                 Button { model.reveal(path) } label: {
@@ -120,11 +120,11 @@ struct FindingInspector: View {
 
                 if finding.isCleanable {
                     HStack {
-                        Button(model.selection.contains(finding.id) ? "Remove from selection" : "Add to selection") {
+                        Button(model.selection.contains(finding.id) ? L("Remove from selection") : L("Add to selection")) {
                             if model.selection.contains(finding.id) { model.selection.remove(finding.id) } else { model.selection.insert(finding.id) }
                         }
                         .buttonStyle(.borderedProminent).tint(Theme.accent)
-                        Button("Clean now…") { model.requestClean([finding]) }
+                        Button(L("Clean now…")) { model.requestClean([finding]) }
                     }
                 }
             }
@@ -137,15 +137,15 @@ struct FindingInspector: View {
     private var actionCard: some View {
         switch finding.action {
         case .command:
-            InfoCard(symbol: "terminal", title: "Runs the tool's own cleanup",
-                     detail: finding.needsAdmin ? "Asks for your administrator password" : nil,
+            InfoCard(symbol: "terminal", title: L("Runs the tool's own cleanup"),
+                     detail: finding.needsAdmin ? L("Asks for your administrator password") : nil,
                      code: finding.command)
         case .delete:
-            InfoCard(symbol: "xmark.bin", title: "Deletes permanently", detail: "Regenerable: it comes back when needed.")
+            InfoCard(symbol: "xmark.bin", title: L("Deletes permanently"), detail: L("Regenerable: it comes back when needed."))
         case .trash:
-            InfoCard(symbol: "trash", title: "Moves to the Trash", detail: "Recoverable until you empty the Trash.")
+            InfoCard(symbol: "trash", title: L("Moves to the Trash"), detail: L("Recoverable until you empty the Trash."))
         case .none:
-            InfoCard(symbol: "info.circle", title: "Nothing to run", detail: "Informational: review it yourself.")
+            InfoCard(symbol: "info.circle", title: L("Nothing to run"), detail: L("Informational: review it yourself."))
         }
     }
 }
@@ -196,7 +196,7 @@ struct TreemapView: View {
             }
         }
         .accessibilityElement(children: .contain)
-        .accessibilityLabel("Disk map of reclaimable items")
+        .accessibilityLabel(L("Disk map of reclaimable items"))
     }
 }
 
@@ -225,7 +225,7 @@ struct TreemapTile: View {
                     }
                     Spacer(minLength: 0)
                     if size.width > 92 && size.height > 64 {
-                        Text(finding.title).font(.caption.weight(.medium)).lineLimit(1)
+                        Text(finding.displayTitle).font(.caption.weight(.medium)).lineLimit(1)
                     }
                     if size.width > 60 && size.height > 50 {
                         Text(finding.reclaimable.formattedBytes).font(.caption.weight(.semibold)).monospacedDigit()
@@ -244,7 +244,29 @@ struct TreemapTile: View {
         }
         .buttonStyle(.plain)
         .onHover { hovering = $0 }
-        .help("\(finding.title) · \(finding.reclaimable.formattedBytes)\n\(model.explanation(for: finding))")
-        .accessibilityLabel("\(finding.title), \(finding.reclaimable.formattedBytes), \(Theme.label(finding.safety))")
+        .help("\(finding.displayTitle) · \(finding.reclaimable.formattedBytes)\n\(model.explanation(for: finding))")
+        .accessibilityLabel("\(finding.displayTitle), \(finding.reclaimable.formattedBytes), \(Theme.label(finding.safety))")
+    }
+}
+
+/// Explanation in the app language, with a one-click way to read the English original.
+private struct TranslatedExplanation: View {
+    @Environment(AppModel.self) private var model
+    let finding: Finding
+    @State private var showOriginal = false
+
+    var body: some View {
+        let translated = model.explanation(for: finding)
+        let isTranslated = translated != finding.explanation
+        VStack(alignment: .leading, spacing: 6) {
+            Text(showOriginal ? finding.explanation : translated)
+                .foregroundStyle(.secondary).fixedSize(horizontal: false, vertical: true)
+            if isTranslated {
+                Button(showOriginal ? L("Show translation") : L("Show original (English)")) {
+                    withAnimation(.snappy) { showOriginal.toggle() }
+                }
+                .buttonStyle(.link).font(.caption)
+            }
+        }
     }
 }

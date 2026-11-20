@@ -194,8 +194,13 @@ final class StoreTests: XCTestCase {
         try store.setTranslation(findingId: "agent:x", lang: "es", text: "Caché.")
         XCTAssertEqual(try store.translations(lang: "es")["agent:x"], "Caché.")
 
-        try store.recordCleanup(HistoryEntry(findingId: "agent:x", title: "X", freedBytes: 99, at: Date(), origin: "cli"))
+        try store.recordCleanup(HistoryEntry(findingId: "agent:x", title: "X", freedBytes: 99, at: Date(), origin: "cli",
+                                             finding: updated))
         XCTAssertEqual(try store.history().first?.freedBytes, 99)
+        XCTAssertEqual(try store.history().first?.finding?.paths, ["/tmp/x"], "history keeps a snapshot")
+
+        // Reopening an existing database runs the migration only once.
+        _ = try Store(path: path)
     }
 
     func testFindingJSONIsVersioned() throws {
@@ -322,6 +327,26 @@ final class CatalogTests: XCTestCase {
                 XCTAssertFalse(a == b || b.hasPrefix(a + "/"), "\(idB) (\(b)) is inside \(idA) (\(a))")
             }
         }
+    }
+
+    func testTranslationsCoverTheCatalog() {
+        let ids = Set(Catalog.locations.map(\.id))
+        XCTAssertGreaterThanOrEqual(Catalog.translations.count, 15, "15 languages embedded")
+        for (lang, table) in Catalog.translations {
+            XCTAssertEqual(Set(table.keys), ids, "\(lang) must cover every catalog id")
+            for (id, t) in table {
+                XCTAssertFalse(t.title.isEmpty || t.explanation.isEmpty, "\(lang)/\(id) empty")
+                // Commands and paths in backticks must survive translation unchanged.
+                let english = Catalog.location(id: id)!.explanation
+                XCTAssertEqual(Self.backticked(t.explanation), Self.backticked(english), "\(lang)/\(id) changed a command")
+            }
+        }
+        XCTAssertNotNil(Catalog.translation(forFindingId: "catalog:spotify-cache", lang: "ja"))
+        XCTAssertNil(Catalog.translation(forFindingId: "agent:whatever", lang: "ja"))
+    }
+
+    static func backticked(_ s: String) -> [String] {
+        s.split(separator: "`", omittingEmptySubsequences: false).enumerated().filter { $0.offset % 2 == 1 }.map { String($0.element) }
     }
 
     func testGeneratedSwiftMatchesJSON() throws {

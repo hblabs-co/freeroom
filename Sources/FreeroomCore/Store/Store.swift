@@ -24,15 +24,18 @@ public struct HistoryEntry: Codable, Equatable, Sendable {
     public var title: String
     public var freedBytes: Int64
     public var at: Date
-    /// Where the cleanup was started: "agent-scan", "menu", "notification", "cli".
+    /// Where the cleanup was started: "app", "menu", "notification", "cli".
     public var origin: String
+    /// Snapshot of what was cleaned (paths, action, command, icon) for the history view.
+    public var finding: Finding?
 
-    public init(findingId: String, title: String, freedBytes: Int64, at: Date, origin: String) {
+    public init(findingId: String, title: String, freedBytes: Int64, at: Date, origin: String, finding: Finding? = nil) {
         self.findingId = findingId
         self.title = title
         self.freedBytes = freedBytes
         self.at = at
         self.origin = origin
+        self.finding = finding
     }
 }
 
@@ -73,6 +76,10 @@ public final class Store: @unchecked Sendable {
             PRIMARY KEY(finding_id, lang));
         PRAGMA user_version = 1;
         """)
+        // v2: history keeps a JSON snapshot of the cleaned finding.
+        if !(try columnExists(table: "history", column: "finding")) {
+            try exec("ALTER TABLE history ADD COLUMN finding TEXT;")
+        }
     }
 
     deinit { sqlite3_close(db) }
@@ -155,15 +162,17 @@ public final class Store: @unchecked Sendable {
     // MARK: History
 
     public func recordCleanup(_ entry: HistoryEntry) throws {
-        try run("INSERT INTO history(finding_id, title, freed, at, origin) VALUES(?,?,?,?,?)",
+        let snapshot = try entry.finding.map { String(decoding: try JSONEncoder.freeroom.encode($0), as: UTF8.self) }
+        try run("INSERT INTO history(finding_id, title, freed, at, origin, finding) VALUES(?,?,?,?,?,?)",
                 [.text(entry.findingId), .text(entry.title), .int(entry.freedBytes),
-                 .real(entry.at.timeIntervalSince1970), .text(entry.origin)])
+                 .real(entry.at.timeIntervalSince1970), .text(entry.origin), snapshot.map { .text($0) } ?? .null])
     }
 
     public func history(limit: Int = 100) throws -> [HistoryEntry] {
-        try query("SELECT finding_id, title, freed, at, origin FROM history ORDER BY at DESC LIMIT ?", [.int(Int64(limit))]) { s in
+        try query("SELECT finding_id, title, freed, at, origin, finding FROM history ORDER BY at DESC LIMIT ?", [.int(Int64(limit))]) { s in
             HistoryEntry(findingId: s.text(0) ?? "", title: s.text(1) ?? "", freedBytes: s.int(2),
-                         at: Date(timeIntervalSince1970: s.double(3)), origin: s.text(4) ?? "")
+                         at: Date(timeIntervalSince1970: s.double(3)), origin: s.text(4) ?? "",
+                         finding: s.text(5).flatMap { try? JSONDecoder.freeroom.decode(Finding.self, from: Data($0.utf8)) })
         }
     }
 
@@ -180,6 +189,10 @@ public final class Store: @unchecked Sendable {
     }
 
     private static let transient = unsafeBitCast(-1, to: sqlite3_destructor_type.self)
+
+    private func columnExists(table: String, column: String) throws -> Bool {
+        try query("SELECT name FROM pragma_table_info(?)", [.text(table)]) { $0.text(0) ?? "" }.contains(column)
+    }
 
     private func exec(_ sql: String) throws {
         guard sqlite3_exec(db, sql, nil, nil, nil) == SQLITE_OK else {

@@ -1,0 +1,962 @@
+{
+  "xcode-derived-data": {
+    "title": "Xcode DerivedData",
+    "explanation": "Produkty kompilacji i indeksy każdego projektu kiedykolwiek otwartego w Xcode. Odtwarzane przy następnej kompilacji."
+  },
+  "xcode-simulator-devices": {
+    "title": "Urządzenia symulatora (aplikacje i dane)",
+    "explanation": "Aplikacje i dane zainstalowane w symulatorach iOS. Wymazanie przywraca każdy symulator do stanu fabrycznego."
+  },
+  "xcode-device-support": {
+    "title": "iOS DeviceSupport",
+    "explanation": "Symbole debugowania skopiowane z fizycznych urządzeń. Odtwarzane po ponownym podłączeniu urządzenia."
+  },
+  "xcode-archives": {
+    "title": "Xcode Archives",
+    "explanation": "Zarchiwizowane kompilacje aplikacji. Potrzebne do symbolizacji raportów awarii wydanych wersji."
+  },
+  "xcode-caches": {
+    "title": "Pamięć podręczna Xcode",
+    "explanation": "Własna pamięć podręczna pobrań i dokumentacji Xcode. Odtwarzana w razie potrzeby."
+  },
+  "xcode-device-logs": {
+    "title": "Dzienniki urządzeń",
+    "explanation": "Dzienniki awarii i diagnostyki pobrane z podłączonych urządzeń. Zachowaj je, jeśli nadal debugujesz awarię."
+  },
+  "xcode-coresimulator-caches": {
+    "title": "Pamięć podręczna symulatorów",
+    "explanation": "Pamięć podręczna dyld i pliki tymczasowe symulatorów. Odtwarzana przy uruchomieniu symulatora."
+  },
+  "xcode-xctest-devices": {
+    "title": "Klony urządzeń XCTest",
+    "explanation": "Klony symulatorów tworzone do testów równoległych. Xcode utworzy je ponownie przy następnym uruchomieniu testów."
+  },
+  "xcode-dvtdownloads": {
+    "title": "Pobrane komponenty Xcode",
+    "explanation": "Pakiety instalacyjne pobrane przez Xcode dla komponentów, które są już zainstalowane."
+  },
+  "xcode-previews": {
+    "title": "Podglądy SwiftUI",
+    "explanation": "Dane symulatora używane do renderowania podglądów SwiftUI. Odtwarzane po wyświetleniu podglądu."
+  },
+  "xcode-unavailable-simulators": {
+    "title": "Niedostępne symulatory",
+    "explanation": "Symulatory dla środowisk, które nie są już zainstalowane. Nie da się ich uruchomić, więc ich usunięcie nic nie kosztuje."
+  },
+  "xcode-simulator-runtimes": {
+    "title": "Środowiska uruchomieniowe symulatorów",
+    "explanation": "Środowiska iOS/watchOS/visionOS (po kilka GB każde). Usuń nieużywane w Xcode > Settings > Components."
+  },
+  "xcode-app": {
+    "title": "Xcode",
+    "explanation": "Sama aplikacja Xcode (10+ GB). Usuń ją tylko, jeśli nie tworzysz już na platformy Apple."
+  },
+  "swiftpm-cache": {
+    "title": "Pamięć podręczna Swift Package Manager",
+    "explanation": "Pobrane pakiety i repozytoria Swift. Pobierane ponownie przy następnym rozwiązywaniu zależności."
+  },
+  "cocoapods-cache": {
+    "title": "Pamięć podręczna CocoaPods",
+    "explanation": "Pobrane pody. Pobierane ponownie przez `pod install`."
+  },
+  "cocoapods-repos": {
+    "title": "Repozytoria specyfikacji CocoaPods",
+    "explanation": "Lokalna kopia indeksu specyfikacji CocoaPods. Nowsze CocoaPods korzysta z CDN i w razie potrzeby odtworzy ją."
+  },
+  "ios-backups": {
+    "title": "Backupy iPhone’a i iPada",
+    "explanation": "Lokalne backupy urządzeń utworzone w Finderze. Usuń stare w Finderze > urządzenie > Zarządzaj backupami."
+  },
+  "docker-desktop-disk": {
+    "title": "Obraz dysku Docker Desktop",
+    "explanation": "Dysk wirtualny ze wszystkimi obrazami, kontenerami i woluminami. Zmniejszaj go poleceniami prune, a nie przez usunięcie."
+  },
+  "docker-build-cache": {
+    "title": "Pamięć podręczna kompilacji Dockera",
+    "explanation": "Warstwy z `docker build`. Rozmiar pochodzi z `docker system df`; jedna kompilacja potrwa potem dłużej."
+  },
+  "docker-dangling-images": {
+    "title": "Osierocone obrazy Dockera",
+    "explanation": "Nieoznaczone warstwy obrazów pozostałe po przebudowach. Nie używa ich żaden kontener ani tag."
+  },
+  "docker-desktop-caches": {
+    "title": "Pamięć podręczna aplikacji Docker Desktop",
+    "explanation": "Dzienniki i pamięć podręczna aktualizacji aplikacji Docker Desktop, nie Twoje obrazy ani kontenery."
+  },
+  "docker-cli-config": {
+    "title": "Konfiguracja i konteksty Docker CLI",
+    "explanation": "Dane logowania do rejestrów i konteksty Docker CLI. Freeroom nigdy ich nie rusza."
+  },
+  "docker-model-runner": {
+    "title": "Modele Docker Model Runner",
+    "explanation": "Modele AI pobrane przez `docker model pull`. Usuń nieużywane za pomocą `docker model rm`."
+  },
+  "orbstack-data": {
+    "title": "Dane OrbStack",
+    "explanation": "Obraz dysku z kontenerami, obrazami i maszynami Linux OrbStack. Czyść przez Dockera (prune) lub usuń maszyny w OrbStack."
+  },
+  "colima-data": {
+    "title": "Maszyny wirtualne Colima",
+    "explanation": "Dyski maszyn wirtualnych Linux Colimy z Twoimi obrazami i kontenerami. Użyj `colima delete` dla niepotrzebnych profili."
+  },
+  "lima-vms": {
+    "title": "Maszyny wirtualne Lima",
+    "explanation": "Dyski maszyn wirtualnych Linux Lima. Usuń nieużywane za pomocą `limactl delete <name>`."
+  },
+  "rancher-desktop": {
+    "title": "Maszyna wirtualna Rancher Desktop",
+    "explanation": "Dysk maszyny wirtualnej Rancher Desktop z obrazami i stanem Kubernetes. Aby wyczyścić, użyj Troubleshooting > Factory Reset."
+  },
+  "minikube": {
+    "title": "minikube",
+    "explanation": "Klastry minikube, obrazy maszyn wirtualnych i pobrane pliki binarne Kubernetes. `minikube delete --all --purge` usuwa wszystko."
+  },
+  "testcontainers-config": {
+    "title": "Ustawienia Testcontainers",
+    "explanation": "Mały plik ustawień Testcontainers. Nie ma tu czego odzyskać."
+  },
+  "npm-cache": {
+    "title": "Pamięć podręczna npm",
+    "explanation": "Pobrane pakiety npm. Pobierane ponownie przy instalacji."
+  },
+  "npm-npx-cache": {
+    "title": "Pamięć podręczna npx",
+    "explanation": "Pakiety pobrane do uruchamiania poleceń `npx`. Pobierane ponownie przy następnym uruchomieniu."
+  },
+  "npm-logs": {
+    "title": "Dzienniki npm",
+    "explanation": "Dzienniki debugowania z uruchomień npm."
+  },
+  "pnpm-store": {
+    "title": "Magazyn pnpm",
+    "explanation": "Magazyn pakietów adresowany treścią. Czyszczenie (prune) usuwa pakiety, do których nie odwołuje się żaden projekt."
+  },
+  "yarn-cache": {
+    "title": "Pamięć podręczna Yarn",
+    "explanation": "Pobrane pakiety Yarn."
+  },
+  "yarn-berry-cache": {
+    "title": "Globalna pamięć podręczna Yarn Berry",
+    "explanation": "Globalna pamięć podręczna pakietów Yarn 2+. Pobierane ponownie przy `yarn install`."
+  },
+  "bun-cache": {
+    "title": "Pamięć podręczna instalacji Bun",
+    "explanation": "Pakiety pobrane przez `bun install`. Pobierane ponownie w razie potrzeby."
+  },
+  "deno-cache": {
+    "title": "Pamięć podręczna Deno",
+    "explanation": "Globalna pamięć podręczna zdalnych modułów i pakietów npm Deno. Odtwarzana przy następnym uruchomieniu."
+  },
+  "node-gyp-cache": {
+    "title": "Nagłówki node-gyp",
+    "explanation": "Nagłówki Node.js pobrane do kompilacji modułów natywnych. Pobierane ponownie w razie potrzeby."
+  },
+  "typescript-cache": {
+    "title": "Pamięć podręczna typów TypeScript",
+    "explanation": "Definicje typów pobrane automatycznie przez serwer TypeScript edytora."
+  },
+  "nvm-versions": {
+    "title": "Wersje Node.js w nvm",
+    "explanation": "Zainstalowane wersje Node.js. Usuń nieużywane za pomocą `nvm uninstall <version>`."
+  },
+  "nvm-cache": {
+    "title": "Pamięć podręczna pobrań nvm",
+    "explanation": "Archiwa Node.js pobrane przez nvm dla wersji, które są już zainstalowane."
+  },
+  "fnm-versions": {
+    "title": "Wersje Node.js w fnm",
+    "explanation": "Wersje Node.js zainstalowane przez fnm. Usuń nieużywane za pomocą `fnm uninstall <version>`."
+  },
+  "volta-tools": {
+    "title": "Zestawy narzędzi Volta",
+    "explanation": "Node, npm i narzędzia globalne zarządzane przez Voltę. Usuń nieużywane wersje w Volcie."
+  },
+  "playwright-browsers": {
+    "title": "Przeglądarki Playwright",
+    "explanation": "Przeglądarki pobrane do testów end-to-end. Zainstaluj ponownie przez `npx playwright install`."
+  },
+  "puppeteer-browsers": {
+    "title": "Przeglądarki Puppeteer",
+    "explanation": "Kompilacje Chrome pobrane przez Puppeteer. Instalowane ponownie przez `npx puppeteer browsers install`."
+  },
+  "cypress-cache": {
+    "title": "Pliki binarne Cypress",
+    "explanation": "Pliki binarne aplikacji Cypress dla każdej zainstalowanej wersji. Instalowane ponownie przez `npx cypress install`."
+  },
+  "electron-cache": {
+    "title": "Pobrane pliki Electron",
+    "explanation": "Środowiska uruchomieniowe i narzędzia Electron pobrane przy kompilowaniu aplikacji Electron."
+  },
+  "updater-caches": {
+    "title": "Pamięć podręczna aktualizatorów aplikacji",
+    "explanation": "Pobrane instalatory uaktualnień, które zostały już zastosowane."
+  },
+  "chrome-headless-shell": {
+    "title": "Chrome headless shell",
+    "explanation": "Kompilacje Chrome bez interfejsu pobrane przez narzędzia do testowania przeglądarek. Pobierane ponownie, gdy test ich potrzebuje."
+  },
+  "pip-cache": {
+    "title": "Pamięć podręczna pip",
+    "explanation": "Pobrane pakiety wheel Pythona."
+  },
+  "uv-cache": {
+    "title": "Pamięć podręczna uv",
+    "explanation": "Pakiety i kompilacje zapisane przez uv. Pobierane ponownie przy następnej instalacji."
+  },
+  "uv-python": {
+    "title": "Wersje Pythona zarządzane przez uv",
+    "explanation": "Interpretery Pythona zainstalowane przez uv. Usuń nieużywane za pomocą `uv python uninstall <version>`."
+  },
+  "uv-tools": {
+    "title": "Narzędzia uv",
+    "explanation": "Narzędzia wiersza poleceń zainstalowane przez `uv tool install`. Usuń za pomocą `uv tool uninstall <name>`."
+  },
+  "poetry-cache": {
+    "title": "Pamięć podręczna Poetry",
+    "explanation": "Pakiety pobrane przez Poetry. Pobierane ponownie przy `poetry install`."
+  },
+  "poetry-virtualenvs": {
+    "title": "Środowiska wirtualne Poetry",
+    "explanation": "Środowiska wirtualne utworzone przez Poetry dla Twoich projektów. Odtwarza je `poetry install`, ale zmiany w środowisku przepadną."
+  },
+  "conda-pkgs": {
+    "title": "Pamięć podręczna pakietów Conda",
+    "explanation": "Pobrane pakiety i archiwa conda. Środowiska nadal działają; instalacje pobiorą je ponownie."
+  },
+  "pyenv-versions": {
+    "title": "Wersje Pythona w pyenv",
+    "explanation": "Wersje Pythona skompilowane przez pyenv. Usuń nieużywane za pomocą `pyenv uninstall <version>`."
+  },
+  "python-matplotlib-cache": {
+    "title": "Pamięć podręczna czcionek Matplotlib",
+    "explanation": "Pamięć podręczna listy czcionek tworzona przez Matplotlib. Odtwarzana przy następnym imporcie."
+  },
+  "ipython-history": {
+    "title": "Profil IPython",
+    "explanation": "Ustawienia i historia poleceń IPython. Mały; zachowywany."
+  },
+  "jupyter-runtime": {
+    "title": "Dane Jupyter",
+    "explanation": "Jądra, rozszerzenia i pliki uruchomieniowe Jupyter. Zwykle małe; przejrzyj przed usunięciem jąder."
+  },
+  "ollama-models": {
+    "title": "Modele Ollama",
+    "explanation": "Lokalne modele AI. Usuń te, których nie używasz, za pomocą `ollama rm <model>`."
+  },
+  "huggingface-hub": {
+    "title": "Pamięć podręczna Hugging Face",
+    "explanation": "Modele i zbiory danych pobrane przez biblioteki Hugging Face. Pobierane ponownie, gdy kod ich potrzebuje."
+  },
+  "huggingface-xet": {
+    "title": "Pamięć podręczna Hugging Face Xet",
+    "explanation": "Pamięć podręczna fragmentów przyspieszająca pobieranie z Hugging Face. Niepotrzebna do uruchamiania modeli."
+  },
+  "lmstudio-models": {
+    "title": "Modele LM Studio",
+    "explanation": "Modele pobrane w LM Studio. Usuń nieużywane na karcie My Models w LM Studio."
+  },
+  "whisper-models": {
+    "title": "Modele Whisper",
+    "explanation": "Modele zamiany mowy na tekst. Pobierane ponownie przy użyciu."
+  },
+  "torch-hub": {
+    "title": "Pamięć podręczna PyTorch Hub",
+    "explanation": "Wagi modeli pobrane przez PyTorch Hub i torchvision. Pobierane ponownie, gdy kod je wczytuje."
+  },
+  "easyocr-models": {
+    "title": "Modele EasyOCR",
+    "explanation": "Modele OCR pobrane przez EasyOCR. Pobierane ponownie przy następnym użyciu."
+  },
+  "claude-code-data": {
+    "title": "Dane Claude Code",
+    "explanation": "Ustawienia, pamięć i historia sesji Claude Code. Usuwaj stare sesje w Claude Code, nie ręcznie."
+  },
+  "claude-cli-cache": {
+    "title": "Pamięć podręczna Claude Code CLI",
+    "explanation": "Dzienniki i dane podręczne Claude Code CLI. Odtwarzane w razie potrzeby."
+  },
+  "claude-desktop-cache": {
+    "title": "Pamięć podręczna Claude",
+    "explanation": "Pamięć podręczna stron aplikacji Claude. Odtwarzana automatycznie; najpierw zamknij aplikację."
+  },
+  "go-modcache": {
+    "title": "Pamięć podręczna modułów Go",
+    "explanation": "Pobrane moduły Go. Pobierane ponownie przez `go build`."
+  },
+  "go-build-cache": {
+    "title": "Pamięć podręczna kompilacji Go",
+    "explanation": "Skompilowane pakiety Go."
+  },
+  "gopls-cache": {
+    "title": "Pamięć podręczna gopls",
+    "explanation": "Pamięć podręczna indeksu serwera języka Go. Odtwarzana po otwarciu projektu Go."
+  },
+  "golangci-lint-cache": {
+    "title": "Pamięć podręczna golangci-lint",
+    "explanation": "Pamięć podręczna wyników lintowania. Odtwarzana przy następnym uruchomieniu."
+  },
+  "go-sumdb": {
+    "title": "Pamięć podręczna bazy sum kontrolnych Go",
+    "explanation": "Zapisane fragmenty bazy sum kontrolnych. Pobierane ponownie przy weryfikacji modułów."
+  },
+  "goimports-cache": {
+    "title": "Pamięć podręczna goimports",
+    "explanation": "Pamięć podręczna indeksu pakietów goimports. Odtwarzana automatycznie."
+  },
+  "cargo-registry": {
+    "title": "Pamięć podręczna rejestru Cargo",
+    "explanation": "Pobrane skrzynki (crates)."
+  },
+  "cargo-git": {
+    "title": "Zależności git Cargo",
+    "explanation": "Kopie robocze git skrzynek używanych jako zależności git. Klonowane ponownie przy następnej kompilacji."
+  },
+  "rustup-toolchains": {
+    "title": "Zestawy narzędzi Rust",
+    "explanation": "Zainstalowane zestawy narzędzi Rust (ok. 1 GB każdy). Usuń nieużywane za pomocą `rustup toolchain uninstall <name>`."
+  },
+  "gradle-cache": {
+    "title": "Pamięć podręczna Gradle",
+    "explanation": "Pobrane zależności i pamięć podręczna kompilacji."
+  },
+  "gradle-wrapper-dists": {
+    "title": "Dystrybucje Gradle wrapper",
+    "explanation": "Wersje Gradle pobrane przez `./gradlew`. Pobierane ponownie przez projekt, który ich potrzebuje."
+  },
+  "gradle-daemon": {
+    "title": "Dzienniki demona Gradle",
+    "explanation": "Dzienniki i rejestr demonów Gradle. Najpierw zatrzymaj demony za pomocą `./gradlew --stop`."
+  },
+  "gradle-jdks": {
+    "title": "JDK pobrane przez Gradle",
+    "explanation": "JDK pobrane przez Gradle dla zestawów narzędzi. Pobierane ponownie, gdy kompilacja ich wymaga."
+  },
+  "maven-repo": {
+    "title": "Repozytorium Maven",
+    "explanation": "Pobrane zależności Javy."
+  },
+  "maven-wrapper": {
+    "title": "Dystrybucje Maven wrapper",
+    "explanation": "Wersje Mavena pobrane przez `./mvnw`. Pobierane ponownie w razie potrzeby."
+  },
+  "sdkman-candidates": {
+    "title": "Kandydaci SDKMAN",
+    "explanation": "JDK i narzędzia zainstalowane przez SDKMAN. Usuń nieużywane wersje za pomocą `sdk uninstall`."
+  },
+  "sdkman-archives": {
+    "title": "Archiwa SDKMAN",
+    "explanation": "Pobrane archiwa już zainstalowanych SDK (`sdk flush` też je czyści)."
+  },
+  "system-jdks": {
+    "title": "Zainstalowane JDK",
+    "explanation": "Środowiska Java zainstalowane w całym systemie. Usuwaj tylko wersje, których nie używa żaden projekt."
+  },
+  "coursier-cache": {
+    "title": "Pamięć podręczna Coursier",
+    "explanation": "Artefakty Scala/JVM pobrane przez Coursier, sbt i Metals."
+  },
+  "nuget-packages": {
+    "title": "Pakiety NuGet",
+    "explanation": "Pobrane pakiety .NET. Przywracane przy następnej kompilacji."
+  },
+  "dotnet-sdks": {
+    "title": "SDK i środowiska .NET",
+    "explanation": "Zainstalowane SDK i środowiska uruchomieniowe .NET. Usuwaj stare wersje zgodnie z dokumentacją Microsoftu."
+  },
+  "dotnet-tools": {
+    "title": "Globalne narzędzia .NET",
+    "explanation": "Globalne narzędzia .NET. Usuń nieużywane za pomocą `dotnet tool uninstall -g <name>`."
+  },
+  "rbenv-versions": {
+    "title": "Wersje Ruby w rbenv",
+    "explanation": "Wersje Ruby skompilowane przez rbenv. Usuń nieużywane za pomocą `rbenv uninstall <version>`."
+  },
+  "rvm-rubies": {
+    "title": "RVM",
+    "explanation": "Wersje Ruby i gemsety zarządzane przez RVM. Usuń nieużywane za pomocą `rvm remove <version>`."
+  },
+  "pub-cache": {
+    "title": "Pamięć podręczna pub Dart/Flutter",
+    "explanation": "Pakiety pobrane przez `dart pub get` / `flutter pub get`. Pobierane ponownie przy następnym get."
+  },
+  "composer-cache": {
+    "title": "Pamięć podręczna Composer",
+    "explanation": "Pakiety PHP pobrane przez Composer."
+  },
+  "ccache": {
+    "title": "ccache",
+    "explanation": "Pamięć podręczna wyników kompilatora C/C++. Kompilacje są wolniejsze, dopóki się nie zapełni."
+  },
+  "vcpkg-archives": {
+    "title": "Binarna pamięć podręczna vcpkg",
+    "explanation": "Gotowe biblioteki C/C++ zapisane przez vcpkg."
+  },
+  "conan-cache": {
+    "title": "Pakiety Conan",
+    "explanation": "Pakiety C/C++ zapisane przez Conan 2. Pobierane lub kompilowane ponownie w razie potrzeby."
+  },
+  "haskell-stack": {
+    "title": "Katalog główny Haskell Stack",
+    "explanation": "Wersje GHC i migawki pakietów używane przez Stack. Duży, ale odbudowa trwa długo."
+  },
+  "ghcup": {
+    "title": "Zestawy narzędzi GHCup",
+    "explanation": "Wersje GHC, cabal i HLS zainstalowane przez GHCup. Usuń nieużywane za pomocą `ghcup rm`."
+  },
+  "opam-root": {
+    "title": "Przełączniki opam",
+    "explanation": "Kompilatory i pakiety OCaml dla każdego przełącznika. Usuń nieużywane za pomocą `opam switch remove`."
+  },
+  "julia-depot": {
+    "title": "Magazyn Julia (depot)",
+    "explanation": "Pakiety, artefakty i skompilowana pamięć podręczna Julii. `Pkg.gc()` usuwa nieużywane wersje."
+  },
+  "platformio": {
+    "title": "PlatformIO core",
+    "explanation": "Zestawy narzędzi i platformy embedded zainstalowane przez PlatformIO. Pobierane ponownie dla projektu w razie potrzeby."
+  },
+  "arduino-staging": {
+    "title": "Pobrane pliki Arduino",
+    "explanation": "Archiwa instalacyjne pakietów płytek, które są już zainstalowane."
+  },
+  "arduino-packages": {
+    "title": "Pakiety płytek Arduino",
+    "explanation": "Zestawy narzędzi dla płytek Arduino/ESP32. Można je bezpiecznie usunąć, jeśli nie używasz już Arduino."
+  },
+  "arduino-ide-cache": {
+    "title": "Pamięć podręczna Arduino IDE",
+    "explanation": "Pamięć podręczna Arduino IDE 2 i pobrane pliki indeksu. Odtwarzana przy uruchomieniu."
+  },
+  "buf-cache": {
+    "title": "Pamięć podręczna modułów Buf",
+    "explanation": "Moduły Protobuf pobrane przez Buf CLI."
+  },
+  "homebrew-cache": {
+    "title": "Pobrane pliki Homebrew",
+    "explanation": "Stare butelki (bottles) i pobrane pliki. Nie wpływa na zainstalowane formuły."
+  },
+  "homebrew-logs": {
+    "title": "Dzienniki Homebrew",
+    "explanation": "Dzienniki kompilacji z instalacji formuł."
+  },
+  "homebrew-cellar": {
+    "title": "Pakiety zainstalowane przez Homebrew",
+    "explanation": "Wszystko zainstalowane przez Homebrew. Usuwaj narzędzia przez `brew uninstall`, a nieużywane zależności przez `brew autoremove`."
+  },
+  "jetbrains-cache": {
+    "title": "Pamięć podręczna JetBrains",
+    "explanation": "Indeksy IDE. Odtwarzane po otwarciu projektu."
+  },
+  "jetbrains-logs": {
+    "title": "Dzienniki JetBrains",
+    "explanation": "Pliki dzienników IDE."
+  },
+  "jetbrains-config": {
+    "title": "Ustawienia i wtyczki JetBrains",
+    "explanation": "Ustawienia IDE i zainstalowane wtyczki. Foldery starych wersji usuwaj z poziomu IDE, nie ręcznie."
+  },
+  "vscode-shipit": {
+    "title": "Pozostałości aktualizacji VS Code",
+    "explanation": "Instalatory uaktualnień, które zostały już zastosowane."
+  },
+  "vscode-cache": {
+    "title": "Pamięć podręczna VS Code",
+    "explanation": "Pamięć podręczna stron, skompilowanego kodu i pobrań rozszerzeń VS Code. Odtwarzana automatycznie; najpierw zamknij VS Code."
+  },
+  "vscode-logs": {
+    "title": "Dzienniki VS Code",
+    "explanation": "Dzienniki diagnostyczne VS Code."
+  },
+  "vscode-workspace-storage": {
+    "title": "Dane obszarów roboczych VS Code",
+    "explanation": "Stan każdego obszaru roboczego (otwarte edytory, dane rozszerzeń, historia lokalna). Rośnie z każdym otwartym folderem."
+  },
+  "vscode-extensions": {
+    "title": "Rozszerzenia VS Code",
+    "explanation": "Zainstalowane rozszerzenia VS Code. Odinstaluj nieużywane w widoku Extensions."
+  },
+  "vscode-settings": {
+    "title": "Ustawienia VS Code",
+    "explanation": "Twoje ustawienia i skróty klawiszowe VS Code."
+  },
+  "cursor-extensions": {
+    "title": "Rozszerzenia Cursor",
+    "explanation": "Zainstalowane rozszerzenia Cursor. Odinstaluj nieużywane w Cursorze."
+  },
+  "android-sdk": {
+    "title": "Android SDK",
+    "explanation": "Platformy, narzędzia kompilacji i obrazy systemu Android. Usuń nieużywane pakiety w SDK Manager Android Studio."
+  },
+  "android-avds": {
+    "title": "Emulatory Androida (AVD)",
+    "explanation": "Urządzenia wirtualne z danymi (po kilka GB każde). Usuń nieużywane w Device Manager."
+  },
+  "android-studio-logs": {
+    "title": "Dzienniki Android Studio",
+    "explanation": "Dzienniki IDE Android Studio."
+  },
+  "postman-cache": {
+    "title": "Pamięć podręczna Postman",
+    "explanation": "Pamięć podręczna stron, dzienniki i pozostałości aktualizacji Postmana. Kolekcje są synchronizowane z Twoim kontem."
+  },
+  "gitkraken-cache": {
+    "title": "Pamięć podręczna GitKraken",
+    "explanation": "Pamięć podręczna stron i pozostałości aktualizacji GitKrakena."
+  },
+  "mongodb-compass-cache": {
+    "title": "Pamięć podręczna MongoDB Compass",
+    "explanation": "Pamięć podręczna stron i pozostałości aktualizacji MongoDB Compass."
+  },
+  "lens-cache": {
+    "title": "Pamięć podręczna Lens",
+    "explanation": "Pamięć podręczna stron Lens, IDE dla Kubernetes."
+  },
+  "tableplus-cache": {
+    "title": "Pamięć podręczna TablePlus",
+    "explanation": "Dane podręczne TablePlus. Połączenia nie są tu przechowywane."
+  },
+  "helm-cache": {
+    "title": "Pamięć podręczna Helm",
+    "explanation": "Pobrane charty i indeksy repozytoriów. Pobierane ponownie przez `helm repo update`."
+  },
+  "kube-config": {
+    "title": "Konfiguracja Kubernetes",
+    "explanation": "kubeconfig z danymi logowania do klastrów. Freeroom nigdy go nie rusza."
+  },
+  "terraform-plugin-cache": {
+    "title": "Pamięć podręczna wtyczek Terraform",
+    "explanation": "Wspólna pamięć podręczna providerów Terraform (tylko przy włączonym plugin_cache_dir). Pobierana ponownie przez `terraform init`."
+  },
+  "terraform-credentials": {
+    "title": "Dane logowania Terraform",
+    "explanation": "Tokeny API dla Terraform Cloud. Nigdy nie są usuwane."
+  },
+  "tflint-plugins": {
+    "title": "Pamięć podręczna TFLint",
+    "explanation": "Wtyczki reguł i pamięć podręczna TFLint. Instalowane ponownie przez `tflint --init`."
+  },
+  "vagrant-boxes": {
+    "title": "Boxy Vagrant",
+    "explanation": "Bazowe obrazy maszyn wirtualnych Vagrant. `vagrant box prune` usuwa stare wersje."
+  },
+  "aws-config": {
+    "title": "Dane logowania AWS",
+    "explanation": "Dane logowania i konfiguracja AWS CLI. Freeroom nigdy ich nie rusza."
+  },
+  "azure-cli": {
+    "title": "Dane Azure CLI",
+    "explanation": "Tokeny logowania i konfiguracja Azure CLI. Nigdy nie są usuwane."
+  },
+  "gcloud-config": {
+    "title": "Konfiguracja Google Cloud SDK",
+    "explanation": "Dane logowania i konfiguracje gcloud. Nigdy nie są usuwane."
+  },
+  "gh-config": {
+    "title": "Konfiguracja GitHub CLI",
+    "explanation": "Ustawienia i uwierzytelnienie GitHub CLI. Nigdy nie są usuwane."
+  },
+  "ssh-keys": {
+    "title": "Klucze SSH",
+    "explanation": "Twoje klucze SSH i znane hosty. Nigdy nie są usuwane."
+  },
+  "gnupg": {
+    "title": "Pęk kluczy GnuPG",
+    "explanation": "Twoje klucze GPG. Nigdy nie są usuwane."
+  },
+  "parallels-vms": {
+    "title": "Maszyny wirtualne Parallels",
+    "explanation": "Twoje maszyny wirtualne Parallels. Usuń nieużywane w Parallels Control Center, co usunie też migawki."
+  },
+  "utm-vms": {
+    "title": "Maszyny wirtualne UTM",
+    "explanation": "Twoje maszyny wirtualne UTM i ich dyski. Usuń nieużywane z poziomu UTM."
+  },
+  "vmware-fusion-vms": {
+    "title": "Maszyny wirtualne VMware Fusion",
+    "explanation": "Twoje maszyny wirtualne VMware Fusion. Usuń nieużywane w Virtual Machine Library w Fusion."
+  },
+  "virtualbox-vms": {
+    "title": "Maszyny wirtualne VirtualBox",
+    "explanation": "Twoje maszyny wirtualne VirtualBox. Usuń nieużywane w VirtualBox opcją „Usuń wszystkie pliki”."
+  },
+  "browser-caches": {
+    "title": "Pamięć podręczna przeglądarek",
+    "explanation": "Pamięć podręczna stron Chrome, Arc, Firefox i Edge. Sesje, historia i hasła nie są tu przechowywane."
+  },
+  "chrome-ai-model": {
+    "title": "Model AI Chrome na urządzeniu",
+    "explanation": "Model Gemini Nano używany przez wbudowaną AI Chrome. Chrome pobierze go ponownie, jeśli funkcja go potrzebuje."
+  },
+  "chrome-profile": {
+    "title": "Profil Chrome",
+    "explanation": "Zakładki, historia, hasła i rozszerzenia Chrome. Zamiast tego wyczyść dane przeglądania w Chrome."
+  },
+  "chrome-for-testing": {
+    "title": "Profile Chrome for Testing",
+    "explanation": "Profile tworzone przez automatyczne testy przeglądarki. Odtwarzane przy następnym uruchomieniu testów."
+  },
+  "google-updater": {
+    "title": "Pamięć podręczna Google Updater",
+    "explanation": "Pobrane pakiety uaktualnień Chrome i innych aplikacji Google."
+  },
+  "safari-cache": {
+    "title": "Pamięć podręczna Safari",
+    "explanation": "Pamięć podręczna stron Safari. Historia i zakładki są przechowywane gdzie indziej."
+  },
+  "safari-data": {
+    "title": "Dane Safari",
+    "explanation": "Historia, zakładki i lista Czytelnia w Safari. Zamiast tego wyczyść historię w Safari."
+  },
+  "firefox-profiles": {
+    "title": "Profile Firefox",
+    "explanation": "Zakładki, historia, hasła i dodatki Firefoksa. Zamiast tego wyczyść dane w Firefoksie."
+  },
+  "arc-data": {
+    "title": "Dane Arc",
+    "explanation": "Przestrzenie, pasek boczny i profile Arc. Zamiast tego wyczyść dane w Arc."
+  },
+  "slack-cache": {
+    "title": "Pamięć podręczna Slack",
+    "explanation": "Pamięć podręczna stron Slacka. Wiadomości zostają w Twoim obszarze roboczym. Najpierw zamknij Slacka."
+  },
+  "teams-cache": {
+    "title": "Pamięć podręczna Microsoft Teams",
+    "explanation": "Pamięć podręczna nowego Microsoft Teams. Czaty zostają na serwerach Microsoftu. Najpierw zamknij Teams."
+  },
+  "zoom-cache": {
+    "title": "Pamięć podręczna Zoom",
+    "explanation": "Dane podręczne i pliki aktualizacji Zoom."
+  },
+  "zoom-recordings": {
+    "title": "Nagrania Zoom",
+    "explanation": "Spotkania nagrane lokalnie. Przenieś to, co chcesz zachować, przed usunięciem."
+  },
+  "discord-cache": {
+    "title": "Pamięć podręczna Discord",
+    "explanation": "Pamięć podręczna stron aplikacji Discord. Odtwarzana automatycznie; najpierw zamknij aplikację."
+  },
+  "whatsapp-cache": {
+    "title": "Pamięć podręczna WhatsApp",
+    "explanation": "Tymczasowa pamięć podręczna aplikacji WhatsApp. Czaty i multimedia są przechowywane gdzie indziej."
+  },
+  "whatsapp-media": {
+    "title": "Multimedia WhatsApp",
+    "explanation": "Zdjęcia, wideo i pliki z Twoich czatów. Zarządzaj nimi w WhatsApp > Ustawienia > Pamięć."
+  },
+  "messages-attachments": {
+    "title": "Załączniki w Wiadomościach",
+    "explanation": "Zdjęcia i pliki z czatów iMessage. Usuń duże w Wiadomościach lub w Ustawieniach > Ogólne > Pamięć masowa."
+  },
+  "messages-db": {
+    "title": "Historia Wiadomości",
+    "explanation": "Twoja baza danych historii iMessage/SMS. Nigdy nie jest usuwana."
+  },
+  "mail-store": {
+    "title": "Skrzynki pocztowe Mail",
+    "explanation": "Twoja lokalna poczta i skrzynki pocztowe. Do usuwania wiadomości używaj narzędzi Maila."
+  },
+  "mail-downloads": {
+    "title": "Pobrane rzeczy Mail",
+    "explanation": "Załączniki otwarte z Maila. Oryginały pozostają w wiadomości."
+  },
+  "facetime-cache": {
+    "title": "Dane FaceTime",
+    "explanation": "Ustawienia i dane połączeń FaceTime. Małe; zachowywane."
+  },
+  "teams-classic-data": {
+    "title": "Dane Microsoft Teams (klasycznego)",
+    "explanation": "Pozostałe dane wycofanej klasycznej aplikacji Teams. Nowy Teams ich nie używa."
+  },
+  "teamviewer-cache": {
+    "title": "Pamięć podręczna TeamViewer",
+    "explanation": "Dane podręczne TeamViewer."
+  },
+  "figma-cache": {
+    "title": "Pamięć podręczna Figma desktop",
+    "explanation": "Dane i pamięć podręczna aplikacji Figma. Pliki są w chmurze; wyczyszczenie wyloguje Cię."
+  },
+  "spotify-cache": {
+    "title": "Pamięć podręczna Spotify",
+    "explanation": "Zapisane utwory. Spotify pobierze je ponownie w razie potrzeby."
+  },
+  "spotify-offline": {
+    "title": "Pamięć offline Spotify",
+    "explanation": "Utwory pobrane do słuchania offline oraz pamięć podręczna Spotify. Wyczyść w Spotify > Ustawienia > Pamięć."
+  },
+  "office-caches": {
+    "title": "Pamięć podręczna Microsoft Office",
+    "explanation": "Pamięć podręczna Word, Excel, PowerPoint i Outlook. Odtwarzana przy uruchomieniu; dokumenty nie są tu przechowywane."
+  },
+  "office-font-cache": {
+    "title": "Pamięć podręczna czcionek Office",
+    "explanation": "Pamięć podręczna czcionek wspólna dla aplikacji Office. Odtwarzana przy następnym uruchomieniu."
+  },
+  "microsoft-autoupdate": {
+    "title": "Pamięć podręczna Microsoft AutoUpdate",
+    "explanation": "Pobrane pakiety uaktualnień Office, które zostały już zainstalowane."
+  },
+  "cloud-storage": {
+    "title": "Foldery chmury",
+    "explanation": "Pliki synchronizowane przez OneDrive, Dropbox, Dysk Google i Box. Zwolnij miejsce opcją „Usuń pobraną rzecz” / „Zwolnij miejsce”."
+  },
+  "adobe-media-cache": {
+    "title": "Pamięć podręczna multimediów Adobe",
+    "explanation": "Dopasowane pliki audio i podglądu dla Premiere Pro i After Effects. Odtwarzane po otwarciu projektów."
+  },
+  "capcut-cache": {
+    "title": "Pamięć podręczna CapCut",
+    "explanation": "Pamięć podręczna efektów, szablonów i podglądów CapCut. Projekty są przechowywane gdzie indziej."
+  },
+  "insta360-cache": {
+    "title": "Pamięć podręczna Insta360 Studio",
+    "explanation": "Pamięć podręczna podglądów i eksportu Insta360 Studio."
+  },
+  "expressvpn-cache": {
+    "title": "Pamięć podręczna ExpressVPN",
+    "explanation": "Dane podręczne ExpressVPN."
+  },
+  "sentry-crash-caches": {
+    "title": "Pamięć podręczna raportów awarii",
+    "explanation": "Raporty awarii, które aplikacje zakolejkowały do wysłania."
+  },
+  "photos-library": {
+    "title": "Biblioteka Zdjęć",
+    "explanation": "Twoje zdjęcia i wideo. Włącz „Optymalizuj miejsce na Macu” w ustawieniach Zdjęć, aby oryginały były tylko w iCloud."
+  },
+  "music-media": {
+    "title": "Multimedia biblioteki Muzyki",
+    "explanation": "Utwory, pobrane i zaimportowane pliki w Muzyce. Usuń pobrane rzeczy w aplikacji Muzyka."
+  },
+  "music-cache": {
+    "title": "Pamięć podręczna aplikacji Muzyka",
+    "explanation": "Pamięć podręczna okładek i strumieniowania aplikacji Muzyka."
+  },
+  "tv-media": {
+    "title": "Pobrane rzeczy w aplikacji TV",
+    "explanation": "Filmy i programy pobrane w aplikacji TV. Usuń pobrane rzeczy w aplikacji TV."
+  },
+  "tv-cache": {
+    "title": "Pamięć podręczna aplikacji TV",
+    "explanation": "Pamięć podręczna okładek i strumieniowania aplikacji TV."
+  },
+  "podcasts-downloads": {
+    "title": "Pobrane odcinki Podcastów",
+    "explanation": "Pobrane odcinki podcastów. Usuń je w Podcastach > Ustawienia lub włącz automatyczne usuwanie."
+  },
+  "apple-loops": {
+    "title": "Apple Loops i biblioteka dźwięków",
+    "explanation": "Dźwięki i pętle GarageBand/Logic. Zarządzaj nimi w Logic > Sound Library zamiast usuwać pliki."
+  },
+  "logic-library-bundle": {
+    "title": "Biblioteka Logic Pro",
+    "explanation": "Pakiet biblioteki dźwięków Logic Pro 12+. Usuń pakiety dźwięków w Logic Pro > Sound Library."
+  },
+  "voice-memos": {
+    "title": "Dyktafon",
+    "explanation": "Twoje nagrania głosowe. Usuń je w aplikacji Dyktafon."
+  },
+  "books-data": {
+    "title": "Książki",
+    "explanation": "Pobrane książki i audiobooki. Usuń pobrane rzeczy w aplikacji Książki."
+  },
+  "notes-data": {
+    "title": "Notatki",
+    "explanation": "Twoje notatki i ich załączniki. Nigdy nie są usuwane."
+  },
+  "icloud-drive": {
+    "title": "iCloud Drive",
+    "explanation": "Lokalne kopie plików z iCloud Drive. Zamiast usuwać, użyj „Optymalizuj miejsce na Macu” lub „Usuń pobraną rzecz”."
+  },
+  "trash": {
+    "title": "Kosz",
+    "explanation": "Pliki przeniesione do Kosza zajmują miejsce na dysku, dopóki go nie opróżnisz."
+  },
+  "downloads": {
+    "title": "Pobrane rzeczy",
+    "explanation": "Przejrzyj ręcznie: instalatory i archiwa w tym folderze często nie są już potrzebne."
+  },
+  "desktop": {
+    "title": "Biurko",
+    "explanation": "Zrzuty ekranu i pliki na Biurku. Przejrzyj ręcznie."
+  },
+  "documents": {
+    "title": "Dokumenty",
+    "explanation": "Twoje dokumenty. Freeroom nigdy nie czyści tego folderu w całości."
+  },
+  "system-temp": {
+    "title": "Systemowe pliki tymczasowe",
+    "explanation": "Zarządzane przez macOS i czyszczone przy ponownym uruchomieniu. Nie usuwaj ręcznie."
+  },
+  "system-folder": {
+    "title": "System macOS",
+    "explanation": "Zapieczętowany wolumin systemowy macOS tylko do odczytu. Nie można i nie wolno go zmieniać."
+  },
+  "system-library": {
+    "title": "Biblioteka systemowa",
+    "explanation": "Ogólnosystemowe ustawienia, sterowniki i dane aplikacji. Usuwaj tylko elementy wskazane przez dezinstalator aplikacji."
+  },
+  "user-library": {
+    "title": "Twój folder Biblioteka",
+    "explanation": "Ustawienia i dane wszystkich aplikacji. Czyść konkretne elementy w środku, nigdy cały folder."
+  },
+  "app-support-root": {
+    "title": "Application Support",
+    "explanation": "Dane wszystkich aplikacji. Bezpiecznie można czyścić tylko konkretne znane podfoldery."
+  },
+  "preferences": {
+    "title": "Preferences",
+    "explanation": "Ustawienia aplikacji. Ich usunięcie resetuje aplikacje."
+  },
+  "keychains": {
+    "title": "Pęki kluczy",
+    "explanation": "Twoje hasła i certyfikaty. Nigdy nie są usuwane."
+  },
+  "containers-root": {
+    "title": "Kontenery aplikacji",
+    "explanation": "Dane aplikacji w piaskownicy. Usunięcie kontenera usuwa dane tej aplikacji."
+  },
+  "group-containers-root": {
+    "title": "Kontenery grupowe",
+    "explanation": "Dane współdzielone przez aplikacje tego samego twórcy. To nie jest pamięć podręczna."
+  },
+  "vm-swap": {
+    "title": "Plik wymiany i obraz uśpienia",
+    "explanation": "Pliki wymiany pamięci wirtualnej i obraz uśpienia. Zarządza nimi macOS; uruchom ponownie, aby zmniejszyć plik wymiany."
+  },
+  "spotlight-index": {
+    "title": "Indeks Spotlight",
+    "explanation": "Indeks wyszukiwania. Odbuduj go w ustawieniach Spotlight, jeśli wydaje się za duży."
+  },
+  "system-logs": {
+    "title": "Dzienniki systemowe",
+    "explanation": "Ujednolicone dzienniki. macOS automatycznie je rotuje i ogranicza."
+  },
+  "user-logs": {
+    "title": "Dzienniki użytkownika",
+    "explanation": "Raporty awarii i zawieszeń już wysłane lub niepotrzebne. Nowe są zapisywane w razie potrzeby."
+  },
+  "macos-updates": {
+    "title": "Pobrane uaktualnienia macOS",
+    "explanation": "Uaktualnienia oprogramowania przygotowane przez macOS. Zainstaluj je lub pozwól macOS je usunąć."
+  },
+  "system-caches": {
+    "title": "Systemowa pamięć podręczna",
+    "explanation": "Ogólnosystemowa pamięć podręczna zarządzana przez macOS i instalatory. Ręczne opróżnianie nie jest bezpieczne."
+  },
+  "time-machine-snapshots": {
+    "title": "Lokalne migawki Time Machine",
+    "explanation": "Widoczne jako miejsce do odzyskania. macOS usuwa je automatycznie, gdy brakuje miejsca (`tmutil listlocalsnapshots /`)."
+  },
+  "apple-intelligence-assets": {
+    "title": "Zasoby systemowe Apple",
+    "explanation": "Pobrane zasoby systemowe (głosy, słowniki, modele AI). Zarządzane przez macOS."
+  },
+  "mobile-sync-config": {
+    "title": "Ustawienia synchronizacji urządzeń",
+    "explanation": "Folder z backupami i danymi synchronizacji urządzeń. Zarządzaj backupami w Finderze."
+  },
+  "crash-reporter": {
+    "title": "Dane raportowania awarii",
+    "explanation": "Metadane raportów awarii przechowywane przez macOS."
+  },
+  "apple-caches-misc": {
+    "title": "Pamięć podręczna aplikacji Apple",
+    "explanation": "Pamięć podręczna App Store, Pomocy, Map i Bezpiecznego przeglądania. Odtwarzana przez macOS w razie potrzeby."
+  },
+  "user-caches-root": {
+    "title": "Folder pamięci podręcznej użytkownika",
+    "explanation": "Zawiera pamięć podręczną wszystkich aplikacji. Czyść znane elementy w środku, nie cały folder."
+  },
+  "dot-cache-root": {
+    "title": "Folder ~/.cache",
+    "explanation": "Folder pamięci podręcznej narzędzi CLI. Czyść znane elementy w środku, nie cały folder."
+  },
+  "dot-config-root": {
+    "title": "Folder ~/.config",
+    "explanation": "Ustawienia narzędzi wiersza poleceń. To nie jest pamięć podręczna."
+  },
+  "dot-local-root": {
+    "title": "Folder ~/.local",
+    "explanation": "Zainstalowane narzędzia CLI i ich dane. Czyść znane elementy w środku, nie cały folder."
+  },
+  "shell-history": {
+    "title": "Historia powłoki",
+    "explanation": "Twoja historia poleceń. Mała; zachowywana."
+  },
+  "git-config": {
+    "title": "Konfiguracja Git",
+    "explanation": "Twoje ustawienia Git."
+  },
+  "docker-unused-images": {
+    "title": "Nieużywane obrazy Dockera",
+    "explanation": "Każdy obraz nieużywany przez kontener, także celowo pobrane. Można je ponownie pobrać lub zbudować."
+  },
+  "docker-buildx-cache": {
+    "title": "Pamięć podręczna buildera Buildx",
+    "explanation": "Pamięć podręczna kompilacji builderów buildx. Kompilacje będą raz wolniejsze, dopóki się nie zapełni."
+  },
+  "docker-stopped-containers": {
+    "title": "Zatrzymane kontenery Dockera",
+    "explanation": "Kontenery, które nie działają. Po usunięciu tracisz ich warstwę zapisywalną i wszystkie dane spoza woluminów."
+  },
+  "docker-unused-volumes": {
+    "title": "Nieużywane woluminy Dockera",
+    "explanation": "Woluminy nieużywane przez żaden kontener. Często zawierają bazy danych; sprawdź przed `docker volume prune`."
+  },
+  "claude-code-versions": {
+    "title": "Wersje Claude Code",
+    "explanation": "Natywne kompilacje Claude Code; bieżąca jest w użyciu. Claude Code sam usuwa stare wersje."
+  },
+  "macos-aerials": {
+    "title": "Tapety Aerial",
+    "explanation": "Tapety i wygaszacze ekranu Aerial pobrane przez macOS. Zarządzane przez macOS; wybierz statyczną tapetę, by wstrzymać pobieranie."
+  },
+  "xcode-userdata": {
+    "title": "Ustawienia użytkownika Xcode",
+    "explanation": "Skróty klawiszowe, fragmenty kodu, motywy i punkty przerwania Xcode."
+  },
+  "command-line-tools": {
+    "title": "Command Line Tools",
+    "explanation": "Kompilatory i git używane przez Homebrew i wiele narzędzi. Zachowaj, chyba że pełny Xcode jest zainstalowany i wybrany."
+  },
+  "xcode-simulator-system-caches": {
+    "title": "Pamięć podręczna środowisk symulatorów",
+    "explanation": "Wspólna pamięć podręczna dla zainstalowanych środowisk symulatorów. Odtwarzana przez macOS; usunięcie wymaga uprawnień administratora."
+  },
+  "go-bin": {
+    "title": "Pliki binarne z go install",
+    "explanation": "Narzędzia zainstalowane przez `go install`. Usuń te, których już nie używasz."
+  },
+  "cargo-bin": {
+    "title": "Pliki binarne z cargo install",
+    "explanation": "Narzędzia zainstalowane przez `cargo install` oraz proxy rustup. Usuń za pomocą `cargo uninstall <name>`."
+  },
+  "chrome-component-caches": {
+    "title": "Pamięć podręczna komponentów Chrome",
+    "explanation": "Pobrane instalatory komponentów i pamięć podręczna shaderów GPU Chrome. Odtwarzana automatycznie; najpierw zamknij Chrome."
+  },
+  "vscode-local-history": {
+    "title": "Historia lokalna VS Code",
+    "explanation": "Wcześniejsze wersje plików zapisanych w VS Code (widok Timeline). Usunięcie oznacza utratę tej historii cofania."
+  },
+  "tectonic-cache": {
+    "title": "Pamięć podręczna pakietu TeX Tectonic",
+    "explanation": "Pliki pomocnicze TeX pobrane przez Tectonic. Pobierane ponownie przy następnej kompilacji."
+  },
+  "zoom-data": {
+    "title": "Dane czatu Zoom",
+    "explanation": "Lokalna historia czatu i ustawienia Zoom. To nie jest pamięć podręczna."
+  },
+  "icloud-drive-state": {
+    "title": "Stan iCloud Drive",
+    "explanation": "Baza danych synchronizacji iCloud Drive. Jej usunięcie może zepsuć synchronizację."
+  },
+  "swift-toolchains": {
+    "title": "Zestawy narzędzi Swift",
+    "explanation": "Dodatkowe zestawy narzędzi Swift ze swift.org lub swiftly. Usuń wersje, których już nie używasz."
+  },
+  "huggingface-datasets": {
+    "title": "Pamięć podręczna zbiorów danych Hugging Face",
+    "explanation": "Zbiory danych pobrane i przetworzone przez bibliotekę `datasets`. Pobierane ponownie, gdy kod je wczytuje."
+  }
+}
