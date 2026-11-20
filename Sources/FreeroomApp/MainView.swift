@@ -70,6 +70,7 @@ struct MainView: View {
                         if model.simpleMode { SimpleView() } else { content }
                         SelectionBar().padding(.bottom, 14)
                     }
+                    .clipped() // nothing from the list column may draw under the inspector
                 }
             }
             .inspector(isPresented: Binding(get: { model.inspectorVisible && !model.simpleMode && model.route == .findings },
@@ -205,10 +206,14 @@ struct MainView: View {
                 Spacer(minLength: 18)
                 DiskBar(total: model.totalBytes, free: model.freeBytes, safe: model.total(.safe),
                         review: model.total(.review), keep: model.findings.filter { $0.safety == .keep }.reduce(0) { $0 + $1.sizeBytes })
-                HStack(spacing: 12) {
+                let legend = Group {
                     LegendDot(symbol: Theme.icon(.safe), color: Theme.safe, label: L("Safe"), value: model.total(.safe))
                     LegendDot(symbol: Theme.icon(.review), color: Theme.review, label: L("Review"), value: model.total(.review))
                     LegendDot(symbol: "circle", color: .secondary, label: L("Free"), value: model.freeBytes)
+                }
+                ViewThatFits(in: .horizontal) {
+                    HStack(spacing: 12) { legend }
+                    VStack(alignment: .leading, spacing: 2) { legend }
                 }
             }
         }

@@ -54,18 +54,23 @@ struct DiskBar: View {
             (incoming, AnyShapeStyle(Theme.safe.opacity(0.35))),
             (max(0, free), AnyShapeStyle(Color.secondary.opacity(0.08))),
         ]
+        // Widths are normalized to exactly the available width (minus the gaps), so the bar can
+        // never grow wider than its column and draw under the inspector.
+        let visible = segments.filter { $0.0 > 0 }
+        let sum = Double(visible.reduce(Int64(0)) { $0 + $1.0 })
+        let gap: CGFloat = 1.5
         GeometryReader { geo in
-            HStack(spacing: 1.5) {
-                ForEach(segments.indices, id: \.self) { i in
-                    let (bytes, style) = segments[i]
-                    if bytes > 0 && total > 0 {
-                        Rectangle().fill(style)
-                            .frame(width: max(2, geo.size.width * CGFloat(Double(bytes) / Double(total + incoming))))
-                    }
+            let available = max(0, geo.size.width - gap * CGFloat(max(0, visible.count - 1)))
+            HStack(spacing: gap) {
+                ForEach(visible.indices, id: \.self) { i in
+                    Rectangle().fill(visible[i].1)
+                        .frame(width: sum > 0 ? available * CGFloat(Double(visible[i].0) / sum) : 0)
                 }
             }
+            .frame(width: geo.size.width, height: geo.size.height, alignment: .leading)
             .clipShape(Capsule())
         }
+        .clipped()
         .frame(height: 10)
         .animation(.smooth, value: free)
         .accessibilityElement()
