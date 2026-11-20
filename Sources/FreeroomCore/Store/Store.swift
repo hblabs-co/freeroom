@@ -26,6 +26,14 @@ public struct HistoryEntry: Codable, Equatable, Sendable {
     public var at: Date
     /// Where the cleanup was started: "agent-scan", "menu", "notification", "cli".
     public var origin: String
+
+    public init(findingId: String, title: String, freedBytes: Int64, at: Date, origin: String) {
+        self.findingId = findingId
+        self.title = title
+        self.freedBytes = freedBytes
+        self.at = at
+        self.origin = origin
+    }
 }
 
 /// Local SQLite store shared by the CLI (writer) and the app (reader + cleaner).

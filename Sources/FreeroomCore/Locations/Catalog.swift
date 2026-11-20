@@ -88,7 +88,7 @@ public enum Catalog {
         .init(id: "homebrew-cache", title: "Homebrew downloads", paths: ["~/Library/Caches/Homebrew"],
               category: .devCaches, safety: .safe,
               explanation: "Old bottles and downloads. Installed formulae are not affected.",
-              action: .command, command: "brew cleanup --prune=all"),
+              action: .command, command: "brew cleanup -s"),
         .init(id: "go-modcache", title: "Go module cache", paths: ["~/go/pkg/mod"], category: .devCaches,
               safety: .safe, explanation: "Downloaded Go modules. Fetched again by `go build`.",
               action: .command, command: "go clean -modcache"),

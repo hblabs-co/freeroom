@@ -56,7 +56,8 @@ freeroom/
 │  │  ├─ Store/            # SQLite: findings, scans, history, settings
 │  │  └─ Models/           # Finding, Scan, SafetyClass (safe/review/keep), Source (rule/agent)
 │  ├─ freeroom/            # CLI (swift-argument-parser), capa fina sobre Core
-│  └─ FreeroomHelper/      # helper privilegiado mínimo (solo borrados admin, lista blanca)
+│  ├─ FreeroomApp/         # app SwiftUI (MenuBarExtra); empaquetada con scripts/build-app.sh
+│  └─ (FreeroomHelper/)    # pendiente: helper privilegiado para borrados admin
 ├─ App/                    # Xcode project: Freeroom.app (SwiftUI, MenuBarExtra)
 │  └─ Resources/bin/freeroom   # CLI embebido en el bundle
 ├─ plugin/                 # plugin de Claude Code
@@ -131,6 +132,15 @@ No existe `freeroom delete`. A propósito.
 - Fuera de la Mac App Store (el sandbox impide leer todo el disco y ejecutar herramientas).
 - DMG firmado y notarizado + `brew install --cask freeroom` (instala app + CLI).
 - Permisos: Full Disk Access (guiado en onboarding), Notificaciones.
+
+## Estado (2026-11-20)
+
+- Fase 1 ✅ Core + CLI (21 tests). Fase 2 ✅ Plugin (probado de punta a punta).
+- Fase 3 ✅ v0.1 de la app: MenuBarExtra, resultados en vivo (polling del SQLite cada 3 s),
+  confirmación, `Cleaner` con lista blanca de comandos y rutas protegidas.
+- Fase 4 ✅ básica: reglas periódicas + 1 notificación/día como máximo.
+- Pendiente: helper de admin (`SMAppService` daemon), onboarding, Developer ID + notarización,
+  tap de Homebrew, capturas para el README.
 
 ## Fases
 

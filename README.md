@@ -10,7 +10,8 @@ Freeroom is a macOS menu bar app for developers. It finds what's eating your dis
 local AI models, forgotten archives…), explains each item, classifies it as
 **Safe** / **Review** / **Keep**, and only deletes what you confirm.
 
-> Status: **early development** — core + CLI + Claude Code plugin work; the menu bar app is next. The clickable prototype lives in [`design/`](design/index.html);
+> Status: **early development (0.1.0)** — core, CLI, Claude Code plugin and a first menu bar app work.
+> Not yet signed with a Developer ID or notarized; build it from source for now. The clickable prototype lives in [`design/`](design/index.html);
 > the architecture is in [`ARCHITECTURE.md`](ARCHITECTURE.md).
 
 ## How it works
@@ -49,6 +50,23 @@ export FREEROOM_CLI="$PWD/.build/release/freeroom"   # the plugin's wrapper uses
 ```
 
 Test the plugin without installing it: `claude --plugin-dir ./plugin`.
+
+Build the menu bar app (ad-hoc signed, for local use):
+
+```sh
+scripts/build-app.sh            # → build/Freeroom.app
+scripts/build-app.sh --install  # also copies it to ~/Applications
+```
+
+## Safety
+
+- The agent **cannot delete**: the CLI has no delete command.
+- The app deletes only after you confirm, and only inside your home folder. It never touches
+  protected folders (`~/Documents`, `~/Library`, `~/.ssh`, Keychains…).
+- Cleanup commands run only if they are on an allowlist (`docker builder prune`,
+  `xcrun simctl runtime delete`, `go clean -modcache`…), without a shell. Anything else is shown
+  to you to run yourself.
+- Items you mark for review go to the Trash, not straight to deletion.
 
 ## License
 
