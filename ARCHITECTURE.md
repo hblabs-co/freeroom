@@ -23,8 +23,9 @@ reglas (sin IA) y un **plugin de Claude Code** para el análisis profundo.
 │                                                                 │
 │  Claude Code (oficial, sesión del usuario)                      │
 │     └─ plugin "freeroom"                                        │
-│          ├─ skill: SKILL.md  (cómo analizar, reglas, formato)   │
-│          └─ command: /freeroom scan                             │
+│          ├─ skill /freeroom:scan       (método de análisis)     │
+│          ├─ skill /freeroom:translate  (traducción bajo demanda)│
+│          └─ bin/freeroom  (wrapper que localiza el CLI real)    │
 │                │  Bash                                          │
 │                ▼                                                │
 │          freeroom  (CLI)  ── measure · known-locations ·        │
@@ -60,8 +61,9 @@ freeroom/
 │  └─ Resources/bin/freeroom   # CLI embebido en el bundle
 ├─ plugin/                 # plugin de Claude Code
 │  ├─ .claude-plugin/plugin.json
-│  ├─ skills/freeroom/SKILL.md
-│  └─ commands/scan.md
+│  ├─ skills/scan/SKILL.md        # /freeroom:scan
+│  ├─ skills/translate/SKILL.md   # /freeroom:translate <lang>
+│  └─ bin/freeroom                # wrapper en el PATH del plugin
 ├─ .claude-plugin/marketplace.json   # el repo es su propio marketplace
 ├─ design/                 # prototipo HTML
 └─ ARCHITECTURE.md
@@ -88,15 +90,20 @@ No existe `freeroom delete`. A propósito.
 
 ## Plugin de Claude Code
 
-- Se instala con `/plugin marketplace add hblabs-co/freeroom` y `/plugin install freeroom`.
+- Se instala con `/plugin marketplace add hblabs-co/freeroom` y `/plugin install freeroom@freeroom`.
 - `SKILL.md` le enseña al agente: usar `freeroom measure` en vez de `du`
   (evita doble conteo), consultar `known-locations` primero, aplicar las
   reglas de seguridad, escribir explicaciones en **inglés** (tokenizer tax),
   reportar cada hallazgo con `freeroom report`, nunca borrar.
 - La traducción la hace el agente bajo demanda desde la app
   (`freeroom` deja la petición en la DB; el usuario la lanza en Claude Code).
-- Requisito: el CLI en el PATH. La app ofrece "Instalar CLI" (symlink a
-  `/usr/local/bin/freeroom` o `~/.local/bin`), o viene con el cask de Homebrew.
+- El plugin trae `bin/freeroom`, un wrapper que Claude Code pone en el PATH. Busca el
+  CLI real en `$FREEROOM_CLI`, `Freeroom.app/Contents/Helpers/freeroom`, Homebrew o
+  `~/.local/bin` (nunca en el PATH, para no llamarse a sí mismo).
+- Permisos: las skills declaran `allowed-tools: Bash(freeroom *)`. Por eso el agente debe
+  usar una llamada simple por comando (sin `&&`, variables ni `export`), o se le pide permiso.
+- Probado de punta a punta (2026-11-20): escaneo de ~/Downloads y ~/Desktop + traducción
+  al español, sin permisos denegados.
 
 ## App en la barra de menú
 
@@ -128,7 +135,7 @@ No existe `freeroom delete`. A propósito.
 ## Fases
 
 1. **Core + CLI**: medición deduplicada, catálogo de sitios, reglas, SQLite. Tests con fixtures (hardlinks, mounts).
-2. **Plugin**: SKILL.md + `/freeroom scan`; probar contra el caso real de hoy.
+2. **Plugin**: SKILL.md + `/freeroom:scan`; probar contra el caso real de hoy.
 3. **App**: menú bar, resultados en vivo, confirmación, Cleaner, helper admin.
 4. **RuleEngine + notificaciones**.
 5. Release: firma, notarización, cask, marketplace del plugin.
@@ -138,7 +145,7 @@ No existe `freeroom delete`. A propósito.
 - **Licencia:** MIT.
 - **Repo:** https://github.com/hblabs-co/freeroom (público). Marketplace del plugin: `/plugin marketplace add hblabs-co/freeroom`.
 - **Azul de marca:** el del logo, `#1a4ddb` (con variante más clara en modo oscuro para pasar AA).
-- **Traducción:** por comando explícito, `/freeroom translate <lang>`. Sin colas: más simple y el usuario ve el coste en su Claude Code.
+- **Traducción:** por comando explícito, `/freeroom:translate <lang>`. Sin colas: más simple y el usuario ve el coste en su Claude Code.
 - **Cask de Homebrew:** `freeroom` (tap `hblabs-co/tap` hasta entrar en homebrew-cask).
 - **Datos de ejemplo:** el prototipo y los tests usan datos anonimizados. El caso real (`docs/caso-real-*.html`) contiene rutas y nombres de clientes: está en `.gitignore` y no se publica.
 

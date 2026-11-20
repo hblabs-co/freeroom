@@ -1349,11 +1349,11 @@ function show(screen, opts) {
 function renderToolbar() {
   var t = $("#tbTitle"), s = $("#tbSub"), a = $("#tbActions");
   var langBtn = '<button class="cap agent-cap hide-sm" data-act="translate" title="Translate agent explanations">' + ic("languages", "i-sm") + (S.lang === "en" ? "English" : S.lang === "es" ? "Español" : "Deutsch") + ic("chev-d", "i-xs") + "</button>";
-  var copyBtn = '<button class="cap" data-copy="/freeroom scan" title="Copy the command, then paste it in Claude Code">' + ic("copy", "i-sm") + '<span class="mono">/freeroom scan</span></button>';
+  var copyBtn = '<button class="cap" data-copy="/freeroom:scan" title="Copy the command, then paste it in Claude Code">' + ic("copy", "i-sm") + '<span class="mono">/freeroom:scan</span></button>';
   if (S.screen === "scan") {
     var st = scanState();
     t.textContent = st === "done" ? "Agent scan complete" : "Live from Claude Code";
-    s.textContent = st === "wait" ? "Waiting for /freeroom scan in your Claude Code" : st === "done" ? "22 findings · 3 measurements corrected by the agent · nothing modified" : "Session 3f2a · plugin freeroom 0.1.0 · read-only CLI";
+    s.textContent = st === "wait" ? "Waiting for /freeroom:scan in your Claude Code" : st === "done" ? "22 findings · 3 measurements corrected by the agent · nothing modified" : "Session 3f2a · plugin freeroom 0.1.0 · read-only CLI";
     a.innerHTML = st === "done"
       ? copyBtn.replace('class="cap"', 'class="cap hide-sm"') + '<button class="btn btn-primary" data-act="toResults">View results' + ic("arrow-r", "i-sm") + "</button>"
       : copyBtn + '<button class="cap hide-sm" data-act="skipScan" title="Prototype shortcut">Skip to results' + ic("arrow-r", "i-sm") + "</button>";
@@ -1398,7 +1398,7 @@ function renderOnboarding() {
   if (S.obStep === 1) {
     var ok = S.plugin === "ok";
     var det = ok
-      ? '<div class="card detect ok"><div class="ico">' + ic("check-circle", "i-lg") + '</div><div><h4>Plugin detected</h4><p>Freeroom found the plugin’s handshake. Run <code>/freeroom scan</code> in Claude Code whenever you want a deep review.</p>' +
+      ? '<div class="card detect ok"><div class="ico">' + ic("check-circle", "i-lg") + '</div><div><h4>Plugin detected</h4><p>Freeroom found the plugin’s handshake. Run <code>/freeroom:scan</code> in Claude Code whenever you want a deep review.</p>' +
         '<ul class="checks"><li>' + ic("check", "i-sm ok") + '<span>Skill <span class="mono">/freeroom</span> available in Claude Code</span></li>' +
         '<li>' + ic("check", "i-sm ok") + '<span>CLI <span class="mono">freeroom 0.1.0</span> · measure, known-locations, report</span></li>' +
         '<li>' + ic("check", "i-sm ok") + '<span>Local store ready · <span class="mono">~/Library/Application Support/Freeroom/store.sqlite</span></span></li></ul></div>' +
@@ -1412,11 +1412,11 @@ function renderOnboarding() {
       '<span class="eyebrow">Step 1 of 3 · optional</span><h3>Install the Claude Code plugin</h3>' +
       '<p class="lead">Freeroom’s deep analysis runs inside <b>your own Claude Code</b>. The plugin adds a <code>/freeroom</code> skill and a small read-only <code>freeroom</code> CLI. Findings land in a local store that this app watches live.</p>' +
       '<div class="flow" aria-label="How it works">' +
-      '<div class="fnode agent"><b>' + ic("terminal", "i-sm") + 'Claude Code</b>You run <span class="mono">/freeroom scan</span>. Your session, your plan.</div>' +
+      '<div class="fnode agent"><b>' + ic("terminal", "i-sm") + 'Claude Code</b>You run <span class="mono">/freeroom:scan</span>. Your session, your plan.</div>' +
       '<div class="fnode"><b>' + ic("ruler", "i-sm") + 'freeroom CLI</b>measure · known-locations · report. Cannot delete.</div>' +
       '<div class="fnode"><b>' + ic("archive", "i-sm") + 'Local store</b>SQLite on this Mac. Nothing leaves it.</div>' +
       '<div class="fnode"><b>' + ic("app", "i-sm") + 'Freeroom.app</b>Shows findings live. Deletes only after you confirm.</div></div>' +
-      '<div class="eyebrow" style="margin-bottom:8px">In Claude Code</div><div class="cmds">' + cmd("/plugin marketplace add hblabs-co/freeroom") + cmd("/plugin install freeroom") + "</div>" +
+      '<div class="eyebrow" style="margin-bottom:8px">In Claude Code</div><div class="cmds">' + cmd("/plugin marketplace add hblabs-co/freeroom") + cmd("/plugin install freeroom@freeroom") + "</div>" +
       det +
       '<div class="cando"><div class="col"><h5>' + ic("ruler", "i-sm") + 'Without Claude</h5><ul>' +
       '<li>' + ic("check", "i-xs") + "<span>Rule-based scan of known locations: caches, simulators, package managers</span></li>" +
@@ -1552,11 +1552,11 @@ function renderEv(ev, animate, done) {
   if (ev.t === "wait") {
     el.className = "ev ev-wait"; el.id = "waitCard";
     el.innerHTML = "<b>" + ic("terminal", "i-sm") + 'Waiting for Claude Code</b><span class="muted">Run this in your Claude Code. The agent works there; findings stream in here.</span>' +
-      '<div class="cmdline" style="margin:0"><span class="ps">›</span><span class="c">/freeroom scan</span><button class="iconbtn" data-copy="/freeroom scan" aria-label="Copy command">' + ic("copy", "i-sm") + "</button></div>";
+      '<div class="cmdline" style="margin:0"><span class="ps">›</span><span class="c">/freeroom:scan</span><button class="iconbtn" data-copy="/freeroom:scan" aria-label="Copy command">' + ic("copy", "i-sm") + "</button></div>";
     host.appendChild(el);
     var line = termLine("", "user");
-    if (!animate) { line.textContent = "> /freeroom scan"; done(); return; }
-    setTimeout(function () { typeInto(line, "> /freeroom scan", done, 1); }, 700);
+    if (!animate) { line.textContent = "> /freeroom:scan"; done(); return; }
+    setTimeout(function () { typeInto(line, "> /freeroom:scan", done, 1); }, 700);
     return;
   }
   if (ev.t === "sys") {
@@ -1872,7 +1872,7 @@ function openTranslate() {
 }
 function renderTranslate() {
   var L = S.trTarget, en = enTokens(), inT = en + 420, outT = Math.round(en * TAX[L]);
-  var nA = agentTextItems().length, nR = ITEMS.length - nA, cmdT = "/freeroom translate " + L;
+  var nA = agentTextItems().length, nR = ITEMS.length - nA, cmdT = "/freeroom:translate " + L;
   var scanTax = Math.round(18940 * (TAX[L] - 1));
   $("#sheetHost").innerHTML = '<div class="scrim" data-scrim><div class="sheet" role="dialog" aria-modal="true" aria-labelledby="trT">' +
     '<div class="sheet-h"><div><h2 id="trT">Translate explanations</h2><p>The analysis runs in English. To translate the agent’s explanations, run one command in your Claude Code.</p></div><button class="iconbtn x" data-act="closeSheet" aria-label="Close">' + ic("x") + "</button></div>" +
@@ -1925,10 +1925,10 @@ function renderSettings() {
     '<div class="frow"><div class="lbl">Plugin<small>' + (ok ? "Deep analysis runs in your own Claude Code. Freeroom never touches credentials or tokens." : "Optional. Without it Freeroom uses its rule engine only.") + "</small></div>" +
     (ok ? '<span class="badge b-safe">' + ic("check-circle") + "detected · 0.1.0</span>" : '<span class="badge b-keep">' + ic("clock") + "not detected</span>") +
     '<button class="btn btn-ghost btn-sm" data-act="recheck2">' + ic("refresh", "i-xs") + "Re-check</button></div>" +
-    '<div class="frow"><div class="lbl">Start a scan<small>Paste in Claude Code. Token usage shows there and counts toward your plan.</small></div><div class="cmdline" style="margin:0;min-width:220px"><span class="ps">›</span><span class="c">/freeroom scan</span><button class="iconbtn" data-copy="/freeroom scan" aria-label="Copy command">' + ic("copy", "i-sm") + "</button></div></div>" +
+    '<div class="frow"><div class="lbl">Start a scan<small>Paste in Claude Code. Token usage shows there and counts toward your plan.</small></div><div class="cmdline" style="margin:0;min-width:220px"><span class="ps">›</span><span class="c">/freeroom:scan</span><button class="iconbtn" data-copy="/freeroom:scan" aria-label="Copy command">' + ic("copy", "i-sm") + "</button></div></div>" +
     '<div class="frow"><div class="lbl">CLI capabilities<small>What the agent can call. There is no delete command.</small></div><span class="val">measure · known-locations · report</span></div>' +
     '<div class="frow"><div class="lbl">Local store<small>Findings, evidence and history. Stays on this Mac.</small></div><span class="val">~/Library/Application Support/Freeroom/store.sqlite</span></div>' +
-    (ok ? "" : '<div class="frow"><div class="lbl">Install<small>In Claude Code</small></div><div class="cmds" style="margin:0;flex:1;min-width:260px"><div class="cmdline" style="margin:0"><span class="ps">›</span><span class="c">/plugin marketplace add hblabs-co/freeroom</span></div><div class="cmdline" style="margin:0"><span class="ps">›</span><span class="c">/plugin install freeroom</span></div></div></div>') +
+    (ok ? "" : '<div class="frow"><div class="lbl">Install<small>In Claude Code</small></div><div class="cmds" style="margin:0;flex:1;min-width:260px"><div class="cmdline" style="margin:0"><span class="ps">›</span><span class="c">/plugin marketplace add hblabs-co/freeroom</span></div><div class="cmdline" style="margin:0"><span class="ps">›</span><span class="c">/plugin install freeroom@freeroom</span></div></div></div>') +
     "</div></section>" +
     "<section><h2>Notifications</h2><div class=\"form\">" +
     '<div class="frow"><div class="lbl">Source<small>Built-in rule engine checking known locations in the background. No AI, no tokens.</small></div><span class="badge b-rule">' + ic("ruler") + "rule engine</span></div>" +
@@ -1941,7 +1941,7 @@ function renderSettings() {
     "</div></section>" +
     "<section><h2>Language</h2><div class=\"form\">" +
     '<div class="frow"><div class="lbl">Analysis language<small>The agent always works in English: fewer tokens on your plan</small></div><span class="badge b-keep">' + ic("lock") + "English</span></div>" +
-    '<div class="frow"><div class="lbl">Preferred language<small>Run <span class=\"mono\">/freeroom translate &lt;lang&gt;</span> in Claude Code. Rule texts are already localized.</small></div><select class="select" aria-label="Default translation"><option>Don’t translate</option><option>Español</option><option>Deutsch</option></select></div>' +
+    '<div class="frow"><div class="lbl">Preferred language<small>Run <span class=\"mono\">/freeroom:translate &lt;lang&gt;</span> in Claude Code. Rule texts are already localized.</small></div><select class="select" aria-label="Default translation"><option>Don’t translate</option><option>Español</option><option>Deutsch</option></select></div>' +
     tg("Show token estimate before translating", "", true) +
     "</div></section>" +
     "<section><h2>Safety</h2><div class=\"form\">" +
@@ -1988,8 +1988,8 @@ function renderPop() {
     }).join("") : '<div class="muted" style="font-size:12.5px;padding:6px 0">Nothing obvious right now.</div>') +
     '<div class="pop-hint">Clean always opens a confirmation first.</div></div>' +
     '<button class="pop-agent" data-act="toResults">' + ic("agent", "i-sm") + "<span>Last agent scan: <b>" + (S.scan.finished ? "just now" : "2 h ago") + "</b> · 22 findings</span>" + ic("chev-r", "i-sm") + "</button>" +
-    '<div class="pop-acts"><button class="btn btn-primary" data-act="openApp">' + ic("app", "i-sm") + 'Open Freeroom</button><button class="btn btn-ghost" data-act="scanCC" title="Copies /freeroom scan">' + ic("terminal", "i-sm") + "Scan with Claude Code</button></div>" +
-    '<div class="pop-hint">“Scan with Claude Code” copies <span class="mono">/freeroom scan</span> and opens Terminal.</div>' +
+    '<div class="pop-acts"><button class="btn btn-primary" data-act="openApp">' + ic("app", "i-sm") + 'Open Freeroom</button><button class="btn btn-ghost" data-act="scanCC" title="Copies /freeroom:scan">' + ic("terminal", "i-sm") + "Scan with Claude Code</button></div>" +
+    '<div class="pop-hint">“Scan with Claude Code” copies <span class="mono">/freeroom:scan</span> and opens Terminal.</div>' +
     '<div class="pop-menu"><button data-nav="settings">Settings…<kbd>⌘,</kbd></button><button data-act="quit">Quit Freeroom<kbd>⌘Q</kbd></button></div>';
 }
 
@@ -2083,8 +2083,8 @@ document.addEventListener("click", function (e) {
     case "skipScan": skipScan(); break;
     case "toResults": show("results"); break;
     case "openApp": show("results"); break;
-    case "scanCC": copy("/freeroom scan"); S.scan.started = false; S.cleaned = null; show("scan"); break;
-    case "rescan": copy("/freeroom scan"); S.scan.started = false; S.cleaned = null; show("scan"); break;
+    case "scanCC": copy("/freeroom:scan"); S.scan.started = false; S.cleaned = null; show("scan"); break;
+    case "rescan": copy("/freeroom:scan"); S.scan.started = false; S.cleaned = null; show("scan"); break;
     case "quit": toast("Prototype: Quit is disabled"); break;
     case "clearSel": S.sel.clear(); renderResults(); break;
     case "confirm": openConfirm(); break;

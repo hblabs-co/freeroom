@@ -9,7 +9,7 @@ Icono: `icons.html` muestra el icono final (**B+ · Sweep con destellos**), su e
 - **Freeroom.app** vive en la **barra de menús** (MenuBarExtra, sin icono en el Dock por defecto) y tiene una ventana completa para Results, Confirm y Settings.
 - Incluye un **motor de reglas** propio, sin IA ni tokens. Revisa ubicaciones conocidas en segundo plano y genera sugerencias rápidas y notificaciones.
 - El análisis profundo lo hace el **Claude Code del usuario** con el **plugin de Freeroom**, que trae el skill `/freeroom` y un CLI pequeño, `freeroom`, con tres comandos: `measure`, `known-locations` y `report`.
-- El usuario ejecuta `/freeroom scan` en su terminal. Lo que el agente reporta se guarda en un **SQLite local** que la app observa en vivo.
+- El usuario ejecuta `/freeroom:scan` en su terminal. Lo que el agente reporta se guarda en un **SQLite local** que la app observa en vivo.
 - **El CLI no puede borrar**: no existe un comando para hacerlo. Solo la app borra, y siempre tras una confirmación.
 - La app **nunca toca credenciales ni tokens de Claude**. Claude es opcional.
 
@@ -25,7 +25,7 @@ Deep links: `#menubar`, `#notify`, `#onboarding`, `#onboarding-2`, `#onboarding-
 - El gauge de espacio libre, por ejemplo «6.6 GB free · 99% used» (o «84 GB» después de limpiar).
 - Las **3 sugerencias rápidas** del motor de reglas, con su tamaño y un botón «Clean». El botón abre la confirmación; nunca borra directamente.
 - «Last agent scan: 2 h ago · 22 findings», en ámbar porque es contenido del agente.
-- Los botones **Open Freeroom** y **Scan with Claude Code**. Este último copia `/freeroom scan` y abre Terminal.
+- Los botones **Open Freeroom** y **Scan with Claude Code**. Este último copia `/freeroom:scan` y abre Terminal.
 - Settings… y Quit.
 
 Al lado hay una ficha que explica el glifo.
@@ -39,7 +39,7 @@ Al lado hay una ficha que explica el glifo.
 Todas salen del **motor de reglas**: sin IA, sin tokens, como mucho una al día y con horas de silencio. Ninguna acción borra desde el banner; todas llevan a una confirmación.
 
 **1. Onboarding (3 pasos).**
-1. *Install the Claude Code plugin* (**opcional**). Muestra el flujo Claude Code → CLI `freeroom` → store local → Freeroom.app, los comandos `/plugin marketplace add hblabs-co/freeroom` y `/plugin install freeroom`, y el estado de detección (*detected ✓* o *not detected* con Re-check). Una comparativa «Without Claude / With Claude Code» deja claro qué aporta cada uno, y la opción «Skip · rules only» permite seguir sin Claude.
+1. *Install the Claude Code plugin* (**opcional**). Muestra el flujo Claude Code → CLI `freeroom` → store local → Freeroom.app, los comandos `/plugin marketplace add hblabs-co/freeroom` y `/plugin install freeroom@freeroom`, y el estado de detección (*detected ✓* o *not detected* con Re-check). Una comparativa «Without Claude / With Claude Code» deja claro qué aporta cada uno, y la opción «Skip · rules only» permite seguir sin Claude.
 2. *Full Disk Access*, igual que antes.
 3. *Notifications & login*: aviso de permiso de notificaciones, «Launch at login», «Show in Dock» (desactivado) y el umbral de disco bajo. Al terminar, la app pasa a la barra de menús.
 
@@ -58,11 +58,11 @@ El token meter ya no está. En su lugar hay una nota discreta: «Analysis by Cla
 
 **4. Confirm & clean.** El paso de re-verificación lo hace ahora la **app** («Re-checking recorded evidence…», en azul y no en ámbar), porque el agente no participa en el borrado. Se mantienen el badge «requires admin password» y la pantalla **Done** (6.6 → 84 GB, ítems tachados). El historial guarda el origen: escaneo de Claude Code, sugerencia del menú o notificación.
 
-**5. Translate.** La traducción **solo** se hace con el comando `/freeroom translate <lang>` en Claude Code. No hay cola en la app: el sheet muestra el comando listo para copiar y el desplegable del «tokenizer tax», y la lista se actualiza cuando las traducciones llegan al store. Solo se traducen las explicaciones del agente. Los textos de reglas vienen ya localizados en la app y no gastan tokens. La estimación se da en tokens, porque cuenta para el plan, y se mantiene el desplegable del «tokenizer tax».
+**5. Translate.** La traducción **solo** se hace con el comando `/freeroom:translate <lang>` en Claude Code. No hay cola en la app: el sheet muestra el comando listo para copiar y el desplegable del «tokenizer tax», y la lista se actualiza cuando las traducciones llegan al store. Solo se traducen las explicaciones del agente. Los textos de reglas vienen ya localizados en la app y no gastan tokens. La estimación se da en tokens, porque cuenta para el plan, y se mantiene el desplegable del «tokenizer tax».
 
 **6. Settings.** Ya no hay selector de motor (Ollama y API key quedan fuera de la v1). Las secciones son:
 - **General**: arranque al iniciar sesión, Dock, espacio libre junto al icono.
-- **Claude Code plugin**: estado, `/freeroom scan` copiable, capacidades del CLI y ruta del store.
+- **Claude Code plugin**: estado, `/freeroom:scan` copiable, capacidades del CLI y ruta del store.
 - **Notifications**: umbral, frecuencia, máximo 1 al día, horas de silencio y switches por categoría.
 - **Language**, **Safety** e **History**.
 - **About**: los iconos claro y oscuro, el glifo de la barra de menús, `brew install --cask hblabs-co/tap/freeroom` y «Open source · GitHub».

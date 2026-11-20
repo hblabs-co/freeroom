@@ -1,0 +1,19 @@
+#!/bin/sh
+# Locates the real freeroom CLI. Claude Code puts this wrapper on PATH while the plugin is enabled.
+# It checks fixed locations only (never PATH) and skips scripts, so it can never call itself.
+for candidate in \
+  "$FREEROOM_CLI" \
+  "/Applications/Freeroom.app/Contents/Helpers/freeroom" \
+  "$HOME/Applications/Freeroom.app/Contents/Helpers/freeroom" \
+  "/opt/homebrew/bin/freeroom" \
+  "/usr/local/bin/freeroom" \
+  "$HOME/.local/bin/freeroom"
+do
+  if [ -n "$candidate" ] && [ -x "$candidate" ] && [ "$(head -c 2 "$candidate")" != "#!" ]; then
+    exec "$candidate" "$@"
+  fi
+done
+cat <<'MSG'
+{"error":"freeroom CLI not found","fix":"Install Freeroom (brew install --cask hblabs-co/tap/freeroom), or build it from https://github.com/hblabs-co/freeroom with `swift build -c release` and set FREEROOM_CLI to .build/release/freeroom."}
+MSG
+exit 127
