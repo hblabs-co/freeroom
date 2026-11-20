@@ -69,6 +69,19 @@ scripts/build-app.sh            # → build/Freeroom.app
 scripts/build-app.sh --install  # also copies it to ~/Applications
 ```
 
+## Uninstall
+
+Everything Freeroom creates is removed with:
+
+```sh
+brew uninstall --zap --cask freeroom      # app, CLI, database, caches, preferences
+claude plugin uninstall freeroom@freeroom # the Claude Code plugin
+```
+
+Not installed with Homebrew? Use **Settings › About › Uninstall Freeroom…** in the app: it lists
+every location it removes (database, caches, preferences, saved state, login item) and moves the
+app to the Trash.
+
 ## Safety
 
 - The agent **cannot delete**: the CLI has no delete command.

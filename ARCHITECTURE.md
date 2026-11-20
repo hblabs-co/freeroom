@@ -1,6 +1,6 @@
 # Freeroom · Arquitectura (v1)
 
-Herramienta open source de hblabs para liberar espacio en macOS, pensada para
+Herramienta open source de HB Labs SAS para liberar espacio en macOS, pensada para
 desarrolladores. Dos piezas: una **app en la barra de menú** con un motor de
 reglas (sin IA) y un **plugin de Claude Code** para el análisis profundo.
 

@@ -3,7 +3,7 @@
 Rediseño visual de Freeroom (app de barra de menús + ventana) a partir del feedback: *«demasiado texto, muy plano, pocos iconos»*.
 
 - **Mockup clicable:** `design/v2/index.html`. Es autocontenido: solo los logos de marca salen del CDN de Simple Icons, fijado a `simple-icons@16.30.0`.
-- **Fuente de los tokens:** `Sources/FreeroomApp/Theme.swift` y el design system de hblabs (acento #1a4ddb / #6594fa, ámbar sagrado, glass selectivo, color semántico siempre con icono).
+- **Fuente de los tokens:** `Sources/FreeroomApp/Theme.swift` y el design system de HB Labs SAS (acento #1a4ddb / #6594fa, ámbar sagrado, glass selectivo, color semántico siempre con icono).
 
 ---
 

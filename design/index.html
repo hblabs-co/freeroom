@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Freeroom · prototype</title>
-<meta name="description" content="Freeroom by hblabs: high-fidelity clickable prototype of a macOS disk-cleanup app driven by the user's own Claude Code.">
+<meta name="description" content="Freeroom by HB Labs SAS: high-fidelity clickable prototype of a macOS disk-cleanup app driven by the user's own Claude Code.">
 <link rel="icon" href="assets/freeroom-icon-light.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -21,7 +21,7 @@
 </script>
 <style>
 /* =====================================================================
-   1 · hblabs tokens (copied from design-system/tokens.css — source of truth)
+   1 · HB Labs tokens (copied from design-system/tokens.css — source of truth)
    ===================================================================== */
 :root {
   --hb-ink-0: oklch(0.99 0.003 250); --hb-ink-1: oklch(0.97 0.004 250);
@@ -872,7 +872,7 @@ table.hist .r { text-align: right; }
 </head>
 <body>
 
-<!-- ============ Icon sprite (Lucide-style, 1.5 stroke — same family as hblabs icons.svg) ============ -->
+<!-- ============ Icon sprite (Lucide-style, 1.5 stroke — same family as HB Labs icons.svg) ============ -->
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
   <symbol id="i-ruler" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M21.3 15.3a2.4 2.4 0 0 1 0 3.4l-2.6 2.6a2.4 2.4 0 0 1-3.4 0L2.7 8.7a2.41 2.41 0 0 1 0-3.4l2.6-2.6a2.41 2.41 0 0 1 3.4 0Z"/><path d="m14.5 12.5 2-2M11.5 9.5l2-2M8.5 6.5l2-2M17.5 15.5l2-2"/></symbol>
   <symbol id="i-bell" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9M10.3 21a1.94 1.94 0 0 0 3.4 0"/></symbol>
@@ -993,7 +993,7 @@ table.hist .r { text-align: right; }
     <aside class="sidebar" aria-label="Sidebar">
       <div class="brand">
         <svg class="appicon" aria-hidden="true"><use class="ai-l" href="#appicon-l"/><use class="ai-d" href="#appicon-d"/></svg>
-        <div><b>Freeroom</b><span class="byline"><svg aria-hidden="true"><use href="#i-hb"/></svg>by hblabs</span></div>
+        <div><b>Freeroom</b><span class="byline"><svg aria-hidden="true"><use href="#i-hb"/></svg>by HB Labs SAS</span></div>
       </div>
       <div class="nav" role="list">
         <button data-nav="scan"><svg class="i"><use href="#i-scan"/></svg><span>Scan</span></button>
@@ -1026,7 +1026,7 @@ table.hist .r { text-align: right; }
               <div class="ob-hero">
                 <svg class="appicon" aria-hidden="true"><use class="ai-l" href="#appicon-l"/><use class="ai-d" href="#appicon-d"/></svg>
                 <h2>Freeroom</h2>
-                <span class="byline"><svg aria-hidden="true"><use href="#i-hb"/></svg>by hblabs · open source · MIT</span>
+                <span class="byline"><svg aria-hidden="true"><use href="#i-hb"/></svg>by HB Labs SAS · open source · MIT</span>
                 <p>Measure first. Explain everything. Delete only what you approve.</p>
               </div>
               <ol class="steps" id="obSteps">
@@ -1955,7 +1955,7 @@ function renderSettings() {
     "<div><h3>Freeroom 0.1</h3><p>Open-source (MIT) disk cleanup for developers: a menu bar app plus a Claude Code plugin. Notarized DMG or Homebrew cask.</p>" +
     '<div class="cmdline" style="max-width:420px"><span class="ps">$</span><span class="c">brew install --cask hblabs-co/tap/freeroom</span><button class="iconbtn" data-copy="brew install --cask hblabs-co/tap/freeroom" aria-label="Copy command">' + ic("copy", "i-sm") + "</button></div>" +
     '<div class="links"><a class="btn btn-ghost btn-sm" href="https://github.com/hblabs-co/freeroom" target="_blank" rel="noopener">' + ic("github", "i-xs") + "github.com/hblabs-co/freeroom</a><span class=\"badge b-keep\">MIT License</span><button class=\"btn btn-ghost btn-sm\" data-act=\"rerunSetup\">Run setup again</button></div>" +
-    '<span class="hbsign"><svg aria-hidden="true"><use href="#i-hb"/></svg>Made by hblabs</span></div></div></div></section>';
+    '<span class="hbsign"><svg aria-hidden="true"><use href="#i-hb"/></svg>Made by HB Labs SAS</span></div></div></div></section>';
 }
 
 /* =====================================================================
@@ -1978,7 +1978,7 @@ function renderPop() {
   var free = currentFree(), used = (DISK_TOTAL - free) / DISK_TOTAL * 100, qs = quickSuggestions();
   var catIcon = {}; CATS.forEach(function (c) { catIcon[c.id] = c.icon; });
   $("#pop").innerHTML =
-    '<div class="pop-h"><svg class="appicon" aria-hidden="true"><use class="ai-l" href="#appicon-l"/><use class="ai-d" href="#appicon-d"/></svg><div><b>Freeroom</b><span class="byline"><svg aria-hidden="true"><use href="#i-hb"/></svg>by hblabs</span></div>' +
+    '<div class="pop-h"><svg class="appicon" aria-hidden="true"><use class="ai-l" href="#appicon-l"/><use class="ai-d" href="#appicon-d"/></svg><div><b>Freeroom</b><span class="byline"><svg aria-hidden="true"><use href="#i-hb"/></svg>by HB Labs SAS</span></div>' +
     '<button class="iconbtn" data-nav="settings" aria-label="Settings" style="margin-left:auto">' + ic("settings", "i-sm") + "</button></div>" +
     '<div class="pop-card pop-disk"><div class="big"><span class="v">' + freeFmt(free) + ' GB</span><span class="of">free · ' + Math.round(used) + '% used</span><span class="pct ' + (used > 90 ? "" : "ok") + '">' + ic(used > 90 ? "alert" : "check", "i-xs") + (used > 90 ? "low" : "ok") + "</span></div>" +
     '<div class="dbar"><i class="u-other" style="width:' + used.toFixed(2) + '%"></i></div><div class="muted" style="font-size:11.5px">Macintosh HD · ' + DISK_TOTAL + " GB · checked 12 min ago</div></div>" +

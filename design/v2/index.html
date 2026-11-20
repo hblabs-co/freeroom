@@ -4,11 +4,11 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Freeroom v2 mockup</title>
-<meta name="description" content="Freeroom v2: visual, icon-first redesign of the macOS menu-bar disk cleaner by hblabs. Clickable high-fidelity mockup.">
+<meta name="description" content="Freeroom v2: visual, icon-first redesign of the macOS menu-bar disk cleaner by HB Labs SAS. Clickable high-fidelity mockup.">
 <style>
 /* ==========================================================================
    Freeroom v2 — tokens
-   hblabs DS: one blue accent (#1a4ddb / #6594fa), amber = agent only,
+   HB Labs DS: one blue accent (#1a4ddb / #6594fa), amber = agent only,
    semantic colour always paired with a glyph, glass only on floating chrome.
    Values mirror Sources/FreeroomApp/Theme.swift so the mock and the app match.
    ========================================================================== */
@@ -1234,7 +1234,7 @@ function settings() {
     <div class="fgroup"><div class="box">
       ${row(icb("i-trash"), "Review items go to the Trash", sw(true), "Safe items are deleted; they're regenerable")}
     </div></div>`;
-  if (S.set === "about") pane = `<div class="about">${appIcon()}<h3>Freeroom 0.2</h3><p>Open source · MIT · by hblabs</p><p class="mono" style="font-size:12px">brew install --cask hblabs-co/tap/freeroom</p>
+  if (S.set === "about") pane = `<div class="about">${appIcon()}<h3>Freeroom 0.2</h3><p>Open source · MIT · by HB Labs SAS</p><p class="mono" style="font-size:12px">brew install --cask hblabs-co/tap/freeroom</p>
     <div style="display:flex;gap:8px;margin-top:8px"><button class="btn">${use("i-github")}GitHub</button><button class="btn">${use("i-history")}History</button></div>
     <p style="font-size:11px;margin-top:14px;max-width:420px">Brand logos from Simple Icons (CC0). Trademarks belong to their owners and are shown only to identify items on your disk.</p></div>`;
   return `<div class="win set" role="dialog" aria-label="Freeroom Settings">

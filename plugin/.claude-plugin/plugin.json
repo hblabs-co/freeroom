@@ -2,7 +2,8 @@
   "name": "freeroom",
   "description": "Analyze disk usage on macOS with the freeroom CLI and send findings to Freeroom.app. Never deletes.",
   "author": {
-    "name": "hblabs-co"
+    "name": "HB Labs SAS",
+    "url": "https://github.com/hblabs-co"
   },
   "homepage": "https://github.com/hblabs-co/freeroom",
   "repository": "https://github.com/hblabs-co/freeroom",

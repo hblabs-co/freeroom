@@ -1,6 +1,6 @@
 # Freeroom · notas de diseño (v2: menu bar + plugin de Claude Code)
 
-Prototipo HTML navegable (`index.html`, autocontenido) de **Freeroom by hblabs**: una app open source (**MIT**) de macOS para liberar espacio en disco, pensada para desarrolladores. Repo: https://github.com/hblabs-co/freeroom. Instalación: `brew install --cask hblabs-co/tap/freeroom` o DMG notarizado.
+Prototipo HTML navegable (`index.html`, autocontenido) de **Freeroom by HB Labs SAS**: una app open source (**MIT**) de macOS para liberar espacio en disco, pensada para desarrolladores. Repo: https://github.com/hblabs-co/freeroom. Instalación: `brew install --cask hblabs-co/tap/freeroom` o DMG notarizado.
 
 Icono: `icons.html` muestra el icono final (**B+ · Sweep con destellos**), su escalera de tamaños, el glifo de la barra de menús y, plegadas, las opciones exploradas.
 
@@ -150,5 +150,5 @@ El repo es público, así que todos los datos de ejemplo son genéricos: `acme-a
 
 ## Preguntas abiertas
 
-- ¿Hace falta registrar el cambio de acento en el changelog del design system, para que otros productos hblabs pasen también a #1a4ddb?
+- ¿Hace falta registrar el cambio de acento en el changelog del design system, para que otros productos de HB Labs SAS pasen también a #1a4ddb?
 - Los multiplicadores del tokenizer tax son ilustrativos. Conviene medirlos con `count_tokens`.

@@ -1,7 +1,10 @@
 {
   "name": "freeroom",
-  "description": "Freeroom by hblabs: free up disk space on macOS with an agent that understands what it is deleting.",
-  "owner": { "name": "hblabs-co" },
+  "description": "Freeroom by HB Labs SAS: free up disk space on macOS with an agent that understands what it is deleting.",
+  "owner": {
+    "name": "HB Labs SAS",
+    "url": "https://github.com/hblabs-co"
+  },
   "plugins": [
     {
       "name": "freeroom",

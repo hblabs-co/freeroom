@@ -70,10 +70,23 @@ cask "freeroom" do
   app "Freeroom.app"
   binary "#{appdir}/Freeroom.app/Contents/Helpers/freeroom"
 
+  uninstall quit: "co.hblabs.freeroom"
+
+  # Keep in sync with Sources/FreeroomApp/Uninstaller.swift
   zap trash: [
     "~/Library/Application Support/Freeroom",
+    "~/Library/Caches/Freeroom",
+    "~/Library/Caches/co.hblabs.freeroom",
+    "~/Library/HTTPStorages/co.hblabs.freeroom",
+    "~/Library/HTTPStorages/co.hblabs.freeroom.binarycookies",
+    "~/Library/Saved Application State/co.hblabs.freeroom.savedState",
     "~/Library/Preferences/co.hblabs.freeroom.plist",
   ]
+
+  caveats <<~EOS
+    The Claude Code plugin is managed by Claude Code. To remove it:
+      claude plugin uninstall freeroom@freeroom
+  EOS
 end
 CASK
 

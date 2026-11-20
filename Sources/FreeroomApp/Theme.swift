@@ -2,7 +2,7 @@ import AppKit
 import FreeroomCore
 import SwiftUI
 
-/// hblabs design tokens (design system v0.3): one blue accent, amber reserved for the agent.
+/// HB Labs design tokens (design system v0.3): one blue accent, amber reserved for the agent.
 enum Theme {
     static func dynamic(light: UInt32, dark: UInt32) -> Color {
         Color(nsColor: NSColor(name: nil) { appearance in

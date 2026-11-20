@@ -89,7 +89,8 @@ row("textformat.size", L("Text size")) {
                 Text("brew install --cask hblabs-co/tap/freeroom").font(.fr(.caption, design: .monospaced)).textSelection(.enabled)
                 Text(L("Brand logos from Simple Icons (CC0). Trademarks belong to their owners and are shown only to identify software on your Mac."))
                     .font(.fr(.caption2)).foregroundStyle(.secondary).multilineTextAlignment(.center).padding(.horizontal, 30)
-                if let error = model.storeError { Text(error).font(.fr(.caption)).foregroundStyle(Theme.danger) }
+UninstallSection().padding(.top, 10)
+                                if let error = model.storeError { Text(error).font(.fr(.caption)).foregroundStyle(Theme.danger) }
             }
             .padding()
             .tabItem { Label(L("About"), systemImage: "info.circle") }
