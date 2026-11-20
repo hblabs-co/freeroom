@@ -324,19 +324,33 @@ final class AppModel {
         guard simple != simpleMode else { return }
         if let window = mainWindow { defaults.set(window.frame.width, forKey: simpleMode ? "simpleWidth" : "detailedWidth") }
         if simple {
-            // Shrinking: lower the minimum first, show the simple layout, then animate down.
-            windowMinWidth = 720
-            simpleMode = true
-            DispatchQueue.main.async { self.resizeWindowForMode() }
+            // Shrinking: slide the columns out, then lower the minimum and animate the window down.
+            withAnimation(.smooth(duration: 0.3)) {
+                simpleMode = true
+                route = .findings
+            }
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                self.windowMinWidth = 720
+                self.resizeWindowForMode()
+            }
         } else {
             // Expanding: animate the window wide first (setFrame(animate:) returns when done),
-            // then show the columns and raise the minimum, so nothing snaps.
+            // then slide the sidebar and the inspector in, then raise the minimum.
             resizeWindowForMode(forSimple: false)
             if inspected == nil { inspected = findings.first(where: \.isCleanable)?.id ?? findings.first?.id }
-            inspectorVisible = true
-            simpleMode = false
+            withAnimation(.smooth(duration: 0.35)) {
+                route = .findings
+                inspectorVisible = true
+                simpleMode = false
+            }
             windowMinWidth = Self.detailedMinWidth
         }
+    }
+
+    /// Changes screen (findings / history / settings) with an animated transition of the columns.
+    func navigate(to newRoute: Route) {
+        guard newRoute != route else { return }
+        withAnimation(.smooth(duration: 0.3)) { route = newRoute }
     }
 
     /// Detailed mode on findings/history needs the wide minimum; Simple mode and Settings don't.
@@ -377,7 +391,7 @@ final class AppModel {
     }
 
     func openSettings() {
-        route = .settings
+        navigate(to: .settings)
         openMainWindow()
     }
 

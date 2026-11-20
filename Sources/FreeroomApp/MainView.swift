@@ -43,9 +43,9 @@ struct MainView: View {
             get: { model.route == .settings ? .settings : model.route == .history ? .history : sidebar },
             set: { item in
                 switch item {
-                case .settings: model.route = .settings
-                case .history: model.route = .history
-                default: model.route = .findings; sidebar = item
+                case .settings: model.navigate(to: .settings)
+                case .history: model.navigate(to: .history)
+                default: model.navigate(to: .findings); sidebar = item
                 }
             })
     }
@@ -153,7 +153,7 @@ struct MainView: View {
                     Label(String(format: L("%@ freed so far"), model.freedAllTime.formattedBytes), systemImage: "clock.arrow.circlepath")
                         .font(.fr(.caption)).foregroundStyle(.secondary)
                 }
-                Button { model.route = model.route == .settings ? .findings : .settings } label: {
+                Button { model.navigate(to: model.route == .settings ? .findings : .settings) } label: {
                     Label(L("Settings"), systemImage: "gearshape")
                         .frame(maxWidth: .infinity, alignment: .leading)
                         .padding(.vertical, 6).padding(.horizontal, 8)
@@ -254,14 +254,14 @@ struct MainView: View {
     private var toolbar: some ToolbarContent {
         if model.route != .findings {
             ToolbarItem(placement: .navigation) {
-                Button { model.route = .findings } label: { Label(L("Back"), systemImage: "chevron.left") }
+                Button { model.navigate(to: .findings) } label: { Label(L("Back"), systemImage: "chevron.left") }
                     .labelStyle(.titleAndIcon)
                     .keyboardShortcut(.escape, modifiers: [])
                     .help(L("Back"))
             }
         }
         ToolbarItem(placement: .navigation) {
-            Picker(L("Mode"), selection: Binding(get: { model.simpleMode }, set: { model.route = .findings; model.switchMode(simple: $0) })) {
+            Picker(L("Mode"), selection: Binding(get: { model.simpleMode }, set: { model.switchMode(simple: $0) })) {
                 Label(L("Simple"), systemImage: "square.grid.2x2.fill").tag(true)
                 Label(L("Detailed"), systemImage: "list.bullet.rectangle").tag(false)
             }
@@ -290,18 +290,18 @@ struct MainView: View {
                 .help(String(format: L("Copy %@ for Claude Code"), "/freeroom:scan"))
         }
         ToolbarItem {
-            Button { model.inspectorVisible.toggle() } label: { Label(L("Inspector"), systemImage: "sidebar.right") }
+            Button { withAnimation(.smooth(duration: 0.3)) { model.inspectorVisible.toggle() } } label: { Label(L("Inspector"), systemImage: "sidebar.right") }
                 .keyboardShortcut("i", modifiers: [.command, .option])
                 .disabled(model.simpleMode)
         }
         ToolbarItem {
-            Button { model.route = model.route == .history ? .findings : .history } label: {
+            Button { model.navigate(to: model.route == .history ? .findings : .history) } label: {
                 Label(L("History"), systemImage: "clock.arrow.circlepath")
             }
             .help(L("History"))
         }
         ToolbarItem {
-            Button { model.route = model.route == .settings ? .findings : .settings } label: {
+            Button { model.navigate(to: model.route == .settings ? .findings : .settings) } label: {
                 Label(L("Settings"), systemImage: "gearshape")
             }
             .help(L("Settings") + " (⌘,)")
