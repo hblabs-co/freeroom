@@ -11,15 +11,16 @@ struct SettingsView: View {
                 row("power", "Open at login") { Toggle("", isOn: Binding(get: { model.launchAtLogin }, set: { model.launchAtLogin = $0 })) }
                 row("menubar.rectangle", "Free space in the menu bar") { Toggle("", isOn: $model.showFreeInMenuBar) }
                 row("square.grid.3x3.square", "Show disk map") { Toggle("", isOn: $model.showDiskMap) }
+                row("rectangle.split.3x1", "Simple mode", subtitle: "Big icons and one button; switch anytime in the toolbar") { Toggle("", isOn: $model.simpleMode) }
                 row("speaker.wave.2", "Sound when cleaning finishes") { Toggle("", isOn: $model.playSound) }
                 row("clock.arrow.circlepath", "Check every", subtitle: "Rules only, no AI") {
                     Picker("", selection: $model.checkEveryHours) {
                         Text("2 h").tag(2); Text("6 h").tag(6); Text("12 h").tag(12); Text("24 h").tag(24)
                     }
                 }
-                row("globe", "Explanations", subtitle: "Translate with /freeroom:translate in Claude Code") {
+                row("globe", "Language", subtitle: "Agent explanations: /freeroom:translate \(model.language)") {
                     Picker("", selection: $model.language) {
-                        Text("English").tag("en"); Text("Español").tag("es"); Text("Deutsch").tag("de")
+                        ForEach(L10n.languages) { Text($0.name).tag($0.id) }
                     }
                 }
             }
@@ -69,7 +70,8 @@ struct SettingsView: View {
             VStack(spacing: 10) {
                 Image(nsImage: NSApp.applicationIconImage).resizable().frame(width: 80, height: 80)
                 Text("Freeroom \(Freeroom.version)").font(.title3.weight(.semibold))
-                Text("Open source · MIT · by hblabs").foregroundStyle(.secondary)
+                Text("by HB Labs SAS").font(.headline).foregroundStyle(.secondary)
+                Text("Open source · MIT").foregroundStyle(.secondary)
                 Link("github.com/hblabs-co/freeroom", destination: URL(string: "https://github.com/hblabs-co/freeroom")!)
                 Text("brew install --cask hblabs-co/tap/freeroom").font(.system(.caption, design: .monospaced)).textSelection(.enabled)
                 Text("Brand logos from Simple Icons (CC0). Trademarks belong to their owners and are shown only to identify software on your Mac.")
@@ -80,8 +82,9 @@ struct SettingsView: View {
             .tabItem { Label("About", systemImage: "info.circle") }
         }
         .formStyle(.grouped)
-        .frame(width: 560)
-        .frame(minHeight: 380)
+        .frame(maxWidth: 720)
+        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
+        .padding(.top, 8)
     }
 
     private func row<Content: View>(_ symbol: String, _ title: String, subtitle: String? = nil,
@@ -100,17 +103,31 @@ struct SettingsView: View {
     }
 }
 
-private struct CopyField: View {
+/// A command with a Copy button that confirms with a checkmark.
+struct CopyField: View {
     let text: String
+    var prominent = false
+    @State private var copied = false
+
     var body: some View {
-        HStack(spacing: 6) {
-            Text(text).font(.system(.caption, design: .monospaced)).textSelection(.enabled).lineLimit(1)
+        HStack(spacing: 8) {
+            Text(text).font(.system(prominent ? .callout : .caption, design: .monospaced))
+                .textSelection(.enabled).lineLimit(1).truncationMode(.middle)
             Button {
                 NSPasteboard.general.clearContents()
                 NSPasteboard.general.setString(text, forType: .string)
-            } label: { Image(systemName: "doc.on.doc") }
-            .buttonStyle(.borderless).help("Copy")
+                withAnimation(.snappy) { copied = true }
+                Task { try? await Task.sleep(for: .seconds(1.6)); withAnimation { copied = false } }
+            } label: {
+                Label(copied ? L("Copied") : L("Copy"), systemImage: copied ? "checkmark" : "doc.on.doc")
+                    .contentTransition(.symbolEffect(.replace))
+            }
+            .buttonStyle(.bordered)
+            .controlSize(prominent ? .regular : .small)
+            .tint(copied ? Theme.safe : nil)
         }
+        .padding(prominent ? 8 : 0)
+        .background(prominent ? AnyShapeStyle(.quaternary.opacity(0.6)) : AnyShapeStyle(.clear), in: RoundedRectangle(cornerRadius: 8))
     }
 }
 

@@ -5,6 +5,7 @@ enum SidebarItem: Hashable {
     case everything
     case ecosystem(String)
     case source(FindingSource)
+    case settings
 }
 
 struct MainView: View {
@@ -13,11 +14,12 @@ struct MainView: View {
     @State private var search = ""
     @State private var groupByEcosystem = true
     @State private var showInspector = true
+    @State private var columns: NavigationSplitViewVisibility = .all
 
     private var visible: [Finding] {
         model.findings.filter { f in
             let inSidebar: Bool = switch sidebar {
-            case .everything: true
+            case .everything, .settings: true
             case .ecosystem(let id): f.ecosystem.id == id
             case .source(let s): f.source == s
             }
@@ -27,36 +29,63 @@ struct MainView: View {
     }
 
     var body: some View {
-        @Bindable var model = model
-        NavigationSplitView {
-            sidebarList
-                .navigationSplitViewColumnWidth(min: 200, ideal: 230)
-        } detail: {
-            ZStack(alignment: .bottom) {
-                content
-                SelectionBar()
-                    .padding(.bottom, 14)
+        if !model.onboarded {
+            VStack(spacing: 0) {
+                BrandTitle().padding(.top, 18)
+                OnboardingView()
             }
-            .inspector(isPresented: $showInspector) {
+        } else {
+            splitView
+        }
+    }
+
+    private var sidebarSelection: Binding<SidebarItem> {
+        Binding(
+            get: { model.route == .settings ? .settings : sidebar },
+            set: { item in
+                if item == .settings { model.route = .settings } else { model.route = .findings; sidebar = item }
+            })
+    }
+
+    private var splitView: some View {
+        @Bindable var model = model
+        return NavigationSplitView(columnVisibility: $columns) {
+            sidebarList
+                .navigationSplitViewColumnWidth(min: 220, ideal: 240, max: 300)
+                .toolbar(removing: .sidebarToggle)
+        } detail: {
+            Group {
+                if model.route == .settings {
+                    SettingsView()
+                } else {
+                    ZStack(alignment: .bottom) {
+                        if model.simpleMode { SimpleView() } else { content }
+                        SelectionBar().padding(.bottom, 14)
+                    }
+                }
+            }
+            .inspector(isPresented: Binding(get: { showInspector && !model.simpleMode && model.route == .findings },
+                                            set: { showInspector = $0 })) {
                 Group {
                     if let id = model.inspected, let finding = model.finding(id: id) {
                         FindingInspector(finding: finding)
                     } else {
-                        ContentUnavailableView("Select an item", systemImage: "sidebar.right",
-                                               description: Text("Details, evidence and paths appear here."))
+                        ContentUnavailableView(L("Select an item"), systemImage: "sidebar.right",
+                                               description: Text(L("Details, evidence and paths appear here.")))
                     }
                 }
                 .inspectorColumnWidth(min: 280, ideal: 310, max: 380)
             }
         }
-        .searchable(text: $search, placement: .toolbar, prompt: "Search")
+        .onChange(of: columns) { _, value in if value != .all { columns = .all } }
+        .searchable(text: $search, placement: .toolbar, prompt: L("Search"))
         .toolbar { toolbar }
         .sheet(isPresented: Binding(get: { model.pendingClean != nil },
                                     set: { if !$0 { model.finishClean() } })) {
             CleanSheet(items: model.pendingClean ?? []).environment(model)
         }
-        .navigationTitle(title)
-        .navigationSubtitle("\(model.freeBytes.formattedBytes) free of \(model.totalBytes.formattedBytes)")
+        .navigationTitle(model.route == .settings ? L("Settings") : title)
+        .navigationSubtitle("\(model.freeBytes.formattedBytes) \(L("free of")) \(model.totalBytes.formattedBytes)")
         .onKeyPress(.space) {
             guard let id = model.inspected, let f = model.finding(id: id), f.isCleanable else { return .ignored }
             if model.selection.contains(id) { model.selection.remove(id) } else { model.selection.insert(id) }
@@ -71,13 +100,14 @@ struct MainView: View {
         case .ecosystem(let id): model.ecosystems.first { $0.0.id == id }?.0.title ?? "Freeroom"
         case .source(.agent): "Found by Claude Code"
         case .source(.rule): "Found by rules"
+        case .settings: "Settings"
         }
     }
 
     // MARK: Sidebar
 
     private var sidebarList: some View {
-        List(selection: $sidebar) {
+        List(selection: sidebarSelection) {
             Label { HStack { Text("Everything"); Spacer(); Text(model.cleanableTotal.formattedBytes).monospacedDigit().foregroundStyle(.secondary) } }
                 icon: { Image(systemName: "square.grid.2x2") }
                 .tag(SidebarItem.everything)
@@ -101,12 +131,25 @@ struct MainView: View {
                     .tag(SidebarItem.source(.agent))
             }
         }
+        .safeAreaInset(edge: .top) {
+            BrandTitle().padding(.horizontal, 14).padding(.vertical, 8).frame(maxWidth: .infinity, alignment: .leading)
+        }
         .safeAreaInset(edge: .bottom) {
-            if model.freedAllTime > 0 {
-                Label("\(model.freedAllTime.formattedBytes) freed so far", systemImage: "clock.arrow.circlepath")
-                    .font(.caption).foregroundStyle(.secondary)
-                    .padding(12).frame(maxWidth: .infinity, alignment: .leading)
+            VStack(alignment: .leading, spacing: 6) {
+                if model.freedAllTime > 0 {
+                    Label("\(model.freedAllTime.formattedBytes) \(L("freed so far"))", systemImage: "clock.arrow.circlepath")
+                        .font(.caption).foregroundStyle(.secondary)
+                }
+                Button { model.route = model.route == .settings ? .findings : .settings } label: {
+                    Label(L("Settings"), systemImage: "gearshape")
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .padding(.vertical, 6).padding(.horizontal, 8)
+                        .background(model.route == .settings ? Theme.accent.opacity(0.15) : .clear,
+                                    in: RoundedRectangle(cornerRadius: 6))
+                }
+                .buttonStyle(.plain)
             }
+            .padding(10)
         }
     }
 
@@ -196,6 +239,15 @@ struct MainView: View {
 
     @ToolbarContentBuilder
     private var toolbar: some ToolbarContent {
+        ToolbarItem(placement: .navigation) {
+            Picker(L("Mode"), selection: Binding(get: { model.simpleMode }, set: { model.simpleMode = $0; model.route = .findings })) {
+                Label(L("Simple"), systemImage: "square.grid.2x2.fill").tag(true)
+                Label(L("Detailed"), systemImage: "list.bullet.rectangle").tag(false)
+            }
+            .pickerStyle(.segmented)
+            .labelStyle(.titleAndIcon)
+            .help(L("Simple: big icons and one button. Detailed: disk map, list and inspector."))
+        }
         ToolbarItem {
             Picker("Group", selection: $groupByEcosystem) {
                 Label("Ecosystem", systemImage: "square.grid.2x2").tag(true)
@@ -219,6 +271,13 @@ struct MainView: View {
         ToolbarItem {
             Button { showInspector.toggle() } label: { Label("Inspector", systemImage: "sidebar.right") }
                 .keyboardShortcut("i", modifiers: [.command, .option])
+                .disabled(model.simpleMode)
+        }
+        ToolbarItem {
+            Button { model.route = model.route == .settings ? .findings : .settings } label: {
+                Label(L("Settings"), systemImage: "gearshape")
+            }
+            .help(L("Settings") + " (⌘,)")
         }
     }
 }

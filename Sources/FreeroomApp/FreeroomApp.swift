@@ -10,33 +10,33 @@ struct FreeroomApp: App {
         MenuBarExtra {
             MenuPanel()
                 .environment(model)
+                .id(model.language)
         } label: {
             MenuBarLabel().environment(model)
         }
         .menuBarExtraStyle(.window)
 
+        // The only window. Settings and onboarding live inside it.
         Window("Freeroom", id: "main") {
             MainView()
                 .environment(model)
-                .frame(minWidth: 900, minHeight: 600)
+                .id(model.language)
+                .frame(minWidth: 980, minHeight: 640)
         }
-        .defaultSize(width: 1200, height: 780)
-
-        Window("Welcome to Freeroom", id: "onboarding") {
-            OnboardingView().environment(model)
-        }
-        .windowResizability(.contentSize)
-        .windowStyle(.hiddenTitleBar)
-
-        Settings {
-            SettingsView()
-                .environment(model)
+        .defaultSize(width: 1240, height: 800)
+        .windowResizability(.contentMinSize)
+        .commands {
+            CommandGroup(replacing: .appSettings) {
+                Button(L("Settings…")) { model.openSettings() }
+                    .keyboardShortcut(",")
+            }
+            CommandGroup(replacing: .newItem) {}
         }
     }
 }
 
-/// Menu bar glyph (+ free space). Also wires window opening for code paths outside SwiftUI views
-/// (notifications, popover actions) and shows onboarding on first launch.
+/// Menu bar glyph (+ optional free space). Also wires window opening for code paths outside
+/// SwiftUI views (notifications, popover actions) and opens the window on first launch.
 private struct MenuBarLabel: View {
     @Environment(AppModel.self) private var model
     @Environment(\.openWindow) private var openWindow
@@ -50,10 +50,7 @@ private struct MenuBarLabel: View {
         }
         .task {
             model.openWindowAction = { id in openWindow(id: id) }
-            if !model.onboarded {
-                openWindow(id: "onboarding")
-                NSApp.activate(ignoringOtherApps: true)
-            }
+            if !model.onboarded { model.openMainWindow() }
         }
     }
 }

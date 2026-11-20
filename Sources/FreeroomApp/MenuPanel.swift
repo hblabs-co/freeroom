@@ -4,10 +4,10 @@ import SwiftUI
 /// The popover under the menu bar glyph: one number, one action, three big wins.
 struct MenuPanel: View {
     @Environment(AppModel.self) private var model
-    @Environment(\.openSettings) private var openSettings
 
     var body: some View {
         VStack(alignment: .leading, spacing: 14) {
+            BrandTitle(compact: true)
             header
 
             let safeTotal = model.safeFindings.reduce(Int64(0)) { $0 + $1.reclaimable }
@@ -116,11 +116,15 @@ struct MenuPanel: View {
             }.help("Check now (no AI)").disabled(model.isRunningRules)
             Button { model.copyScanCommand() } label: { Image(systemName: "terminal") }.help("Copy /freeroom:scan")
             Spacer()
+            Toggle(isOn: Binding(get: { model.showFreeInMenuBar }, set: { model.showFreeInMenuBar = $0 })) {
+                Image(systemName: "menubar.rectangle")
+            }
+            .toggleStyle(.button).help("Show free space in the menu bar")
             if let scan = model.lastRuleScan {
                 Text("Checked \(scan.startedAt.formatted(.relative(presentation: .named)))")
                     .font(.caption).foregroundStyle(.secondary)
             }
-            Button { openSettings(); NSApp.activate(ignoringOtherApps: true) } label: { Image(systemName: "gearshape") }.help("Settings")
+            Button { model.openSettings() } label: { Image(systemName: "gearshape") }.help("Settings")
             Button { NSApp.terminate(nil) } label: { Image(systemName: "power") }.help("Quit Freeroom")
         }
         .buttonStyle(.borderless)

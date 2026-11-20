@@ -47,7 +47,7 @@ cat > "$APP/Contents/Info.plist" <<PLIST
   <key>LSMinimumSystemVersion</key><string>15.0</string>
   <key>LSUIElement</key><true/>
   <key>LSApplicationCategoryType</key><string>public.app-category.utilities</string>
-  <key>NSHumanReadableCopyright</key><string>© 2026 hblabs · MIT License</string>
+  <key>NSHumanReadableCopyright</key><string>© 2026 HB Labs SAS · MIT License</string>
 </dict>
 </plist>
 PLIST

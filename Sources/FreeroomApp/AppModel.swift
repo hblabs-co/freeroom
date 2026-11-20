@@ -36,7 +36,7 @@ final class AppModel {
     var freedAllTime: Int64 { history.reduce(0) { $0 + $1.freedBytes } }
 
     // Settings (UserDefaults)
-    var language: String { didSet { defaults.set(language, forKey: "language"); reload() } }
+    var language: String { didSet { defaults.set(language, forKey: "language"); L10n.current = language; reload() } }
     var notificationsEnabled: Bool { didSet { defaults.set(notificationsEnabled, forKey: "notifications") } }
     var lowDiskThresholdGB: Int { didSet { defaults.set(lowDiskThresholdGB, forKey: "lowDiskGB") } }
     var checkEveryHours: Int { didSet { defaults.set(checkEveryHours, forKey: "checkHours"); scheduleRuleChecks() } }
@@ -44,6 +44,11 @@ final class AppModel {
     var showDiskMap: Bool { didSet { defaults.set(showDiskMap, forKey: "diskMap") } }
     var playSound: Bool { didSet { defaults.set(playSound, forKey: "sound") } }
     var onboarded: Bool { didSet { defaults.set(onboarded, forKey: "onboarded") } }
+    var simpleMode: Bool { didSet { defaults.set(simpleMode, forKey: "simpleMode") } }
+
+    /// What the single main window shows.
+    enum Route: Hashable { case findings, settings }
+    var route: Route = .findings
 
     private let defaults = UserDefaults.standard
     private var store: Store?
@@ -52,7 +57,9 @@ final class AppModel {
     private let notificationDelegate = NotificationDelegate()
 
     init() {
-        language = defaults.string(forKey: "language") ?? "en"
+        let savedLanguage = defaults.string(forKey: "language") ?? L10n.preferredSystemLanguage
+        language = savedLanguage
+        L10n.current = savedLanguage
         notificationsEnabled = defaults.object(forKey: "notifications") as? Bool ?? true
         lowDiskThresholdGB = defaults.object(forKey: "lowDiskGB") as? Int ?? 25
         checkEveryHours = defaults.object(forKey: "checkHours") as? Int ?? 6
@@ -60,6 +67,7 @@ final class AppModel {
         showDiskMap = defaults.object(forKey: "diskMap") as? Bool ?? true
         playSound = defaults.object(forKey: "sound") as? Bool ?? true
         onboarded = defaults.bool(forKey: "onboarded")
+        simpleMode = defaults.object(forKey: "simpleMode") as? Bool ?? true
 
         do { store = try Store() } catch { storeError = "\(error)" }
         reload()
@@ -281,6 +289,11 @@ final class AppModel {
     func openMainWindow() {
         openWindowAction?("main")
         NSApp.activate(ignoringOtherApps: true)
+    }
+
+    func openSettings() {
+        route = .settings
+        openMainWindow()
     }
 
     func copyScanCommand() {

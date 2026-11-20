@@ -4,7 +4,6 @@ import SwiftUI
 /// Three short steps: Full Disk Access → notifications → Claude Code (optional). Then the first scan.
 struct OnboardingView: View {
     @Environment(AppModel.self) private var model
-    @Environment(\.dismissWindow) private var dismissWindow
     @State private var step = 0
     @State private var fullDiskAccess = false
     @State private var pluginState: Bool?
@@ -30,7 +29,8 @@ struct OnboardingView: View {
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .padding(.horizontal, 40)
         }
-        .frame(width: 600, height: 520)
+        .frame(maxWidth: 640, maxHeight: 560)
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
         .task {
             // Poll Full Disk Access while the user flips the switch in System Settings.
             while !Task.isCancelled {
@@ -43,10 +43,8 @@ struct OnboardingView: View {
     private func next() { withAnimation(.smooth) { step += 1 } }
 
     private func finish() {
-        model.onboarded = true
+        withAnimation(.smooth) { model.onboarded = true }
         model.runRules()
-        dismissWindow(id: "onboarding")
-        model.openMainWindow()
     }
 
     private var diskAccess: some View {
@@ -95,9 +93,7 @@ struct OnboardingView: View {
             title: "Optional: a deeper look with Claude Code",
             text: "The plugin lets your own Claude Code explain what rules can't (old archives, abandoned projects). It can measure and report, never delete.",
             status: AnyView(VStack(spacing: 8) {
-                Text("/plugin install freeroom --marketplace hblabs-co/freeroom")
-                    .font(.system(.callout, design: .monospaced)).textSelection(.enabled)
-                    .padding(8).background(.quaternary.opacity(0.6), in: RoundedRectangle(cornerRadius: 8))
+                CopyField(text: "/plugin install freeroom --marketplace hblabs-co/freeroom", prominent: true)
                 switch pluginState {
                 case .some(true): Label("Plugin installed", systemImage: "checkmark.circle.fill").foregroundStyle(Theme.safe)
                 case .some(false): Label("Plugin not detected", systemImage: "questionmark.circle").foregroundStyle(.secondary)

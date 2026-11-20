@@ -105,3 +105,18 @@ struct RowIcon: View {
             .background(RoundedRectangle(cornerRadius: 6, style: .continuous).fill(.quaternary))
     }
 }
+
+/// "Freeroom by HB Labs SAS" with the app icon.
+struct BrandTitle: View {
+    var compact = false
+    var body: some View {
+        HStack(spacing: 8) {
+            Image(nsImage: NSApp.applicationIconImage).resizable().frame(width: compact ? 20 : 28, height: compact ? 20 : 28)
+            VStack(alignment: .leading, spacing: 0) {
+                Text("Freeroom").font(compact ? .headline : .title3.weight(.semibold))
+                Text("by HB Labs SAS").font(.caption2).foregroundStyle(.secondary)
+            }
+        }
+        .accessibilityElement(children: .combine)
+    }
+}
