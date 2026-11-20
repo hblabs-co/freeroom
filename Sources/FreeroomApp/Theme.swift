@@ -123,8 +123,10 @@ enum MenuGlyph {
 
 struct SafetyBadge: View {
     let safety: SafetyClass
+    var value: Int64? = nil
     var body: some View {
-        Label(Theme.label(safety), systemImage: Theme.icon(safety))
+        Label(value.map { "\(Theme.label(safety)) \($0.formattedBytes)" } ?? Theme.label(safety), systemImage: Theme.icon(safety))
+            .monospacedDigit()
             .font(.caption.weight(.semibold))
             .foregroundStyle(Theme.color(safety))
             .padding(.horizontal, 7).padding(.vertical, 2)

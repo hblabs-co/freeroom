@@ -307,6 +307,7 @@ struct Report: ParsableCommand {
           command (string, when action=command)   needsAdmin (bool, optional)
           evidence (string, why this classification is right)
           sizeBytes (only used when paths is empty)
+          icon (optional): {"app": "<bundle id>"} or {"brand": "<simple-icons slug>"} or {"symbol": "<SF Symbol>"}
         """)
 
     @Option(help: "Finding JSON. Reads stdin when omitted.") var json: String?
@@ -323,6 +324,7 @@ struct Report: ParsableCommand {
         var needsAdmin: Bool?
         var evidence: String?
         var sizeBytes: Int64?
+        var icon: FindingIcon?
     }
 
     func run() throws {
@@ -363,7 +365,8 @@ struct Report: ParsableCommand {
                 command: input.command, needsAdmin: input.needsAdmin ?? false,
                 verification: Verification(rule: "agent", evidence: input.evidence ?? "",
                                            measuredByFreeroom: !paths.isEmpty),
-                scanId: scan.id)
+                scanId: scan.id,
+                icon: input.icon)
             try store.upsert(finding, scanId: scan.id)
             saved.append(DisplayFinding(finding))
         }

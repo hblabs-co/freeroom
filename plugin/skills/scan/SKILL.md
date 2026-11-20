@@ -70,6 +70,8 @@ your findings to the user, who decides and deletes from the app.**
    - `category`: docker | xcode | appCaches | devCaches | projects | personal | apps | system | other
    - `action`: `delete` (regenerable), `trash` (default for review), `command` (give the exact
      tool command, e.g. `ollama rm qwen2.5`), `none` (informational).
+   - Optional `icon`: `{"app": "<bundle id>"}` when the item belongs to an app (e.g. `com.spotify.client`),
+     or `{"brand": "<simple-icons slug>"}` for tools (e.g. `docker`, `nodedotjs`). The app shows it.
    - Use a stable, descriptive `id` slug. Reporting the same id again updates the finding.
    - Group many small similar items into one finding with several paths.
    - Skip anything under 100 MB unless the user asked for detail.

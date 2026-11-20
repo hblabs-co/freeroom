@@ -80,7 +80,8 @@ public struct RuleEngine: Sendable {
             action: .delete,
             verification: Verification(rule: "build-artifacts",
                                        evidence: "\(matches.count) folders matched with evidence (e.g. \(matches[0].evidence))",
-                                       measuredByFreeroom: true)
+                                       measuredByFreeroom: true),
+            icon: FindingIcon(symbol: "hammer")
         )
     }
 }

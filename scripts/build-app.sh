@@ -16,6 +16,10 @@ mkdir -p "$APP/Contents/MacOS" "$APP/Contents/Helpers" "$APP/Contents/Resources"
 cp "$BIN/FreeroomApp" "$APP/Contents/MacOS/Freeroom"
 cp "$BIN/freeroom" "$APP/Contents/Helpers/freeroom"
 
+# Brand logos (Simple Icons, CC0) used by the icon resolver; bundled so nothing is fetched at runtime.
+mkdir -p "$APP/Contents/Resources/BrandIcons"
+cp design/catalog-icons/*.svg design/catalog-icons/LICENSE-simple-icons.md "$APP/Contents/Resources/BrandIcons/"
+
 # App icon from the design master
 ICONSET=build/AppIcon.iconset
 rm -rf "$ICONSET" && mkdir -p "$ICONSET"
@@ -40,7 +44,7 @@ cat > "$APP/Contents/Info.plist" <<PLIST
   <key>CFBundleShortVersionString</key><string>${VERSION}</string>
   <key>CFBundleVersion</key><string>${VERSION}</string>
   <key>CFBundleIconFile</key><string>AppIcon</string>
-  <key>LSMinimumSystemVersion</key><string>14.0</string>
+  <key>LSMinimumSystemVersion</key><string>15.0</string>
   <key>LSUIElement</key><true/>
   <key>LSApplicationCategoryType</key><string>public.app-category.utilities</string>
   <key>NSHumanReadableCopyright</key><string>© 2026 hblabs · MIT License</string>

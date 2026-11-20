@@ -2,7 +2,7 @@ import Foundation
 
 /// How to draw a finding's icon, in order of preference:
 /// the installed app's own icon, an official brand logo (Simple Icons, CC0), an SF Symbol.
-public struct IconRef: Codable, Equatable, Hashable, Sendable {
+public struct FindingIcon: Codable, Equatable, Hashable, Sendable {
     /// Bundle identifier of the app whose icon to show (resolved with NSWorkspace at runtime).
     public var app: String?
     /// Simple Icons slug (bundled SVG).
@@ -30,7 +30,7 @@ public struct KnownLocation: Codable, Equatable, Sendable {
     public var action: CleanupAction
     public var command: String?
     public var needsAdmin: Bool
-    public var icon: IconRef?
+    public var icon: FindingIcon?
     public var confidence: String?
     public var source: String?
     /// 1–5: how common this is on developer Macs.
@@ -38,7 +38,7 @@ public struct KnownLocation: Codable, Equatable, Sendable {
 
     public init(id: String, title: String, paths: [String], category: FindingCategory, safety: SafetyClass,
                 explanation: String, action: CleanupAction, command: String? = nil, needsAdmin: Bool = false,
-                icon: IconRef? = nil) {
+                icon: FindingIcon? = nil) {
         self.id = id
         self.title = title
         self.paths = paths

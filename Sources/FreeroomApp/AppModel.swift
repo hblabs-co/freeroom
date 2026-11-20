@@ -12,50 +12,66 @@ final class AppModel {
     var freeBytes: Int64 = 0
     var totalBytes: Int64 = 0
     var usedFraction: Double { totalBytes > 0 ? 1 - Double(freeBytes) / Double(totalBytes) : 0 }
+    var lowOnSpace: Bool { freeBytes > 0 && freeBytes < Int64(lowDiskThresholdGB) * 1_000_000_000 }
 
-    // Findings (latest rule scan + latest agent scan, minus what was already cleaned)
+    // Findings: latest rule scan + latest agent scan, minus what was already cleaned, biggest first.
     var findings: [Finding] = []
     var translations: [String: String] = [:]
     var lastRuleScan: ScanRecord?
     var lastAgentScan: ScanRecord?
     var agentScanLive: Bool { lastAgentScan != nil && lastAgentScan?.endedAt == nil }
+    /// Ids that appeared in the last reload (for the "new finding" highlight).
+    var freshIds: Set<String> = []
     var isRunningRules = false
     var storeError: String?
 
     // Selection & cleaning
     var selection: Set<String> = []
+    var inspected: String?
+    /// When set, the main window presents the clean sheet with these findings.
+    var pendingClean: [Finding]?
     var cleaning = false
     var cleanResults: [String: CleanupOutcome] = [:]
     var history: [HistoryEntry] = []
+    var freedAllTime: Int64 { history.reduce(0) { $0 + $1.freedBytes } }
 
-    // Settings (persisted in UserDefaults)
+    // Settings (UserDefaults)
     var language: String { didSet { defaults.set(language, forKey: "language"); reload() } }
     var notificationsEnabled: Bool { didSet { defaults.set(notificationsEnabled, forKey: "notifications") } }
     var lowDiskThresholdGB: Int { didSet { defaults.set(lowDiskThresholdGB, forKey: "lowDiskGB") } }
     var checkEveryHours: Int { didSet { defaults.set(checkEveryHours, forKey: "checkHours"); scheduleRuleChecks() } }
     var showFreeInMenuBar: Bool { didSet { defaults.set(showFreeInMenuBar, forKey: "menuBarFree") } }
+    var showDiskMap: Bool { didSet { defaults.set(showDiskMap, forKey: "diskMap") } }
+    var playSound: Bool { didSet { defaults.set(playSound, forKey: "sound") } }
+    var onboarded: Bool { didSet { defaults.set(onboarded, forKey: "onboarded") } }
 
     private let defaults = UserDefaults.standard
     private var store: Store?
     private var pollTimer: Timer?
     private var ruleTimer: Timer?
+    private let notificationDelegate = NotificationDelegate()
 
     init() {
         language = defaults.string(forKey: "language") ?? "en"
         notificationsEnabled = defaults.object(forKey: "notifications") as? Bool ?? true
-        lowDiskThresholdGB = defaults.object(forKey: "lowDiskGB") as? Int ?? 15
+        lowDiskThresholdGB = defaults.object(forKey: "lowDiskGB") as? Int ?? 25
         checkEveryHours = defaults.object(forKey: "checkHours") as? Int ?? 6
         showFreeInMenuBar = defaults.object(forKey: "menuBarFree") as? Bool ?? true
+        showDiskMap = defaults.object(forKey: "diskMap") as? Bool ?? true
+        playSound = defaults.object(forKey: "sound") as? Bool ?? true
+        onboarded = defaults.bool(forKey: "onboarded")
 
         do { store = try Store() } catch { storeError = "\(error)" }
         reload()
-        // The CLI writes while Claude Code scans; poll the small SQLite store to show it live.
         pollTimer = Timer.scheduledTimer(withTimeInterval: 3, repeats: true) { [weak self] _ in
             Task { @MainActor in self?.reload() }
         }
         scheduleRuleChecks()
-        if notificationsEnabled { requestNotificationPermission() }
-        if lastRuleScan == nil { runRules() }
+        notificationDelegate.model = self
+        let center = UNUserNotificationCenter.current()
+        center.delegate = notificationDelegate
+        center.setNotificationCategories([NotificationDelegate.category])
+        if onboarded && lastRuleScan == nil { runRules() }
     }
 
     // MARK: Loading
@@ -67,13 +83,16 @@ final class AppModel {
             let scans = try store.scans(limit: 50)
             lastRuleScan = scans.first { $0.source == .rule }
             lastAgentScan = scans.first { $0.source == .agent }
-            history = try store.history(limit: 200)
+            history = try store.history(limit: 500)
             let cleaned = Dictionary(history.map { ($0.findingId, $0.at) }, uniquingKeysWith: max)
             let scanStart = Dictionary(scans.map { ($0.id, $0.startedAt) }, uniquingKeysWith: { a, _ in a })
-            findings = try store.latestFindings().filter { finding in
+            let loaded = try store.latestFindings().filter { finding in
                 guard let at = cleaned[finding.id], let start = finding.scanId.flatMap({ scanStart[$0] }) else { return true }
-                return at < start // cleaned before this scan found it again → still relevant
-            }
+                return at < start
+            }.sorted { $0.sizeBytes > $1.sizeBytes }
+            let previous = Set(findings.map(\.id))
+            if !previous.isEmpty { freshIds = Set(loaded.map(\.id)).subtracting(previous) }
+            if loaded != findings { findings = loaded }
             translations = language == "en" ? [:] : try store.translations(lang: language)
             selection = selection.filter { id in findings.contains { $0.id == id } }
         } catch {
@@ -94,16 +113,24 @@ final class AppModel {
 
     // MARK: Derived
 
-    var suggestions: [Finding] {
-        findings.filter { $0.safety == .safe && $0.action != .none && !$0.needsAdmin }.prefix(3).map { $0 }
-    }
+    var safeFindings: [Finding] { findings.filter { $0.safety == .safe && $0.isCleanable && !$0.needsAdmin } }
+    var suggestions: [Finding] { Array(safeFindings.prefix(3)) }
 
     func total(_ safety: SafetyClass) -> Int64 {
-        findings.filter { $0.safety == safety }.reduce(0) { $0 + $1.sizeBytes }
+        findings.filter { $0.safety == safety }.reduce(0) { $0 + $1.reclaimable }
     }
 
+    var cleanableTotal: Int64 { findings.filter(\.isCleanable).reduce(0) { $0 + $1.reclaimable } }
     var selectedFindings: [Finding] { findings.filter { selection.contains($0.id) } }
-    var selectedBytes: Int64 { selectedFindings.reduce(0) { $0 + $1.sizeBytes - $1.sharedBytes } }
+    var selectedBytes: Int64 { selectedFindings.reduce(0) { $0 + $1.reclaimable } }
+
+    var ecosystems: [(Ecosystem, Int64)] {
+        Dictionary(grouping: findings, by: \.ecosystem)
+            .map { ($0.key, $0.value.reduce(0) { $0 + $1.reclaimable }) }
+            .sorted { $0.1 > $1.1 }
+    }
+
+    func finding(id: String) -> Finding? { findings.first { $0.id == id } }
 
     // MARK: Rule engine (no AI)
 
@@ -135,6 +162,14 @@ final class AppModel {
 
     // MARK: Cleaning
 
+    func requestClean(_ items: [Finding]) {
+        let cleanable = items.filter(\.isCleanable)
+        guard !cleanable.isEmpty else { return }
+        cleanResults = [:]
+        pendingClean = cleanable
+        openMainWindow()
+    }
+
     func clean(_ toClean: [Finding], origin: String) {
         guard !cleaning else { return }
         cleaning = true
@@ -148,14 +183,24 @@ final class AppModel {
                     try? store?.recordCleanup(HistoryEntry(findingId: finding.id, title: finding.title,
                                                            freedBytes: freed, at: Date(), origin: origin))
                 }
-                await MainActor.run { self.cleanResults[finding.id] = outcome }
+                await MainActor.run {
+                    withAnimation(.smooth) { self.cleanResults[finding.id] = outcome }
+                }
             }
             await MainActor.run {
                 self.cleaning = false
                 self.selection = []
-                self.reload()
+                self.updateDisk()
+                if self.playSound { NSSound(named: "Glass")?.play() }
+                NSHapticFeedbackManager.defaultPerformer.perform(.levelChange, performanceTime: .now)
             }
         }
+    }
+
+    func finishClean() {
+        pendingClean = nil
+        cleanResults = [:]
+        reload()
     }
 
     // MARK: Notifications (rule engine only, max one per day)
@@ -170,20 +215,37 @@ final class AppModel {
         guard Date().timeIntervalSince(lastSent) > 20 * 3600 else { return }
 
         let content = UNMutableNotificationContent()
-        let safeTotal = total(.safe)
-        if freeBytes < Int64(lowDiskThresholdGB) * 1_000_000_000 {
-            content.title = "Disk almost full: \(freeBytes.formattedBytes) free"
-            content.body = "\(safeTotal.formattedBytes) can be freed safely. Open Freeroom to review."
+        content.categoryIdentifier = NotificationDelegate.categoryId
+        var attachmentIcon: FindingIcon?
+        if lowOnSpace {
+            content.title = "Disk almost full · \(freeBytes.formattedBytes) free"
+            content.body = "\(total(.safe).formattedBytes) can be freed safely."
+            attachmentIcon = FindingIcon(symbol: "internaldrive")
+            content.userInfo = ["action": "safe"]
         } else if let top = suggestions.first, top.sizeBytes > 5_000_000_000 {
-            content.title = "\(top.title): \(top.sizeBytes.formattedBytes)"
-            content.body = "\(explanation(for: top)) Review it in Freeroom."
+            content.title = "\(top.title) · \(top.sizeBytes.formattedBytes)"
+            content.body = "Safe: \(explanation(for: top))"
+            attachmentIcon = top.icon
+            content.userInfo = ["findingId": top.id]
         } else {
             return
         }
-        content.sound = nil
+        if let icon = attachmentIcon, let attachment = NotificationDelegate.attachment(for: icon) {
+            content.attachments = [attachment]
+        }
         let request = UNNotificationRequest(identifier: "freeroom-\(Date().timeIntervalSince1970)", content: content, trigger: nil)
         UNUserNotificationCenter.current().add(request)
         defaults.set(Date(), forKey: "lastNotification")
+    }
+
+    func handleNotification(userInfo: [AnyHashable: Any]) {
+        if let id = userInfo["findingId"] as? String, let finding = finding(id: id) {
+            requestClean([finding])
+        } else if userInfo["action"] as? String == "safe" {
+            requestClean(safeFindings)
+        } else {
+            openMainWindow()
+        }
     }
 
     // MARK: Launch at login
@@ -199,7 +261,27 @@ final class AppModel {
         }
     }
 
+    // MARK: Environment checks (onboarding)
+
+    var hasFullDiskAccess: Bool {
+        (try? FileManager.default.contentsOfDirectory(atPath: PathUtils.expand("~/Library/Safari"))) != nil
+    }
+
+    func pluginInstalled() async -> Bool {
+        await Task.detached {
+            let result = Shell.run(["claude", "plugin", "list"], timeout: 15)
+            return result.ok && result.stdout.contains("freeroom")
+        }.value
+    }
+
     // MARK: Helpers
+
+    var openWindowAction: ((String) -> Void)?
+
+    func openMainWindow() {
+        openWindowAction?("main")
+        NSApp.activate(ignoringOtherApps: true)
+    }
 
     func copyScanCommand() {
         NSPasteboard.general.clearContents()
@@ -208,5 +290,50 @@ final class AppModel {
 
     func reveal(_ path: String) {
         NSWorkspace.shared.activateFileViewerSelecting([URL(fileURLWithPath: path)])
+    }
+
+    func openTrash() {
+        NSWorkspace.shared.open(URL(fileURLWithPath: PathUtils.expand("~/.Trash")))
+    }
+}
+
+/// Handles notification actions: "Review" opens the clean sheet for that item; "Later" does nothing.
+final class NotificationDelegate: NSObject, UNUserNotificationCenterDelegate, @unchecked Sendable {
+    static let categoryId = "finding"
+    static let category = UNNotificationCategory(
+        identifier: categoryId,
+        actions: [
+            UNNotificationAction(identifier: "review", title: "Review", options: [.foreground]),
+            UNNotificationAction(identifier: "later", title: "Later", options: []),
+        ],
+        intentIdentifiers: [])
+
+    weak var model: AppModel?
+
+    func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse,
+                                withCompletionHandler completionHandler: @escaping () -> Void) {
+        let info = response.notification.request.content.userInfo
+        let action = response.actionIdentifier
+        Task { @MainActor in
+            if action != "later" { self.model?.handleNotification(userInfo: info) }
+            completionHandler()
+        }
+    }
+
+    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification,
+                                withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+        completionHandler([.banner])
+    }
+
+    /// Renders the item's icon to a PNG so the banner shows it.
+    @MainActor
+    static func attachment(for icon: FindingIcon) -> UNNotificationAttachment? {
+        let renderer = ImageRenderer(content: ItemIcon(icon: icon, size: 128).padding(8))
+        renderer.scale = 2
+        guard let image = renderer.nsImage, let tiff = image.tiffRepresentation,
+              let png = NSBitmapImageRep(data: tiff)?.representation(using: .png, properties: [:]) else { return nil }
+        let url = URL(fileURLWithPath: NSTemporaryDirectory()).appendingPathComponent("freeroom-\(UUID().uuidString).png")
+        guard (try? png.write(to: url)) != nil else { return nil }
+        return try? UNNotificationAttachment(identifier: "icon", url: url)
     }
 }

@@ -3,7 +3,7 @@ import PackageDescription
 
 let package = Package(
     name: "Freeroom",
-    platforms: [.macOS(.v14)],
+    platforms: [.macOS(.v15)],
     products: [
         .library(name: "FreeroomCore", targets: ["FreeroomCore"]),
         .executable(name: "freeroom", targets: ["freeroom"]),

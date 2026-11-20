@@ -1,228 +1,319 @@
 import FreeroomCore
 import SwiftUI
 
+enum SidebarItem: Hashable {
+    case everything
+    case ecosystem(String)
+    case source(FindingSource)
+}
+
 struct MainView: View {
     @Environment(AppModel.self) private var model
-    @State private var filter: SafetyClass? = nil
-    @State private var sourceFilter: FindingSource? = nil
+    @State private var sidebar: SidebarItem = .everything
     @State private var search = ""
-    @State private var expanded: Set<String> = []
-    @State private var confirming = false
+    @State private var groupByEcosystem = true
+    @State private var showInspector = true
 
     private var visible: [Finding] {
         model.findings.filter { f in
-            (filter == nil || f.safety == filter)
-                && (sourceFilter == nil || f.source == sourceFilter)
-                && (search.isEmpty || f.title.localizedCaseInsensitiveContains(search)
-                    || f.paths.contains { $0.localizedCaseInsensitiveContains(search) })
+            let inSidebar: Bool = switch sidebar {
+            case .everything: true
+            case .ecosystem(let id): f.ecosystem.id == id
+            case .source(let s): f.source == s
+            }
+            return inSidebar && (search.isEmpty || f.title.localizedCaseInsensitiveContains(search)
+                                 || f.paths.contains { $0.localizedCaseInsensitiveContains(search) })
         }
-    }
-
-    private var grouped: [(FindingCategory, [Finding])] {
-        let groups = Dictionary(grouping: visible, by: \.category)
-        return FindingCategory.allCases.compactMap { c in groups[c].map { (c, $0) } }
     }
 
     var body: some View {
         @Bindable var model = model
-        VStack(spacing: 0) {
-            summary
-            Divider()
-            if model.findings.isEmpty {
-                emptyState
-            } else {
-                List {
-                    ForEach(grouped, id: \.0) { category, items in
-                        Section {
-                            ForEach(items) { finding in
-                                FindingRow(finding: finding, expanded: expanded.contains(finding.id)) {
-                                    if expanded.contains(finding.id) { expanded.remove(finding.id) } else { expanded.insert(finding.id) }
-                                }
-                            }
-                        } header: {
-                            Label(category.title, systemImage: Theme.categoryIcon(category))
+        NavigationSplitView {
+            sidebarList
+                .navigationSplitViewColumnWidth(min: 200, ideal: 230)
+        } detail: {
+            ZStack(alignment: .bottom) {
+                content
+                SelectionBar()
+                    .padding(.bottom, 14)
+            }
+            .inspector(isPresented: $showInspector) {
+                Group {
+                    if let id = model.inspected, let finding = model.finding(id: id) {
+                        FindingInspector(finding: finding)
+                    } else {
+                        ContentUnavailableView("Select an item", systemImage: "sidebar.right",
+                                               description: Text("Details, evidence and paths appear here."))
+                    }
+                }
+                .inspectorColumnWidth(min: 280, ideal: 310, max: 380)
+            }
+        }
+        .searchable(text: $search, placement: .toolbar, prompt: "Search")
+        .toolbar { toolbar }
+        .sheet(isPresented: Binding(get: { model.pendingClean != nil },
+                                    set: { if !$0 { model.finishClean() } })) {
+            CleanSheet(items: model.pendingClean ?? []).environment(model)
+        }
+        .navigationTitle(title)
+        .navigationSubtitle("\(model.freeBytes.formattedBytes) free of \(model.totalBytes.formattedBytes)")
+        .onKeyPress(.space) {
+            guard let id = model.inspected, let f = model.finding(id: id), f.isCleanable else { return .ignored }
+            if model.selection.contains(id) { model.selection.remove(id) } else { model.selection.insert(id) }
+            return .handled
+        }
+        .background(KeyboardShortcuts())
+    }
+
+    private var title: String {
+        switch sidebar {
+        case .everything: "Everything"
+        case .ecosystem(let id): model.ecosystems.first { $0.0.id == id }?.0.title ?? "Freeroom"
+        case .source(.agent): "Found by Claude Code"
+        case .source(.rule): "Found by rules"
+        }
+    }
+
+    // MARK: Sidebar
+
+    private var sidebarList: some View {
+        List(selection: $sidebar) {
+            Label { HStack { Text("Everything"); Spacer(); Text(model.cleanableTotal.formattedBytes).monospacedDigit().foregroundStyle(.secondary) } }
+                icon: { Image(systemName: "square.grid.2x2") }
+                .tag(SidebarItem.everything)
+
+            Section("Ecosystems") {
+                ForEach(model.ecosystems, id: \.0) { eco, bytes in
+                    HStack(spacing: 8) {
+                        ItemIcon(icon: eco.icon, fallback: "folder", size: 20)
+                        Text(eco.title).lineLimit(1)
+                        Spacer()
+                        Text(bytes.formattedBytes).monospacedDigit().foregroundStyle(.secondary).font(.callout)
+                    }
+                    .tag(SidebarItem.ecosystem(eco.id))
+                }
+            }
+            Section("Found by") {
+                Label("Rules", systemImage: "ruler").badge(model.findings.filter { $0.source == .rule }.count)
+                    .tag(SidebarItem.source(.rule))
+                Label { Text("Claude Code") } icon: { AgentMark(size: 14) }
+                    .badge(model.findings.filter { $0.source == .agent }.count)
+                    .tag(SidebarItem.source(.agent))
+            }
+        }
+        .safeAreaInset(edge: .bottom) {
+            if model.freedAllTime > 0 {
+                Label("\(model.freedAllTime.formattedBytes) freed so far", systemImage: "clock.arrow.circlepath")
+                    .font(.caption).foregroundStyle(.secondary)
+                    .padding(12).frame(maxWidth: .infinity, alignment: .leading)
+            }
+        }
+    }
+
+    // MARK: Content
+
+    @ViewBuilder
+    private var content: some View {
+        if model.findings.isEmpty {
+            EmptyStateView()
+        } else {
+            ScrollView {
+                VStack(alignment: .leading, spacing: 18) {
+                    if model.agentScanLive { AgentLiveBanner() }
+                    hero
+                    if model.showDiskMap && sidebar == .everything && search.isEmpty {
+                        TreemapView(findings: visible.filter(\.isCleanable))
+                            .frame(height: 230)
+                    }
+                    list
+                }
+                .padding(20)
+                .padding(.bottom, 70)
+            }
+        }
+    }
+
+    private var hero: some View {
+        HStack(alignment: .top, spacing: 24) {
+            VStack(alignment: .leading, spacing: 6) {
+                Text("You can free up to").foregroundStyle(.secondary)
+                Text(model.cleanableTotal.formattedBytes)
+                    .font(.system(size: 40, weight: .semibold, design: .rounded)).monospacedDigit()
+                    .contentTransition(.numericText(value: Double(model.cleanableTotal)))
+                HStack(spacing: 6) {
+                    SafetyBadge(safety: .safe, value: model.total(.safe))
+                    SafetyBadge(safety: .review, value: model.total(.review))
+                }
+            }
+            VStack(alignment: .leading, spacing: 8) {
+                Spacer(minLength: 18)
+                DiskBar(total: model.totalBytes, free: model.freeBytes, safe: model.total(.safe),
+                        review: model.total(.review), keep: model.findings.filter { $0.safety == .keep }.reduce(0) { $0 + $1.sizeBytes })
+                HStack(spacing: 12) {
+                    LegendDot(symbol: Theme.icon(.safe), color: Theme.safe, label: "Safe", value: model.total(.safe))
+                    LegendDot(symbol: Theme.icon(.review), color: Theme.review, label: "Review", value: model.total(.review))
+                    LegendDot(symbol: "circle", color: .secondary, label: "Free", value: model.freeBytes)
+                }
+            }
+        }
+    }
+
+    private var list: some View {
+        let maxSize = Double(visible.first?.sizeBytes ?? 1)
+        let groups: [(String, Ecosystem?, [Finding])] = groupByEcosystem
+            ? Dictionary(grouping: visible, by: \.ecosystem)
+                .map { ($0.key.title, Optional($0.key), $0.value) }
+                .sorted { $0.2.reduce(0) { $0 + $1.sizeBytes } > $1.2.reduce(0) { $0 + $1.sizeBytes } }
+            : [("By size", nil, visible)]
+        return VStack(alignment: .leading, spacing: 16) {
+            ForEach(groups, id: \.0) { title, eco, items in
+                VStack(alignment: .leading, spacing: 4) {
+                    HStack(spacing: 8) {
+                        if let eco { ItemIcon(icon: eco.icon, size: 20) }
+                        Text(title).font(.headline)
+                        let cleanable = items.filter { $0.isCleanable && $0.safety == .safe }
+                        if !cleanable.isEmpty {
+                            Button("Select all") { model.selection.formUnion(cleanable.map(\.id)) }
+                                .buttonStyle(.link).font(.callout)
+                        }
+                        Spacer()
+                        Text(items.reduce(Int64(0)) { $0 + $1.reclaimable }.formattedBytes)
+                            .monospacedDigit().foregroundStyle(.secondary)
+                    }
+                    .padding(.horizontal, 4)
+                    VStack(spacing: 0) {
+                        ForEach(items) { finding in
+                            FindingRow(finding: finding, fraction: Double(finding.sizeBytes) / maxSize)
+                            if finding.id != items.last?.id { Divider().padding(.leading, 76) }
                         }
                     }
+                    .background(RoundedRectangle(cornerRadius: 12, style: .continuous).fill(Color(nsColor: .controlBackgroundColor)))
+                    .overlay(RoundedRectangle(cornerRadius: 12, style: .continuous).strokeBorder(Color(nsColor: .separatorColor), lineWidth: 0.5))
                 }
-                .listStyle(.inset)
-            }
-            selectionBar
-        }
-        .searchable(text: $search, placement: .toolbar, prompt: "Search findings")
-        .toolbar {
-            ToolbarItem(placement: .navigation) {
-                Picker("Source", selection: $sourceFilter) {
-                    Text("All sources").tag(FindingSource?.none)
-                    Text("Rules").tag(FindingSource?.some(.rule))
-                    Text("Agent").tag(FindingSource?.some(.agent))
-                }
-                .pickerStyle(.menu)
-            }
-            ToolbarItem {
-                Button { model.runRules() } label: {
-                    Label("Check now", systemImage: model.isRunningRules ? "hourglass" : "arrow.clockwise")
-                }
-                .disabled(model.isRunningRules)
-                .help("Run the rule engine (no AI)")
             }
         }
-        .sheet(isPresented: $confirming) {
-            ConfirmSheet().environment(model)
-        }
-        .navigationTitle("Freeroom")
     }
 
-    private var summary: some View {
-        HStack(alignment: .center, spacing: 24) {
-            DiskGauge(free: model.freeBytes, total: model.totalBytes).frame(maxWidth: 320)
-            ForEach(SafetyClass.allCases, id: \.self) { safety in
-                Button {
-                    filter = filter == safety ? nil : safety
-                } label: {
-                    VStack(alignment: .leading, spacing: 2) {
-                        Label(Theme.label(safety), systemImage: Theme.icon(safety))
-                            .font(.caption.weight(.semibold)).foregroundStyle(Theme.color(safety))
-                        Text(model.total(safety).formattedBytes).font(.title3.weight(.semibold)).monospacedDigit()
-                    }
-                    .padding(10)
-                    .frame(minWidth: 110, alignment: .leading)
-                    .background(filter == safety ? Theme.color(safety).opacity(0.12) : .clear,
-                                in: RoundedRectangle(cornerRadius: 10, style: .continuous))
-                }
-                .buttonStyle(.plain)
+    @ToolbarContentBuilder
+    private var toolbar: some ToolbarContent {
+        ToolbarItem {
+            Picker("Group", selection: $groupByEcosystem) {
+                Label("Ecosystem", systemImage: "square.grid.2x2").tag(true)
+                Label("Size", systemImage: "list.number").tag(false)
             }
-            Spacer()
-            if model.agentScanLive {
-                HStack(spacing: 6) {
-                    ProgressView().controlSize(.small)
-                    AgentMark(size: 12)
-                    Text("Live from Claude Code").font(.callout).foregroundStyle(Theme.agent)
-                }
-            }
+            .pickerStyle(.segmented)
+            .help("Group by ecosystem or list by size")
         }
-        .padding(16)
-    }
-
-    private var emptyState: some View {
-        VStack(spacing: 12) {
-            Spacer()
-            if model.isRunningRules {
-                ProgressView("Measuring your disk…")
-            } else {
-                Image(systemName: "sparkles").font(.largeTitle).foregroundStyle(Theme.accent)
-                Text("No findings yet").font(.title3.weight(.semibold))
-                Text("Run the built-in check, or ask Claude Code for a deep analysis with /freeroom:scan.")
-                    .foregroundStyle(.secondary)
-                HStack {
-                    Button("Check now") { model.runRules() }.buttonStyle(.borderedProminent).tint(Theme.accent)
-                    Button("Copy /freeroom:scan") { model.copyScanCommand() }
-                }
+        ToolbarItem {
+            Button { model.runRules() } label: {
+                Label("Check now", systemImage: "arrow.clockwise")
+                    .symbolEffect(.rotate, isActive: model.isRunningRules)
             }
-            Spacer()
+            .help("Check now: rules only, no AI (⌘R)")
+            .keyboardShortcut("r")
         }
-        .frame(maxWidth: .infinity)
-    }
-
-    private var selectionBar: some View {
-        HStack {
-            if model.selection.isEmpty {
-                Text("Select findings to clean. Nothing is deleted until you confirm.").foregroundStyle(.secondary)
-            } else {
-                Text("\(model.selection.count) selected · \(model.selectedBytes.formattedBytes)")
-                    .monospacedDigit().font(.callout.weight(.semibold))
-                Text("→ about \((model.freeBytes + model.selectedBytes).formattedBytes) free")
-                    .foregroundStyle(.secondary).monospacedDigit()
-                Button("Clear") { model.selection = [] }.buttonStyle(.borderless)
-            }
-            Spacer()
-            Button("Review & clean…") { confirming = true }
-                .buttonStyle(.borderedProminent).tint(Theme.accent)
-                .disabled(model.selection.isEmpty || model.cleaning)
+        ToolbarItem {
+            Button { model.copyScanCommand() } label: { Label("Deep scan", systemImage: "terminal") }
+                .help("Copy /freeroom:scan for Claude Code")
         }
-        .padding(.horizontal, 16).padding(.vertical, 10)
-        .freeroomGlass(cornerRadius: 0)
+        ToolbarItem {
+            Button { showInspector.toggle() } label: { Label("Inspector", systemImage: "sidebar.right") }
+                .keyboardShortcut("i", modifiers: [.command, .option])
+        }
     }
 }
 
-struct FindingRow: View {
+/// Global shortcuts: ⌘A selects all Safe, ⌘⏎ reviews the selection.
+private struct KeyboardShortcuts: View {
     @Environment(AppModel.self) private var model
-    let finding: Finding
-    let expanded: Bool
-    let toggle: () -> Void
+    var body: some View {
+        ZStack {
+            Button("") { model.selection = Set(model.safeFindings.map(\.id)) }.keyboardShortcut("a")
+            Button("") { model.requestClean(model.selectedFindings) }.keyboardShortcut(.return, modifiers: .command)
+        }
+        .opacity(0).allowsHitTesting(false)
+    }
+}
+
+/// Floating glass capsule with the selection and the main action.
+struct SelectionBar: View {
+    @Environment(AppModel.self) private var model
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 6) {
-            HStack(spacing: 10) {
-                Toggle("", isOn: Binding(
-                    get: { model.selection.contains(finding.id) },
-                    set: { on in if on { model.selection.insert(finding.id) } else { model.selection.remove(finding.id) } }
-                ))
-                .labelsHidden()
-                .disabled(finding.safety == .keep || finding.action == .none)
-
-                VStack(alignment: .leading, spacing: 2) {
-                    HStack(spacing: 6) {
-                        Text(finding.title).font(.body.weight(.medium))
-                        SourceBadge(source: finding.source)
-                        if finding.verification?.measuredByFreeroom == true {
-                            Image(systemName: "checkmark.seal").foregroundStyle(Theme.accent).help("Measured by Freeroom")
-                        }
-                        if finding.needsAdmin {
-                            Image(systemName: "lock.shield").foregroundStyle(.secondary).help("Needs administrator rights")
-                        }
+        HStack(spacing: 12) {
+            if model.selection.isEmpty {
+                Image(systemName: "keyboard").foregroundStyle(.secondary)
+                Text("space selects · ⌘A all Safe · ⌘⏎ clean").foregroundStyle(.secondary).font(.callout)
+            } else {
+                HStack(spacing: -8) {
+                    ForEach(model.selectedFindings.prefix(5)) { f in
+                        ItemIcon(icon: f.icon, fallback: f.categoryFallback, size: 24)
+                            .background(Circle().fill(.background).padding(-2))
                     }
-                    Text(model.explanation(for: finding))
-                        .font(.callout).foregroundStyle(.secondary).lineLimit(expanded ? nil : 1)
                 }
-                Spacer()
-                VStack(alignment: .trailing, spacing: 3) {
-                    Text(finding.sizeBytes.formattedBytes).font(.body.weight(.semibold)).monospacedDigit()
-                    SafetyBadge(safety: finding.safety)
-                }
-                Button(action: toggle) {
-                    Image(systemName: expanded ? "chevron.up" : "chevron.down")
-                }
-                .buttonStyle(.borderless)
+                Text("**\(model.selectedBytes.formattedBytes)** · \(model.selection.count) items")
+                    .monospacedDigit()
+                Text("→ \((model.freeBytes + model.selectedBytes).formattedBytes) free")
+                    .foregroundStyle(.secondary).monospacedDigit()
+                Button { model.selection = [] } label: { Image(systemName: "xmark.circle.fill") }
+                    .buttonStyle(.borderless).foregroundStyle(.secondary).help("Clear selection")
             }
-            if expanded { details.padding(.leading, 34) }
+            Button("Review & clean") { model.requestClean(model.selectedFindings) }
+                .buttonStyle(.borderedProminent).tint(Theme.accent)
+                .disabled(model.selection.isEmpty)
         }
-        .padding(.vertical, 4)
+        .padding(.horizontal, 16).padding(.vertical, 10)
+        .freeroomGlass(cornerRadius: 22)
+        .shadow(color: .black.opacity(0.12), radius: 12, y: 4)
+        .animation(.snappy, value: model.selection)
     }
+}
 
-    @ViewBuilder
-    private var details: some View {
-        VStack(alignment: .leading, spacing: 6) {
-            if let command = finding.command {
-                LabeledContent("Command") {
-                    Text(command).font(.system(.caption, design: .monospaced)).textSelection(.enabled)
-                }
+struct AgentLiveBanner: View {
+    @Environment(AppModel.self) private var model
+    var body: some View {
+        HStack(spacing: 10) {
+            AgentMark(size: 18).symbolEffect(.pulse)
+            VStack(alignment: .leading, spacing: 2) {
+                Text("Claude Code is scanning…").font(.callout.weight(.semibold))
+                let agent = model.findings.filter { $0.source == .agent }
+                Text(agent.first.map { "\(agent.count) findings · latest: \($0.title) \($0.sizeBytes.formattedBytes)" } ?? "Waiting for the first finding")
+                    .font(.caption)
             }
-            LabeledContent("Action") { Text(actionText) }
-            if finding.sharedBytes > 0 {
-                LabeledContent("Shared") {
-                    Text("\(finding.sharedBytes.formattedBytes) is hard-linked elsewhere and will not be freed")
-                }
-            }
-            if let v = finding.verification, !v.evidence.isEmpty {
-                LabeledContent("Evidence") { Text(v.evidence) }
-            }
-            ForEach(finding.paths.prefix(8), id: \.self) { path in
-                Button(PathUtils.abbreviate(path)) { model.reveal(path) }
-                    .buttonStyle(.link).font(.system(.caption, design: .monospaced))
-            }
-            if finding.paths.count > 8 {
-                Text("+ \(finding.paths.count - 8) more paths").font(.caption).foregroundStyle(.secondary)
-            }
+            Spacer()
+            ProgressView().controlSize(.small)
         }
-        .font(.caption)
+        .foregroundStyle(Theme.agent)
+        .padding(12)
+        .background(Theme.agentSoft, in: RoundedRectangle(cornerRadius: 12, style: .continuous))
     }
+}
 
-    private var actionText: String {
-        switch finding.action {
-        case .command: "Run the tool's own cleanup command"
-        case .trash: "Move to Trash (recoverable)"
-        case .delete: "Delete permanently (regenerable)"
-        case .none: "Informational: nothing to run"
+struct EmptyStateView: View {
+    @Environment(AppModel.self) private var model
+    var body: some View {
+        VStack(spacing: 14) {
+            if model.isRunningRules {
+                ProgressView().controlSize(.large)
+                Text("Measuring \(Catalog.locations.count) known locations…").foregroundStyle(.secondary)
+            } else {
+                Image(nsImage: NSApp.applicationIconImage).resizable().frame(width: 96, height: 96)
+                Text("Nothing worth cleaning").font(.title2.weight(.semibold))
+                Text("\(model.freeBytes.formattedBytes) free").foregroundStyle(.secondary).monospacedDigit()
+                HStack {
+                    Button("Check now") { model.runRules() }.buttonStyle(.borderedProminent).tint(Theme.accent)
+                    Button("Deep scan with Claude Code") { model.copyScanCommand() }
+                }
+                HStack(spacing: -6) {
+                    ForEach(Array(Catalog.locations.filter { $0.icon?.app != nil || $0.icon?.brand != nil }
+                        .sorted { ($0.popularity ?? 0) > ($1.popularity ?? 0) }.prefix(12).enumerated()), id: \.offset) { _, loc in
+                        ItemIcon(icon: loc.icon, size: 26)
+                    }
+                }
+                .padding(.top, 10)
+                Text("Watching \(Catalog.locations.count) known locations").font(.caption).foregroundStyle(.secondary)
+            }
         }
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
     }
 }

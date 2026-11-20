@@ -1,124 +1,153 @@
 import FreeroomCore
 import SwiftUI
 
-/// The popover under the menu bar glyph.
+/// The popover under the menu bar glyph: one number, one action, three big wins.
 struct MenuPanel: View {
     @Environment(AppModel.self) private var model
-    @Environment(\.openWindow) private var openWindow
     @Environment(\.openSettings) private var openSettings
 
     var body: some View {
         VStack(alignment: .leading, spacing: 14) {
             header
-            DiskGauge(free: model.freeBytes, total: model.totalBytes)
 
-            VStack(alignment: .leading, spacing: 8) {
-                Text("Quick suggestions").font(.caption.weight(.semibold)).foregroundStyle(.secondary)
-                if model.suggestions.isEmpty {
-                    Text(model.isRunningRules ? "Checking your disk…" : "Nothing big to clean right now.")
-                        .font(.callout).foregroundStyle(.secondary)
+            let safeTotal = model.safeFindings.reduce(Int64(0)) { $0 + $1.reclaimable }
+            Button {
+                model.requestClean(model.safeFindings)
+            } label: {
+                Label(safeTotal > 0 ? "Free \(safeTotal.formattedBytes) safely" : "Nothing safe to free right now",
+                      systemImage: "sparkles")
+                    .font(.headline)
+                    .frame(maxWidth: .infinity)
+                    .padding(.vertical, 6)
+            }
+            .buttonStyle(.borderedProminent)
+            .tint(Theme.accent)
+            .disabled(safeTotal == 0)
+            .keyboardShortcut(.defaultAction)
+
+            if !model.suggestions.isEmpty {
+                HStack {
+                    Text("Biggest safe wins").font(.caption.weight(.semibold)).foregroundStyle(.secondary)
+                    Spacer()
+                    Button("See all") { model.openMainWindow() }.buttonStyle(.link).font(.caption)
                 }
-                ForEach(model.suggestions) { finding in
-                    HStack(spacing: 10) {
-                        Image(systemName: Theme.categoryIcon(finding.category))
-                            .foregroundStyle(.secondary).frame(width: 18)
-                        VStack(alignment: .leading, spacing: 1) {
-                            Text(finding.title).font(.callout).lineLimit(1)
-                            Text(finding.sizeBytes.formattedBytes).font(.caption).monospacedDigit().foregroundStyle(.secondary)
-                        }
-                        Spacer()
-                        Button("Clean") {
-                            model.selection = [finding.id]
-                            openMain()
-                        }
-                        .controlSize(.small)
+                HStack(spacing: 8) {
+                    ForEach(model.suggestions) { finding in
+                        WinTile(finding: finding) { model.requestClean([finding]) }
                     }
                 }
+            } else if model.isRunningRules {
+                HStack { ProgressView().controlSize(.small); Text("Measuring your disk…").foregroundStyle(.secondary) }
             }
 
-            agentLine
+            agentCard
 
             Divider()
-            HStack {
-                Button("Open Freeroom") { openMain() }
-                    .buttonStyle(.borderedProminent).tint(Theme.accent)
-                Button {
-                    model.copyScanCommand()
-                } label: {
-                    Label("Copy /freeroom:scan", systemImage: "doc.on.doc")
-                }
-                .help("Paste it into Claude Code for a deep analysis")
-                Spacer()
-            }
-            HStack {
-                Button(model.isRunningRules ? "Checking…" : "Check now") { model.runRules() }
-                    .disabled(model.isRunningRules)
-                Spacer()
-                Button("Settings…") { openSettings() }
-                Button("Quit") { NSApp.terminate(nil) }
-            }
-            .buttonStyle(.borderless)
-            .font(.callout)
+            footer
         }
-        .padding(16)
-        .frame(width: 360)
+        .padding(14)
+        .frame(width: 340)
     }
 
     private var header: some View {
-        HStack(spacing: 8) {
-            Image(nsImage: NSApp.applicationIconImage).resizable().frame(width: 22, height: 22)
-            Text("Freeroom").font(.headline)
+        HStack(spacing: 14) {
+            DiskRing(used: model.usedFraction, warning: model.lowOnSpace)
+            VStack(alignment: .leading, spacing: 2) {
+                HStack(alignment: .firstTextBaseline, spacing: 4) {
+                    Text(model.freeBytes.formattedBytes).font(.system(size: 26, weight: .semibold, design: .rounded)).monospacedDigit()
+                }
+                Text("free of \(model.totalBytes.formattedBytes)").foregroundStyle(.secondary)
+                if model.lowOnSpace {
+                    Label("Below your \(model.lowDiskThresholdGB) GB threshold", systemImage: "exclamationmark.triangle.fill")
+                        .font(.caption).foregroundStyle(Theme.danger)
+                }
+            }
             Spacer()
-            if model.isRunningRules { ProgressView().controlSize(.small) }
+            Button { model.openMainWindow() } label: { Image(systemName: "arrow.up.forward.app") }
+                .buttonStyle(.borderless).help("Open Freeroom")
         }
     }
 
     @ViewBuilder
-    private var agentLine: some View {
-        HStack(spacing: 6) {
-            AgentMark(size: 11)
-            if let scan = model.lastAgentScan {
-                let count = model.findings.filter { $0.source == .agent }.count
-                Text(model.agentScanLive
-                     ? "Claude Code is scanning… \(count) findings so far"
-                     : "Last agent scan \(scan.startedAt.formatted(.relative(presentation: .named))) · \(count) findings")
-            } else {
-                Text("No agent scan yet. Run /freeroom:scan in Claude Code.")
+    private var agentCard: some View {
+        let agentFindings = model.findings.filter { $0.source == .agent }
+        if model.lastAgentScan != nil {
+            Button { model.openMainWindow() } label: {
+                HStack(spacing: 10) {
+                    AgentMark(size: 18)
+                        .symbolEffect(.pulse, isActive: model.agentScanLive)
+                    VStack(alignment: .leading, spacing: 1) {
+                        Text(model.agentScanLive ? "Claude Code is scanning…" :
+                                "Claude Code · \(model.lastAgentScan!.startedAt.formatted(.relative(presentation: .named)))")
+                            .font(.callout.weight(.semibold))
+                        Text("\(agentFindings.count) findings · \(agentFindings.reduce(Int64(0)) { $0 + $1.reclaimable }.formattedBytes)")
+                            .font(.caption)
+                    }
+                    Spacer()
+                    Image(systemName: "chevron.right").font(.caption)
+                }
+                .foregroundStyle(Theme.agent)
+                .padding(10)
+                .background(Theme.agentSoft, in: RoundedRectangle(cornerRadius: 10, style: .continuous))
             }
+            .buttonStyle(.plain)
+        } else {
+            Button { model.copyScanCommand() } label: {
+                HStack(spacing: 10) {
+                    RowIcon(symbol: "terminal")
+                    VStack(alignment: .leading, spacing: 1) {
+                        Text("Deep scan with Claude Code").font(.callout.weight(.semibold))
+                        Text("Copy /freeroom:scan").font(.caption).foregroundStyle(.secondary)
+                    }
+                    Spacer()
+                    Image(systemName: "doc.on.doc").foregroundStyle(.secondary)
+                }
+                .padding(10)
+                .background(.quaternary.opacity(0.5), in: RoundedRectangle(cornerRadius: 10, style: .continuous))
+            }
+            .buttonStyle(.plain)
         }
-        .font(.caption)
-        .foregroundStyle(Theme.agent)
     }
 
-    private func openMain() {
-        openWindow(id: "main")
-        NSApp.activate(ignoringOtherApps: true)
+    private var footer: some View {
+        HStack(spacing: 14) {
+            Button { model.runRules() } label: {
+                Image(systemName: "arrow.clockwise").symbolEffect(.rotate, isActive: model.isRunningRules)
+            }.help("Check now (no AI)").disabled(model.isRunningRules)
+            Button { model.copyScanCommand() } label: { Image(systemName: "terminal") }.help("Copy /freeroom:scan")
+            Spacer()
+            if let scan = model.lastRuleScan {
+                Text("Checked \(scan.startedAt.formatted(.relative(presentation: .named)))")
+                    .font(.caption).foregroundStyle(.secondary)
+            }
+            Button { openSettings(); NSApp.activate(ignoringOtherApps: true) } label: { Image(systemName: "gearshape") }.help("Settings")
+            Button { NSApp.terminate(nil) } label: { Image(systemName: "power") }.help("Quit Freeroom")
+        }
+        .buttonStyle(.borderless)
+        .foregroundStyle(.secondary)
     }
 }
 
-struct DiskGauge: View {
-    let free: Int64
-    let total: Int64
-
-    var used: Double { total > 0 ? 1 - Double(free) / Double(total) : 0 }
+/// Big icon tile for the top safe wins; tapping goes straight to the clean sheet.
+struct WinTile: View {
+    let finding: Finding
+    let action: () -> Void
+    @State private var hovering = false
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 6) {
-            HStack(alignment: .firstTextBaseline) {
-                Text(free.formattedBytes).font(.title2.weight(.semibold)).monospacedDigit()
-                Text("free of \(total.formattedBytes)").foregroundStyle(.secondary)
-                Spacer()
-                Text("\(Int(used * 100))% used").font(.caption).monospacedDigit().foregroundStyle(.secondary)
+        Button(action: action) {
+            VStack(spacing: 6) {
+                ItemIcon(icon: finding.icon, fallback: finding.categoryFallback, size: 40)
+                Text(finding.reclaimable.formattedBytes).font(.callout.weight(.semibold)).monospacedDigit()
+                Text(finding.title).font(.caption2).foregroundStyle(.secondary).lineLimit(1)
             }
-            GeometryReader { geo in
-                ZStack(alignment: .leading) {
-                    Capsule().fill(.quaternary)
-                    Capsule().fill(used > 0.9 ? Theme.danger : Theme.accent)
-                        .frame(width: geo.size.width * used)
-                }
-            }
-            .frame(height: 6)
+            .padding(.vertical, 10).padding(.horizontal, 6)
+            .frame(maxWidth: .infinity)
+            .background(RoundedRectangle(cornerRadius: 12, style: .continuous)
+                .fill(hovering ? AnyShapeStyle(Theme.accent.opacity(0.12)) : AnyShapeStyle(.quaternary.opacity(0.5))))
         }
-        .accessibilityElement(children: .combine)
+        .buttonStyle(.plain)
+        .onHover { hovering = $0 }
+        .help("\(finding.title): clean \(finding.reclaimable.formattedBytes)")
     }
 }

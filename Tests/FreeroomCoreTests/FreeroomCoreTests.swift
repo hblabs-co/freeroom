@@ -332,3 +332,30 @@ final class CatalogTests: XCTestCase {
         XCTAssertEqual(fromFile, Catalog.locations, "run python3 scripts/gen-catalog.py after editing catalog.json")
     }
 }
+
+final class TreemapTests: XCTestCase {
+    func testAreasAreProportionalAndInsideTheRect() {
+        let rect = CGRect(x: 0, y: 0, width: 600, height: 400)
+        let weights: [Double] = [27.4, 21.6, 19.8, 14.2, 9.3, 7.9, 5.6, 2.1, 0.5]
+        let rects = Treemap.layout(weights: weights, in: rect)
+        XCTAssertEqual(rects.count, weights.count)
+        let total = weights.reduce(0, +)
+        for (w, r) in zip(weights, rects) {
+            let expected = Double(rect.width * rect.height) * w / total
+            XCTAssertEqual(Double(r.width * r.height), expected, accuracy: expected * 0.001 + 0.01)
+            XCTAssertTrue(rect.insetBy(dx: -0.01, dy: -0.01).contains(r), "\(r) outside \(rect)")
+        }
+        // No overlaps
+        for i in rects.indices { for j in rects.indices where i < j {
+            let overlap = rects[i].intersection(rects[j])
+            XCTAssertTrue(overlap.isNull || overlap.width * overlap.height < 0.01)
+        } }
+    }
+
+    func testEdgeCases() {
+        XCTAssertTrue(Treemap.layout(weights: [], in: CGRect(x: 0, y: 0, width: 10, height: 10)).isEmpty)
+        XCTAssertEqual(Treemap.layout(weights: [5], in: CGRect(x: 0, y: 0, width: 10, height: 10)),
+                       [CGRect(x: 0, y: 0, width: 10, height: 10)])
+        XCTAssertEqual(Treemap.layout(weights: [0, 0], in: CGRect(x: 0, y: 0, width: 10, height: 10)), [.zero, .zero])
+    }
+}

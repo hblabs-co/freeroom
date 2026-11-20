@@ -106,7 +106,8 @@ public enum Probes {
                     verification: Verification(
                         rule: "sim-runtime-not-latest",
                         evidence: "Last used \(runtime.lastUsedAt ?? "never"); newer runtime kept: \(kept.version ?? "?")",
-                        measuredByFreeroom: false)
+                        measuredByFreeroom: false),
+                    icon: FindingIcon(app: "com.apple.dt.Xcode", brand: "xcode", symbol: "iphone")
                 ))
             }
         }
@@ -158,7 +159,8 @@ public enum Probes {
                     explanation: "Volumes not attached to any container. They can hold databases: check them before removing.",
                     action: .none, command: "docker volume ls -f dangling=true",
                     verification: Verification(rule: "docker-df-volumes", evidence: "docker system df: reclaimable \(row.reclaimable)",
-                                               measuredByFreeroom: false)))
+                                               measuredByFreeroom: false),
+                    icon: Self.dockerIcon))
             default:
                 continue
             }
@@ -172,8 +174,11 @@ public enum Probes {
                 category: .docker, explanation: explanation + " Docker Desktop returns the space to macOS gradually.",
                 action: .command, command: command,
                 verification: Verification(rule: rule, evidence: "Reported reclaimable by `docker system df`",
-                                           measuredByFreeroom: false))
+                                           measuredByFreeroom: false),
+                icon: dockerIcon)
     }
+
+    static let dockerIcon = FindingIcon(app: "com.docker.docker", brand: "docker", symbol: "shippingbox")
 
     /// "5.104GB", "1.522GB (77%)", "40.96kB", "0B" → bytes (Docker uses decimal units).
     public static func parseDockerSize(_ text: String) -> Int64 {

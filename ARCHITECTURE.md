@@ -139,7 +139,10 @@ No existe `freeroom delete`. A propósito.
 - Fase 3 ✅ v0.1 de la app: MenuBarExtra, resultados en vivo (polling del SQLite cada 3 s),
   confirmación, `Cleaner` con lista blanca de comandos y rutas protegidas.
 - Fase 4 ✅ básica: reglas periódicas + 1 notificación/día como máximo.
-- Pendiente: helper de admin (`SMAppService` daemon), onboarding, Developer ID + notarización,
+- v2 de la UI (2026-11-20): iconos oficiales (app instalada → Simple Icons → SF Symbol), barra lateral
+  por ecosistema, mapa del disco (treemap), inspector, hoja de limpieza en 3 fases con "You freed",
+  popover nuevo, onboarding de 3 pasos, notificaciones con acciones e icono. macOS 15+.
+- Pendiente: helper de admin (`SMAppService` daemon), Developer ID + notarización,
   tap de Homebrew, capturas para el README.
 
 ## Fases
