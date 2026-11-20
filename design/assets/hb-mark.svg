@@ -1,0 +1,8 @@
+<!-- HB Labs Cloud · favicon · v0.2 2026-05-18 claude-code (T10).
+     32×32 simplified: just the mark, brand blue, HB knocked out.
+     Tight viewBox (12→88 of the 100 grid) so the hex fills the
+     tab favicon edge-to-edge. -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="10 2 80 96" width="32" height="32" role="img" aria-label="HB Labs Cloud">
+  <path d="M50 4 L88 26 L88 74 L50 96 L12 74 L12 26 Z" fill="#1a4ddb"/>
+  <path d="M28 32 H38 V46 H50 V32 H60 V68 H50 V54 H38 V68 H28 Z M62 32 H78 Q86 32 86 40 Q86 47 80 49 Q86 51 86 60 Q86 68 78 68 H62 Z M70 38 V46 H75 Q78 46 78 42 Q78 38 75 38 Z M70 54 V62 H76 Q79 62 79 58 Q79 54 76 54 Z" fill="#ffffff"/>
+</svg>
