@@ -21,8 +21,8 @@ local AI models, forgotten archives…), explains each item, classifies it as
 
 <sub>Screenshots use demo data (`scripts/screenshots.sh`).</sub>
 
-> Status: **early (0.1.x)**. Signed with Developer ID and notarized by Apple; Apple silicon and
-> Intel (universal from 0.1.2). The architecture is in [`ARCHITECTURE.md`](ARCHITECTURE.md).
+> **Freeroom 1.0.** Signed with Developer ID and notarized by Apple; Apple silicon and Intel
+> (universal), macOS 15 or later. The architecture is in [`ARCHITECTURE.md`](ARCHITECTURE.md).
 
 ## How it works
 
