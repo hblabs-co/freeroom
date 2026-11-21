@@ -129,7 +129,14 @@ extension AppModel {
     /// Shows what FREEROOM_DEMO_ROUTE asks for: findings (default), history, settings, onboarding,
     /// or menu (the menu bar popover).
     func showDemoWindow() {
-        let route = ProcessInfo.processInfo.environment["FREEROOM_DEMO_ROUTE"] ?? "findings"
+        let env = ProcessInfo.processInfo.environment
+        let route = env["FREEROOM_DEMO_ROUTE"] ?? "findings"
+        // -AppleInterfaceStyle does not reach the app's windows; set the appearance directly.
+        switch env["FREEROOM_DEMO_APPEARANCE"] {
+        case "dark": NSApp.appearance = NSAppearance(named: .darkAqua)
+        case "light": NSApp.appearance = NSAppearance(named: .aqua)
+        default: break
+        }
         if route == "menu" {
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.8) { Demo.clickStatusItem() }
             return

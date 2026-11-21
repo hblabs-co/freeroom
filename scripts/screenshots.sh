@@ -22,8 +22,9 @@ trap finish EXIT
 
 shot() { # name appearance route simpleMode(true|false) [onboarded(true|false)]
   # Values are property-list literals: a plain "NO" would arrive as a string, not a Bool.
-  FREEROOM_DEMO=1 FREEROOM_DEMO_ROUTE="$3" "$BIN" -onboarded "<${5:-true}/>" -simpleMode "<$4/>" \
-    -language en -textSize medium -AppleLocale en_US -AppleInterfaceStyle "$2" >/dev/null 2>&1 &
+  APPEARANCE=$(echo "$2" | tr '[:upper:]' '[:lower:]')
+  FREEROOM_DEMO=1 FREEROOM_DEMO_ROUTE="$3" FREEROOM_DEMO_APPEARANCE="$APPEARANCE" "$BIN" -onboarded "<${5:-true}/>" -simpleMode "<$4/>" \
+    -language en -textSize medium -AppleLocale en_US >/dev/null 2>&1 &
   PID=$!
   sleep 4
   LAYER=""; [ "$3" = menu ] && LAYER="--any-layer"

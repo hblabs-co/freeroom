@@ -414,6 +414,26 @@ final class AppModel {
                 simpleMode = false
             }
             windowMinWidth = Self.detailedMinWidth
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.45) { self.restoreSidebarWidth() }
+        }
+    }
+
+    /// NavigationSplitView keeps the sidebar at whatever width it had while the window was narrow,
+    /// so after growing the window it can stay squeezed ("Xco…"). Put it back to its ideal width.
+    func restoreSidebarWidth(_ width: CGFloat = 220) {
+        guard !simpleMode, let root = mainWindow?.contentView else { return }
+        func splitView(in view: NSView) -> NSSplitView? {
+            if let split = view as? NSSplitView, split.arrangedSubviews.count >= 2 { return split }
+            for sub in view.subviews { if let found = splitView(in: sub) { return found } }
+            return nil
+        }
+        guard let split = splitView(in: root), let sidebar = split.arrangedSubviews.first,
+              sidebar.frame.width < width - 1 else { return }
+        NSAnimationContext.runAnimationGroup { context in
+            context.duration = 0.25
+            context.allowsImplicitAnimation = true
+            split.setPosition(width, ofDividerAt: 0)
+            split.layoutSubtreeIfNeeded()
         }
     }
 
@@ -458,6 +478,7 @@ final class AppModel {
                           height: min(800, visible.height - 40))
         let origin = NSPoint(x: visible.midX - size.width / 2, y: visible.midY - size.height / 2)
         window.setFrame(NSRect(origin: origin, size: size), display: true, animate: true)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) { self.restoreSidebarWidth() }
     }
 
     func openSettings() {
