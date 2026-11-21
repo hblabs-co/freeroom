@@ -10,9 +10,19 @@ Freeroom is a macOS menu bar app for developers. It finds what's eating your dis
 local AI models, forgotten archives…), explains each item, classifies it as
 **Safe** / **Review** / **Keep**, and only deletes what you confirm.
 
-> Status: **early development (0.1.1)** — core, CLI, Claude Code plugin and a first menu bar app work.
-> Not yet signed with a Developer ID or notarized; build it from source for now. The clickable prototype lives in [`design/`](design/index.html);
-> the architecture is in [`ARCHITECTURE.md`](ARCHITECTURE.md).
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="docs/screenshots/detailed-dark.png">
+  <img src="docs/screenshots/detailed-light.png" alt="Freeroom in Detailed mode: 195 GB that can be freed, a disk map, findings grouped by ecosystem, and an inspector explaining Xcode DerivedData">
+</picture>
+
+| Menu bar | Simple mode | History |
+|---|---|---|
+| <picture><source media="(prefers-color-scheme: dark)" srcset="docs/screenshots/menu-dark.png"><img src="docs/screenshots/menu-light.png" alt="Menu bar popover with free space and the biggest safe wins"></picture> | <picture><source media="(prefers-color-scheme: dark)" srcset="docs/screenshots/simple-dark.png"><img src="docs/screenshots/simple-light.png" alt="Simple mode: what can be freed safely, with one button"></picture> | <img src="docs/screenshots/history-light.png" alt="History of cleanups and how much was freed"> |
+
+<sub>Screenshots use demo data (`scripts/screenshots.sh`).</sub>
+
+> Status: **early (0.1.x)**. Signed with Developer ID and notarized by Apple; Apple silicon and
+> Intel (universal from 0.1.2). The architecture is in [`ARCHITECTURE.md`](ARCHITECTURE.md).
 
 ## How it works
 
