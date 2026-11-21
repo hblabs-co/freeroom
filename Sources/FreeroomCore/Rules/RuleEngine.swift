@@ -18,44 +18,55 @@ public struct RuleEngine: Sendable {
         self.includeProbes = includeProbes
     }
 
-    public func run(scanId: String? = nil) -> [Finding] {
-        var findings = catalogFindings()
-        if includeProbes {
-            findings += Probes.simulatorRuntimes()
-            findings += Probes.docker()
+    /// - Parameter onFinding: called with each finding (already above `minimumBytes`) as soon as it
+    ///   is measured, so callers can show progress while the slower steps are still running.
+    public func run(scanId: String? = nil, onFinding: ((Finding) -> Void)? = nil) -> [Finding] {
+        var findings: [Finding] = []
+        func emit(_ batch: [Finding]) {
+            for var finding in batch where finding.sizeBytes >= minimumBytes {
+                finding.scanId = scanId
+                findings.append(finding)
+                onFinding?(finding)
+            }
         }
-        if let projects = projectFinding() { findings.append(projects) }
-        return findings
-            .filter { $0.sizeBytes >= minimumBytes }
-            .map { var f = $0; f.scanId = scanId; return f }
-            .sorted { $0.sizeBytes > $1.sizeBytes }
+        for location in Catalog.locations {
+            if let finding = catalogFinding(location) { emit([finding]) }
+        }
+        if includeProbes {
+            emit(Probes.simulatorRuntimes())
+            emit(Probes.docker())
+        }
+        if let projects = projectFinding() { emit([projects]) }
+        return findings.sorted { $0.sizeBytes > $1.sizeBytes }
     }
 
     public func catalogFindings() -> [Finding] {
-        Catalog.locations.compactMap { location in
-            guard !location.paths.isEmpty else { return nil } // tool-managed: covered by Probes
-            let report = Measurer().measure(location.paths)
-            let existing = report.items.filter(\.exists)
-            guard !existing.isEmpty, report.totalAllocatedBytes > 0 else { return nil }
-            return Finding(
-                id: "catalog:\(location.id)",
-                title: location.title,
-                paths: existing.map(\.path),
-                sizeBytes: report.totalAllocatedBytes,
-                sharedBytes: report.totalSharedBytes,
-                safety: location.safety,
-                source: .rule,
-                category: location.category,
-                explanation: location.explanation,
-                action: location.action,
-                command: location.command,
-                needsAdmin: location.needsAdmin,
-                verification: Verification(rule: "catalog:\(location.id)",
-                                           evidence: "Known location, measured by Freeroom",
-                                           measuredByFreeroom: true),
-                icon: location.icon
-            )
-        }
+        Catalog.locations.compactMap(catalogFinding)
+    }
+
+    private func catalogFinding(_ location: KnownLocation) -> Finding? {
+        guard !location.paths.isEmpty else { return nil } // tool-managed: covered by Probes
+        let report = Measurer().measure(location.paths)
+        let existing = report.items.filter(\.exists)
+        guard !existing.isEmpty, report.totalAllocatedBytes > 0 else { return nil }
+        return Finding(
+            id: "catalog:\(location.id)",
+            title: location.title,
+            paths: existing.map(\.path),
+            sizeBytes: report.totalAllocatedBytes,
+            sharedBytes: report.totalSharedBytes,
+            safety: location.safety,
+            source: .rule,
+            category: location.category,
+            explanation: location.explanation,
+            action: location.action,
+            command: location.command,
+            needsAdmin: location.needsAdmin,
+            verification: Verification(rule: "catalog:\(location.id)",
+                                       evidence: "Known location, measured by Freeroom",
+                                       measuredByFreeroom: true),
+            icon: location.icon
+        )
     }
 
     /// One aggregated finding for all verified build folders (measured together so pnpm

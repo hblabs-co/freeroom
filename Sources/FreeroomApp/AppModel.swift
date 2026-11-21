@@ -31,6 +31,10 @@ final class AppModel {
     /// Ids that appeared in the last reload (for the "new finding" highlight).
     var freshIds: Set<String> = []
     var isRunningRules = false
+    /// Frame of the animated menu bar glyph. Advanced by a plain timer only while scanning:
+    /// a TimelineView inside the MenuBarExtra label makes AppKit re-layout the status item in a
+    /// tight loop and freezes the main thread.
+    var scanFrame = 0
     var storeError: String?
 
     // Selection & cleaning
@@ -99,6 +103,12 @@ final class AppModel {
         reload()
         pollTimer = Timer.scheduledTimer(withTimeInterval: 3, repeats: true) { [weak self] _ in
             Task { @MainActor in self?.reload() }
+        }
+        Timer.scheduledTimer(withTimeInterval: 0.4, repeats: true) { [weak self] _ in
+            Task { @MainActor in
+                guard let self, self.isScanning else { return }
+                self.scanFrame &+= 1
+            }
         }
         Timer.scheduledTimer(withTimeInterval: 600, repeats: true) { [weak self] _ in
             Task { @MainActor in self?.refreshPluginStatus() }
@@ -200,11 +210,22 @@ final class AppModel {
         guard !isRunningRules else { return }
         isRunningRules = true
         Task.detached(priority: .utility) {
-            let findings = RuleEngine().run()
+            // Each finding is stored as soon as it is measured. Until a scan is complete the list
+            // keeps showing the previous complete one (Store.latestFindings), except on the very
+            // first scan, where partial results appear live instead of an empty spinner.
+            guard let store = try? Store(), let scan = try? store.beginScan(source: .rule) else {
+                await MainActor.run { self.isRunningRules = false }
+                return
+            }
+            var lastReload = Date.distantPast
+            _ = RuleEngine().run { finding in
+                try? store.upsert(finding, scanId: scan.id)
+                if Date().timeIntervalSince(lastReload) > 0.5 {
+                    lastReload = Date()
+                    Task { @MainActor in self.reload() }
+                }
+            }
             do {
-                let store = try Store()
-                let scan = try store.beginScan(source: .rule)
-                for finding in findings { try store.upsert(finding, scanId: scan.id) }
                 try store.endScan(id: scan.id)
                 try store.pruneRuleScans(keep: 60)
             } catch {}

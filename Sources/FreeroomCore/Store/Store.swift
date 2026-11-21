@@ -178,10 +178,16 @@ public final class Store: @unchecked Sendable {
     /// Findings of the latest scan of each source (rule + agent), newest first.
     public func latestFindings() throws -> [Finding] {
         var result: [Finding] = []
-        for source in [FindingSource.agent, .rule] {
-            if let scan = try scans(limit: 50).first(where: { $0.source == source }) {
-                result += try findings(scanId: scan.id)
-            }
+        let recent = try scans(limit: 50)
+        // Agent scans show live while Claude Code reports. A rule scan that is still running
+        // does not replace the last complete one (the list would shrink and refill); it is shown
+        // only when there is no complete rule scan yet, i.e. on the very first check.
+        if let scan = recent.first(where: { $0.source == .agent }) {
+            result += try findings(scanId: scan.id)
+        }
+        let rules = recent.filter { $0.source == .rule }
+        if let scan = rules.first(where: { $0.endedAt != nil }) ?? rules.first {
+            result += try findings(scanId: scan.id)
         }
         return result.sorted { $0.sizeBytes > $1.sizeBytes }
     }
