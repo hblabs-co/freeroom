@@ -60,6 +60,7 @@ private struct MenuBarLabel: View {
         .task {
             model.openWindowAction = { id in openWindow(id: id) }
             if !model.onboarded { model.openMainWindow() }
+            if Demo.isOn { model.showDemoWindow() }
         }
     }
 }

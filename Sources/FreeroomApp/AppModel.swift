@@ -73,7 +73,7 @@ final class AppModel {
     enum Route: Hashable { case findings, history, settings }
     var route: Route = .findings { didSet { if oldValue != route { updateWindowMinWidth() } } }
 
-    private let defaults = UserDefaults.standard
+    private let defaults = Demo.isOn ? UserDefaults(suiteName: Demo.defaultsSuite)! : UserDefaults.standard
     private var store: Store?
     private var pollTimer: Timer?
     private var ruleTimer: Timer?
@@ -99,7 +99,8 @@ final class AppModel {
 
         plugin.published = defaults.string(forKey: "pluginPublished")
         plugin.checkedAt = defaults.object(forKey: "pluginCheckedAt") as? Date
-        do { store = try Store() } catch { storeError = "\(error)" }
+        if Demo.isOn { Demo.prepareDatabase() }
+        do { store = try Demo.isOn ? Store(path: Demo.databasePath) : Store() } catch { storeError = "\(error)" }
         reload()
         pollTimer = Timer.scheduledTimer(withTimeInterval: 3, repeats: true) { [weak self] _ in
             Task { @MainActor in self?.reload() }
@@ -172,8 +173,8 @@ final class AppModel {
     func updateDisk() {
         let values = try? URL(fileURLWithPath: NSHomeDirectory())
             .resourceValues(forKeys: [.volumeAvailableCapacityForImportantUsageKey, .volumeTotalCapacityKey])
-        freeBytes = values?.volumeAvailableCapacityForImportantUsage ?? 0
-        totalBytes = Int64(values?.volumeTotalCapacity ?? 0)
+        freeBytes = Demo.isOn ? Demo.freeBytes : values?.volumeAvailableCapacityForImportantUsage ?? 0
+        totalBytes = Demo.isOn ? Demo.totalBytes : Int64(values?.volumeTotalCapacity ?? 0)
     }
 
     func explanation(for finding: Finding) -> String {
@@ -207,7 +208,7 @@ final class AppModel {
     // MARK: Rule engine (no AI)
 
     func runRules() {
-        guard !isRunningRules else { return }
+        guard !isRunningRules, !Demo.isOn else { return }
         isRunningRules = true
         Task.detached(priority: .utility) {
             // Each finding is stored as soon as it is measured. Until a scan is complete the list
@@ -260,9 +261,17 @@ final class AppModel {
         cleanResults = [:]
         Task.detached(priority: .userInitiated) {
             let cleaner = Cleaner()
-            let store = try? Store()
+            let demo = Demo.isOn
+            let store = try? (demo ? Store(path: Demo.databasePath) : Store())
             for finding in toClean {
-                let outcome = cleaner.clean(finding)
+                // Demo mode never touches the disk: it pretends, so the clean sheet can be shown.
+                let outcome: CleanupOutcome
+                if demo {
+                    try? await Task.sleep(for: .milliseconds(400))
+                    outcome = .cleaned(freedBytes: finding.sizeBytes)
+                } else {
+                    outcome = cleaner.clean(finding)
+                }
                 if case .cleaned(let freed) = outcome {
                     try? store?.recordCleanup(HistoryEntry(findingId: finding.id, title: finding.title,
                                                            freedBytes: freed, at: Date(), origin: origin,
@@ -295,7 +304,7 @@ final class AppModel {
     }
 
     private func notifyIfUseful() {
-        guard notificationsEnabled else { return }
+        guard notificationsEnabled, !Demo.isOn else { return }
         let lastSent = defaults.object(forKey: "lastNotification") as? Date ?? .distantPast
         guard Date().timeIntervalSince(lastSent) > 20 * 3600 else { return }
 
