@@ -26,7 +26,18 @@ jobs:
     env:
       PUBLISH: ${{ github.event_name == 'push' }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
+
+      # The app uses macOS 26 APIs (Liquid Glass), so it needs the Xcode 26 SDK; the runner's
+      # default Xcode can be older. Pick the newest Xcode 26+ installed on the image.
+      - name: Select Xcode
+        run: |
+          XCODE=$(ls -d /Applications/Xcode_*.app 2>/dev/null \
+            | sed -E 's|.*/Xcode_([0-9.]+)\.app|\1 &|' | awk '$1+0 >= 26' | sort -V | tail -1 | cut -d' ' -f2)
+          [ -n "$XCODE" ] || { echo "::error::No Xcode 26 or newer on this runner"; ls -d /Applications/Xcode*.app; exit 1; }
+          sudo xcode-select -s "$XCODE/Contents/Developer"
+          xcodebuild -version
+          swift --version
 
       - name: Check version
         run: |
@@ -70,7 +81,7 @@ jobs:
 
       - name: Keep the DMG (manual runs)
         if: env.PUBLISH != 'true'
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         with:
           name: Freeroom-${{ env.VERSION }}
           path: |
