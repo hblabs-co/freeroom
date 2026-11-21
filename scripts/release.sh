@@ -2,9 +2,11 @@
 # Builds a signed, notarized and stapled Freeroom DMG, plus the Homebrew cask, into ./build.
 # It does NOT publish anything: uploading the GitHub release and the cask are separate steps.
 #
-# Requirements (once per Mac):
+# Requirements:
 #   - "Developer ID Application" certificate in the keychain
-#   - notarytool profile:  xcrun notarytool store-credentials freeroom-notary ...
+#   - notarization credentials, either
+#       a notarytool keychain profile (local Mac):  xcrun notarytool store-credentials freeroom-notary ...
+#     or an App Store Connect API key (CI): NOTARY_KEY_PATH, NOTARY_KEY_ID, NOTARY_ISSUER_ID
 #
 # Usage: scripts/release.sh
 set -eu
@@ -37,12 +39,17 @@ rm -rf "$STAGE"
 codesign --force --timestamp --sign "$IDENTITY" "$DMG"
 
 echo "==> Notarizing (this usually takes a few minutes)"
-OUT=$(xcrun notarytool submit "$DMG" --keychain-profile "$PROFILE" --wait 2>&1) || true
+if [ -n "${NOTARY_KEY_PATH:-}" ]; then
+  set -- --key "$NOTARY_KEY_PATH" --key-id "$NOTARY_KEY_ID" --issuer "$NOTARY_ISSUER_ID"
+else
+  set -- --keychain-profile "$PROFILE"
+fi
+OUT=$(xcrun notarytool submit "$DMG" "$@" --wait 2>&1) || true
 echo "$OUT" | grep -E "id:|status:" || true
 if ! echo "$OUT" | grep -q "status: Accepted"; then
   ID=$(echo "$OUT" | sed -n 's/^ *id: \(.*\)$/\1/p' | head -1)
   echo "Notarization failed. Log:"
-  [ -n "$ID" ] && xcrun notarytool log "$ID" --keychain-profile "$PROFILE"
+  [ -n "$ID" ] && xcrun notarytool log "$ID" "$@"
   exit 1
 fi
 
