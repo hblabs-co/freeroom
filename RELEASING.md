@@ -20,10 +20,13 @@ notarytool profile.
 
 ## Credentials (organization level, shared by all HB Labs apps)
 
+> HB Labs SAS maintainers: the full procedures (creating, renewing and rotating each credential,
+> expiry dates) are in the private [hblabs-co/handbook](https://github.com/hblabs-co/handbook).
+
 They live in **hblabs-co › Settings › Secrets and variables › Actions**, not in this repo, so
 every HB Labs app can reuse them. Give each secret access to the repositories that need it
 ("Selected repositories"). On the GitHub Free plan, organization secrets are only available to
-**public** repositories (see notes/organization-secrets.md); a private app repo would need the Team plan, or its own copies as
+**public** repositories; a private app repo would need the Team plan, or its own copies as
 repository secrets.
 
 | Name | Kind | What it is |
