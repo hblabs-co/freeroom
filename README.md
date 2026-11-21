@@ -10,7 +10,7 @@ Freeroom is a macOS menu bar app for developers. It finds what's eating your dis
 local AI models, forgotten archives…), explains each item, classifies it as
 **Safe** / **Review** / **Keep**, and only deletes what you confirm.
 
-> Status: **early development (0.1.0)** — core, CLI, Claude Code plugin and a first menu bar app work.
+> Status: **early development (0.1.1)** — core, CLI, Claude Code plugin and a first menu bar app work.
 > Not yet signed with a Developer ID or notarized; build it from source for now. The clickable prototype lives in [`design/`](design/index.html);
 > the architecture is in [`ARCHITECTURE.md`](ARCHITECTURE.md).
 
