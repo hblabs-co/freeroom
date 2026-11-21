@@ -23,7 +23,7 @@ notarytool profile.
 They live in **hblabs-co › Settings › Secrets and variables › Actions**, not in this repo, so
 every HB Labs app can reuse them. Give each secret access to the repositories that need it
 ("Selected repositories"). On the GitHub Free plan, organization secrets are only available to
-**public** repositories; a private app repo would need the Team plan, or its own copies as
+**public** repositories (see notes/organization-secrets.md); a private app repo would need the Team plan, or its own copies as
 repository secrets.
 
 | Name | Kind | What it is |
@@ -47,7 +47,8 @@ REPOS=freeroom                                  # later: freeroom,otherapp
 ```
 
 1. **Certificate.** Keychain Access › My Certificates › "Developer ID Application: HB Labs SAS"
-   › right-click › Export… › `.p12`, with a strong password. Then:
+   › right-click › Export… › `.p12`, with a strong password. (Not the `.cer` downloaded from
+   Apple, nor the `.certSigningRequest`: neither contains the private key.) Then:
    ```sh
    base64 -i ~/Desktop/DeveloperID-HBLabs.p12 | gh secret set APPLE_DEVELOPER_ID_P12 --org hblabs-co --repos $REPOS
    gh secret set APPLE_DEVELOPER_ID_P12_PASSWORD --org hblabs-co --repos $REPOS   # prompts for it

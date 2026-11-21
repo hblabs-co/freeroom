@@ -7,9 +7,15 @@ cd "$(dirname "$0")/.."
 VERSION=$(sed -n 's/.*version = "\(.*\)".*/\1/p' Sources/FreeroomCore/Version.swift)
 APP=build/Freeroom.app
 
-swift build -c release --product FreeroomApp
-swift build -c release --product freeroom
-BIN=$(swift build -c release --show-bin-path)
+# Universal binary (Apple silicon + Intel). FREEROOM_ARCHS="arm64" for a faster local build.
+ARCH_FLAGS=""
+for arch in ${FREEROOM_ARCHS:-arm64 x86_64}; do ARCH_FLAGS="$ARCH_FLAGS --arch $arch"; done
+# shellcheck disable=SC2086
+swift build -c release $ARCH_FLAGS --product FreeroomApp
+# shellcheck disable=SC2086
+swift build -c release $ARCH_FLAGS --product freeroom
+# shellcheck disable=SC2086
+BIN=$(swift build -c release $ARCH_FLAGS --show-bin-path)
 
 rm -rf "$APP"
 mkdir -p "$APP/Contents/MacOS" "$APP/Contents/Helpers" "$APP/Contents/Resources"
