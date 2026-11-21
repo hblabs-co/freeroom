@@ -1,4 +1,4 @@
-import Foundation
+import AppKit
 import FreeroomCore
 
 /// Demo mode for screenshots: `FREEROOM_DEMO=1`. Sample findings in a throwaway database, a fixed
@@ -126,15 +126,40 @@ enum Demo {
 }
 
 extension AppModel {
-    /// Opens the main window on the route given by FREEROOM_DEMO_ROUTE (findings, history, settings).
+    /// Shows what FREEROOM_DEMO_ROUTE asks for: findings (default), history, settings, onboarding,
+    /// or menu (the menu bar popover).
     func showDemoWindow() {
-        openMainWindow()
+        let route = ProcessInfo.processInfo.environment["FREEROOM_DEMO_ROUTE"] ?? "findings"
+        if route == "menu" {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.8) { Demo.clickStatusItem() }
+            return
+        }
+        if onboarded { openMainWindow() } // onboarding opens the window by itself
+        guard onboarded else { return }
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
             self.expandMainWindow()
-            switch ProcessInfo.processInfo.environment["FREEROOM_DEMO_ROUTE"] {
+            switch route {
             case "history": self.route = .history
             case "settings": self.route = .settings
             default: if !self.simpleMode { self.inspected = "catalog:xcode-derived-data" }
+            }
+        }
+    }
+}
+
+extension Demo {
+    /// MenuBarExtra has no API to open its popover, so find the status bar button and click it.
+    @MainActor
+    static func clickStatusItem() {
+        func find(_ view: NSView) -> NSButton? {
+            if let button = view as? NSButton, String(describing: type(of: button)).contains("StatusBar") { return button }
+            for sub in view.subviews { if let found = find(sub) { return found } }
+            return nil
+        }
+        for window in NSApp.windows where String(describing: type(of: window)).contains("StatusBar") {
+            if let root = window.contentView, let button = find(root) ?? (root as? NSButton) {
+                button.performClick(nil)
+                return
             }
         }
     }

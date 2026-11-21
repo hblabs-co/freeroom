@@ -20,12 +20,14 @@ finish() {
 }
 trap finish EXIT
 
-shot() { # name appearance route simpleMode
-  FREEROOM_DEMO=1 FREEROOM_DEMO_ROUTE="$3" "$BIN" -onboarded YES -simpleMode "$4" -language en \
-    -textSize medium -AppleInterfaceStyle "$2" >/dev/null 2>&1 &
+shot() { # name appearance route simpleMode(true|false) [onboarded(true|false)]
+  # Values are property-list literals: a plain "NO" would arrive as a string, not a Bool.
+  FREEROOM_DEMO=1 FREEROOM_DEMO_ROUTE="$3" "$BIN" -onboarded "<${5:-true}/>" -simpleMode "<$4/>" \
+    -language en -textSize medium -AppleLocale en_US -AppleInterfaceStyle "$2" >/dev/null 2>&1 &
   PID=$!
   sleep 4
-  ID=$(swift scripts/window-id.swift Freeroom)
+  LAYER=""; [ "$3" = menu ] && LAYER="--any-layer"
+  ID=$(swift scripts/window-id.swift Freeroom $LAYER)
   screencapture -l "$ID" -o -x "$OUT/$1.png" || {
     echo "Capture failed: give your terminal app Screen Recording permission (System Settings > Privacy & Security)."
     exit 1
@@ -37,8 +39,12 @@ shot() { # name appearance route simpleMode
   echo "$OUT/$1.png"
 }
 
-shot detailed-light Light findings NO
-shot detailed-dark Dark findings NO
-shot simple-light Light findings YES
-shot history-light Light history NO
-shot settings-light Light settings NO
+shot detailed-light Light findings false
+shot detailed-dark Dark findings false
+shot simple-light Light findings true
+shot simple-dark Dark findings true
+shot menu-light Light menu true
+shot menu-dark Dark menu true
+shot onboarding-light Light findings true false
+shot history-light Light history false
+shot settings-light Light settings false
