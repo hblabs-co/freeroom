@@ -3,7 +3,7 @@
 # Freeroom
 
 **Free up disk space on your Mac — with an agent that understands what it's deleting.**
-Open source, by [HB Labs SAS](https://github.com/hblabs-co).
+Open source, by [HB Labs SAS](https://github.com/hblabs-co) · **[freeroom.hblabs.co](https://freeroom.hblabs.co)**
 
 Freeroom is a macOS menu bar app for developers. It finds what's eating your disk
 (Docker build cache, Xcode simulator runtimes, `node_modules`, Go/NuGet/npm caches,
