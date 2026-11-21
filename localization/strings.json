@@ -4231,5 +4231,22 @@
     "hi": "बंद करें",
     "id": "Keluar",
     "vi": "Thoát"
+  },
+  "When Claude Code asks, choose “Install for you (user scope)”: the plugin then works in every folder and Freeroom can detect it.": {
+    "es": "Cuando Claude Code pregunte, elige “Install for you (user scope)”: así el plugin funciona en todas las carpetas y Freeroom lo detecta.",
+    "de": "Wenn Claude Code fragt, wähle “Install for you (user scope)”: Dann funktioniert das Plugin in jedem Ordner und Freeroom erkennt es.",
+    "fr": "Lorsque Claude Code le demande, choisissez “Install for you (user scope)” : le plugin fonctionne alors dans tous les dossiers et Freeroom le détecte.",
+    "it": "Quando Claude Code lo chiede, scegli “Install for you (user scope)”: così il plugin funziona in ogni cartella e Freeroom lo rileva.",
+    "pt": "Quando o Claude Code perguntar, escolha “Install for you (user scope)”: assim o plugin funciona em todas as pastas e o Freeroom o detecta.",
+    "nl": "Als Claude Code het vraagt, kies “Install for you (user scope)”: dan werkt de plugin in elke map en ziet Freeroom hem.",
+    "pl": "Gdy Claude Code zapyta, wybierz “Install for you (user scope)”: wtedy wtyczka działa w każdym folderze, a Freeroom ją wykrywa.",
+    "ru": "Когда Claude Code спросит, выберите “Install for you (user scope)”: так плагин работает в любой папке, и Freeroom его видит.",
+    "ja": "Claude Code に聞かれたら “Install for you (user scope)” を選んでください。プラグインがどのフォルダでも動作し、Freeroom が検出できます。",
+    "zh-Hans": "当 Claude Code 询问时，请选择 “Install for you (user scope)”：这样插件在所有文件夹中都能使用，Freeroom 也能检测到它。",
+    "zh-Hant": "當 Claude Code 詢問時，請選擇 “Install for you (user scope)”：這樣外掛在所有資料夾中都能使用，Freeroom 也能偵測到它。",
+    "ko": "Claude Code가 물으면 “Install for you (user scope)”를 선택하세요. 그러면 플러그인이 모든 폴더에서 작동하고 Freeroom이 감지합니다.",
+    "hi": "जब Claude Code पूछे, तो “Install for you (user scope)” चुनें: इससे प्लगइन हर फ़ोल्डर में काम करता है और Freeroom उसे पहचान लेता है।",
+    "id": "Saat Claude Code bertanya, pilih “Install for you (user scope)”: plugin akan berfungsi di semua folder dan Freeroom dapat mendeteksinya.",
+    "vi": "Khi Claude Code hỏi, hãy chọn “Install for you (user scope)”: plugin sẽ hoạt động ở mọi thư mục và Freeroom nhận ra nó."
   }
 }

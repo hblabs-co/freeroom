@@ -94,6 +94,8 @@ struct OnboardingView: View {
             text: L("The plugin lets your own Claude Code explain what rules can't (old archives, abandoned projects). It can measure and report, never delete."),
             status: AnyView(VStack(spacing: 8) {
                 CopyField(text: "/plugin install freeroom --marketplace hblabs-co/freeroom", prominent: true)
+                Label(L("When Claude Code asks, choose “Install for you (user scope)”: the plugin then works in every folder and Freeroom can detect it."), systemImage: "person.crop.circle.badge.checkmark")
+                    .font(.fr(.caption)).foregroundStyle(.secondary).fixedSize(horizontal: false, vertical: true)
                 switch pluginState {
                 case .some(true): Label(L("Plugin installed"), systemImage: "checkmark.circle.fill").foregroundStyle(Theme.safe)
                 case .some(false): Label(L("Plugin not detected"), systemImage: "questionmark.circle").foregroundStyle(.secondary)

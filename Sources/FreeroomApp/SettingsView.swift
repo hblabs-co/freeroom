@@ -59,7 +59,13 @@ row("textformat.size", L("Text size")) {
                 row("arrow.triangle.2.circlepath", L("Check for plugin updates"), subtitle: L("Asks GitHub once a day. Nothing about you is sent.")) {
                     Toggle("", isOn: $model.checkPluginUpdates)
                 }
-                row("arrow.down.circle", L("Install")) { CopyField(text: "/plugin install freeroom --marketplace hblabs-co/freeroom") }
+                row("arrow.down.circle", L("Install")) {
+                    VStack(alignment: .leading, spacing: 4) {
+                        CopyField(text: "/plugin install freeroom --marketplace hblabs-co/freeroom")
+                        Label(L("When Claude Code asks, choose “Install for you (user scope)”: the plugin then works in every folder and Freeroom can detect it."), systemImage: "person.crop.circle.badge.checkmark")
+                            .font(.fr(.caption)).foregroundStyle(.secondary).fixedSize(horizontal: false, vertical: true)
+                    }
+                }
                 row("magnifyingglass", L("Scan")) { CopyField(text: "/freeroom:scan") }
                 row("globe", L("Translate")) { CopyField(text: "/freeroom:translate es") }
                 Label(L("The agent can measure and report. It cannot delete."), systemImage: "checkmark.shield")

@@ -37,6 +37,9 @@ In Claude Code:
 
 (or, on older versions: `/plugin marketplace add hblabs-co/freeroom` then `/plugin install freeroom@freeroom`)
 
+When Claude Code asks where to install it, choose **Install for you (user scope)**: the plugin
+then works in every folder, and the Freeroom app can detect it.
+
 Then run `/freeroom:scan` — or `/freeroom:scan ~/Projects` for one folder — and
 `/freeroom:translate es` to read the explanations in another language.
 
