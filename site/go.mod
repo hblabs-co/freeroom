@@ -3,9 +3,9 @@ module github.com/hblabs-co/freeroom/site
 go 1.26.2
 
 require (
-	github.com/hblabs-co/kit/core v0.2.0
-	github.com/hblabs-co/kit/mail v0.2.0
-	github.com/hblabs-co/kit/web v0.2.0
+	github.com/hblabs-co/kit/core v0.3.0
+	github.com/hblabs-co/kit/mail v0.3.0
+	github.com/hblabs-co/kit/web v0.3.0
 	golang.org/x/time v0.15.0
 )
 
