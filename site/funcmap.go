@@ -4,10 +4,10 @@ import (
 	"html/template"
 	"slices"
 
-	"github.com/hblabs-co/kit/web/siteinfo"
-	"github.com/hblabs-co/kit/web/uikit"
 	"github.com/hblabs-co/freeroom/site/release"
 	"github.com/hblabs-co/freeroom/site/request"
+	"github.com/hblabs-co/kit/web/siteinfo"
+	"github.com/hblabs-co/kit/web/uikit"
 )
 
 // serviceFuncMap exposes the uikit icon/theme helpers, the shared

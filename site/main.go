@@ -19,16 +19,16 @@ import (
 
 	"golang.org/x/time/rate"
 
-	kitconst "github.com/hblabs-co/kit/core/constants"
-	"github.com/hblabs-co/kit/core/envcfg"
-	"github.com/hblabs-co/kit/core/log"
-	"github.com/hblabs-co/kit/core/system"
-	"github.com/hblabs-co/kit/web/site"
-	"github.com/hblabs-co/kit/web/siteurl"
-	"github.com/hblabs-co/kit/core/ratelimit"
 	"github.com/hblabs-co/freeroom/site/langpick"
 	"github.com/hblabs-co/freeroom/site/release"
 	"github.com/hblabs-co/freeroom/site/request"
+	kitconst "github.com/hblabs-co/kit/core/constants"
+	"github.com/hblabs-co/kit/core/envcfg"
+	"github.com/hblabs-co/kit/core/log"
+	"github.com/hblabs-co/kit/core/ratelimit"
+	"github.com/hblabs-co/kit/core/system"
+	"github.com/hblabs-co/kit/web/site"
+	"github.com/hblabs-co/kit/web/siteurl"
 )
 
 // siteFS is the whole service surface embedded into the binary.
