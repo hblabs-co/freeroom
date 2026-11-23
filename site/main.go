@@ -5,8 +5,10 @@
 //
 // Besides the rendered pages it owns one route: GET /download answers
 // with a 302 to the newest Freeroom-<version>.dmg, resolved from the
-// GitHub Releases API and cached in memory (see release/), so the
-// download button never needs a redeploy for a new release.
+// GitHub Releases API and cached in memory (kit web/ghrelease), so the
+// download button never needs a redeploy for a new release. POST
+// /feature-request forwards the feature-request form by mail (kit
+// web/contactform + mail/scaleway).
 package main
 
 import (
@@ -19,14 +21,14 @@ import (
 
 	"golang.org/x/time/rate"
 
-	"github.com/hblabs-co/freeroom/site/langpick"
-	"github.com/hblabs-co/freeroom/site/release"
-	"github.com/hblabs-co/freeroom/site/request"
 	kitconst "github.com/hblabs-co/kit/core/constants"
 	"github.com/hblabs-co/kit/core/envcfg"
 	"github.com/hblabs-co/kit/core/log"
 	"github.com/hblabs-co/kit/core/ratelimit"
 	"github.com/hblabs-co/kit/core/system"
+	"github.com/hblabs-co/kit/web/contactform"
+	"github.com/hblabs-co/kit/web/csrf"
+	"github.com/hblabs-co/kit/web/ghrelease"
 	"github.com/hblabs-co/kit/web/site"
 	"github.com/hblabs-co/kit/web/siteurl"
 )
@@ -68,17 +70,58 @@ const (
 	requestInterval = 10 * time.Minute
 )
 
+// releaseRepo hosts the DMGs; releaseAsset matches the
+// Freeroom-<version>.dmg naming used by scripts/release.sh.
+const releaseRepo = "hblabs-co/freeroom"
+
+var releaseAsset = ghrelease.PrefixSuffix("Freeroom-", ".dmg")
+
+const releaseUserAgent = "HB Labs freeroom-landing/1.0 (+https://hblabs.co)"
+
+// requestFields are the inputs of the feature-request form in
+// pages/index.html.tmpl (same names and limits as the template).
+var requestFields = []contactform.Field{
+	{Name: "need", Label: "What they need", Required: true, Multiline: true},
+	{Name: "why", Label: "Why", Required: true, Multiline: true},
+	{Name: "email", Label: "Reply to", Email: true, MaxRunes: 200},
+	{Name: "macos", Label: "macOS", MaxRunes: 40},
+}
+
+// requestHandler wires the feature-request form; the result pages are
+// pages/thanks and pages/request-failed.
+func requestHandler(sender contactform.Sender, limiter contactform.Limiter, guard *csrf.Guard, langs []string, defaultLang string) *contactform.Handler {
+	return &contactform.Handler{
+		Fields:        requestFields,
+		Sender:        sender,
+		Limiter:       limiter,
+		CSRF:          guard,
+		Langs:         langs,
+		DefaultLang:   defaultLang,
+		FailurePage:   "request-failed",
+		SubjectPrefix: "Freeroom feature request: ",
+		Intro:         "New feature request from freeroom.hblabs.co",
+	}
+}
+
 func main() {
 	ctx := system.Boot(system.
 		BootOptions(serviceName).
 		With(system.Port(defaultPort)).
 		With(system.BannerExtras(site.BannerExtras()...)))
 
-	resolver := release.New(release.Options{})
-	mailer := request.NewMailer(request.ConfigFromEnv())
+	resolver, err := ghrelease.New(ghrelease.Options{
+		Repo:      releaseRepo,
+		Asset:     releaseAsset,
+		UserAgent: releaseUserAgent,
+	})
+	if err != nil {
+		log.Error("release resolver init failed", "err", err)
+		os.Exit(1)
+	}
+	mailer := notifierFromEnv()
 	if !mailer.Enabled() {
 		log.Warn("feature-request mail not configured; the page shows the mailto fallback",
-			"needs", []string{request.EnvScalewaySecretKey, request.EnvScalewayProjectID, request.EnvMailFrom})
+			"needs", []string{EnvScalewaySecretKey, EnvScalewayProjectID, EnvMailFrom})
 	}
 
 	handler, modules, cfg, err := site.New(site.Options{
@@ -99,19 +142,18 @@ func main() {
 	})
 	limiter.Start(ctx)
 
+	guard := csrf.New(csrf.Options{Secure: !siteurl.IsDev()})
+
 	mux := http.NewServeMux()
 	mux.Handle("GET "+downloadPath, resolver.Handler())
-	mux.Handle("POST "+requestPath, &request.Handler{
-		Sender:      mailer,
-		Limiter:     limiter,
-		Langs:       cfg.SupportedLangs,
-		DefaultLang: cfg.DefaultLang,
-	})
-	mux.Handle("/", langpick.Middleware(request.IssueCSRF(handler, !siteurl.IsDev()), cfg.SupportedLangs))
+	mux.Handle("POST "+requestPath, requestHandler(mailer, limiter, guard, cfg.SupportedLangs, cfg.DefaultLang))
+	// "/" language negotiation (incl. zh-Hans / zh-Hant) is the
+	// framework's own (kit web/langpick).
+	mux.Handle("/", guard.Issue(handler))
 
 	addr := fmt.Sprintf(":%d", envcfg.Int(kitconst.EnvPort, defaultPort))
 	modules = append(modules,
-		&release.Refresher{Resolver: resolver},
+		&ghrelease.Refresher{Resolver: resolver},
 		system.NewServer(system.ServerOptions{Addr: addr, Handler: mux}),
 	)
 	if err := system.RunForever(ctx, modules...); err != nil {

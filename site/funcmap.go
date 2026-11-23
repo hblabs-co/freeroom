@@ -4,8 +4,9 @@ import (
 	"html/template"
 	"slices"
 
-	"github.com/hblabs-co/freeroom/site/release"
-	"github.com/hblabs-co/freeroom/site/request"
+	"github.com/hblabs-co/kit/web/contactform"
+	"github.com/hblabs-co/kit/web/ghrelease"
+	"github.com/hblabs-co/kit/web/langpick"
 	"github.com/hblabs-co/kit/web/siteinfo"
 	"github.com/hblabs-co/kit/web/uikit"
 )
@@ -13,19 +14,21 @@ import (
 // serviceFuncMap exposes the uikit icon/theme helpers, the shared
 // siteinfo footer constants, and two Freeroom helpers:
 //
-//	{{ latestRelease }} → release.Release (cached, never blocks on GitHub)
+//	{{ latestRelease }} → ghrelease.Release (cached, never blocks on GitHub)
+//	{{ universal $rel }} → whether that release is a universal build
 //	{{ downloadURL }}   → the stable /download redirect
 //	{{ requestFormEnabled }} → whether the feature-request mailer is configured
 //	{{ requestPath }} / {{ requestRecipient }} → form action and mailto fallback
-func serviceFuncMap(resolver *release.Resolver, mailer *request.Mailer) template.FuncMap {
+func serviceFuncMap(resolver *ghrelease.Resolver, mailer contactform.Sender) template.FuncMap {
 	fm := template.FuncMap{
 		"latestRelease":      resolver.Peek,
+		"universal":          universal,
 		"downloadURL":        func() string { return downloadPath },
 		"requestFormEnabled": mailer.Enabled,
 		"requestPath":        func() string { return requestPath },
-		"requestRecipient":   func() string { return request.Recipient },
+		"requestRecipient":   func() string { return requestRecipient },
 	}
-	fm["langName"] = langName
+	fm["langName"] = langpick.Name
 	fm["hblabsURL"] = hblabsURL
 	for name, fn := range uikit.FuncMap() {
 		fm[name] = fn
@@ -36,21 +39,13 @@ func serviceFuncMap(resolver *release.Resolver, mailer *request.Mailer) template
 	return fm
 }
 
-// langNames are the endonyms shown in the language switcher, in the
-// same set the app ships.
-var langNames = map[string]string{
-	"en": "English", "es": "Español", "de": "Deutsch", "fr": "Français",
-	"it": "Italiano", "pt": "Português", "nl": "Nederlands", "pl": "Polski",
-	"ru": "Русский", "ja": "日本語", "zh-Hans": "简体中文", "zh-Hant": "繁體中文",
-	"ko": "한국어", "hi": "हिन्दी", "id": "Bahasa Indonesia", "vi": "Tiếng Việt",
-}
+// firstUniversalVersion is the first release that ships a universal
+// binary (Apple silicon and Intel); earlier ones are Apple silicon only.
+const firstUniversalVersion = "0.1.2"
 
-func langName(code string) string {
-	if n, ok := langNames[code]; ok {
-		return n
-	}
-	return code
-}
+// universal reports whether rel is a universal build. An unresolved
+// release answers false so the page falls back to neutral copy.
+func universal(rel ghrelease.Release) bool { return rel.AtLeast(firstUniversalVersion) }
 
 // hblabsLangs are the languages hblabs.co serves; legal pages for
 // other languages fall back to English.

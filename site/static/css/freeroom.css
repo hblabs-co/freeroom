@@ -1,6 +1,7 @@
 /* Freeroom landing: service-specific layout only. Tokens, fonts and
    shared components (.hb-btn, .hb-field, .hb-input, ...) come from
-   packages/web/uikit via /static/uikit/css/. Never redefine --hb-*
+   github.com/hblabs-co/kit/web/uikit via /static/uikit/css/ (also
+   .hb-code, .hb-shot, .hb-honeypot and the copy / CSRF scripts). Never redefine --hb-*
    variables here. */
 
 *, *::before, *::after { box-sizing: border-box; }
@@ -124,16 +125,7 @@ h3 { font-size: var(--hb-text-lg); line-height: var(--hb-leading-snug); }
 .hero__note { color: var(--hb-ink-5); font-size: var(--hb-text-sm); margin: 0 auto var(--hb-s-8); max-width: 70ch; }
 .hb-btn svg { vertical-align: -3px; }
 
-.shot img, img.shot {
-  display: block;
-  width: 100%;
-  height: auto;
-  border-radius: var(--hb-r-xl);
-  border: 1px solid var(--hb-line);
-  box-shadow: var(--hb-shadow-lg);
-  background: var(--hb-ink-1);
-}
-.shot--hero { display: block; max-width: 1040px; margin: 0 auto; }
+.shot--hero { max-width: 1040px; margin: 0 auto; }
 
 /* ---------- Sections ---------- */
 .section { padding: var(--hb-s-8) 0; border-top: 1px solid var(--hb-line-soft); }
@@ -185,30 +177,11 @@ h3 { font-size: var(--hb-text-lg); line-height: var(--hb-leading-snug); }
 .checklist li { display: flex; gap: var(--hb-s-3); align-items: flex-start; color: var(--hb-ink-6); }
 .checklist svg { flex: none; color: var(--hb-success); margin-top: 3px; }
 
-.code { position: relative; }
-.code pre {
-  margin: 0;
-  padding: var(--hb-s-4);
-  padding-right: 88px;
-  overflow-x: auto;
-  font-family: var(--hb-font-mono);
-  font-size: var(--hb-text-sm);
-  background: var(--hb-ink-1);
-  border: 1px solid var(--hb-line);
-  border-radius: var(--hb-r-md);
-}
-.code__copy { position: absolute; top: var(--hb-s-2); right: var(--hb-s-2); }
-/* Phones: wrap long commands instead of hiding them behind a scroll; the copy button sits above. */
-@media (max-width: 600px) {
-  .code pre { white-space: pre-wrap; overflow-wrap: anywhere; padding-right: var(--hb-s-4); padding-top: 48px; }
-}
-
 /* ---------- Feature request ---------- */
 .request-form { display: grid; gap: var(--hb-s-4); max-width: 720px; }
 .request-form__row { display: grid; grid-template-columns: 2fr 1fr; gap: var(--hb-s-4); }
 @media (max-width: 600px) { .request-form__row { grid-template-columns: 1fr; } }
 .request-form p { margin: 0; }
-.hp-field { position: absolute; left: -10000px; width: 1px; height: 1px; opacity: 0; }
 .request-fallback { display: flex; flex-wrap: wrap; gap: var(--hb-s-2); align-items: center; font-size: var(--hb-text-lg); }
 .request-fallback__text { display: inline-flex; gap: var(--hb-s-2); align-items: center; }
 @media (max-width: 600px) {

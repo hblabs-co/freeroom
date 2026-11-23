@@ -14,10 +14,10 @@
     <a class="hb-btn hb-btn--ghost hb-btn--lg" href="https://github.com/hblabs-co/freeroom" rel="noopener">{{ icon "code" 18 }} {{ T .Lang "hero.github" }}</a>
   </p>
   <p class="hero__note">
-    {{ if not $rel.Resolved }}{{ T .Lang "hero.arch_unknown" }}{{ else if $rel.Universal }}{{ T .Lang "hero.arch_universal" }}{{ else }}{{ T .Lang "hero.arch_silicon" }}{{ end }}
+    {{ if not $rel.Resolved }}{{ T .Lang "hero.arch_unknown" }}{{ else if universal $rel }}{{ T .Lang "hero.arch_universal" }}{{ else }}{{ T .Lang "hero.arch_silicon" }}{{ end }}
     {{ T .Lang "hero.note" }}
   </p>
-  <picture class="shot shot--hero">
+  <picture class="hb-shot shot--hero">
     <source media="(prefers-color-scheme: dark)" srcset="{{ asset "img/screenshots/detailed-dark.png" }}">
     <img src="{{ asset "img/screenshots/detailed-light.png" }}" alt="{{ T .Lang "hero.screenshot_alt" }}" width="1440" height="800">
   </picture>
@@ -68,21 +68,21 @@
   <p class="eyebrow">{{ T .Lang "shots.eyebrow" }}</p>
   <div class="shots__grid">
     <figure>
-      <picture class="shot">
+      <picture class="hb-shot">
         <source media="(prefers-color-scheme: dark)" srcset="{{ asset "img/screenshots/menu-dark.png" }}">
         <img src="{{ asset "img/screenshots/menu-light.png" }}" alt="{{ T .Lang "shots.menu_alt" }}" width="340" height="440" loading="lazy">
       </picture>
       <figcaption>{{ T .Lang "shots.menu_caption" }}</figcaption>
     </figure>
     <figure>
-      <picture class="shot">
+      <picture class="hb-shot">
         <source media="(prefers-color-scheme: dark)" srcset="{{ asset "img/screenshots/simple-dark.png" }}">
         <img src="{{ asset "img/screenshots/simple-light.png" }}" alt="{{ T .Lang "shots.simple_alt" }}" width="900" height="800" loading="lazy">
       </picture>
       <figcaption>{{ T .Lang "shots.simple_caption" }}</figcaption>
     </figure>
     <figure class="shots__wide">
-      <img class="shot" src="{{ asset "img/screenshots/history-light.png" }}" alt="{{ T .Lang "shots.history_alt" }}" width="1440" height="800" loading="lazy">
+      <img class="hb-shot" src="{{ asset "img/screenshots/history-light.png" }}" alt="{{ T .Lang "shots.history_alt" }}" width="1440" height="800" loading="lazy">
       <figcaption>{{ T .Lang "shots.history_caption" }}</figcaption>
     </figure>
   </div>
@@ -115,13 +115,13 @@
     <div class="install__card">
       <h3>{{ T .Lang "install.brew_title" }}</h3>
       <p>{{ T .Lang "install.brew_body" }}</p>
-      <div class="code" data-copy-label="{{ T .Lang "install.copy" }}" data-copied-label="{{ T .Lang "install.copied" }}"><pre><code>brew trust --cask hblabs-co/tap/freeroom
+      <div class="hb-code" data-copy-label="{{ T .Lang "install.copy" }}" data-copied-label="{{ T .Lang "install.copied" }}"><pre><code>brew trust --cask hblabs-co/tap/freeroom
 brew install --cask hblabs-co/tap/freeroom</code></pre></div>
     </div>
     <div class="install__card">
       <h3>{{ T .Lang "install.plugin_title" }}</h3>
       <p>{{ T .Lang "install.plugin_body" }}</p>
-      <div class="code" data-copy-label="{{ T .Lang "install.copy" }}" data-copied-label="{{ T .Lang "install.copied" }}"><pre><code>/plugin install freeroom --marketplace hblabs-co/freeroom</code></pre></div>
+      <div class="hb-code" data-copy-label="{{ T .Lang "install.copy" }}" data-copied-label="{{ T .Lang "install.copied" }}"><pre><code>/plugin install freeroom --marketplace hblabs-co/freeroom</code></pre></div>
     </div>
   </div>
 </section>
@@ -134,7 +134,7 @@ brew install --cask hblabs-co/tap/freeroom</code></pre></div>
   <form class="request-form" method="post" action="{{ requestPath }}" data-csrf-form>
     <input type="hidden" name="lang" value="{{ .Lang }}">
     <input type="hidden" name="_csrf" value="">
-    <input class="hp-field" type="text" name="website" value="" tabindex="-1" autocomplete="off" aria-hidden="true">
+    <input class="hb-honeypot" type="text" name="website" value="" tabindex="-1" autocomplete="off" aria-hidden="true">
     <label class="hb-field">
       <span class="hb-field__label">{{ T .Lang "request.need_label" }}</span>
       <textarea class="hb-textarea" name="need" rows="4" maxlength="4000" required></textarea>
