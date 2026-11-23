@@ -1,0 +1,88 @@
+# freeroom.hblabs.co in the `cloud` namespace of the livekit cluster. Source: site/ in
+# github.com/hblabs-co/freeroom; image built by .github/workflows/site.yml on a `site/vX.Y.Z` tag.
+#
+# Single Go binary, everything go:embedded. Two runtime dependencies, both optional:
+#   - api.github.com: /download resolves the latest release DMG (cached, falls back to
+#     github.com/.../releases/latest).
+#   - Scaleway Transactional Email: the feature-request form mails freeroom@hblabs.co.
+#     Credentials come from the optional Secret `service-freeroom-mail` (keys
+#     HB_SCALEWAY_SECRET_KEY, HB_SCALEWAY_PROJECT_ID). Without it the page shows a mailto: fallback.
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: service-freeroom
+  namespace: cloud
+  labels:
+    app: service-freeroom
+  annotations:
+    secret.reloader.stakater.com/auto: "true"
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: service-freeroom
+  template:
+    metadata:
+      labels:
+        app: service-freeroom
+    spec:
+      containers:
+        - name: service-freeroom
+          image: ghcr.io/hblabs-co/freeroom-site:0.1.3
+          imagePullPolicy: IfNotPresent
+          ports:
+            - name: http
+              containerPort: 8080
+          env:
+            - name: HB_CANONICAL_HOST
+              value: "https://freeroom.hblabs.co"
+            - name: HB_SECURITY_CONTACT
+              value: "security@hblabs.co"
+            # Sender for feature-request mails. hblabs.co's SPF already
+            # includes _spf.tem.scaleway.com; the domain must also be
+            # verified (DKIM) in the Scaleway TEM project.
+            - name: HB_MAIL_FROM
+              value: "no-reply@hblabs.co"
+            - name: HB_MAIL_FROM_NAME
+              value: "Freeroom website"
+          envFrom:
+            - secretRef:
+                name: service-freeroom-mail
+                optional: true
+          readinessProbe:
+            httpGet:
+              path: /readyz
+              port: http
+            initialDelaySeconds: 2
+            periodSeconds: 10
+          livenessProbe:
+            httpGet:
+              path: /healthz
+              port: http
+            periodSeconds: 30
+            timeoutSeconds: 5
+            failureThreshold: 5
+          resources:
+            requests:
+              cpu: 10m
+              memory: 32Mi
+            limits:
+              cpu: 200m
+              memory: 128Mi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: service-freeroom
+  namespace: cloud
+  labels:
+    app: service-freeroom
+spec:
+  type: ClusterIP
+  selector:
+    app: service-freeroom
+  ports:
+    - name: http
+      port: 80
+      targetPort: http

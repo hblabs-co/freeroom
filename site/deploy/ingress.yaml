@@ -1,0 +1,29 @@
+# Public Ingress for freeroom.hblabs.co. cert-manager issues the
+# certificate via the letsencrypt-production ClusterIssuer (DNS-01 on
+# Cloudflare). Traffic needs a proxied Cloudflare record for
+# `freeroom` pointing at the cluster like the other *.hblabs.co hosts:
+# the *.hblabs.co wildcard does NOT reach the cluster (Cloudflare 521).
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: service-freeroom
+  namespace: cloud
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt-production
+spec:
+  ingressClassName: traefik
+  tls:
+    - hosts:
+        - freeroom.hblabs.co
+      secretName: service-freeroom-cert
+  rules:
+    - host: freeroom.hblabs.co
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: service-freeroom
+                port:
+                  name: http
