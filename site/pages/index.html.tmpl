@@ -1,0 +1,165 @@
+{{ define "content" }}
+{{ $rel := latestRelease }}
+<section class="hero">
+  <picture class="hero__icon">
+    <source media="(prefers-color-scheme: dark)" srcset="{{ asset "img/freeroom-icon-dark.svg" }}">
+    <img src="{{ asset "img/freeroom-icon-light.svg" }}" alt="Freeroom" width="112" height="112">
+  </picture>
+  <p class="eyebrow">{{ T .Lang "hero.eyebrow" }}</p>
+  <h1>{{ T .Lang "hero.headline" }}</h1>
+  <p class="lede">{{ T .Lang "hero.lede" }}</p>
+  <p class="hero__ctas">
+    <a class="hb-btn hb-btn--primary hb-btn--lg" href="{{ downloadURL }}">{{ icon "arrow-down" 18 }}
+      {{ if $rel.Resolved }}{{ printf (T .Lang "hero.download_version") $rel.Version }}{{ else }}{{ T .Lang "hero.download" }}{{ end }}</a>
+    <a class="hb-btn hb-btn--ghost hb-btn--lg" href="https://github.com/hblabs-co/freeroom" rel="noopener">{{ icon "code" 18 }} {{ T .Lang "hero.github" }}</a>
+  </p>
+  <p class="hero__note">
+    {{ if not $rel.Resolved }}{{ T .Lang "hero.arch_unknown" }}{{ else if $rel.Universal }}{{ T .Lang "hero.arch_universal" }}{{ else }}{{ T .Lang "hero.arch_silicon" }}{{ end }}
+    {{ T .Lang "hero.note" }}
+  </p>
+  <picture class="shot shot--hero">
+    <source media="(prefers-color-scheme: dark)" srcset="{{ asset "img/screenshots/detailed-dark.png" }}">
+    <img src="{{ asset "img/screenshots/detailed-light.png" }}" alt="{{ T .Lang "hero.screenshot_alt" }}" width="1440" height="800">
+  </picture>
+</section>
+
+<section class="section classes" aria-labelledby="classes-h">
+  <p class="eyebrow">{{ T .Lang "classes.eyebrow" }}</p>
+  <h2 id="classes-h">{{ T .Lang "classes.headline" }}</h2>
+  <ul class="classes__grid" role="list">
+    <li class="class-card class-card--safe">
+      <span class="class-chip class-chip--safe">{{ T .Lang "label.safe" }}</span>
+      <p>{{ T .Lang "classes.safe_body" }}</p>
+    </li>
+    <li class="class-card class-card--review">
+      <span class="class-chip class-chip--review">{{ T .Lang "label.review" }}</span>
+      <p>{{ T .Lang "classes.review_body" }}</p>
+    </li>
+    <li class="class-card class-card--keep">
+      <span class="class-chip class-chip--keep">{{ T .Lang "label.keep" }}</span>
+      <p>{{ T .Lang "classes.keep_body" }}</p>
+    </li>
+  </ul>
+</section>
+
+<section class="section features" id="features" aria-labelledby="features-h">
+  <p class="eyebrow">{{ T .Lang "features.eyebrow" }}</p>
+  <h2 id="features-h">{{ T .Lang "features.headline" }}</h2>
+  <ul class="features__grid" role="list">
+    <li class="feature">{{ icon "layout-grid" 20 }}<h3>{{ T .Lang "f.menubar_title" }}</h3><p>{{ T .Lang "f.menubar_body" }}</p></li>
+    <li class="feature">{{ icon "eye" 20 }}<h3>{{ T .Lang "f.modes_title" }}</h3><p>{{ T .Lang "f.modes_body" }}</p></li>
+    <li class="feature">{{ icon "blocks" 20 }}<h3>{{ T .Lang "f.map_title" }}</h3><p>{{ T .Lang "f.map_body" }}</p></li>
+    <li class="feature">{{ icon "package" 20 }}<h3>{{ T .Lang "f.catalog_title" }}</h3><p>{{ T .Lang "f.catalog_body" }}</p></li>
+    <li class="feature">{{ icon "info" 20 }}<h3>{{ T .Lang "f.explain_title" }}</h3><p>{{ T .Lang "f.explain_body" }}</p></li>
+    <li class="feature">{{ icon "clock" 20 }}<h3>{{ T .Lang "f.rules_title" }}</h3><p>{{ T .Lang "f.rules_body" }}</p></li>
+    <li class="feature">{{ icon "chart-line" 20 }}<h3>{{ T .Lang "f.measure_title" }}</h3><p>{{ T .Lang "f.measure_body" }}</p></li>
+    <li class="feature">{{ icon "check-circle" 20 }}<h3>{{ T .Lang "f.confirm_title" }}</h3><p>{{ T .Lang "f.confirm_body" }}</p></li>
+    <li class="feature">{{ icon "bot" 20 }}<h3>{{ T .Lang "f.plugin_title" }}</h3><p>{{ T .Lang "f.plugin_body" }}</p></li>
+    <li class="feature">{{ icon "trending-up" 20 }}<h3>{{ T .Lang "f.history_title" }}</h3><p>{{ T .Lang "f.history_body" }}</p></li>
+    <li class="feature">{{ icon "globe" 20 }}<h3>{{ T .Lang "f.languages_title" }}</h3><p>{{ T .Lang "f.languages_body" }}</p></li>
+    <li class="feature">{{ icon "code" 20 }}<h3>{{ T .Lang "f.cli_title" }}</h3><p>{{ T .Lang "f.cli_body" }}</p></li>
+    <li class="feature">{{ icon "x" 20 }}<h3>{{ T .Lang "f.uninstall_title" }}</h3><p>{{ T .Lang "f.uninstall_body" }}</p></li>
+    <li class="feature">{{ icon "shield" 20 }}<h3>{{ T .Lang "f.signed_title" }}</h3><p>{{ T .Lang "f.signed_body" }}</p></li>
+    <li class="feature">{{ icon "eye" 20 }}<h3>{{ T .Lang "f.privacy_title" }}</h3><p>{{ T .Lang "f.privacy_body" }}</p></li>
+  </ul>
+</section>
+
+<section class="section shots" aria-label="{{ T .Lang "shots.eyebrow" }}">
+  <p class="eyebrow">{{ T .Lang "shots.eyebrow" }}</p>
+  <div class="shots__grid">
+    <figure>
+      <picture class="shot">
+        <source media="(prefers-color-scheme: dark)" srcset="{{ asset "img/screenshots/menu-dark.png" }}">
+        <img src="{{ asset "img/screenshots/menu-light.png" }}" alt="{{ T .Lang "shots.menu_alt" }}" width="340" height="440" loading="lazy">
+      </picture>
+      <figcaption>{{ T .Lang "shots.menu_caption" }}</figcaption>
+    </figure>
+    <figure>
+      <picture class="shot">
+        <source media="(prefers-color-scheme: dark)" srcset="{{ asset "img/screenshots/simple-dark.png" }}">
+        <img src="{{ asset "img/screenshots/simple-light.png" }}" alt="{{ T .Lang "shots.simple_alt" }}" width="900" height="800" loading="lazy">
+      </picture>
+      <figcaption>{{ T .Lang "shots.simple_caption" }}</figcaption>
+    </figure>
+    <figure class="shots__wide">
+      <img class="shot" src="{{ asset "img/screenshots/history-light.png" }}" alt="{{ T .Lang "shots.history_alt" }}" width="1440" height="800" loading="lazy">
+      <figcaption>{{ T .Lang "shots.history_caption" }}</figcaption>
+    </figure>
+  </div>
+  <p class="muted">{{ T .Lang "shots.note" }}</p>
+</section>
+
+<section class="section safety" id="safety" aria-labelledby="safety-h">
+  <p class="eyebrow">{{ T .Lang "safety.eyebrow" }}</p>
+  <h2 id="safety-h">{{ T .Lang "safety.headline" }}</h2>
+  <ul class="checklist" role="list">
+    <li>{{ icon "shield" 18 }}<span>{{ T .Lang "safety.b1" }}</span></li>
+    <li>{{ icon "shield" 18 }}<span>{{ T .Lang "safety.b2" }}</span></li>
+    <li>{{ icon "shield" 18 }}<span>{{ T .Lang "safety.b3" }}</span></li>
+    <li>{{ icon "shield" 18 }}<span>{{ T .Lang "safety.b4" }}</span></li>
+    <li>{{ icon "shield" 18 }}<span>{{ T .Lang "safety.b5" }}</span></li>
+  </ul>
+</section>
+
+<section class="section install" id="install" aria-labelledby="install-h">
+  <p class="eyebrow">{{ T .Lang "install.eyebrow" }}</p>
+  <h2 id="install-h">{{ T .Lang "install.headline" }}</h2>
+  <div class="install__grid">
+    <div class="install__card">
+      <h3>{{ T .Lang "install.dmg_title" }}</h3>
+      <p>{{ T .Lang "install.dmg_body" }}</p>
+      <p><a class="hb-btn hb-btn--primary" href="{{ downloadURL }}">{{ icon "arrow-down" 16 }}
+        {{ if $rel.Resolved }}{{ printf (T .Lang "hero.download_version") $rel.Version }}{{ else }}{{ T .Lang "hero.download" }}{{ end }}</a></p>
+      <p class="muted"><a href="https://github.com/hblabs-co/freeroom/releases" rel="noopener">{{ T .Lang "install.releases" }}</a></p>
+    </div>
+    <div class="install__card">
+      <h3>{{ T .Lang "install.brew_title" }}</h3>
+      <p>{{ T .Lang "install.brew_body" }}</p>
+      <div class="code" data-copy-label="{{ T .Lang "install.copy" }}" data-copied-label="{{ T .Lang "install.copied" }}"><pre><code>brew trust --cask hblabs-co/tap/freeroom
+brew install --cask hblabs-co/tap/freeroom</code></pre></div>
+    </div>
+    <div class="install__card">
+      <h3>{{ T .Lang "install.plugin_title" }}</h3>
+      <p>{{ T .Lang "install.plugin_body" }}</p>
+      <div class="code" data-copy-label="{{ T .Lang "install.copy" }}" data-copied-label="{{ T .Lang "install.copied" }}"><pre><code>/plugin install freeroom --marketplace hblabs-co/freeroom</code></pre></div>
+    </div>
+  </div>
+</section>
+
+<section class="section request" id="request" aria-labelledby="request-h">
+  <p class="eyebrow">{{ T .Lang "request.eyebrow" }}</p>
+  <h2 id="request-h">{{ T .Lang "request.headline" }}</h2>
+  <p class="lede">{{ T .Lang "request.lede" }}</p>
+  {{ if requestFormEnabled }}
+  <form class="request-form" method="post" action="{{ requestPath }}" data-csrf-form>
+    <input type="hidden" name="lang" value="{{ .Lang }}">
+    <input type="hidden" name="_csrf" value="">
+    <input class="hp-field" type="text" name="website" value="" tabindex="-1" autocomplete="off" aria-hidden="true">
+    <label class="hb-field">
+      <span class="hb-field__label">{{ T .Lang "request.need_label" }}</span>
+      <textarea class="hb-textarea" name="need" rows="4" maxlength="4000" required></textarea>
+      <span class="hb-field__hint">{{ T .Lang "request.need_hint" }}</span>
+    </label>
+    <label class="hb-field">
+      <span class="hb-field__label">{{ T .Lang "request.why_label" }}</span>
+      <textarea class="hb-textarea" name="why" rows="3" maxlength="4000" required></textarea>
+    </label>
+    <div class="request-form__row">
+      <label class="hb-field">
+        <span class="hb-field__label">{{ T .Lang "request.email_label" }}</span>
+        <input class="hb-input" type="email" name="email" maxlength="200" autocomplete="email">
+        <span class="hb-field__hint">{{ T .Lang "request.email_hint" }}</span>
+      </label>
+      <label class="hb-field">
+        <span class="hb-field__label">{{ T .Lang "request.macos_label" }}</span>
+        <input class="hb-input" type="text" name="macos" maxlength="40" placeholder="15.5">
+      </label>
+    </div>
+    <p class="muted">{{ T .Lang "request.privacy" }} <a href="{{ hblabsURL .Lang "privacy" }}">{{ T .Lang "footer.privacy" }}</a></p>
+    <p><button class="hb-btn hb-btn--primary" type="submit">{{ icon "mail" 16 }} {{ T .Lang "request.submit" }}</button></p>
+  </form>
+  {{ else }}
+  <p class="request-fallback"><span class="request-fallback__text">{{ icon "mail" 18 }} {{ T .Lang "request.fallback" }}</span> <a href="mailto:{{ requestRecipient }}?subject=Freeroom%20feature%20request">{{ requestRecipient }}</a></p>
+  {{ end }}
+</section>
+{{ end }}

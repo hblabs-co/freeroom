@@ -1,0 +1,8 @@
+{{ define "content" }}
+<section class="section notice">
+  <span class="notice__icon notice__icon--warn">{{ icon "alert-triangle" 32 }}</span>
+  <h1>{{ T .Lang "request.failed_headline" }}</h1>
+  <p class="lede">{{ T .Lang "request.failed_body" }} <a href="mailto:{{ requestRecipient }}?subject=Freeroom%20feature%20request">{{ requestRecipient }}</a>.</p>
+  <p><a class="hb-btn hb-btn--primary" href="{{ pageURL .Lang "" }}#request">{{ T .Lang "request.back" }}</a></p>
+</section>
+{{ end }}

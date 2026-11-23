@@ -1,0 +1,12 @@
+canonical_host: "${HB_CANONICAL_HOST:-http://localhost:8087}"
+default_lang: "${HB_DEFAULT_LANG:-en}"
+supported_langs: [en, es, de, fr, it, pt, nl, pl, ru, ja, zh-Hans, zh-Hant, ko, hi, id, vi]
+brand: Freeroom
+
+seo:
+  security_contact: "${HB_SECURITY_CONTACT:-}"
+  llms_txt_path: ""
+
+og:
+  enabled: true
+  url_prefix: /og

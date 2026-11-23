@@ -1,0 +1,8 @@
+{{ define "content" }}
+<section class="section notice">
+  <span class="notice__icon notice__icon--ok">{{ icon "check-circle" 32 }}</span>
+  <h1>{{ T .Lang "request.thanks_headline" }}</h1>
+  <p class="lede">{{ T .Lang "request.thanks_body" }}</p>
+  <p><a class="hb-btn hb-btn--primary" href="{{ pageURL .Lang "" }}">{{ T .Lang "request.back" }}</a></p>
+</section>
+{{ end }}
