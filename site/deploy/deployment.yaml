@@ -17,6 +17,10 @@ metadata:
     app: service-freeroom
   annotations:
     secret.reloader.stakater.com/auto: "true"
+    # Keel: roll out any newer patch or minor version found in the registry (checked every 2 min).
+    keel.sh/policy: minor
+    keel.sh/trigger: poll
+    keel.sh/pollSchedule: "@every 2m"
 spec:
   replicas: 2
   selector:
@@ -27,9 +31,11 @@ spec:
       labels:
         app: service-freeroom
     spec:
+      imagePullSecrets:
+        - name: regcred
       containers:
         - name: service-freeroom
-          image: ghcr.io/hblabs-co/freeroom-site:0.1.4
+          image: registry.4the.company/freeroom/site:0.1.5
           imagePullPolicy: IfNotPresent
           ports:
             - name: http
