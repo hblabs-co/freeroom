@@ -35,7 +35,7 @@ spec:
         - name: regcred
       containers:
         - name: service-freeroom
-          image: registry.4the.company/freeroom/site:0.1.5
+          image: registry.4the.company/freeroom/site:0.1.8
           imagePullPolicy: IfNotPresent
           ports:
             - name: http

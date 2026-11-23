@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="{{.Lang}}">
+<head>
+<meta charset="utf-8">
+<style>
+  * { box-sizing: border-box; margin: 0; }
+  html, body { width: 1200px; height: 630px; overflow: hidden; }
+  body {
+    position: relative;
+    font-family: -apple-system, "SF Pro Display", "Hiragino Sans", "PingFang SC", "PingFang TC",
+      "Apple SD Gothic Neo", "Kohinoor Devanagari", sans-serif;
+    color: #fff;
+    background:
+      radial-gradient(900px 520px at 86% -8%, rgba(96, 145, 255, 0.55), transparent 60%),
+      radial-gradient(700px 460px at -6% 112%, rgba(30, 90, 255, 0.45), transparent 62%),
+      linear-gradient(140deg, #050c26 0%, #0b1c58 48%, #1443d0 100%);
+  }
+  /* macOS menu bar */
+  .menubar {
+    position: absolute; top: 0; left: 0; right: 0; height: 30px; padding: 0 18px;
+    display: flex; align-items: center; justify-content: flex-end; gap: 18px;
+    background: rgba(255, 255, 255, 0.10); border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    font-size: 13px; font-weight: 500; color: rgba(255, 255, 255, 0.92);
+  }
+  .menubar .item { width: 15px; height: 10px; border-radius: 2px; background: rgba(255, 255, 255, 0.55); }
+  .menubar .item.round { width: 12px; height: 12px; border-radius: 50%; }
+  .menubar .fr {
+    width: 28px; height: 22px; border-radius: 6px; display: grid; place-items: center;
+    background: rgba(255, 255, 255, 0.22);
+  }
+  .menubar .fr img { width: 17px; height: 17px; }
+  /* App surfaces */
+  .window {
+    position: absolute; left: 520px; top: 96px; width: 820px; border-radius: 12px;
+    box-shadow: 0 40px 90px rgba(0, 0, 0, 0.55), 0 0 0 1px rgba(255, 255, 255, 0.10);
+  }
+  .menu {
+    position: absolute; left: 852px; top: 38px; width: 300px; border-radius: 12px;
+    box-shadow: 0 30px 70px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(255, 255, 255, 0.12);
+  }
+  /* Identity */
+  .left { position: absolute; left: 64px; top: 86px; width: 410px; }
+  .icon { width: 84px; height: 84px; display: block; filter: drop-shadow(0 10px 24px rgba(0, 0, 0, 0.35)); }
+  h1 { margin-top: 22px; font-size: 62px; font-weight: 800; letter-spacing: -0.02em; line-height: 1; }
+  .headline { margin-top: 18px; font-size: 23px; line-height: 1.38; color: rgba(255, 255, 255, 0.88); font-weight: 450; }
+  .chips { margin-top: 26px; display: flex; gap: 10px; flex-wrap: wrap; }
+  .chip { padding: 6px 14px; border-radius: 999px; font-size: 15px; font-weight: 650; }
+  .safe { background: #3a74ff; color: #fff; }
+  .review { border: 1.5px solid #8fb0ff; color: #dbe6ff; }
+  .keep { background: rgba(255, 255, 255, 0.14); color: rgba(255, 255, 255, 0.8); }
+  .footer {
+    position: absolute; left: 64px; bottom: 40px; display: flex; align-items: center; gap: 10px;
+    font-size: 17px; color: rgba(255, 255, 255, 0.72);
+  }
+  .footer img { width: 24px; height: 24px; }
+  .footer b { color: #fff; font-weight: 600; }
+</style>
+</head>
+<body>
+  <div class="menubar">
+    <span class="item"></span><span class="item round"></span>
+    <span class="fr"><img src="{{.Icon}}" alt=""></span>
+    <span>{{.Clock}}</span>
+  </div>
+  <img class="window" src="{{.Window}}" alt="">
+  <img class="menu" src="{{.Menu}}" alt="">
+  <div class="left">
+    <img class="icon" src="{{.Icon}}" alt="">
+    <h1>Freeroom</h1>
+    <p class="headline">{{.Headline}}</p>
+    <div class="chips">
+      <span class="chip safe">{{.Safe}}</span>
+      <span class="chip review">{{.Review}}</span>
+      <span class="chip keep">{{.Keep}}</span>
+    </div>
+  </div>
+  <div class="footer">
+    <img src="{{.HBLogo}}" alt="">
+    <span><b>freeroom.hblabs.co</b> · {{.Eyebrow}} · HB Labs</span>
+  </div>
+</body>
+</html>
