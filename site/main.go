@@ -13,24 +13,20 @@ package main
 
 import (
 	"embed"
-	"fmt"
-	"io/fs"
 	"net/http"
 	"os"
 	"time"
 
 	"golang.org/x/time/rate"
 
-	kitconst "github.com/hblabs-co/kit/core/constants"
-	"github.com/hblabs-co/kit/core/envcfg"
 	"github.com/hblabs-co/kit/core/log"
 	"github.com/hblabs-co/kit/core/ratelimit"
 	"github.com/hblabs-co/kit/core/system"
+	"github.com/hblabs-co/kit/mail/scaleway"
 	"github.com/hblabs-co/kit/web/contactform"
 	"github.com/hblabs-co/kit/web/csrf"
 	"github.com/hblabs-co/kit/web/ghrelease"
 	"github.com/hblabs-co/kit/web/site"
-	"github.com/hblabs-co/kit/web/siteurl"
 )
 
 // siteFS is the whole service surface embedded into the binary.
@@ -39,19 +35,11 @@ import (
 //go:embed pages all:partials locales static config
 var siteFS embed.FS
 
-// devWatchRoot is the on-disk source dir used when HB_ENV=local:
-// run `go run .` from site/.
-const devWatchRoot = "."
-
 // serviceName identifies the service in logs and the boot banner.
 const serviceName = "service-freeroom"
 
-// configPath is the framework config inside whichever fs.FS render
-// reads from.
-const configPath = "config/config.yaml"
-
-// defaultPort is the local `go run` port; prod pins HB_PORT=8080 in
-// the Dockerfile. 8087 keeps it clear of landing (8080) and the other
+// defaultPort is the local `go run` port (HB_PORT wins; prod pins
+// HB_PORT=8080 in the Dockerfile). 8087 keeps it clear of landing (8080) and the other
 // local services.
 const defaultPort = 8087
 
@@ -76,7 +64,10 @@ const releaseRepo = "hblabs-co/freeroom"
 
 var releaseAsset = ghrelease.PrefixSuffix("Freeroom-", ".dmg")
 
-const releaseUserAgent = "HB Labs freeroom-landing/1.0 (+https://hblabs.co)"
+// requestRecipient is where feature requests land (also the mailto
+// fallback on the page). Mail settings come from the kit's standard
+// HB_SCALEWAY_* / HB_MAIL_FROM* env keys (scaleway.NotifierFromEnv).
+const requestRecipient = "freeroom@hblabs.co"
 
 // requestFields are the inputs of the feature-request form in
 // pages/index.html.tmpl (same names and limits as the template).
@@ -109,27 +100,19 @@ func main() {
 		With(system.Port(defaultPort)).
 		With(system.BannerExtras(site.BannerExtras()...)))
 
-	resolver, err := ghrelease.New(ghrelease.Options{
-		Repo:      releaseRepo,
-		Asset:     releaseAsset,
-		UserAgent: releaseUserAgent,
-	})
+	resolver, err := ghrelease.New(ghrelease.Options{Repo: releaseRepo, Asset: releaseAsset})
 	if err != nil {
 		log.Error("release resolver init failed", "err", err)
 		os.Exit(1)
 	}
-	mailer := notifierFromEnv()
+	mailer := scaleway.NotifierFromEnv(requestRecipient)
 	if !mailer.Enabled() {
-		log.Warn("feature-request mail not configured; the page shows the mailto fallback",
-			"needs", []string{EnvScalewaySecretKey, EnvScalewayProjectID, EnvMailFrom})
+		log.Warn("feature-request mail not configured; the page shows the mailto fallback")
 	}
 
 	handler, modules, cfg, err := site.New(site.Options{
-		SiteFS:      siteFS,
-		WatchRoot:   devWatchRoot,
-		ConfigPath:  configPath,
-		FuncMap:     serviceFuncMap(resolver, mailer),
-		ExtraStatic: map[string]fs.FS{"uikit": site.UIKitFS()},
+		SiteFS:  siteFS,
+		FuncMap: serviceFuncMap(resolver, mailer),
 	})
 	if err != nil {
 		log.Error("site init failed", "err", err)
@@ -142,7 +125,7 @@ func main() {
 	})
 	limiter.Start(ctx)
 
-	guard := csrf.New(csrf.Options{Secure: !siteurl.IsDev()})
+	guard := csrf.New(csrf.Options{})
 
 	mux := http.NewServeMux()
 	mux.Handle("GET "+downloadPath, resolver.Handler())
@@ -151,10 +134,9 @@ func main() {
 	// framework's own (kit web/langpick).
 	mux.Handle("/", guard.Issue(handler))
 
-	addr := fmt.Sprintf(":%d", envcfg.Int(kitconst.EnvPort, defaultPort))
 	modules = append(modules,
 		&ghrelease.Refresher{Resolver: resolver},
-		system.NewServer(system.ServerOptions{Addr: addr, Handler: mux}),
+		system.NewServer(system.ServerOptions{Handler: mux}),
 	)
 	if err := system.RunForever(ctx, modules...); err != nil {
 		log.Error("run failed", "err", err)

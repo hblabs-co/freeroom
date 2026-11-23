@@ -8,6 +8,7 @@ import (
 	"strings"
 	"testing"
 
+	"github.com/hblabs-co/kit/mail/scaleway"
 	"github.com/hblabs-co/kit/web/csrf"
 	"github.com/hblabs-co/kit/web/ghrelease"
 )
@@ -44,7 +45,7 @@ func TestFuncMap(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	fm := serviceFuncMap(r, notifierFromEnv())
+	fm := serviceFuncMap(r, scaleway.NotifierFromEnv(requestRecipient))
 	for _, name := range []string{"latestRelease", "universal", "downloadURL", "requestFormEnabled", "requestPath",
 		"requestRecipient", "langName", "hblabsURL", "icon", "themeBoot", "legalEntity"} {
 		if fm[name] == nil {
@@ -53,21 +54,6 @@ func TestFuncMap(t *testing.T) {
 	}
 	if got := fm["langName"].(func(string) string)("zh-Hant"); got != "繁體中文" {
 		t.Errorf("langName(zh-Hant) = %q", got)
-	}
-}
-
-func TestNotifierFromEnv(t *testing.T) {
-	for _, k := range []string{EnvScalewaySecretKey, EnvScalewayProjectID, EnvMailFrom} {
-		t.Setenv(k, "")
-	}
-	if notifierFromEnv().Enabled() {
-		t.Fatal("enabled without config")
-	}
-	t.Setenv(EnvScalewaySecretKey, "k")
-	t.Setenv(EnvScalewayProjectID, "p")
-	t.Setenv(EnvMailFrom, "no-reply@example.com")
-	if !notifierFromEnv().Enabled() {
-		t.Fatal("disabled with full config")
 	}
 }
 
